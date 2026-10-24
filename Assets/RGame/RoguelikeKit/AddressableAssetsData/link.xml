@@ -1,6 +1,7 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="DATN.Trial.TrialController" preserve="all" />
+    <type fullname="DATN.UI.UiCoverImage" preserve="all" />
     <type fullname="RGame.CommonStat.CommonStatRuntimeSO" preserve="all" />
     <type fullname="RGame.CommonStat.ValueConfigSO" preserve="all" />
     <type fullname="RGame.Framework.BoolEventChannelSO" preserve="all" />

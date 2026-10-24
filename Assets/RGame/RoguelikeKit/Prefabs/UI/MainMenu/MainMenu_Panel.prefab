@@ -1241,6 +1241,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 7700000000000000001}
   - component: {fileID: 1606312507067358797}
   - component: {fileID: 3169137661152711953}
   - component: {fileID: 4142961986533328557}
@@ -1298,7 +1299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8672492875515090611, guid: 80261988c14074542be4feb4ad1a8e06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f60b92c9c72948f2afd8de48f235134c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2346,3 +2347,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationAnimation: {fileID: 11400000, guid: e9bff180233c8c44283835f2b978ee2d, type: 2}
+
+--- !u!114 &7700000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980707718744834358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77e8596af8d4ccd98944f153a742e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

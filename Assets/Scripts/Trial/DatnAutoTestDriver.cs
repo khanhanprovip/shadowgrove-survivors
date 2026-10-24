@@ -83,6 +83,12 @@ namespace DATN.Trial
                 _fpsFrames = 0;
             }
 
+            // Chup anh menu that som (truoc khi vao game) de kiem tra UI khung hinh
+            if (!_shotMenu && elapsed >= 3.5f)
+            {
+                _shotMenu = Capture($"screenshot_03s_menu_{Screen.width}x{Screen.height}.png", elapsed);
+            }
+
             // Lan menu bang dung cac method nut bam
             // (panel co the dang inactive — phai bao gom ca inactive khi tim)
             if (!_menuDriven && elapsed > 6f)
@@ -180,7 +186,7 @@ namespace DATN.Trial
             }
         }
 
-        private bool _shot15, _shot50, _shot96;
+        private bool _shot15, _shot50, _shot96, _shotMenu;
 
         private bool Capture(string fileName, float elapsed)
         {
