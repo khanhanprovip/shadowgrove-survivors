@@ -641,6 +641,7 @@ MonoBehaviour:
   mLevelSos:
   - {fileID: 11400000, guid: c94fe453188f477469fbe78b87996fd5, type: 2}
   - {fileID: 11400000, guid: 8fc8a5f7f5031cc408705b3710d5ee93, type: 2}
+  - {fileID: 11400000, guid: 256052761ec94540aacbac36a2b72fff, type: 2}
 --- !u!1 &3063054409913459484
 GameObject:
   m_ObjectHideFlags: 0

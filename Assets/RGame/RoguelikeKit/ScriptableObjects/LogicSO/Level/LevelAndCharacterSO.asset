@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: 
   SelectCharacterSo: {fileID: 11400000, guid: d30462e6da325724eaf11cf827cb75be, type: 2}
-  SelectLevelSO: {fileID: 11400000, guid: c94fe453188f477469fbe78b87996fd5, type: 2}
+  SelectLevelSO: {fileID: 11400000, guid: 256052761ec94540aacbac36a2b72fff, type: 2}

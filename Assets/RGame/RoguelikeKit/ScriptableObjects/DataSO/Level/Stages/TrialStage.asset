@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae905e892d5ad344ca0cb0bb7784aaf4, type: 3}
+  m_Name: TrialStage
+  m_EditorClassIdentifier: 
+  Description: A short five-phase stage for testing the complete gameplay loop.
+  SpawnSets:
+  - {fileID: 11400000, guid: 023f1e4db5074210ace14b468c15fe6b, type: 2}
+  - {fileID: 11400000, guid: bcfe67109b6a43e9b804dcc1f254160f, type: 2}
+  - {fileID: 11400000, guid: aaa8e11ce3154f5e98bda63ef9ff855c, type: 2}
+  - {fileID: 11400000, guid: bb482b8d1741424aa8d9bc1a4e0f174c, type: 2}
+  - {fileID: 11400000, guid: 97c58a74e657447c939bd655a011f683, type: 2}
