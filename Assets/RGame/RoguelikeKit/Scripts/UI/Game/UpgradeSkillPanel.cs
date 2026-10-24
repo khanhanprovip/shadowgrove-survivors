@@ -17,6 +17,9 @@ namespace RGame.RoguelikeKit
             _upgradeSkillUIChannel.RegisterListener(SkillUI);
         }
 
+        /// <summary>Panel dang hien hay khong (dung cho kiem thu tu dong).</summary>
+        public bool IsVisible => _canvasGroup != null && _canvasGroup.alpha > 0.5f;
+
         private void OnDisable()
         {
             _upgradeSkillUIChannel.UnregisterListener(SkillUI);

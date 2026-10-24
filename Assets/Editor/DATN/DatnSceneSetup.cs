@@ -87,5 +87,34 @@ namespace DATN
             }
             return asset;
         }
+
+        public static void AddAutoTestDriver()
+        {
+            try
+            {
+                const string initScene = "Assets/RGame/RoguelikeKit/Scenes/Initialization.unity";
+                var scene = EditorSceneManager.OpenScene(initScene, OpenSceneMode.Single);
+
+                if (Object.FindFirstObjectByType<DATN.Trial.DatnAutoTestDriver>(FindObjectsInactive.Include) != null)
+                {
+                    Debug.Log("[DatnSceneSetup] DatnAutoTestDriver da ton tai trong Initialization");
+                }
+                else
+                {
+                    var go = new GameObject("DatnAutoTestDriver");
+                    go.AddComponent<DATN.Trial.DatnAutoTestDriver>();
+                    EditorSceneManager.MarkSceneDirty(scene);
+                    EditorSceneManager.SaveScene(scene);
+                    Debug.Log("[DatnSceneSetup] Da them DatnAutoTestDriver vao scene Initialization");
+                }
+
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DatnSceneSetup] LOI: {ex}");
+                EditorApplication.Exit(1);
+            }
+        }
     }
 }

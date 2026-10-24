@@ -30,6 +30,9 @@ namespace RGame.RoguelikeKit
             openTreasurePanelChannel.RegisterListener(Show);
         }
 
+        /// <summary>Panel dang hien hay khong (dung cho kiem thu tu dong).</summary>
+        public bool IsVisible => canvasGroup != null && canvasGroup.alpha > 0.5f;
+
         private void OnDisable()
         {
             openTreasurePanelChannel.UnregisterListener(Show);

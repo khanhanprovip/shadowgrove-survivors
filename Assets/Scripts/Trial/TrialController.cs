@@ -50,6 +50,10 @@ namespace DATN.Trial
 
         public bool IsPaused => mPaused;
 
+        /// <summary>Tai nguyen can thiet cho kiem thu tu dong tren ban build.</summary>
+        public CommonStatRuntimeSO PlayerStat => mPlayerStat;
+        public GlobalConfigSO GlobalConfig => mGlobalConfig;
+
         private void OnEnable()
         {
             mPlayerSpawnChannel.RegisterListener(OnPlayerSpawned);
@@ -64,6 +68,8 @@ namespace DATN.Trial
 
         private void Update()
         {
+            LogRuntimeStats();
+
             if (!mCounting) return;
 
             mRemaining -= Time.deltaTime;
@@ -75,6 +81,25 @@ namespace DATN.Trial
             }
 
             UpdateTimeHud();
+        }
+
+        // ---- Ghi FPS/thong ke vao log (lam bang chung kiem thu hieu nang) ----
+
+        private float _statsTimer;
+        private int _statsFrames;
+
+        private void LogRuntimeStats()
+        {
+            _statsTimer += Time.unscaledDeltaTime;
+            _statsFrames++;
+
+            if (_statsTimer < 10f) return;
+
+            float avgFps = _statsFrames / _statsTimer;
+            int enemies = FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).Length;
+            Debug.Log($"[Trial] FPS trung binh 10s: {avgFps:F0} | quai dang song: {enemies} | con lai: {mRemaining:F0}s | level: {mPlayerStat.GetValue("Level")}");
+            _statsTimer = 0f;
+            _statsFrames = 0;
         }
 
         // ---- Vong doi man choi ----
