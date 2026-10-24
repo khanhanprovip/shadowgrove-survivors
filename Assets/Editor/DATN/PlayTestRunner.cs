@@ -79,6 +79,28 @@ namespace DATN
             Begin(100f, Path.Combine(ReportDir, "playtest_full100.txt"));
         }
 
+        public static void Full100Rowan()
+        {
+            // Kiem thu voi nhan vat goc Rowan (art moi) — gan cau hinh truoc khi vao game
+            var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
+                "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
+            var rowan = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.CharacterSelectConfigSO>(
+                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectCharacter/Shadowgrove/Rowan.asset");
+            if (lac != null && rowan != null)
+            {
+                var so = new SerializedObject(lac);
+                so.FindProperty("SelectCharacterSo").objectReferenceValue = rowan;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                Debug.Log("[PlayTest] Da gan nhan vat Rowan cho lan test nay");
+            }
+            else
+            {
+                Debug.LogError("[PlayTest] KHONG tim thay Rowan.asset hoac LevelAndCharacterSO!");
+            }
+            SessionState.SetString(KeyMode, "full");
+            Begin(100f, Path.Combine(ReportDir, "playtest_full100_rowan.txt"));
+        }
+
         public static void Flow65()
         {
             SessionState.SetString(KeyMode, "flow");
