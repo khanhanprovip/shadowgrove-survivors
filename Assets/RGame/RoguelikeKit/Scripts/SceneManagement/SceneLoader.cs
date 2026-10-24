@@ -119,7 +119,15 @@ namespace RGame.RoguelikeKit
 
             if (currentLoadedScene != null && currentLoadedScene.sceneReference.OperationHandle.IsValid())
             {
-                currentLoadedScene.sceneReference.UnLoadScene();
+                var unloadOperation = currentLoadedScene.sceneReference.UnLoadScene();
+
+                // Phai doi unload hoan tat truoc khi load scene moi: Addressables tu choi
+                // nap lai AssetReference scene khi handle cu chua duoc giai phong
+                // (gay loi "already been loaded" khi restart cung mot scene).
+                while (unloadOperation.IsValid() && !unloadOperation.IsDone)
+                {
+                    yield return null;
+                }
             }
 
             LoadPendingScene();

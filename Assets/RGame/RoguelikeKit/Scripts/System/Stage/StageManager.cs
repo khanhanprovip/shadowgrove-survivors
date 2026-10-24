@@ -53,6 +53,8 @@ namespace RGame.RoguelikeKit
 
         private void OnDisable()
         {
+            playerSpawnSO.UnregisterListener(OnPlayerSpawned);
+            startStageChannelSO.UnregisterListener(OnStageStart);
             StopAllCoroutines();
             CleanupEnemies();
         }
@@ -62,6 +64,9 @@ namespace RGame.RoguelikeKit
         private void OnStageStart(RuntimeStageConfigSO runtime)
         {
             // Make a sorted copy of segments so designer order is irrelevant
+            // Dong thoi huy cac coroutine segment cua luot choi truoc (restart)
+            // de khong sinh quai kep khi _elapsed duoc reset ve 0.
+            StopAllCoroutines();
             StageConfigSO cfg = runtime.SelectStageConfig;
             _spawnSets = new List<SpawnSet>(cfg.SpawnSets);
             _spawnSets.Sort((a, b) => a.StartTime.CompareTo(b.StartTime));
@@ -74,6 +79,11 @@ namespace RGame.RoguelikeKit
         private void Update()
         {
             if (_spawnSets == null || _spawnSets.Count == 0) return;
+
+            // Luc dang tai lai scene, player cu da bi huy — tam dung sinh quai
+            // den khi player moi duoc sinh (OnPlayerSpawned cap nhat lai _player).
+            if (_player == null) return;
+
             _elapsed += Time.deltaTime;
 
             while (_spawnSetIndex < _spawnSets.Count &&

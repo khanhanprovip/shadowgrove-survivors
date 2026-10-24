@@ -1,0 +1,91 @@
+using System;
+using DATN.Trial;
+using RGame.CommonStat;
+using RGame.Framework;
+using RGame.RoguelikeKit;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+/// <summary>
+///     Cong cu cau hinh scene mot lan cho do an (chay qua -executeMethod).
+///     AddTrialController: tao GameObject "TrialController" trong scene GamePlay
+///     va gan day du cac tai nguyen serialize — tranh phai sua YAML scene bang tay.
+/// </summary>
+namespace DATN
+{
+    public static class DatnSceneSetup
+    {
+        private const string GamePlayScene =
+            "Assets/RGame/RoguelikeKit/Scenes/Managers/GamePlay.unity";
+
+        private const string ChRoot =
+            "Assets/RGame/RoguelikeKit/ScriptableObjects";
+
+        public static void AddTrialController()
+        {
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(GamePlayScene, OpenSceneMode.Single);
+
+                if (Object.FindFirstObjectByType<TrialController>(FindObjectsInactive.Include) != null)
+                {
+                    Debug.Log("[DatnSceneSetup] TrialController da ton tai — khong lam gi them");
+                }
+                else
+                {
+                    var go = new GameObject("TrialController");
+                    var ctrl = go.AddComponent<TrialController>();
+
+                    var so = new SerializedObject(ctrl);
+                    so.FindProperty("mLevelDuration").floatValue = 90f;
+                    so.FindProperty("mPlayerSpawnChannel").objectReferenceValue =
+                        Load<PlayerSpawnChannelSO>($"{ChRoot}/LogicSO/EventChannels/Player/PlayerSpawnChannelSO.asset");
+                    so.FindProperty("mGameWinChannel").objectReferenceValue =
+                        Load<VoidEventChannelSO>($"{ChRoot}/LogicSO/EventChannels/UI/OnGameWin.asset");
+                    so.FindProperty("mInputReader").objectReferenceValue =
+                        Load<InputReader>($"{ChRoot}/LogicSO/Input/InputReader.asset");
+                    so.FindProperty("mPlayerStat").objectReferenceValue =
+                        Load<CommonStatRuntimeSO>($"{ChRoot}/DataSO/Player/PlayerRuntimeStat.asset");
+                    so.FindProperty("mGlobalConfig").objectReferenceValue =
+                        Load<GlobalConfigSO>($"{ChRoot}/RuntimeDataSO/Global/GlobalConfigSO.asset");
+                    so.FindProperty("mPoolRuntime").objectReferenceValue =
+                        Load<PoolRuntimeSO>($"{ChRoot}/RuntimeDataSO/Pool/Pool.asset");
+                    so.FindProperty("mClearAllBuffsChannel").objectReferenceValue =
+                        Load<VoidEventChannelSO>($"{ChRoot}/LogicSO/EventChannels/Buff/ClearAllBuffs.asset");
+                    so.FindProperty("mLoadLevelChannel").objectReferenceValue =
+                        Load<LoadEventChannelSO>($"{ChRoot}/LogicSO/EventChannels/SceneManagement/LoadLevel_Channel.asset");
+                    so.FindProperty("mLoadMenuChannel").objectReferenceValue =
+                        Load<LoadEventChannelSO>($"{ChRoot}/LogicSO/EventChannels/SceneManagement/LoadMenu_Channel.asset");
+                    so.FindProperty("mGameScene").objectReferenceValue =
+                        Load<GameSceneSO>($"{ChRoot}/LogicSO/SceneData/GameLevel/Game.asset");
+                    so.FindProperty("mMainMenuScene").objectReferenceValue =
+                        Load<GameSceneSO>($"{ChRoot}/LogicSO/SceneData/Menus/MainMenu.asset");
+                    so.ApplyModifiedPropertiesWithoutUndo();
+
+                    EditorSceneManager.MarkSceneDirty(scene);
+                    EditorSceneManager.SaveScene(scene);
+                    Debug.Log("[DatnSceneSetup] Da tao va luu TrialController trong scene GamePlay");
+                }
+
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DatnSceneSetup] LOI: {ex}");
+                EditorApplication.Exit(1);
+            }
+        }
+
+        private static T Load<T>(string path) where T : Object
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (asset == null)
+            {
+                throw new Exception($"Khong tai duoc asset: {path} ({typeof(T).Name})");
+            }
+            return asset;
+        }
+    }
+}

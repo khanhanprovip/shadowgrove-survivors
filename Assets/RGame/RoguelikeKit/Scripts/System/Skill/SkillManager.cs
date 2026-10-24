@@ -115,6 +115,10 @@ namespace RGame.RoguelikeKit
 
         private void CreateSkill(string key)
         {
+            // Trong luc tai lai scene (restart/exit), player cu da bi huy —
+            // bo qua dot cast nay de tranh MissingReferenceException o SkillCast.
+            if (_globalConfig.GlobalPlayer == null) return;
+
             _skillCastDictionary[key].Cast(_skillDataDictionary[key]);
         }
 

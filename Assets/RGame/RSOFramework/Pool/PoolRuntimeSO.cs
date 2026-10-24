@@ -102,18 +102,25 @@ namespace RGame.Framework
         {
             if (!EnsureInitialized())
                 return;
-            
-            string key = obj.GetComponent<IPoolR>().Key;
-            
-            if (!ValidatePoolExists(key))
-                return;
-            
+
             if (obj == null)
             {
-                Debug.LogError($"[{nameof(PoolRuntimeSO)}] Cannot return null object to pool '{key}'");
+                Debug.LogError($"[{nameof(PoolRuntimeSO)}] Cannot return a destroyed object to a pool");
                 return;
             }
-            
+
+            var poolR = obj.GetComponent<IPoolR>();
+            if (poolR == null)
+            {
+                Debug.LogError($"[{nameof(PoolRuntimeSO)}] {obj.name} does not implement IPoolR and cannot be pooled");
+                return;
+            }
+
+            string key = poolR.Key;
+
+            if (!ValidatePoolExists(key))
+                return;
+
             _activeObjects[key].Remove(obj);
             DeactivateObject(obj, key);
             ReturnObjectToPool(obj, key);

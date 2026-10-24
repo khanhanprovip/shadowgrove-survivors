@@ -18,17 +18,30 @@ namespace RGame.RoguelikeKit
         
         private void Start()
         {
+            if (mStat == null)
+            {
+                Debug.LogError("[HealthUI] CommonStatRuntimeSO chua duoc gan — HP bar se khong hoat dong", this);
+                enabled = false;
+                return;
+            }
+
             mHpBar = new BarAnimator(mHPBar, mHpTransitionBar, 0.5f);
 
             mHPChange += mHpBar.SetValue;
             mStat.AddAction("HP", mHPChange);
         }
-        
+
         private void OnDestroy()
         {
-            mHpBar.Kill();
-            mStat.RemoveAction("HP", mHPChange);
-            mHPChange -= mHpBar.SetValue;
+            // Start() co the chua chay neu object bi huy ngay sau khi kich dong
+            // (vd. restart man nhanh) — phai kiem null truoc khi giai phong.
+            if (mStat != null && mHPChange != null)
+            {
+                mStat.RemoveAction("HP", mHPChange);
+            }
+
+            mHpBar?.Kill();
+            mHPChange = null;
         }
     }
 }

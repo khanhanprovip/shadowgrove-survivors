@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mLevelAndCharacterSO: {fileID: 11400000, guid: 96f0ea912b3468744902388f599f6e0c, type: 2}
   mGeneratorMapChannelSO: {fileID: 11400000, guid: 7293f2636f08c514aab88505070172e5, type: 2}
-  mStartWaveEventChannelSO: {fileID: 11400000, guid: 0d2e5c5d38a6fc944b4262bb84bdc5be, type: 2}
+  mStartStageEventChannelSo: {fileID: 11400000, guid: 0d2e5c5d38a6fc944b4262bb84bdc5be, type: 2}
   mGlobalConfigSO: {fileID: 11400000, guid: 055b856c9b45e18459c288223c3025c1, type: 2}
   mInputReader: {fileID: 11400000, guid: 82e62e07b6da4c140aea038b41169543, type: 2}
