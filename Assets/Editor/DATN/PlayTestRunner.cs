@@ -93,6 +93,13 @@ namespace DATN
             Begin(100f, Path.Combine(ReportDir, "playtest_full100_lyra.txt"));
         }
 
+        public static void Full100Kael()
+        {
+            SelectCharacterForTest("Kael");
+            SessionState.SetString(KeyMode, "full");
+            Begin(100f, Path.Combine(ReportDir, "playtest_full100_kael.txt"));
+        }
+
         private static void SelectCharacterForTest(string charName)
         {
             var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
