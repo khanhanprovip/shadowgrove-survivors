@@ -146,3 +146,7 @@ MonoBehaviour:
     _pool:
       _prefab: {fileID: 154470369426367514, guid: 8d28448697ec53347b82a4cd4fcb0285, type: 3}
       _preloadAmount: 1
+  - _key: GroveColossus
+    _pool:
+      _prefab: {fileID: 4101547999572780385, guid: 27f593e5e64d4d71a4d2eb0b3659eba3, type: 3}
+      _preloadAmount: 3

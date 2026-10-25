@@ -100,6 +100,25 @@ namespace DATN
             Begin(100f, Path.Combine(ReportDir, "playtest_full100_kael.txt"));
         }
 
+        /// <summary>Kiem thu man KillTarget moi (LV2): thang khi ha du 30 quai.</summary>
+        public static void KillTargetLevel()
+        {
+            SelectCharacterForTest("Rowan");
+            var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
+                "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
+            var lv = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelConfigSO>(
+                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectLevel/LV2_MoonlitRuins.asset");
+            if (lac != null && lv != null)
+            {
+                var so = new SerializedObject(lac);
+                so.FindProperty("SelectLevelSO").objectReferenceValue = lv;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                Debug.Log("[PlayTest] Da chon LV2_MoonlitRuins (KillTarget) cho lan test");
+            }
+            SessionState.SetString(KeyMode, "full");
+            Begin(100f, Path.Combine(ReportDir, "playtest_killtarget_lv2.txt"));
+        }
+
         private static void SelectCharacterForTest(string charName)
         {
             var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
