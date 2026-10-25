@@ -165,5 +165,67 @@ namespace DATN
             }
         }
 
+
+        /// <summary>Moc fix chớp: gỡ DynamicSortOrder khỏi 3 prefab nhân vật + order 50, bằng PrefabUtility.</summary>
+        public static void RemoveDynamicSortOrderSafe()
+        {
+            try
+            {
+                foreach (var name in new[] { "Rowan", "Lyra", "Kael" })
+                {
+                    string path = "Assets/RGame/RoguelikeKit/Prefabs/Player/Shadowgrove/" + name + ".prefab";
+                    var root = PrefabUtility.LoadPrefabContents(path);
+                    foreach (var dso in root.GetComponentsInChildren<DynamicSortOrder>(true))
+                        Object.DestroyImmediate(dso);
+                    var sr = root.GetComponent<SpriteRenderer>();
+                    if (sr != null) sr.sortingOrder = 50;
+                    PrefabUtility.SaveAsPrefabAsset(root, path);
+                    PrefabUtility.UnloadPrefabContents(root);
+                    Debug.Log("[Fix] " + name + ": da go DynamicSortOrder, order=50");
+                }
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[Fix] LOI: " + ex);
+                EditorApplication.Exit(1);
+            }
+        }
+
+
+        /// <summary>Rút menu chọn màn còn 6 màn đại diện (đúng cách, qua SerializedObject).</summary>
+        public static void TrimLevelListSafe()
+        {
+            try
+            {
+                string path = "Assets/RGame/RoguelikeKit/Prefabs/UI/MainMenu/LevelSelect_Panel .prefab";
+                var panelGo = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                var panel = panelGo.GetComponent<LevelSelectPanel>();
+                var so = new SerializedObject(panel);
+                var list = so.FindProperty("mLevelSos");
+                string[] keep = { "TrialLevel", "LV2_MoonlitRuins", "LV3_SunkenMarsh", "LV5_FrostHollow", "LV6_CursedVillage", "LV9_EndlessAbyss" };
+                var keepAssets = new System.Collections.Generic.List<LevelConfigSO>();
+                foreach (var k in keep)
+                {
+                    var a = AssetDatabase.LoadAssetAtPath<LevelConfigSO>(
+                        "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectLevel/" + k + ".asset");
+                    if (a != null) keepAssets.Add(a);
+                }
+                list.arraySize = keepAssets.Count;
+                for (int i = 0; i < keepAssets.Count; i++)
+                    list.GetArrayElementAtIndex(i).objectReferenceValue = keepAssets[i];
+                so.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(panel);
+                AssetDatabase.SaveAssets();
+                Debug.Log("[Fix] Menu man: " + keepAssets.Count + " man");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[Fix] LOI: " + ex);
+                EditorApplication.Exit(1);
+            }
+        }
+
     }
 }
