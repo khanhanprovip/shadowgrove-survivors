@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 913092130059746969}
   - component: {fileID: 6997282388556424107}
   - component: {fileID: 5197528830913031081}
-  - component: {fileID: 8716348354107494368}
   - component: {fileID: 9013862499070297895}
   m_Layer: 0
   m_Name: Rowan
@@ -266,19 +265,7 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
---- !u!114 &8716348354107494368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6482655462957775351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21366a372235a341b090397d9c69b29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  excludedRenderers: []
+
 --- !u!212 &9013862499070297895
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -322,7 +309,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 50
   m_Sprite: {fileID: 4548314910298454548, guid: 4f3f1274d80c409886d50b89042dfdce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
