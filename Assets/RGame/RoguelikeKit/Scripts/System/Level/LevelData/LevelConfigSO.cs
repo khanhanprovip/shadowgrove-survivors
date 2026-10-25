@@ -14,5 +14,9 @@ namespace RGame.RoguelikeKit
         public Sprite PreviewImage;
         public MapConfigSO MapConfig;
         public StageConfigSO StageConfig;
+
+        // Shadowgrove (Moc 4): che do choi cua man — tach logic thang/thua
+        // khoi TrialController theo kien truc IGameMode.
+        public DATN.Modes.GameModeSO GameMode;
     }
 }

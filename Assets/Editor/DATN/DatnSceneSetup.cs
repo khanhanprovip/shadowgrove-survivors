@@ -78,6 +78,31 @@ namespace DATN
             }
         }
 
+        public static void WireTrialControllerMode()
+        {
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(GamePlayScene, OpenSceneMode.Single);
+                var ctrl = Object.FindFirstObjectByType<DATN.Trial.TrialController>(FindObjectsInactive.Include);
+                if (ctrl == null) throw new Exception("Khong tim thay TrialController trong GamePlay");
+
+                var so = new SerializedObject(ctrl);
+                so.FindProperty("mLevelAndCharacterSO").objectReferenceValue =
+                    Load<LevelAndCharacterSO>($"{ChRoot}/LogicSO/Level/LevelAndCharacterSO.asset");
+                so.ApplyModifiedPropertiesWithoutUndo();
+
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorSceneManager.SaveScene(scene);
+                Debug.Log("[DatnSceneSetup] Da gan mLevelAndCharacterSO cho TrialController (Moc 4)");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DatnSceneSetup] LOI: {ex}");
+                EditorApplication.Exit(1);
+            }
+        }
+
         private static T Load<T>(string path) where T : Object
         {
             var asset = AssetDatabase.LoadAssetAtPath<T>(path);

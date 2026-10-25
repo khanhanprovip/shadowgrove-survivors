@@ -106,6 +106,190 @@ MonoBehaviour:
     m_Localized: Level: {0}
     m_Metadata:
       m_Items: []
+  - m_Id: 150195699065697
+    m_Localized: Thorn Fan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144683251360480
+    m_Localized: Fires thorn blades to both sides.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158532990256964
+    m_Localized: Gloom Spore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266335890726077
+    m_Localized: Throws a spore that bounces between enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2279370532971
+    m_Localized: Root Lash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41487737847386
+    m_Localized: Root whip lashes through nearby foes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 229756683898716
+    m_Localized: Warden Halo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144597081382918
+    m_Localized: Halo strikes all enemies around you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 108500701849110
+    m_Localized: Thorn Orbit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 145569192685972
+    m_Localized: Thorns orbit and shred on contact.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 210625631007568
+    m_Localized: Cross Bolt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 271113430255706
+    m_Localized: Bolts fire in four directions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 216333245068117
+    m_Localized: Spirit Bloom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 246706347985428
+    m_Localized: Bursts bloom around you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55883360224934
+    m_Localized: Wild Magic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89550677745645
+    m_Localized: Unpredictable bolts seek enemies.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50846383074446
+    m_Localized: Eclipse Bolt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116227430295888
+    m_Localized: Homing bolt strikes the nearest foe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102071726297295
+    m_Localized: Money Bag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 142947643431392
+    m_Localized: Contains coins. Instant wealth!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213135784412289
+    m_Localized: Might
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24609979510728
+    m_Localized: Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226384035353028
+    m_Localized: Max HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 270697578676530
+    m_Localized: Recovery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 185314214066036
+    m_Localized: Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245791633292247
+    m_Localized: Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213957144303107
+    m_Localized: Skill Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 275671309603562
+    m_Localized: Duration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217058394145951
+    m_Localized: Projectiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273933420309311
+    m_Localized: Move Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 112885997957466
+    m_Localized: Magnet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258481925275066
+    m_Localized: Growth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41519376158677
+    m_Localized: Greed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 187547233986514
+    m_Localized: Curse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5421137555364
+    m_Localized: Lv. {0} → {1} / {2}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89981525826060
+    m_Localized: Lv. {0} (MAX)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117468656678555
+    m_Localized: NEW SKILL!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279750746932096
+    m_Localized: UPGRADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137708062717879
+    m_Localized: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170220118826616
+    m_Localized: Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253492882150148
+    m_Localized: Projectiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 231404376720762
+    m_Localized: Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133642766609913
+    m_Localized: Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102173825467855
+    m_Localized: Coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 204012337399981
+    m_Localized: Kills: {0}/{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143966124341762
+    m_Localized: Endless
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

@@ -103,6 +103,190 @@ MonoBehaviour:
     m_Key: LevelReached
     m_Metadata:
       m_Items: []
+  - m_Id: 150195699065697
+    m_Key: Skill_BothSideSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144683251360480
+    m_Key: SkillDesc_BothSideSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158532990256964
+    m_Key: Skill_BouncingSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266335890726077
+    m_Key: SkillDesc_BouncingSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2279370532971
+    m_Key: Skill_ChainSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41487737847386
+    m_Key: SkillDesc_ChainSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 229756683898716
+    m_Key: Skill_CircularAttackSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144597081382918
+    m_Key: SkillDesc_CircularAttackSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 108500701849110
+    m_Key: Skill_CircularMotionSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 145569192685972
+    m_Key: SkillDesc_CircularMotionSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 210625631007568
+    m_Key: Skill_FourCornerSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 271113430255706
+    m_Key: SkillDesc_FourCornerSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 216333245068117
+    m_Key: Skill_InsideScopeSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 246706347985428
+    m_Key: SkillDesc_InsideScopeSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55883360224934
+    m_Key: Skill_RandomSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89550677745645
+    m_Key: SkillDesc_RandomSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50846383074446
+    m_Key: Skill_ToNearestSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116227430295888
+    m_Key: SkillDesc_ToNearestSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102071726297295
+    m_Key: Skill_MoneyBag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 142947643431392
+    m_Key: SkillDesc_MoneyBag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213135784412289
+    m_Key: SkillAttr_Might
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24609979510728
+    m_Key: SkillAttr_Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226384035353028
+    m_Key: SkillAttr_HPMax
+    m_Metadata:
+      m_Items: []
+  - m_Id: 270697578676530
+    m_Key: SkillAttr_Recovery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 185314214066036
+    m_Key: SkillAttr_Cooldown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 245791633292247
+    m_Key: SkillAttr_Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213957144303107
+    m_Key: SkillAttr_SkillSpeed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 275671309603562
+    m_Key: SkillAttr_Duration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217058394145951
+    m_Key: SkillAttr_Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273933420309311
+    m_Key: SkillAttr_MoveSpeed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 112885997957466
+    m_Key: SkillAttr_Magnet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 258481925275066
+    m_Key: SkillAttr_Growth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41519376158677
+    m_Key: SkillAttr_Greed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 187547233986514
+    m_Key: SkillAttr_Curse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5421137555364
+    m_Key: CardLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89981525826060
+    m_Key: CardMaxed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117468656678555
+    m_Key: CardNew
+    m_Metadata:
+      m_Items: []
+  - m_Id: 279750746932096
+    m_Key: CardUpgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 137708062717879
+    m_Key: Stat_Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170220118826616
+    m_Key: Stat_CD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 253492882150148
+    m_Key: Stat_Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 231404376720762
+    m_Key: Stat_Velocity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 133642766609913
+    m_Key: Stat_Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102173825467855
+    m_Key: Stat_Money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 204012337399981
+    m_Key: Objective_Kills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143966124341762
+    m_Key: Objective_Endless
+    m_Metadata:
+      m_Items: []
   m_KeyGenerator:
     rid: 0
   references:

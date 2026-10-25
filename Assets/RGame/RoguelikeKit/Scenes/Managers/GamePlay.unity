@@ -5211,7 +5211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e86b9d0e546d94ca548851a4e7b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DATN.Trial.TrialController
-  mLevelDuration: 90
+  mLevelAndCharacterSO: {fileID: 11400000, guid: 96f0ea912b3468744902388f599f6e0c, type: 2}
   mPlayerSpawnChannel: {fileID: 11400000, guid: 2780f268bc318574eb2d611c05a0de50, type: 2}
   mGameWinChannel: {fileID: 11400000, guid: 342c5ed9afc9857488cb0d3c16eecbe4, type: 2}
   mInputReader: {fileID: 11400000, guid: 82e62e07b6da4c140aea038b41169543, type: 2}

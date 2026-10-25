@@ -129,6 +129,11 @@ namespace DATN.Trial
             if (Time.timeScale == 0f && !_winSeen && elapsed - _lastPick >= 1f)
             {
                 _lastPick = elapsed;
+                var upgradePanel = FindFirstObjectByType<UpgradeSkillPanel>();
+                if (upgradePanel != null && upgradePanel.IsVisible && !_shotSkill)
+                {
+                    _shotSkill = Capture("screenshot_skill_panel.png", elapsed);
+                }
                 AutoConfirmPanels();
             }
 
@@ -192,7 +197,7 @@ namespace DATN.Trial
             }
         }
 
-        private bool _shot15, _shot50, _shot96, _shotMenu;
+        private bool _shot15, _shot50, _shot96, _shotMenu, _shotSkill;
 
         private bool Capture(string fileName, float elapsed)
         {

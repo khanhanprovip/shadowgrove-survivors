@@ -42,6 +42,20 @@ namespace DATN.Localization
             }
         }
 
+        private int _buttonAttempts;
+
+        private void Update()
+        {
+            // Tao nut o Update thay vi Awake: TMP can tai nguyen san trong Editor,
+            // that bai thi thu lai toi da 3 lan, khong bao gio lam game loi.
+            if (_toggleButton == null && _buttonAttempts < 3)
+            {
+                _buttonAttempts++;
+                try { BuildToggleButton(); }
+                catch (System.Exception ex) { Debug.LogWarning("[Lang] Thu tao nut ngon ngu that bai: " + ex.Message); }
+            }
+        }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -50,7 +64,6 @@ namespace DATN.Localization
                 return;
             }
             Instance = this;
-            BuildToggleButton();
             StartCoroutine(InitWhenLocalizationReady());
         }
 
@@ -116,7 +129,7 @@ namespace DATN.Localization
 
         public void Toggle()
         {
-            if (LocalizationSettings.SelectedLocale == null) return;
+            if (LocalizationSettings.SelectedLocale == null || _vi == null || _en == null) return;
             var target = CurrentCode == "vi" ? _en : _vi;
             if (target == null) return;
             PlayerPrefs.SetString(PrefsKey, target.Identifier.Code);

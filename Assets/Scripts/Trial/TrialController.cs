@@ -4,6 +4,7 @@ using RGame.Framework;
 using RGame.RoguelikeKit;
 using TMPro;
 using DATN.Localization;
+using DATN.Modes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,8 @@ namespace DATN.Trial
     /// </summary>
     public class TrialController : MonoBehaviour
     {
-        [Header("Thoi luong man choi")]
-        [SerializeField] private float mLevelDuration = 90f;
+        [Header("Du lieu man choi")]
+        [SerializeField] private LevelAndCharacterSO mLevelAndCharacterSO;
 
         [Header("Su kien & du lieu")]
         [SerializeField] private PlayerSpawnChannelSO mPlayerSpawnChannel;
@@ -38,8 +39,8 @@ namespace DATN.Trial
         [SerializeField] private GameSceneSO mGameScene;
         [SerializeField] private GameSceneSO mMainMenuScene;
 
-        private float mRemaining;
-        private bool mCounting;
+        private IGameMode mMode;
+        private bool mRunning;
         private bool mEnded;
         private bool mPaused;
 
@@ -67,21 +68,40 @@ namespace DATN.Trial
             mInputReader.MenuPauseEvent -= OnPausePressed;
         }
 
+        private GameModeSO mModeConfig;
+
         private void Update()
         {
             LogRuntimeStats();
 
-            if (!mCounting) return;
+            if (!mRunning) return;
 
-            mRemaining -= Time.deltaTime;
-            if (mRemaining <= 0f)
+            // Mode tra ve chuoi muc tieu da dich cho HUD moi frame
+            string objective = mMode.UpdateObjective();
+            if (objective != null && mTimeText != null) mTimeText.text = objective;
+
+            if (mMode.CheckWin())
             {
-                mRemaining = 0f;
-                mCounting = false;
+                mRunning = false;
                 EndLevelAsWin();
             }
+        }
 
-            UpdateTimeHud();
+        /// <summary>Lay GameModeSO tu LevelConfigSO cua man dang chon (fallback: Survival 90s).</summary>
+        private IGameMode ResolveMode()
+        {
+            mModeConfig = mLevelAndCharacterSO != null && mLevelAndCharacterSO.SelectLevelSO != null
+                ? mLevelAndCharacterSO.SelectLevelSO.GameMode
+                : null;
+            if (mModeConfig == null)
+            {
+                // Man chua gan mode (vi du man cu cua kit) →Survival 90s nhu truoc
+                var fallback = ScriptableObject.CreateInstance<GameModeSO>();
+                fallback.ModeId = GameModeId.Survival;
+                fallback.Duration = 90f;
+                mModeConfig = fallback;
+            }
+            return mModeConfig.CreateInstance();
         }
 
         // ---- Ghi FPS/thong ke vao log (lam bang chung kiem thu hieu nang) ----
@@ -98,7 +118,7 @@ namespace DATN.Trial
 
             float avgFps = _statsFrames / _statsTimer;
             int enemies = FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).Length;
-            Debug.Log($"[Trial] FPS trung binh 10s: {avgFps:F0} | quai dang song: {enemies} | con lai: {mRemaining:F0}s | level: {mPlayerStat.GetValue("Level")}");
+            Debug.Log($"[Trial] FPS trung binh 10s: {avgFps:F0} | quai dang song: {enemies} | mode: {mModeConfig.ModeId} | level: {mPlayerStat.GetValue("Level")}");
             _statsTimer = 0f;
             _statsFrames = 0;
         }
@@ -113,8 +133,15 @@ namespace DATN.Trial
             mGlobalConfig.OnGameStart();
             mClearAllBuffsChannel.RaiseEvent();
 
-            mRemaining = mLevelDuration;
-            mCounting = true;
+            mMode = ResolveMode();
+            mMode.Initialize(new GameModeContext
+            {
+                Config = mModeConfig,
+                GlobalConfig = mGlobalConfig,
+                PlayerStat = mPlayerStat,
+            });
+            mMode.Begin();
+            mRunning = true;
             mEnded = false;
             mPaused = false;
             Time.timeScale = 1f;
@@ -163,7 +190,8 @@ namespace DATN.Trial
             Time.timeScale = 1f;
             mPaused = false;
             mEnded = true; // chan cac update trong luc tai lai
-            mCounting = false;
+            mRunning = false;
+            mMode?.Cleanup();
             HidePausePanel();
 
             mPoolRuntime.RecycleAll();
@@ -178,7 +206,8 @@ namespace DATN.Trial
             Time.timeScale = 1f;
             mPaused = false;
             mEnded = true;
-            mCounting = false;
+            mRunning = false;
+            mMode?.Cleanup();
             HidePausePanel();
 
             mPoolRuntime.RecycleAll();
@@ -192,12 +221,9 @@ namespace DATN.Trial
 
         private void UpdateTimeHud()
         {
-            if (mTimeText == null) return;
-
-            int total = Mathf.CeilToInt(mRemaining);
-            int minutes = total / 60;
-            int seconds = total % 60;
-            mTimeText.text = $"{minutes:00}:{seconds:00}";
+            if (mTimeText == null || mMode == null) return;
+            string objective = mMode.UpdateObjective();
+            if (objective != null) mTimeText.text = objective;
         }
 
         // ---- Xay dung UI luc runtime (khong sua scene YAML phuc tap) ----
