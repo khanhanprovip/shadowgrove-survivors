@@ -95,8 +95,7 @@ namespace DATN.Trial
                 _shotMenu = Capture($"screenshot_03s_menu_{Screen.width}x{Screen.height}.png", elapsed);
             }
 
-            // Lan menu bang dung cac method nut bam
-            // (panel co the dang inactive — phai bao gom ca inactive khi tim)
+            // Lan menu THEO TUNG BUONG de chup anh tung panel (bang chung reskin UI)
             if (!_menuDriven && elapsed > 6f)
             {
                 var menu = FindFirstObjectByType<UIMainMenu>(FindObjectsInactive.Include);
@@ -104,11 +103,11 @@ namespace DATN.Trial
                 var levelPanel = FindFirstObjectByType<LevelSelectPanel>(FindObjectsInactive.Include);
                 if (menu != null && charPanel != null && levelPanel != null)
                 {
-                    menu.NewGameButton();
-                    charPanel.ConfirmButton();
-                    levelPanel.ConfirmButton();
+                    menu.NewGameButton();          // buoc 1: mo panel chon nhan vat
                     _menuDriven = true;
-                    _events.Add("PASS | Da lai menu: NewGame → Confirm nhan vat → Confirm man");
+                    _stageTime = elapsed;
+                    _pendingCharPanel = charPanel;
+                    _pendingLevelPanel = levelPanel;
                 }
                 else if (elapsed > 30f)
                 {
@@ -117,7 +116,23 @@ namespace DATN.Trial
                 }
             }
 
-            if (!_menuDriven) return;
+            if (_menuDriven && !_charShot && _pendingCharPanel != null && elapsed > _stageTime + 1.6f)
+            {
+                _charShot = Capture("screenshot_charselect.png", elapsed);
+                _pendingCharPanel.ConfirmButton(); // buoc 2: mo panel chon man
+                _stageTime = elapsed;
+            }
+
+            if (_menuDriven && _charShot && !_levelShot && _pendingLevelPanel != null
+                && elapsed > _stageTime + 1.6f)
+            {
+                _levelShot = Capture("screenshot_levelselect.png", elapsed);
+                _pendingLevelPanel.ConfirmButton(); // buoc 3: vao game
+                _levelConfirmed = true;
+                _events.Add("PASS | Da lai menu tung buoc + chup 2 panel");
+            }
+
+            if (!_levelConfirmed) return;
 
             if (elapsed - _lastSample >= 1f)
             {
@@ -198,6 +213,10 @@ namespace DATN.Trial
         }
 
         private bool _shot15, _shot50, _shot96, _shotMenu, _shotSkill;
+        private bool _charShot, _levelShot, _levelConfirmed;
+        private float _stageTime;
+        private CharacterSelectPanel _pendingCharPanel;
+        private LevelSelectPanel _pendingLevelPanel;
 
         private bool Capture(string fileName, float elapsed)
         {

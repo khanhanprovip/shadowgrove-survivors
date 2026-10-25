@@ -25,8 +25,7 @@ MonoBehaviour:
     m_Address: MainMenu_vi
     m_ReadOnly: 1
     m_SerializedLabels:
-    - StringTable
-    - SharedData
+    - Locale-vi
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: f73bcf546edaa3347a5f9f5fc77a72ea, type: 2}
