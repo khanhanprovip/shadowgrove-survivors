@@ -81,24 +81,35 @@ namespace DATN
 
         public static void Full100Rowan()
         {
-            // Kiem thu voi nhan vat goc Rowan (art moi) — gan cau hinh truoc khi vao game
+            SelectCharacterForTest("Rowan");
+            SessionState.SetString(KeyMode, "full");
+            Begin(100f, Path.Combine(ReportDir, "playtest_full100_rowan.txt"));
+        }
+
+        public static void Full100Lyra()
+        {
+            SelectCharacterForTest("Lyra");
+            SessionState.SetString(KeyMode, "full");
+            Begin(100f, Path.Combine(ReportDir, "playtest_full100_lyra.txt"));
+        }
+
+        private static void SelectCharacterForTest(string charName)
+        {
             var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
                 "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
-            var rowan = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.CharacterSelectConfigSO>(
-                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectCharacter/Shadowgrove/Rowan.asset");
-            if (lac != null && rowan != null)
+            var cfg = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.CharacterSelectConfigSO>(
+                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectCharacter/Shadowgrove/" + charName + ".asset");
+            if (lac != null && cfg != null)
             {
                 var so = new SerializedObject(lac);
-                so.FindProperty("SelectCharacterSo").objectReferenceValue = rowan;
+                so.FindProperty("SelectCharacterSo").objectReferenceValue = cfg;
                 so.ApplyModifiedPropertiesWithoutUndo();
-                Debug.Log("[PlayTest] Da gan nhan vat Rowan cho lan test nay");
+                Debug.Log("[PlayTest] Da gan nhan vat " + charName + " cho lan test nay");
             }
             else
             {
-                Debug.LogError("[PlayTest] KHONG tim thay Rowan.asset hoac LevelAndCharacterSO!");
+                Debug.LogError("[PlayTest] KHONG tim thay " + charName + ".asset hoac LevelAndCharacterSO!");
             }
-            SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_full100_rowan.txt"));
         }
 
         public static void Flow65()

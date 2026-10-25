@@ -191,7 +191,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 7afa415848305bb2a70362ac45bdd280
-      internalID: 640108409358526757
+      internalID: 3137835414641574949
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: b71656c30eed50978d89446d06c1d8cf
-      internalID: 2029919164409592913
+      internalID: 596103771845440023
       vertices: []
       indices: 
       edges: []
@@ -235,7 +235,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: d7ef7b9ee33d5bb1a2ba8bf8164fa2f9
-      internalID: -521959241999514931
+      internalID: 955970847691622912
       vertices: []
       indices: 
       edges: []
@@ -257,7 +257,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: b0ee81bdee1e5a60968c7178be019114
-      internalID: -8094025382465384511
+      internalID: 223974839150534450
       vertices: []
       indices: 
       edges: []
@@ -279,7 +279,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 3f88f8f1ee1a5f21a847fd5c4ea44455
-      internalID: -3399047377811691040
+      internalID: 3985121979603192584
       vertices: []
       indices: 
       edges: []
@@ -301,7 +301,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: d6ce154721405ff4865d9489738d663e
-      internalID: -3202549831297429289
+      internalID: 579790973056488231
       vertices: []
       indices: 
       edges: []
@@ -323,7 +323,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: fce6b2a8926053c49f4089e25dda1713
-      internalID: 7427066886177936116
+      internalID: 2865004465253477469
       vertices: []
       indices: 
       edges: []
@@ -345,7 +345,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 1d7780b380eb5991a42d7afcba1ca2e8
-      internalID: 6135421351105890924
+      internalID: 3382986550418029672
       vertices: []
       indices: 
       edges: []
@@ -367,7 +367,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: f6cc99165b1b5545a355f9448d71e42d
-      internalID: -4925567616851241397
+      internalID: 1862523090662281672
       vertices: []
       indices: 
       edges: []
@@ -389,7 +389,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 8507896127f754c8bd18f75f3e3abc20
-      internalID: 7413739464634149891
+      internalID: 898763223614431533
       vertices: []
       indices: 
       edges: []
@@ -411,7 +411,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: e58f883e8662511b8f33a8ef458c682b
-      internalID: 1122344257788002720
+      internalID: 2869173356713246253
       vertices: []
       indices: 
       edges: []
@@ -433,7 +433,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 873616e8e58a55d5b3f88c0ed02a8084
-      internalID: -4403477547881780623
+      internalID: 893882035419056574
       vertices: []
       indices: 
       edges: []
@@ -452,18 +452,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SG_Char_Lyra_Sheet_0_0: 640108409358526757
-      SG_Char_Lyra_Sheet_0_1: 2029919164409592913
-      SG_Char_Lyra_Sheet_0_2: -521959241999514931
-      SG_Char_Lyra_Sheet_0_3: -8094025382465384511
-      SG_Char_Lyra_Sheet_0_4: -3399047377811691040
-      SG_Char_Lyra_Sheet_0_5: -3202549831297429289
-      SG_Char_Lyra_Sheet_1_0: 7427066886177936116
-      SG_Char_Lyra_Sheet_1_1: 6135421351105890924
-      SG_Char_Lyra_Sheet_1_2: -4925567616851241397
-      SG_Char_Lyra_Sheet_1_3: 7413739464634149891
-      SG_Char_Lyra_Sheet_1_4: 1122344257788002720
-      SG_Char_Lyra_Sheet_1_5: -4403477547881780623
+      SG_Char_Lyra_Sheet_0_0: 3137835414641574949
+      SG_Char_Lyra_Sheet_0_1: 596103771845440023
+      SG_Char_Lyra_Sheet_0_2: 955970847691622912
+      SG_Char_Lyra_Sheet_0_3: 223974839150534450
+      SG_Char_Lyra_Sheet_0_4: 3985121979603192584
+      SG_Char_Lyra_Sheet_0_5: 579790973056488231
+      SG_Char_Lyra_Sheet_1_0: 2865004465253477469
+      SG_Char_Lyra_Sheet_1_1: 3382986550418029672
+      SG_Char_Lyra_Sheet_1_2: 1862523090662281672
+      SG_Char_Lyra_Sheet_1_3: 898763223614431533
+      SG_Char_Lyra_Sheet_1_4: 2869173356713246253
+      SG_Char_Lyra_Sheet_1_5: 893882035419056574
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

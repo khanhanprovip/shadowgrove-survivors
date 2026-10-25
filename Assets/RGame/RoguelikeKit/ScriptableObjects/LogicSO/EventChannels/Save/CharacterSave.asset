@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CharacterSave
   m_EditorClassIdentifier: 
   mChracterSaveConfig:
-    CharacterTwo: 0
-    CharacterThree: 0
+    CharacterTwo: 1
+    CharacterThree: 1

@@ -30,15 +30,11 @@ namespace RGame.RoguelikeKit
 
         private void CreateCharacterItem()
         {
-            //SaveSystem Code To List is better code
+            // Shadowgrove: 3 nhan vat goc (Rowan/Lyra/Kael) la noi dung chinh cua
+            // do an nen mo khoa toan bo — bo co che khoa slot theo save cua kit.
             for (int i = 0; i < mCharacterSos.Count; i++)
             {
                 bool isUnlocked = true;
-
-                if (i == 1 || i == 2)
-                {
-                    isUnlocked = i == 1 ? mCharacterSave.CharacterTwo : mCharacterSave.CharacterThree;
-                }
                 var characterItem = Instantiate(mCharacterPrefab, mSelectList.transform);
                 characterItem.Initialization(mCharacterSos[i], isUnlocked);
                 characterItem.OnPointerEnterAction += PointerEnterAction;

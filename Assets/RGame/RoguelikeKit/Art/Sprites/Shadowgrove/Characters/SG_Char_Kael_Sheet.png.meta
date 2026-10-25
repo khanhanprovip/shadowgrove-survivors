@@ -191,7 +191,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 1bd4d74ef1e350b6b7b1d4245af30703
-      internalID: -8830328056556450630
+      internalID: 746534857368882186
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 215bbcfa2a95555aaeb918c37069760c
-      internalID: -5067063304831329754
+      internalID: 1712485711554475494
       vertices: []
       indices: 
       edges: []
@@ -235,7 +235,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: ca5fb43bbd6f5f02b926bdce456c5944
-      internalID: -1776318424950592302
+      internalID: 3716508573190415768
       vertices: []
       indices: 
       edges: []
@@ -257,7 +257,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 1c72fa58d55b595e88fa3495075ca858
-      internalID: 355454077917430490
+      internalID: 889283236372152380
       vertices: []
       indices: 
       edges: []
@@ -279,7 +279,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 5470bb48aa5d50c2bf530307319eba36
-      internalID: -1226777001669745812
+      internalID: 838156292193152355
       vertices: []
       indices: 
       edges: []
@@ -301,7 +301,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 4329c2359947524487c7faa97c155ca5
-      internalID: -924144653794200867
+      internalID: 660527862019413825
       vertices: []
       indices: 
       edges: []
@@ -323,7 +323,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: e022017a571b5a1e835ff30c643370ff
-      internalID: 2675369145554947324
+      internalID: 2378779337564379261
       vertices: []
       indices: 
       edges: []
@@ -345,7 +345,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: be86aa41e0655c5fb1a16e4a3145e0b7
-      internalID: 4242949910684835970
+      internalID: 934058468482850814
       vertices: []
       indices: 
       edges: []
@@ -367,7 +367,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: ed5370c613fe5857889d365797647b97
-      internalID: 9096093165991968013
+      internalID: 1032725020950028537
       vertices: []
       indices: 
       edges: []
@@ -389,7 +389,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 24c80108a4b8569090bc5456bee99177
-      internalID: 5617749818865254712
+      internalID: 872546295576340042
       vertices: []
       indices: 
       edges: []
@@ -411,7 +411,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 3a1ef59f78a65c7e8bf3a4bf20ae4f3b
-      internalID: 1027255350730789553
+      internalID: 4277855131394331390
       vertices: []
       indices: 
       edges: []
@@ -433,7 +433,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: e578414ca728533f996810970aa975cd
-      internalID: 4783713288806819772
+      internalID: 3250500010197880682
       vertices: []
       indices: 
       edges: []
@@ -452,18 +452,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SG_Char_Kael_Sheet_0_0: -8830328056556450630
-      SG_Char_Kael_Sheet_0_1: -5067063304831329754
-      SG_Char_Kael_Sheet_0_2: -1776318424950592302
-      SG_Char_Kael_Sheet_0_3: 355454077917430490
-      SG_Char_Kael_Sheet_0_4: -1226777001669745812
-      SG_Char_Kael_Sheet_0_5: -924144653794200867
-      SG_Char_Kael_Sheet_1_0: 2675369145554947324
-      SG_Char_Kael_Sheet_1_1: 4242949910684835970
-      SG_Char_Kael_Sheet_1_2: 9096093165991968013
-      SG_Char_Kael_Sheet_1_3: 5617749818865254712
-      SG_Char_Kael_Sheet_1_4: 1027255350730789553
-      SG_Char_Kael_Sheet_1_5: 4783713288806819772
+      SG_Char_Kael_Sheet_0_0: 746534857368882186
+      SG_Char_Kael_Sheet_0_1: 1712485711554475494
+      SG_Char_Kael_Sheet_0_2: 3716508573190415768
+      SG_Char_Kael_Sheet_0_3: 889283236372152380
+      SG_Char_Kael_Sheet_0_4: 838156292193152355
+      SG_Char_Kael_Sheet_0_5: 660527862019413825
+      SG_Char_Kael_Sheet_1_0: 2378779337564379261
+      SG_Char_Kael_Sheet_1_1: 934058468482850814
+      SG_Char_Kael_Sheet_1_2: 1032725020950028537
+      SG_Char_Kael_Sheet_1_3: 872546295576340042
+      SG_Char_Kael_Sheet_1_4: 4277855131394331390
+      SG_Char_Kael_Sheet_1_5: 3250500010197880682
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
