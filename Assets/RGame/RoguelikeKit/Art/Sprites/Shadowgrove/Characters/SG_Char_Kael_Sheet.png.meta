@@ -438,6 +438,138 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f7844b6d99b56d1aa4cb4931fd99c5d
+      internalID: 506729861588419730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef08b4ab58935019bffb7a6a5b721fb2
+      internalID: 3475735166839865797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cb6e2e1bc30500bb70631e0a3134632
+      internalID: 3660507502597721289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1571f1ae4275530e930b25c77d72f252
+      internalID: 3907183168089088585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e2784214a875c488657b6252d47da93
+      internalID: 2995236563079445172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Kael_Sheet_2_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1348c503d3d55a4ad1a934ffff8a3c5
+      internalID: 2020331109435720076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -464,6 +596,12 @@ TextureImporter:
       SG_Char_Kael_Sheet_1_3: 872546295576340042
       SG_Char_Kael_Sheet_1_4: 4277855131394331390
       SG_Char_Kael_Sheet_1_5: 3250500010197880682
+      SG_Char_Kael_Sheet_2_0: 506729861588419730
+      SG_Char_Kael_Sheet_2_1: 3475735166839865797
+      SG_Char_Kael_Sheet_2_2: 3660507502597721289
+      SG_Char_Kael_Sheet_2_3: 3907183168089088585
+      SG_Char_Kael_Sheet_2_4: 2995236563079445172
+      SG_Char_Kael_Sheet_2_5: 2020331109435720076
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

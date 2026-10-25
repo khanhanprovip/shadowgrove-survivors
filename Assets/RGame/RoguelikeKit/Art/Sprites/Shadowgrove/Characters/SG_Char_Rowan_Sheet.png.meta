@@ -438,6 +438,138 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b405cce2324556380f409d9adc3c68a
+      internalID: 3453331289289575271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3fe79aff1d058eab256880edca6e795
+      internalID: 2041104353972575034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2120fa2480c5541693bed80fd37556bd
+      internalID: 1173231340234557567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23d3b5f5d7cd510d8122bcc2a1d0bfea
+      internalID: 1192598710992095284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b170dfbd71450aaaa1ab1fee28d4981
+      internalID: 1032454209735378128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SG_Char_Rowan_Sheet_2_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b187adfc89c5984809c1db4dd3e4e05
+      internalID: 303841119893153030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -464,6 +596,12 @@ TextureImporter:
       SG_Char_Rowan_Sheet_1_3: 4494288120667838577
       SG_Char_Rowan_Sheet_1_4: 402387941170171491
       SG_Char_Rowan_Sheet_1_5: 4407766739152238483
+      SG_Char_Rowan_Sheet_2_0: 3453331289289575271
+      SG_Char_Rowan_Sheet_2_1: 2041104353972575034
+      SG_Char_Rowan_Sheet_2_2: 1173231340234557567
+      SG_Char_Rowan_Sheet_2_3: 1192598710992095284
+      SG_Char_Rowan_Sheet_2_4: 1032454209735378128
+      SG_Char_Rowan_Sheet_2_5: 303841119893153030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
