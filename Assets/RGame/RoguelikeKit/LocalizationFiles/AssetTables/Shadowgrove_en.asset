@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Shadowgrove_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 90fc3c5c6e7040448c11c7b862e82ae4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 227724019850587
+    m_Localized: PAUSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147240631841642
+    m_Localized: RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 98044630322727
+    m_Localized: RESTART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 232332520601154
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193728035074856
+    m_Localized: VICTORY!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 129533498243102
+    m_Localized: DEFEAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244370373480854
+    m_Localized: NEXT LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250441889166217
+    m_Localized: VI / EN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 177240612491542
+    m_Localized: Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62258534137810
+    m_Localized: Warden of Thorns. Balanced fighter with a wide-swing thorn scythe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173558724966971
+    m_Localized: Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156999271492139
+    m_Localized: Eclipse Arcanist. Long-range mage firing eclipse bolts.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20976366511956
+    m_Localized: Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242710225208285
+    m_Localized: Ember Hunter. Fast hunter with ember crossbow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265981654029629
+    m_Localized: Trial Forest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6958082104100
+    m_Localized: Survive 90 seconds against five waves.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101712088627825
+    m_Localized: Survive: {0}s
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199582914291994
+    m_Localized: Lv. {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 186459536633104
+    m_Localized: NEW!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 109043060325783
+    m_Localized: Kills: {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73415100261187
+    m_Localized: Time: {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170799392320690
+    m_Localized: Level: {0}
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  references:
+    version: 2
+    RefIds: []

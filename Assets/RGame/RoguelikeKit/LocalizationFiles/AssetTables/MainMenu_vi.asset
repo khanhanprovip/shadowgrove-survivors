@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_vi
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: vi
+  m_SharedData: {fileID: 11400000, guid: c14911beed33b8f4a98f67e354f3e326, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 60444430336
+    m_Localized: BẮT ĐẦU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64047337472
+    m_Localized: THOÁT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 864563810304
+    m_Localized: TÙY CHỌN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 247485205630976
+    m_Localized: NÂNG CẤP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 249323820732416
+    m_Localized: Xác nhận
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044394694463488
+    m_Localized: Âm lượng chung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044429859508224
+    m_Localized: Âm lượng nhạc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044456841465856
+    m_Localized: Âm lượng hiệu ứng
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044742620368896
+    m_Localized: Độ phân giải
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044795674120192
+    m_Localized: Toàn màn hình
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044852582436864
+    m_Localized: Hiện số sát thương
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045225607057408
+    m_Localized: Ngôn ngữ
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045456616738816
+    m_Localized: Lưu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045470432776192
+    m_Localized: Quay lại
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1803786150793216
+    m_Localized: Kịch bản màn đầu tiên dùng để thử nghiệm
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  references:
+    version: 2
+    RefIds: []

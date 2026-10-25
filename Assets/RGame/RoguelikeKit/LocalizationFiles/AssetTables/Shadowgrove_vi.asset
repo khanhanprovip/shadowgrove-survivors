@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Shadowgrove_vi
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: vi
+  m_SharedData: {fileID: 11400000, guid: 90fc3c5c6e7040448c11c7b862e82ae4, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 227724019850587
+    m_Localized: TẠM DỪNG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147240631841642
+    m_Localized: TIẾP TỤC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 98044630322727
+    m_Localized: CHƠI LẠI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 232332520601154
+    m_Localized: VỀ MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193728035074856
+    m_Localized: CHIẾN THẮNG!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 129533498243102
+    m_Localized: THẤT BẠI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244370373480854
+    m_Localized: MÀN SAU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250441889166217
+    m_Localized: VI / EN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 177240612491542
+    m_Localized: Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62258534137810
+    m_Localized: Vệ Binh Gai. Chiến binh cân bằng với lưỡi liềm gai quét rộng.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173558724966971
+    m_Localized: Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156999271492139
+    m_Localized: Pháp Sư Nhật Thực. Đánh xa bằng cầu ma thuật nhật thực.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20976366511956
+    m_Localized: Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242710225208285
+    m_Localized: Thợ Săn Tàn Lửa. Di chuyển nhanh với nỏ than hồng.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265981654029629
+    m_Localized: Rừng Thử Thách
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6958082104100
+    m_Localized: Sống sót 90 giây trước năm đợt quái.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101712088627825
+    m_Localized: Sống sót: {0}s
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199582914291994
+    m_Localized: Cấp {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 186459536633104
+    m_Localized: MỚI!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 109043060325783
+    m_Localized: Hạ: {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73415100261187
+    m_Localized: Thời gian: {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170799392320690
+    m_Localized: Cấp độ: {0}
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  references:
+    version: 2
+    RefIds: []

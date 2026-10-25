@@ -3,6 +3,7 @@ using RGame.CommonStat;
 using RGame.Framework;
 using RGame.RoguelikeKit;
 using TMPro;
+using DATN.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -264,12 +265,13 @@ namespace DATN.Trial
             var group = mPausePanel.GetComponent<CanvasGroup>();
             group.blocksRaycasts = true;
 
-            var title = CreateLabel(mPausePanel.transform, "TAM DUNG", 46f, new Vector2(0f, 130f));
-            title.fontStyle = FontStyles.Bold;
+            _pauseTitle = CreateLabel(mPausePanel.transform, "", 46f, new Vector2(0f, 130f));
+            _pauseTitle.fontStyle = FontStyles.Bold;
 
-            mPauseResumeButton = CreateButton(mPausePanel.transform, "TiepTucBtn", "TIEP TUC", new Vector2(0f, 30f));
-            mPauseRestartButton = CreateButton(mPausePanel.transform, "ChoiLaiBtn", "CHOI LAI", new Vector2(0f, -40f));
-            mPauseExitButton = CreateButton(mPausePanel.transform, "VeMenuBtn", "VE MENU", new Vector2(0f, -110f));
+            mPauseResumeButton = CreateButton(mPausePanel.transform, "TiepTucBtn", "", new Vector2(0f, 30f));
+            mPauseRestartButton = CreateButton(mPausePanel.transform, "ChoiLaiBtn", "", new Vector2(0f, -40f));
+            mPauseExitButton = CreateButton(mPausePanel.transform, "VeMenuBtn", "", new Vector2(0f, -110f));
+            RefreshPauseTexts();
 
             mPauseResumeButton.onClick.AddListener(Resume);
             mPauseRestartButton.onClick.AddListener(Restart);
@@ -278,8 +280,22 @@ namespace DATN.Trial
             mPausePanel.SetActive(false);
         }
 
+        private TextMeshProUGUI _pauseTitle;
+        private TextMeshProUGUI _pauseResumeLabel, _pauseRestartLabel, _pauseExitLabel;
+
+        /// <summary>Cap nhat lai chuoi pause panel theo ngon ngu hien tai.</summary>
+        private void RefreshPauseTexts()
+        {
+            if (_pauseTitle == null) return;
+            _pauseTitle.text = LanguageManager.Get("Pause");
+            _pauseResumeLabel.text = LanguageManager.Get("Resume");
+            _pauseRestartLabel.text = LanguageManager.Get("Restart");
+            _pauseExitLabel.text = LanguageManager.Get("BackToMenu");
+        }
+
         private void ShowPausePanel()
         {
+            RefreshPauseTexts();
             if (mPausePanel != null) mPausePanel.SetActive(true);
         }
 
@@ -322,6 +338,9 @@ namespace DATN.Trial
             image.color = new Color(0.18f, 0.22f, 0.16f, 0.95f);
 
             var label = CreateLabel(go.transform, text, 26f, Vector2.zero);
+            if (name == "TiepTucBtn") _pauseResumeLabel = label;
+            else if (name == "ChoiLaiBtn") _pauseRestartLabel = label;
+            else if (name == "VeMenuBtn") _pauseExitLabel = label;
             label.GetComponent<RectTransform>().sizeDelta = new Vector2(280f, 56f);
             label.color = Color.white;
 
@@ -367,7 +386,7 @@ namespace DATN.Trial
             // Doi nhan cua nut (Exit → Choi lai)
             foreach (var tmp in clone.GetComponentsInChildren<TextMeshProUGUI>(true))
             {
-                tmp.text = "CHOI LAI";
+                tmp.text = LanguageManager.Get("Restart");
             }
 
             var button = clone.GetComponent<Button>();

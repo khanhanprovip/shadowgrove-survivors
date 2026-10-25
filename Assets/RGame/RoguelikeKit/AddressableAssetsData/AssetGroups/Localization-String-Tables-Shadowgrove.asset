@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Shadowgrove
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Shadowgrove
+  m_GUID: 6d9d75b4c2e549258e005e8a7737d8e7
+  m_SerializeEntries:
+  - m_GUID: 90fc3c5c6e7040448c11c7b862e82ae4
+    m_Address: Shadowgrove Shared Data
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - StringTable
+    - SharedData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ff348045e7741e8b91ea241cf38b153
+    m_Address: Shadowgrove_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - StringTable
+    - SharedData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 334aab5d65134b04ad231366701cac60
+    m_Address: Shadowgrove_vi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - StringTable
+    - SharedData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: f73bcf546edaa3347a5f9f5fc77a72ea, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 36916bd5990c42209c44eac161a58794, type: 2}
+    - {fileID: 11400000, guid: 3cf06cf5f3234e49a916213b89686807, type: 2}

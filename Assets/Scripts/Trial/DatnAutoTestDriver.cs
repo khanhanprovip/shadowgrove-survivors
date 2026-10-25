@@ -41,6 +41,12 @@ namespace DATN.Trial
             foreach (string arg in Environment.GetCommandLineArgs())
             {
                 if (arg == "-datn-autotest") autoTest = true;
+                // -datn-lang=vi hoac -datn-lang=en: ep ngon ngu cho lan kiem thu
+                if (arg.StartsWith("-datn-lang="))
+                {
+                    PlayerPrefs.SetString(DATN.Localization.LanguageManager.PrefsKey, arg.Substring(11));
+                    PlayerPrefs.Save();
+                }
             }
 
             if (!autoTest)

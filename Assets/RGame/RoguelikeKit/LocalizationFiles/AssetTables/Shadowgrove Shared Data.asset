@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff4a1c7c8ff5bb48a1c5ec0346377e8, type: 3}
+  m_Name: Shadowgrove Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Shadowgrove
+  m_TableCollectionNameGuidString: 1c43e473-8dcf-4172-97ec-284e0acc0d28
+  m_Entries:
+  - m_Id: 227724019850587
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147240631841642
+    m_Key: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 98044630322727
+    m_Key: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 232332520601154
+    m_Key: BackToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 193728035074856
+    m_Key: Victory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 129533498243102
+    m_Key: Defeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244370373480854
+    m_Key: NextLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 250441889166217
+    m_Key: LangButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 177240612491542
+    m_Key: CharName_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62258534137810
+    m_Key: CharDesc_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173558724966971
+    m_Key: CharName_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156999271492139
+    m_Key: CharDesc_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20976366511956
+    m_Key: CharName_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 242710225208285
+    m_Key: CharDesc_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265981654029629
+    m_Key: LevelName_TrialForest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6958082104100
+    m_Key: LevelDesc_TrialForest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101712088627825
+    m_Key: Objective_Survive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199582914291994
+    m_Key: SkillLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 186459536633104
+    m_Key: NewSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 109043060325783
+    m_Key: Kills
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73415100261187
+    m_Key: TimeSurvived
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170799392320690
+    m_Key: LevelReached
+    m_Metadata:
+      m_Items: []
+  m_KeyGenerator:
+    rid: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 0
+      type: {class: SimpleDistributedKeyGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data: 
