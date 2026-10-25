@@ -27,6 +27,7 @@ namespace DATN.Trial
         [Header("Su kien & du lieu")]
         [SerializeField] private PlayerSpawnChannelSO mPlayerSpawnChannel;
         [SerializeField] private VoidEventChannelSO mGameWinChannel;
+        [SerializeField] private VoidEventChannelSO mGameOverChannel;
         [SerializeField] private InputReader mInputReader;
         [SerializeField] private CommonStatRuntimeSO mPlayerStat;
         [SerializeField] private GlobalConfigSO mGlobalConfig;
@@ -59,12 +60,16 @@ namespace DATN.Trial
         private void OnEnable()
         {
             mPlayerSpawnChannel.RegisterListener(OnPlayerSpawned);
+            mGameWinChannel.RegisterListener(OnResultShown);
+            mGameOverChannel.RegisterListener(OnResultShown);
             mInputReader.MenuPauseEvent += OnPausePressed;
         }
 
         private void OnDisable()
         {
             mPlayerSpawnChannel.UnregisterListener(OnPlayerSpawned);
+            mGameWinChannel.UnregisterListener(OnResultShown);
+            mGameOverChannel.UnregisterListener(OnResultShown);
             mInputReader.MenuPauseEvent -= OnPausePressed;
         }
 
@@ -73,6 +78,8 @@ namespace DATN.Trial
         private void Update()
         {
             LogRuntimeStats();
+            _matchSeconds += Time.deltaTime;
+            _countingWasActive = true;
 
             if (!mRunning) return;
 
@@ -153,6 +160,7 @@ namespace DATN.Trial
         {
             if (mEnded) return;
             mEnded = true;
+            mWon = true;
             mGameWinChannel.RaiseEvent();
         }
 
@@ -381,6 +389,61 @@ namespace DATN.Trial
         ///     Clone nut Exit co san tren man thang/thua de tao nut "Choi lai"
         ///     giu nguyen phong cach UI cua kit, roi gan su kien Restart.
         /// </summary>
+        // ---- Màn tổng kết (Mốc 8): hiện khi thắng/thua ----
+        private float _matchSeconds;
+
+        private void OnResultShown()
+        {
+            if (mEnded || !_countingWasActive) return;
+            _countingWasActive = false;
+            BuildResultSummary();
+        }
+
+        private bool _countingWasActive;
+
+        private void BuildResultSummary()
+        {
+            Canvas canvas = null;
+            var canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+            foreach (var cv in canvases) if (cv.name == "Canvas-GamePlay") canvas = cv;
+            if (canvas == null) return;
+
+            var panel = new GameObject("TrialResultSummary", typeof(RectTransform), typeof(CanvasGroup), typeof(Image));
+            panel.transform.SetParent(canvas.transform, false);
+            var pr = panel.GetComponent<RectTransform>();
+            pr.anchorMin = new Vector2(0.5f, 0.5f); pr.anchorMax = new Vector2(0.5f, 0.5f);
+            pr.anchoredPosition = new Vector2(0f, -40f); pr.sizeDelta = new Vector2(620f, 420f);
+            var bg = panel.GetComponent<Image>();
+            bg.color = new Color(0.06f, 0.1f, 0.08f, 0.96f);
+            var grp = panel.GetComponent<CanvasGroup>();
+            grp.blocksRaycasts = false; // khong chan nut choi lai/ve menu cua panel chinh
+
+            MakeLabel(panel.transform, LanguageManager.Get(mWon ? "Victory" : "Defeat"), 52f, new Vector2(0f, 150f), mWon ? new Color(0.91f,0.79f,0.35f) : new Color(0.8f,0.3f,0.3f));
+            MakeLabel(panel.transform, LanguageManager.GetFormatted("TimeSurvived", Mathf.FloorToInt(_matchSeconds / 60) + ":" + Mathf.FloorToInt(_matchSeconds % 60).ToString("00")), 34f, new Vector2(0f, 70f));
+            MakeLabel(panel.transform, LanguageManager.GetFormatted("Kills", mGlobalConfig != null ? mGlobalConfig.CurrentGetKill : 0), 34f, new Vector2(0f, 10f));
+            MakeLabel(panel.transform, LanguageManager.GetFormatted("LevelReached", mPlayerStat != null ? mPlayerStat.GetValue("Level") : 0), 34f, new Vector2(0f, -50f));
+            MakeLabel(panel.transform, LanguageManager.Get(mLevelAndCharacterSO != null && mLevelAndCharacterSO.SelectCharacterSo != null ? mLevelAndCharacterSO.SelectCharacterSo.CharacterName : ""), 30f, new Vector2(0f, -110f), new Color(0.62f,0.73f,0.66f));
+        }
+
+        private bool mWon;
+
+        private TMPro.TextMeshProUGUI MakeLabel(Transform parent, string text, float size, Vector2 pos)
+        {
+            return MakeLabel(parent, text, size, pos, new Color(0.91f, 0.89f, 0.82f));
+        }
+
+        private TMPro.TextMeshProUGUI MakeLabel(Transform parent, string text, float size, Vector2 pos, Color color)
+        {
+            var go = new GameObject("ResultLabel", typeof(RectTransform), typeof(TMPro.TextMeshProUGUI));
+            go.transform.SetParent(parent, false);
+            var r = go.GetComponent<RectTransform>();
+            r.anchorMin = r.anchorMax = new Vector2(0.5f, 0.5f);
+            r.anchoredPosition = pos; r.sizeDelta = new Vector2(580f, size + 24f);
+            var lb = go.GetComponent<TMPro.TextMeshProUGUI>();
+            lb.alignment = TMPro.TextAlignmentOptions.Center; lb.fontSize = size; lb.color = color; lb.text = text;
+            return lb;
+        }
+
         private void AttachRestartButtons()
         {
             AttachRestartButton("GameWin", new Vector2(-300f, 0f));

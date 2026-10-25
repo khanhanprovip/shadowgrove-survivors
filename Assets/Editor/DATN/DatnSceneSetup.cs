@@ -141,5 +141,29 @@ namespace DATN
                 EditorApplication.Exit(1);
             }
         }
+
+        public static void WireGameOverChannel()
+        {
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(GamePlayScene, OpenSceneMode.Single);
+                var ctrl = Object.FindFirstObjectByType<DATN.Trial.TrialController>(FindObjectsInactive.Include);
+                if (ctrl == null) throw new Exception("Khong tim thay TrialController");
+                var so = new SerializedObject(ctrl);
+                so.FindProperty("mGameOverChannel").objectReferenceValue =
+                    Load<VoidEventChannelSO>($"{ChRoot}/LogicSO/EventChannels/UI/OnGameOver.asset");
+                so.ApplyModifiedPropertiesWithoutUndo();
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorSceneManager.SaveScene(scene);
+                Debug.Log("[DatnSceneSetup] Da gan OnGameOver cho TrialController (Moc 8)");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[DatnSceneSetup] LOI: {ex}");
+                EditorApplication.Exit(1);
+            }
+        }
+
     }
 }
