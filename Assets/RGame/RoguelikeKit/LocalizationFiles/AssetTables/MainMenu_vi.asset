@@ -78,6 +78,10 @@ MonoBehaviour:
     m_Localized: Kịch bản màn đầu tiên dùng để thử nghiệm
     m_Metadata:
       m_Items: []
+  - m_Id: 248680238338048
+    m_Localized: Chọn Nhân Vật
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   references:

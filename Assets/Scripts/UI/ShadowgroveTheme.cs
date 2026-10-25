@@ -22,11 +22,18 @@ namespace DATN.UI
         private static readonly Color PanelColor = new(0.07f, 0.12f, 0.09f, 0.94f);
 
         // Nhan English cung con sot tren panel kit → tieng Viet (khi dang chon VI)
+        // Bao gom ca cac key trong bang MainMenu (backup khi table lookup cham)
         private static readonly Dictionary<string, string> ViFix = new()
         {
             { "Close", "Đóng" }, { "Confirm", "Xác nhận" }, { "Character Selection", "Chọn Nhân Vật" },
             { "Level Selection", "Chọn Màn" }, { "Level Select", "Chọn Màn" }, { "Level", "Màn" },
-            { "Name", "Tên" }, { "Description", "Mô tả" }, { "Level:1", "Màn 1" },
+            { "Name", "Tên" }, { "Description", "Mô tả" },
+            { "Back", "Quay lại" }, { "Save", "Lưu" }, { "Start", "BẮT ĐẦU" }, { "QUIT", "THOÁT" },
+            { "OPTIONS", "TÙY CHỌN" }, { "POWER UP", "NÂNG CẤP" },
+            { "MasterVolume", "Âm lượng chung" }, { "MusicVolume", "Âm lượng nhạc" },
+            { "SFXVolume", "Âm lượng hiệu ứng" }, { "Resolution", "Độ phân giải" },
+            { "FullScreen", "Toàn màn hình" }, { "ShowDamageText", "Hiện số sát thương" },
+            { "Language", "Ngôn ngữ" },
         };
 
         private Sprite _buttonSprite;

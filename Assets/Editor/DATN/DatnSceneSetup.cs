@@ -6,6 +6,7 @@ using RGame.RoguelikeKit;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 /// <summary>
@@ -223,6 +224,78 @@ namespace DATN
             catch (Exception ex)
             {
                 Debug.LogError("[Fix] LOI: " + ex);
+                EditorApplication.Exit(1);
+            }
+        }
+
+        /// <summary>Priority 2: Khôi phục 10 màn + ScrollRect — thêm VerticalLayoutGroup + ContentSizeFitter vào Content.</summary>
+        public static void RestoreLevelsAndScroll()
+        {
+            try
+            {
+                string path = "Assets/RGame/RoguelikeKit/Prefabs/UI/MainMenu/LevelSelect_Panel .prefab";
+                var panelGo = PrefabUtility.LoadPrefabContents(path);
+                var panel = panelGo.GetComponent<LevelSelectPanel>();
+
+                // 1) Khôi phục 10 màn
+                string[] levels = {
+                    "TrialLevel", "LV2_MoonlitRuins", "LV3_SunkenMarsh", "LV4_AshenQuarry",
+                    "LV5_FrostHollow", "LV6_CursedVillage", "LV7_ClockworkCitadel",
+                    "LV8_CrimsonCathedral", "LV9_EndlessAbyss", "LV10_EclipseThrone"
+                };
+                var keepAssets = new System.Collections.Generic.List<LevelConfigSO>();
+                foreach (var k in levels)
+                {
+                    var a = AssetDatabase.LoadAssetAtPath<LevelConfigSO>(
+                        "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectLevel/" + k + ".asset");
+                    if (a != null) keepAssets.Add(a);
+                }
+                var so = new SerializedObject(panel);
+                var list = so.FindProperty("mLevelSos");
+                list.arraySize = keepAssets.Count;
+                for (int i = 0; i < keepAssets.Count; i++)
+                    list.GetArrayElementAtIndex(i).objectReferenceValue = keepAssets[i];
+                so.ApplyModifiedPropertiesWithoutUndo();
+
+                // 2) Tim ScrollRect + Content → them layout + fitter
+                var scrollRect = panelGo.GetComponentInChildren<ScrollRect>(true);
+                if (scrollRect != null)
+                {
+                    var content = scrollRect.content;
+                    if (content != null)
+                    {
+                        // Them VerticalLayoutGroup neu chua co
+                        var vlg = content.GetComponent<VerticalLayoutGroup>();
+                        if (vlg == null) vlg = content.gameObject.AddComponent<VerticalLayoutGroup>();
+                        vlg.spacing = 14f;
+                        vlg.childForceExpandHeight = false;
+                        vlg.childForceExpandWidth = true;
+                        vlg.childControlHeight = false;
+                        vlg.childControlWidth = false;
+                        vlg.childAlignment = TextAnchor.UpperCenter;
+
+                        // Them ContentSizeFitter
+                        var csf = content.GetComponent<ContentSizeFitter>();
+                        if (csf == null) csf = content.gameObject.AddComponent<ContentSizeFitter>();
+                        csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                        csf.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+
+                        // ScrollRect vertical = true
+                        scrollRect.vertical = true;
+                        scrollRect.horizontal = false;
+                        scrollRect.movementType = ScrollRect.MovementType.Clamped;
+                        scrollRect.scrollSensitivity = 30f;
+                    }
+                }
+
+                PrefabUtility.SaveAsPrefabAsset(panelGo, path);
+                PrefabUtility.UnloadPrefabContents(panelGo);
+                Debug.Log("[P2] RestoreLevelsAndScroll: " + keepAssets.Count + " man + ScrollRect da fix");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[P2] LOI: " + ex);
                 EditorApplication.Exit(1);
             }
         }
