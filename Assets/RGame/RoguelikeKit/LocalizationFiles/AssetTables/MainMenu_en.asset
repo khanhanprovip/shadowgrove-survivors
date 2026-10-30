@@ -35,11 +35,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 248680238338048
-    m_Localized: Character Selection
+    m_Localized: CHARACTER SELECTION
     m_Metadata:
       m_Items: []
   - m_Id: 249323820732416
-    m_Localized: Confirm
+    m_Localized: CONFIRM
     m_Metadata:
       m_Items: []
   - m_Id: 1044394694463488
@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1045470432776192
-    m_Localized: Back
+    m_Localized: BACK
     m_Metadata:
       m_Items: []
   - m_Id: 1803786150793216

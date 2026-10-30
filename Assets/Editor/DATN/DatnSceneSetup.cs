@@ -6,6 +6,7 @@ using RGame.RoguelikeKit;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -298,6 +299,148 @@ namespace DATN
                 Debug.LogError("[P2] LOI: " + ex);
                 EditorApplication.Exit(1);
             }
+        }
+
+        /// <summary>
+        /// Hoan thien bang MainMenu va layout hai panel chon bang Unity API.
+        /// Khong sua truc tiep YAML cua StringTable/prefab.
+        /// </summary>
+        public static void AddViTableEntryViaAPI()
+        {
+            try
+            {
+                // Load the authored tables through AssetDatabase, then mutate them through
+                // StringTable.AddEntry/GetEntry. The collection cache can be incomplete in
+                // batchmode when Addressables has not initialized yet.
+                var enTable = AssetDatabase.LoadAssetAtPath<StringTable>(
+                    "Assets/RGame/RoguelikeKit/LocalizationFiles/AssetTables/MainMenu_en.asset");
+                var viTable = AssetDatabase.LoadAssetAtPath<StringTable>(
+                    "Assets/RGame/RoguelikeKit/LocalizationFiles/AssetTables/MainMenu_vi.asset");
+                if (enTable == null || viTable == null) throw new Exception("Khong tim thay bang EN hoac VI");
+
+                var values = new (string key, string en, string vi)[]
+                {
+                    ("Start", "START", "BẮT ĐẦU"),
+                    ("QUIT", "QUIT", "THOÁT"),
+                    ("OPTIONS", "OPTIONS", "TÙY CHỌN"),
+                    ("POWERUP", "POWER UP", "NÂNG CẤP"),
+                    ("CharacterSelection", "CHARACTER SELECTION", "CHỌN NHÂN VẬT"),
+                    ("Confirm", "CONFIRM", "XÁC NHẬN"),
+                    ("Back", "BACK", "QUAY LẠI")
+                };
+                foreach (var value in values)
+                {
+                    UpsertString(enTable, value.key, value.en);
+                    UpsertString(viTable, value.key, value.vi);
+                }
+                EditorUtility.SetDirty(enTable.SharedData);
+                EditorUtility.SetDirty(enTable);
+                EditorUtility.SetDirty(viTable);
+
+                FixSelectionPanelLayout(
+                    "Assets/RGame/RoguelikeKit/Prefabs/UI/MainMenu/CharacterSelect_Panel.prefab",
+                    "CharacterList", false);
+                FixSelectionPanelLayout(
+                    "Assets/RGame/RoguelikeKit/Prefabs/UI/MainMenu/LevelSelect_Panel .prefab",
+                    "LevelList", true);
+
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                Debug.Log("[P1API] MainMenu EN/VI + responsive layout da duoc luu bang Unity API");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[P1API] LOI: " + ex);
+                EditorApplication.Exit(1);
+            }
+        }
+
+        private static void UpsertString(StringTable table, string key, string value)
+        {
+            var entry = table.GetEntry(key) ?? table.AddEntry(key, value);
+            entry.Value = value;
+        }
+
+        private static void FixSelectionPanelLayout(string path, string listName, bool isLevelPanel)
+        {
+            var root = PrefabUtility.LoadPrefabContents(path);
+            try
+            {
+                foreach (var button in root.GetComponentsInChildren<Button>(true))
+                {
+                    string name = button.name.Trim();
+                    if (name != "ButtonBack" && name != "ButtonConfirm") continue;
+                    bool back = name == "ButtonBack";
+                    var rect = button.GetComponent<RectTransform>();
+                    rect.anchorMin = rect.anchorMax = back ? new Vector2(0f, 1f) : new Vector2(1f, 1f);
+                    rect.pivot = back ? new Vector2(0f, 1f) : new Vector2(1f, 1f);
+                    rect.anchoredPosition = back ? new Vector2(44f, -34f) : new Vector2(-44f, -34f);
+                    rect.sizeDelta = new Vector2(250f, 72f);
+                }
+
+                var list = FindChild(root.transform, listName) as RectTransform;
+                if (list != null)
+                {
+                    list.anchorMin = isLevelPanel ? new Vector2(0.08f, 0.10f) : new Vector2(0.08f, 0.22f);
+                    list.anchorMax = isLevelPanel ? new Vector2(0.92f, 0.82f) : new Vector2(0.92f, 0.78f);
+                    list.pivot = new Vector2(0.5f, 0.5f);
+                    list.offsetMin = Vector2.zero;
+                    list.offsetMax = Vector2.zero;
+                }
+
+                if (isLevelPanel)
+                {
+                    var scroll = root.GetComponentInChildren<ScrollRect>(true);
+                    if (scroll != null && scroll.content != null)
+                    {
+                        var layout = scroll.content.GetComponent<VerticalLayoutGroup>();
+                        if (layout == null) layout = scroll.content.gameObject.AddComponent<VerticalLayoutGroup>();
+                        layout.padding = new RectOffset(20, 20, 18, 18);
+                        layout.spacing = 14f;
+                        layout.childAlignment = TextAnchor.UpperCenter;
+                        layout.childControlWidth = false;
+                        layout.childControlHeight = false;
+                        layout.childForceExpandWidth = false;
+                        layout.childForceExpandHeight = false;
+                        var fitter = scroll.content.GetComponent<ContentSizeFitter>();
+                        if (fitter == null) fitter = scroll.content.gameObject.AddComponent<ContentSizeFitter>();
+                        fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+                        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                        scroll.horizontal = false;
+                        scroll.vertical = true;
+                        scroll.movementType = ScrollRect.MovementType.Clamped;
+                        scroll.scrollSensitivity = 36f;
+                    }
+                }
+                else if (list != null)
+                {
+                    var grid = list.GetComponent<GridLayoutGroup>();
+                    if (grid != null)
+                    {
+                        grid.cellSize = new Vector2(220f, 220f);
+                        grid.spacing = new Vector2(24f, 24f);
+                        grid.childAlignment = TextAnchor.MiddleCenter;
+                    }
+                }
+
+                PrefabUtility.SaveAsPrefabAsset(root, path);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+        }
+
+        private static Transform FindChild(Transform root, string name)
+        {
+            foreach (Transform child in root)
+            {
+                if (child.name.Trim() == name) return child;
+                var nested = FindChild(child, name);
+                if (nested != null) return nested;
+            }
+            return null;
         }
 
     }

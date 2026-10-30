@@ -13,13 +13,16 @@ namespace DATN.Trial
     ///     khi choi binh thuong script tu huy ngay, khong anh huong game.
     ///     Luong: doi MainMenu → NewGame → Confirm nhan vat → Confirm man →
     ///     kiem tra map/player/quai/FPS → bom HP (god mode) → tu xac nhan
-    ///     panel nang cap → den 100s ghi bao cao ra file va thoat.
+    ///     panel nang cap → den 112s ghi bao cao ra file va thoat.
     ///     Bao cao: F:/Do_An_KT/_assistant_work/build_test_report.txt
     /// </summary>
     public class DatnAutoTestDriver : MonoBehaviour
     {
         private const string ReportPath = "F:/Do_An_KT/_assistant_work/build_test_report.txt";
-        private const float Duration = 100f;
+        // Gameplay starts after the menu flow (about 12s). A 90-second Survival
+        // stage therefore needs more than 102s wall time before its result panel
+        // can be asserted. Keep a small post-result observation window as well.
+        private const float Duration = 112f;
 
         private readonly List<string> _events = new();
         private readonly List<string> _errors = new();
@@ -55,12 +58,13 @@ namespace DATN.Trial
                 return;
             }
 
+            Application.runInBackground = true;
             DontDestroyOnLoad(gameObject);
             Application.logMessageReceived += OnLog;
             _start = Time.unscaledTime;
             _events.Add($"AUTO TEST BUILD — {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)}");
             _events.Add($"Unity {Application.unityVersion} | CPU {SystemInfo.processorType} | RAM {SystemInfo.systemMemorySize} MB | GPU {SystemInfo.graphicsDeviceName}");
-            _events.Add($"Do phan giai man hinh: {Screen.currentResolution.width}x{Screen.currentResolution.height}");
+            _events.Add($"Do phan giai cua so game: {Screen.width}x{Screen.height}");
         }
 
         private void OnLog(string condition, string stacktrace, LogType type)
@@ -119,14 +123,27 @@ namespace DATN.Trial
             if (_menuDriven && !_charShot && _pendingCharPanel != null && elapsed > _stageTime + 1.6f)
             {
                 _charShot = Capture("screenshot_charselect.png", elapsed);
-                _pendingCharPanel.ConfirmButton(); // buoc 2: mo panel chon man
                 _stageTime = elapsed;
             }
 
-            if (_menuDriven && _charShot && !_levelShot && _pendingLevelPanel != null
+            // CaptureScreenshot writes at the end of the frame. Transitioning in that
+            // same frame records the next panel instead of the requested one.
+            if (_charShot && !_charConfirmed && elapsed > _stageTime + 0.5f)
+            {
+                _pendingCharPanel.ConfirmButton(); // buoc 2: mo panel chon man
+                _charConfirmed = true;
+                _stageTime = elapsed;
+            }
+
+            if (_menuDriven && _charConfirmed && !_levelShot && _pendingLevelPanel != null
                 && elapsed > _stageTime + 1.6f)
             {
                 _levelShot = Capture("screenshot_levelselect.png", elapsed);
+                _stageTime = elapsed;
+            }
+
+            if (_levelShot && !_levelConfirmed && elapsed > _stageTime + 0.5f)
+            {
                 _pendingLevelPanel.ConfirmButton(); // buoc 3: vao game
                 _levelConfirmed = true;
                 _events.Add("PASS | Da lai menu tung buoc + chup 2 panel");
@@ -162,6 +179,7 @@ namespace DATN.Trial
                     _winSeen = true;
                     _winAt = elapsed;
                     _events.Add($"PASS | CHIEN THANG tren ban build tai t={elapsed:F0}s (alpha={group.alpha:F2})");
+                    _shot96 = Capture("screenshot_chien_thang.png", elapsed);
                 }
             }
 
@@ -206,14 +224,10 @@ namespace DATN.Trial
             {
                 _shot50 = Capture("screenshot_50s_ap_suat.png", elapsed);
             }
-            else if (elapsed >= 96.5f && elapsed < 99.5f && !_shot96)
-            {
-                _shot96 = Capture("screenshot_96s_chien_thang.png", elapsed);
-            }
         }
 
         private bool _shot15, _shot50, _shot96, _shotMenu, _shotSkill;
-        private bool _charShot, _levelShot, _levelConfirmed;
+        private bool _charShot, _charConfirmed, _levelShot, _levelConfirmed;
         private float _stageTime;
         private CharacterSelectPanel _pendingCharPanel;
         private LevelSelectPanel _pendingLevelPanel;

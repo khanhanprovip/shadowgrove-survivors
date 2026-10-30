@@ -43,6 +43,12 @@ namespace DATN.Localization
             { "Resume", new[] { "RESUME", "TIẾP TỤC" } },
             { "Restart", new[] { "RESTART", "CHƠI LẠI" } },
             { "BackToMenu", new[] { "MAIN MENU", "VỀ MENU" } },
+            { "Close", new[] { "CLOSE", "ĐÓNG" } },
+            { "Confirm", new[] { "CONFIRM", "XÁC NHẬN" } },
+            { "Back", new[] { "BACK", "QUAY LẠI" } },
+            { "Save", new[] { "SAVE", "LƯU" } },
+            { "CharacterSelection", new[] { "CHARACTER SELECTION", "CHỌN NHÂN VẬT" } },
+            { "LevelSelection", new[] { "LEVEL SELECTION", "CHỌN MÀN" } },
             { "Victory", new[] { "VICTORY!", "CHIẾN THẮNG!" } },
             { "Defeat", new[] { "DEFEAT", "THẤT BẠI" } },
             { "CharName_Rowan", new[] { "Rowan", "Rowan" } },
@@ -98,6 +104,20 @@ namespace DATN.Localization
             { "Stat_Velocity", new[] { "Speed", "Tốc độ" } },
             { "Stat_Area", new[] { "Area", "Diện tích" } },
             { "Stat_Money", new[] { "Coins", "Vàng" } },
+        };
+
+        private static readonly Dictionary<string, string[]> LevelDescriptions = new()
+        {
+            { "TrialLevel", new[] { "Trial Forest — Survive 90 seconds", "Rừng Thử Thách — Sống sót 90 giây" } },
+            { "LV2_MoonlitRuins", new[] { "Moonlit Ruins — Defeat 30 enemies", "Tàn Tích Ánh Trăng — Hạ 30 quái" } },
+            { "LV3_SunkenMarsh", new[] { "Sunken Marsh — Survive 120 seconds", "Đầm Lầy Chìm — Sống sót 120 giây" } },
+            { "LV4_AshenQuarry", new[] { "Ashen Quarry — Defeat 30 enemies", "Mỏ Đá Tro Tàn — Hạ 30 quái" } },
+            { "LV5_FrostHollow", new[] { "Frost Hollow — Survive 120 seconds", "Khe Băng Giá — Sống sót 120 giây" } },
+            { "LV6_CursedVillage", new[] { "Cursed Village — Endless", "Ngôi Làng Bị Nguyền — Vô tận" } },
+            { "LV7_ClockworkCitadel", new[] { "Clockwork Citadel — Defeat 30 enemies", "Thành Trì Cơ Giới — Hạ 30 quái" } },
+            { "LV8_CrimsonCathedral", new[] { "Crimson Cathedral — Survive 120 seconds", "Thánh Đường Đỏ Thẫm — Sống sót 120 giây" } },
+            { "LV9_EndlessAbyss", new[] { "Endless Abyss — Endless", "Vực Thẳm Vô Tận — Vô tận" } },
+            { "LV10_EclipseThrone", new[] { "Eclipse Throne — Defeat 30 enemies", "Ngai Nhật Thực — Hạ 30 quái" } },
         };
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -169,22 +189,33 @@ namespace DATN.Localization
             scaler.referenceResolution = new Vector2(1920, 1080);
             scaler.matchWidthOrHeight = 1f;
 
-            var btnGo = new GameObject("LangButton", typeof(RectTransform), typeof(Image), typeof(Button), typeof(TMPro.TextMeshProUGUI));
+            // A GameObject may only contain one Graphic. Keep Image/Button on the
+            // button object and put the TMP label on a stretched child.
+            var btnGo = new GameObject("LangButton", typeof(RectTransform), typeof(Image), typeof(Button));
             btnGo.transform.SetParent(canvasGo.transform, false);
             var rect = btnGo.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1f, 1f);
-            rect.anchoredPosition = new Vector2(-24f, -20f);
+            // Keep the language switch clear of the selection panels' Confirm button.
+            rect.anchoredPosition = new Vector2(-24f, -104f);
             rect.sizeDelta = new Vector2(130f, 54f);
 
             var image = btnGo.GetComponent<Image>();
             image.color = new Color(0.1f, 0.16f, 0.12f, 0.92f);
 
-            _toggleLabel = btnGo.GetComponent<TMPro.TextMeshProUGUI>();
+            var labelGo = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(TMPro.TextMeshProUGUI));
+            labelGo.transform.SetParent(btnGo.transform, false);
+            var labelRect = labelGo.GetComponent<RectTransform>();
+            labelRect.anchorMin = Vector2.zero;
+            labelRect.anchorMax = Vector2.one;
+            labelRect.offsetMin = Vector2.zero;
+            labelRect.offsetMax = Vector2.zero;
+
+            _toggleLabel = labelGo.GetComponent<TMPro.TextMeshProUGUI>();
             _toggleLabel.alignment = TMPro.TextAlignmentOptions.Center;
             _toggleLabel.fontSize = 30f;
             _toggleLabel.fontStyle = TMPro.FontStyles.Bold;
             _toggleLabel.color = new Color(0.91f, 0.89f, 0.82f);
-            _toggleLabel.raycastTarget = true;
+            _toggleLabel.raycastTarget = false;
 
             _toggleButton = btnGo.GetComponent<Button>();
             _toggleButton.onClick.AddListener(Toggle);
@@ -237,6 +268,15 @@ namespace DATN.Localization
             {
                 return format;
             }
+        }
+
+        public static string GetLevelDescription(string levelAssetName, string fallback)
+        {
+            if (!LevelDescriptions.TryGetValue(levelAssetName, out var pair)) return fallback;
+            bool vi = Instance != null
+                ? Instance.CurrentCode == "vi"
+                : PlayerPrefs.GetString(PrefsKey, "") == "vi";
+            return vi ? pair[1] : pair[0];
         }
     }
 }

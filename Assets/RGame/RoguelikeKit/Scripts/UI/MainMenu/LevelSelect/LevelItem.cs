@@ -21,12 +21,38 @@ namespace RGame.RoguelikeKit
         public UnityAction<LevelItem> OnPointerDownAction;
         public UnityAction<LevelItem> OnPointerExitAction;
         public bool IsSelected;
+        private LevelConfigSO _config;
+        private string _lastLocale;
+
         public void Initialization(LevelConfigSO _configSo)
         {
-            mDescription.text = _configSo.LevelDescription;
+            _config = _configSo;
+            RefreshDescription();
             mPreviewImage.sprite = _configSo.PreviewImage;
+            mPreviewImage.preserveAspect = true;
+            mPreviewImage.color = _configSo.PreviewImage == null
+                ? new Color(0.055f, 0.105f, 0.075f, 1f)
+                : Color.white;
 
             GetComponent<Button>().onClick.AddListener(() => { mLevelAndCharacterSO.SelectLevelSO = _configSo; });
+        }
+
+        private void Update()
+        {
+            string locale = DATN.Localization.LanguageManager.Instance != null
+                ? DATN.Localization.LanguageManager.Instance.CurrentCode
+                : PlayerPrefs.GetString(DATN.Localization.LanguageManager.PrefsKey, "");
+            if (locale != _lastLocale) RefreshDescription();
+        }
+
+        private void RefreshDescription()
+        {
+            if (_config == null || mDescription == null) return;
+            _lastLocale = DATN.Localization.LanguageManager.Instance != null
+                ? DATN.Localization.LanguageManager.Instance.CurrentCode
+                : PlayerPrefs.GetString(DATN.Localization.LanguageManager.PrefsKey, "");
+            mDescription.text = DATN.Localization.LanguageManager.GetLevelDescription(
+                _config.name, _config.LevelDescription);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

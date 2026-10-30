@@ -19,71 +19,70 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 60444430336
-    m_Localized: BẮT ĐẦU
+    m_Localized: "B\u1EAET \u0110\u1EA6U"
     m_Metadata:
       m_Items: []
   - m_Id: 64047337472
-    m_Localized: THOÁT
+    m_Localized: "THO\xC1T"
     m_Metadata:
       m_Items: []
   - m_Id: 864563810304
-    m_Localized: TÙY CHỌN
+    m_Localized: "T\xD9Y CH\u1ECCN"
     m_Metadata:
       m_Items: []
   - m_Id: 247485205630976
-    m_Localized: NÂNG CẤP
+    m_Localized: "N\xC2NG C\u1EA4P"
     m_Metadata:
       m_Items: []
   - m_Id: 249323820732416
-    m_Localized: Xác nhận
+    m_Localized: "X\xC1C NH\u1EACN"
     m_Metadata:
       m_Items: []
   - m_Id: 1044394694463488
-    m_Localized: Âm lượng chung
+    m_Localized: "\xC2m l\u01B0\u1EE3ng chung"
     m_Metadata:
       m_Items: []
   - m_Id: 1044429859508224
-    m_Localized: Âm lượng nhạc
+    m_Localized: "\xC2m l\u01B0\u1EE3ng nh\u1EA1c"
     m_Metadata:
       m_Items: []
   - m_Id: 1044456841465856
-    m_Localized: Âm lượng hiệu ứng
+    m_Localized: "\xC2m l\u01B0\u1EE3ng hi\u1EC7u \u1EE9ng"
     m_Metadata:
       m_Items: []
   - m_Id: 1044742620368896
-    m_Localized: Độ phân giải
+    m_Localized: "\u0110\u1ED9 ph\xE2n gi\u1EA3i"
     m_Metadata:
       m_Items: []
   - m_Id: 1044795674120192
-    m_Localized: Toàn màn hình
+    m_Localized: "To\xE0n m\xE0n h\xECnh"
     m_Metadata:
       m_Items: []
   - m_Id: 1044852582436864
-    m_Localized: Hiện số sát thương
+    m_Localized: "Hi\u1EC7n s\u1ED1 s\xE1t th\u01B0\u01A1ng"
     m_Metadata:
       m_Items: []
   - m_Id: 1045225607057408
-    m_Localized: Ngôn ngữ
+    m_Localized: "Ng\xF4n ng\u1EEF"
     m_Metadata:
       m_Items: []
   - m_Id: 1045456616738816
-    m_Localized: Lưu
+    m_Localized: "L\u01B0u"
     m_Metadata:
       m_Items: []
   - m_Id: 1045470432776192
-    m_Localized: Quay lại
+    m_Localized: "QUAY L\u1EA0I"
     m_Metadata:
       m_Items: []
   - m_Id: 1803786150793216
-    m_Localized: Kịch bản màn đầu tiên dùng để thử nghiệm
+    m_Localized: "K\u1ECBch b\u1EA3n m\xE0n \u0111\u1EA7u ti\xEAn d\xF9ng \u0111\u1EC3
+      th\u1EED nghi\u1EC7m"
     m_Metadata:
       m_Items: []
   - m_Id: 248680238338048
-    m_Localized: Chọn Nhân Vật
+    m_Localized: "CH\u1ECCN NH\xC2N V\u1EACT"
     m_Metadata:
       m_Items: []
-  m_Metadata:
-    m_Items: []
   references:
     version: 2
     RefIds: []

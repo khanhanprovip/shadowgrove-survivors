@@ -10,6 +10,8 @@ namespace RGame.RoguelikeKit
 {
     public class LevelSelectPanel : MonoBehaviour
     {
+        private static readonly Color NormalColor = new Color(0.10f, 0.18f, 0.13f, 0.98f);
+        private static readonly Color FocusColor = new Color(0.58f, 0.46f, 0.20f, 1f);
         [SerializeField] private GameObject mSelectList;
         [SerializeField] private LevelItem mLevelPrefab;
         [SerializeField] private List<LevelConfigSO> mLevelSos;
@@ -49,23 +51,23 @@ namespace RGame.RoguelikeKit
         
         private void PointerEnterAction(LevelItem item)
         {
-            item.BackgroundImage.color = Color.yellow;
+            item.BackgroundImage.color = FocusColor;
         }
 
         private void PointerExitAction(LevelItem item)
         {
             if (item.IsSelected) return;
-            item.BackgroundImage.color = Color.red;
+            item.BackgroundImage.color = NormalColor;
         }
 
         private void PointerDownAction(LevelItem item)
         {
             for (int i = 0; i < _levelItems.Count; i++)
             {
-                _levelItems[i].BackgroundImage.color = Color.red;
+                _levelItems[i].BackgroundImage.color = NormalColor;
                 _levelItems[i].IsSelected = false;
             }
-            item.BackgroundImage.color = Color.yellow;
+            item.BackgroundImage.color = FocusColor;
             item.IsSelected = true;
         }
 

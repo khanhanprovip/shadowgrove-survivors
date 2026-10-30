@@ -13,6 +13,8 @@ namespace RGame.RoguelikeKit
 {
     public class CharacterSelectPanel : MonoBehaviour
     {
+        private static readonly Color NormalColor = new Color(0.10f, 0.18f, 0.13f, 0.98f);
+        private static readonly Color FocusColor = new Color(0.58f, 0.46f, 0.20f, 1f);
         [SerializeField] private GameObject mSelectList;
         [SerializeField] private CharacterItem mCharacterPrefab;
         [SerializeField] private List<CharacterSelectConfigSO> mCharacterSos;
@@ -37,6 +39,7 @@ namespace RGame.RoguelikeKit
                 bool isUnlocked = true;
                 var characterItem = Instantiate(mCharacterPrefab, mSelectList.transform);
                 characterItem.Initialization(mCharacterSos[i], isUnlocked);
+                characterItem.BackgroundImage.color = NormalColor;
                 characterItem.OnPointerEnterAction += PointerEnterAction;
                 characterItem.OnPointerExitAction += PointerExitAction;
                 characterItem.OnPointerDownAction += PointerDownAction;
@@ -57,13 +60,13 @@ namespace RGame.RoguelikeKit
 
         private void PointerEnterAction(CharacterItem item, bool isUnlocked)
         {
-            item.BackgroundImage.color = Color.yellow;
+            item.BackgroundImage.color = FocusColor;
         }
 
         private void PointerExitAction(CharacterItem item, bool isUnlocked)
         {
             if (item.IsSelected) return;
-            item.BackgroundImage.color = Color.red;
+            item.BackgroundImage.color = NormalColor;
         }
 
         private void PointerDownAction(CharacterItem item, bool isUnlocked)
@@ -72,10 +75,10 @@ namespace RGame.RoguelikeKit
             {
                 for (int i = 0; i < _characterItems.Count; i++)
                 {
-                    _characterItems[i].BackgroundImage.color = Color.red;
+                    _characterItems[i].BackgroundImage.color = NormalColor;
                     _characterItems[i].IsSelected = false;
                 }
-                item.BackgroundImage.color = Color.yellow;
+                item.BackgroundImage.color = FocusColor;
                 item.IsSelected = true;
             }
             else
