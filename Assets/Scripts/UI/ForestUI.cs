@@ -125,10 +125,8 @@ namespace DATN.UI
         private static void Menu(UIMainMenu p)
         {
             Background(p.transform,false);var shade=Picture(p.transform,"Forest_MenuShade",null,0,0,.53f,1);shade.color=new Color(.025f,.055f,.035f,.60f);shade.transform.SetSiblingIndex(1);
-            Picture(p.transform,"Forest_Sigil","sigil",.075f,.73f,.18f,.9f,true);
-            Label(p.transform,"Forest_Tag","KHU RỪNG KHÔNG NGỦ","THE FOREST NEVER SLEEPS",23,.075f,.67f,.65f,.73f,color:Gold);
-            Label(p.transform,"Forest_Wordmark","SHADOWGROVE","SHADOWGROVE",88,.07f,.55f,.72f,.67f);
-            Label(p.transform,"Forest_Submark","S U R V I V O R S","S U R V I V O R S",34,.075f,.49f,.52f,.55f,color:Gold);
+            Label(p.transform,"Forest_Tag","KHU RỪNG KHÔNG NGỦ","THE FOREST NEVER SLEEPS",23,.075f,.80f,.65f,.85f,color:Gold);
+            Picture(p.transform,"Forest_Logo","Logo",.055f,.475f,.57f,.79f,true);
             Label(p.transform,"Forest_Copy","Khi khu rừng thức giấc, bạn có sống sót đến bình minh?","When the forest wakes, will you survive until dawn?",27,.075f,.39f,.45f,.46f,color:Muted);
             var group=p.transform.Find("PanelButtons");if(group!=null){StopLayout(group);Place(group,0,0,1,1);}
             foreach(var b in p.GetComponentsInChildren<Button>(true)){
@@ -152,8 +150,8 @@ namespace DATN.UI
             Place(i.transform.Find("CharacterImage"),.045f,.39f,.955f,.965f);var portrait=i.transform.Find("CharacterImage")?.GetComponent<Image>();if(portrait!=null){portrait.preserveAspect=true;portrait.sprite=HeroArt(i.transform.Find("CharacterName").GetComponent<TMP_Text>().text);}
             var title=i.transform.Find("CharacterName");Place(title,.1f,.28f,.9f,.38f);if(title!=null){var t=title.GetComponent<TMP_Text>();t.fontSize=42;t.color=Ink;t.alignment=TextAlignmentOptions.Center;t.raycastTarget=false;}
             string heroName=i.transform.Find("CharacterName").GetComponent<TMP_Text>().text;
-            string roleVi=heroName=="Rowan"?"Vệ Binh Gai · Cân bằng":heroName=="Lyra"?"Pháp Sư Nhật Thực":"Thợ Săn Tàn Lửa";
-            string roleEn=heroName=="Rowan"?"Thorn Warden · Balanced":heroName=="Lyra"?"Eclipse Arcanist":"Ember Hunter";
+            string roleVi=heroName=="Rowan"?"Cận chiến · Tầm 2,2\nNhát Chém Gai":heroName=="Lyra"?"Pháp sư · Tầm 7\nCầu Bóng Đêm":"Cung thủ · Tầm 10,5\nTên Tàn Lửa";
+            string roleEn=heroName=="Rowan"?"Melee · Range 2.2\nThorn Cleave":heroName=="Lyra"?"Mage · Range 7\nDark Orb":"Archer · Range 10.5\nEmber Arrow";
             Place(i.transform.Find("Skill"),.1f,.13f,.25f,.25f);Label(i.transform,"Forest_Role",roleVi,roleEn,24,.29f,.12f,.91f,.25f,color:Muted);
         }
         private static void Levels(LevelSelectPanel p)
@@ -195,6 +193,11 @@ namespace DATN.UI
             var list=p.transform.Find("CharacterList");if(list==null)return;StopLayout(list);Place(list,.055f,.22f,.71f,.73f);var all=p.GetComponentsInChildren<PowerUpAttributeUpgrade>(true);foreach(var a in all)a.transform.SetParent(list,false);
             var g=list.GetComponent<GridLayoutGroup>()??list.gameObject.AddComponent<GridLayoutGroup>();g.enabled=true;g.constraint=GridLayoutGroup.Constraint.FixedColumnCount;g.constraintCount=4;g.cellSize=new Vector2(292,122);g.spacing=new Vector2(14,14);g.childAlignment=TextAnchor.UpperLeft;
             foreach(var a in all){foreach(var i in a.GetComponentsInChildren<Image>(true)){if(i.name=="BG"||i.transform==a.transform){i.sprite=Art("Button");i.color=Color.white;i.type=Image.Type.Sliced;}else if(i.name=="Image"&&i.transform.parent==a.transform)i.enabled=false;}
+                // The tile's full rectangle is its hit target; decorative child
+                // graphics must not be the only (small) clickable area.
+                foreach(var graphic in a.GetComponentsInChildren<Graphic>(true))graphic.raycastTarget=false;
+                var surface=a.GetComponent<Image>()??a.gameObject.AddComponent<Image>();surface.sprite=Art("Button");surface.type=Image.Type.Sliced;surface.color=Color.white;
+                a.SetHitSurface(surface);
                 var item=a.transform.Find("Item");if(item==null)continue;Place(item,0,0,1,1);Place(item.Find("Icon"),.06f,.27f,.27f,.83f);Place(item.Find("Text (TMP)"),.33f,.4f,.94f,.9f);Place(item.Find("Level"),.33f,.12f,.94f,.32f);
                 var t=item.GetComponentInChildren<TMP_Text>();if(t!=null){t.text=AttributeName(a.name);t.fontSize=25;t.enableAutoSizing=true;t.fontSizeMin=19;t.fontSizeMax=25;t.color=Ink;t.raycastTarget=false;var bind=t.gameObject.AddComponent<ForestAttributeText>();bind.Key=a.name.Trim();}}
             var d=p.transform.Find("Description");if(d!=null){Place(d,.75f,.25f,.94f,.70f);var bg=d.Find("BG")?.GetComponent<Image>();if(bg!=null){bg.sprite=Art("Panel");bg.color=Color.white;bg.type=Image.Type.Sliced;}

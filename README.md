@@ -16,7 +16,17 @@
 - Rương nhận 50 vàng trong trận khi chạm; chống nhận lặp.
 - Âm thanh, save, nâng cấp và các công cụ kiểm thử Unity/Windows.
 
-Bộ chiêu khởi đầu riêng cho ba nhân vật và thao tác chọn ô Sức mạnh đang được hoàn thiện; chưa coi là đã kiểm thử trong bản hiện tại.
+## Chiêu khởi đầu
+
+| Nhân vật | Đòn đánh | Tầm cơ bản (đơn vị Unity) |
+| --- | --- | ---: |
+| Rowan | Nhát Chém Gai, chém hình quạt cận chiến | 2,2 |
+| Lyra | Cầu Bóng Đêm, đạn ma thuật | 7 |
+| Kael | Tên Tàn Lửa, tên bay nhanh | 10,5 |
+
+Chỉ tung đòn khi có quái hợp lệ trong tầm tròn. Đạn được thu hồi khi trúng hoặc hết tầm. Màn chọn nhân vật, HUD và thẻ nâng cấp dùng tên/icon riêng. Các ô Sức mạnh có vùng bấm phủ toàn ô để xem đúng mô tả, kể cả khi thuộc tính đã tối đa.
+
+Đã kiểm tra UI, combat/rương và thẻ kỹ năng trên bản Windows ở 1280×720 và 1920×1080. Đồng hồ Survival được chặn đúng mốc 90/120 giây khi frame vượt hạn. [Kết quả và phạm vi kiểm chứng](Tools/UnityHarness/verification-2026-11-23.json).
 
 ## Chạy dự án
 
@@ -45,3 +55,9 @@ Build, log, cache Unity và bộ thực thi CLI tải về không được đưa
 - Plug-in, font và các thành phần bên thứ ba giữ giấy phép riêng. DOTween và các tài nguyên nền kế thừa từ kit không được tuyên bố là do tác giả phiên bản này tự viết.
 
 Đây là dự án phát triển dựa trên một bộ kit mã nguồn mở; việc sở hữu repo này không thay đổi tác giả hay bản quyền của các thành phần gốc.
+
+## Giới hạn đã biết
+
+- Khi rất đông quái dồn một chỗ, FPS có thể giảm mạnh; chưa tối ưu stress test dài hạn.
+- Các vấn đề đã ghi nhận về ngân hàng vàng cuối trận, nâng cấp vĩnh viễn và xác thực save chưa thuộc đợt sửa hình ảnh/kỹ năng này.
+- Bộ kiểm thử UI dùng raycast và sự kiện pointer thật của Unity; kiểm tra chuột Windows ở ô Sức mạnh chưa hoàn tất do người dùng dừng Computer Use.

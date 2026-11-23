@@ -15,6 +15,6 @@ MonoBehaviour:
   Description: "Warden of Thorns \u2014 can bang, luoi liem gai sat thuong rong"
   CharacterName: Rowan
   CharacterImage: {fileID: 21300000, guid: 4d8e761788e3bef4ab1febe1215bdd72, type: 3}
-  BeginSkillImage: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
+  BeginSkillImage: {fileID: 21300000, guid: c2591cb8b887e5c4098ad0db20a11c0d, type: 3}
   CharacterPrefab: {fileID: 6482655462957775351, guid: 2ba3b95e7a6647f283303487517f688c, type: 3}
   SellingPrice: 0

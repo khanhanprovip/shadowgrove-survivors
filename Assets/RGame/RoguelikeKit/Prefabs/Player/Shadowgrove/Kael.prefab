@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 6997282388556424107}
   - component: {fileID: 5197528830913031081}
   - component: {fileID: 9013862499070297895}
+  - component: {fileID: 4894667372721128574}
   m_Layer: 0
   m_Name: Kael
   m_TagString: Player
@@ -319,6 +320,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &4894667372721128574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6482655462957775351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03274e22407f7f5488e7097873d596a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RGame.RoguelikeKit.StarterWeaponProfile
+  Kind: 3
+  Range: 10.5
+  Icon: {fileID: 21300000, guid: 0fbea6b2097538248a1001d914dd4358, type: 3}
+  Effect: {fileID: 21300000, guid: 68d48d27398e1174b922f2a2c994f417, type: 3}
 --- !u!1 &8811000000000000003
 GameObject:
   m_ObjectHideFlags: 0

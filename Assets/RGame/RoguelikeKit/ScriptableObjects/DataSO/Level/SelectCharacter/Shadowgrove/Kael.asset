@@ -15,6 +15,6 @@ MonoBehaviour:
   Description: "Ember Hunter \u2014 toc do cao, nho than chiu tri mang"
   CharacterName: Kael
   CharacterImage: {fileID: 21300000, guid: dd845364daacb58428a7347b29873c0e, type: 3}
-  BeginSkillImage: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
+  BeginSkillImage: {fileID: 21300000, guid: 0fbea6b2097538248a1001d914dd4358, type: 3}
   CharacterPrefab: {fileID: 6482655462957775351, guid: c4ea089a77e04ee0bd70c78289e37460, type: 3}
   SellingPrice: 0

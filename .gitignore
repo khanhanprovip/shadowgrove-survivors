@@ -81,3 +81,7 @@ AssetStoreTools*
 /Tools/UnityHarness/artifacts/
 /Tools/UnityHarness/__pycache__/
 /Tools/UnityHarness/.operation.lock
+
+# Addressables build-generated linker output
+/Assets/RGame/RoguelikeKit/AddressableAssetsData/link.xml
+/Assets/RGame/RoguelikeKit/AddressableAssetsData/link.xml.meta

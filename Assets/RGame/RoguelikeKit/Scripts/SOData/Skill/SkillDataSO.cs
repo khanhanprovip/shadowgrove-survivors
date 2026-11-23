@@ -56,6 +56,8 @@ namespace RGame.RoguelikeKit
         public int Damage = 3;         
         public int Amount = 1;         
         public int Area = 0;         
+        public StarterWeaponKind StarterWeapon;
+        public float AttackRange;
         public List<AttackSkillAttributeMod> UpgradeAttribute = new();         
         public List<int> UpgradeAttributeModValue = new();                  
 
@@ -82,6 +84,8 @@ namespace RGame.RoguelikeKit
             newSkillDataSo.Damage = this.Damage;             
             newSkillDataSo.Amount = this.Amount;
             newSkillDataSo.Area = this.Area;                          
+            newSkillDataSo.StarterWeapon = StarterWeapon;
+            newSkillDataSo.AttackRange = AttackRange;
             newSkillDataSo.UpgradeAttribute = new List<AttackSkillAttributeMod>(this.UpgradeAttribute);             
             newSkillDataSo.UpgradeAttributeModValue = new List<int>(this.UpgradeAttributeModValue);
             newSkillDataSo.MoneyAmount = this.MoneyAmount;                         

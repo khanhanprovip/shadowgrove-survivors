@@ -1,0 +1,371 @@
+{
+  "date": "2026-11-23",
+  "unity": "6000.3.21f1",
+  "finalBuildRun": "20261123-110031-verify-10672",
+  "finalAssemblySha256": "ebfce09bdf9533e16b95d790bab2e709aaacb75463dcd9b95a7afb6dc1f5f00e",
+  "scope": "Final binary verified for survival-boundary, full Survival120, UI and all starter weapons at720p; UI/starter combat/skill-card levels at1080p. Other successful suites are explicitly recorded on the earlier candidate before the Survival clock clamp.",
+  "starterRanges": {
+    "Rowan": 2.2,
+    "Lyra": 7,
+    "Kael": 10.5
+  },
+  "finalBinaryCases": [
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "survival-boundary",
+      "passed": true,
+      "assertions": 7,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161316-test-36688",
+      "suite": "survival",
+      "passed": true,
+      "assertions": 13,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161316-test-36688",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 92,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 92,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "skills",
+      "passed": true,
+      "assertions": 1591,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    }
+  ],
+  "history": [
+    {
+      "run": "20261123-104605-verify-33048",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104605-verify-33048",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 91,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104605-verify-33048",
+      "suite": "skills",
+      "passed": true,
+      "assertions": 1591,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104605-verify-33048",
+      "suite": "animations",
+      "passed": true,
+      "assertions": 7557,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 92,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "menus",
+      "passed": true,
+      "assertions": 68,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "survival",
+      "passed": false,
+      "assertions": 10,
+      "failures": 1,
+      "reasons": [
+        "1 failed assertions",
+        "exit 1",
+        "1 error lines in raw runtime log"
+      ],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "killtarget",
+      "passed": true,
+      "assertions": 13,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "endless",
+      "passed": true,
+      "assertions": 12,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "hit-feedback",
+      "passed": true,
+      "assertions": 248,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "skill-lifetime",
+      "passed": true,
+      "assertions": 4,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "audio",
+      "passed": true,
+      "assertions": 30,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "settings-write",
+      "passed": true,
+      "assertions": 4,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-104938-verify-28496",
+      "suite": "settings-read",
+      "passed": true,
+      "assertions": 2,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "survival-boundary",
+      "passed": true,
+      "assertions": 7,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "survival",
+      "passed": false,
+      "assertions": 0,
+      "failures": 0,
+      "reasons": [
+        "missing report",
+        "no PASS assertions",
+        "missing/ambiguous runtime error summary"
+      ],
+      "runtimeErrorTotals": []
+    },
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "combat-pickups",
+      "passed": false,
+      "assertions": 0,
+      "failures": 0,
+      "reasons": [
+        "missing report",
+        "no PASS assertions",
+        "missing/ambiguous runtime error summary"
+      ],
+      "runtimeErrorTotals": []
+    },
+    {
+      "run": "20261123-110031-verify-10672",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161316-test-36688",
+      "suite": "survival",
+      "passed": true,
+      "assertions": 13,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161316-test-36688",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 92,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "ui",
+      "passed": true,
+      "assertions": 324,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "combat-pickups",
+      "passed": true,
+      "assertions": 92,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    },
+    {
+      "run": "20261123-161721-test-36956",
+      "suite": "skills",
+      "passed": true,
+      "assertions": 1591,
+      "failures": 0,
+      "reasons": [],
+      "runtimeErrorTotals": [
+        "0"
+      ]
+    }
+  ],
+  "limitations": [
+    "Manual Windows pointer selection in PowerUp was stopped by physical Escape before its outcome was observed; Unity raycast/pointer callback tests for all14 tiles passed.",
+    "A stationary healed bot with hundreds of enemies recorded low FPS (5-8 in heavy samples); performance stress optimization remains.",
+    "Gold banking, permanent-upgrade logic and save validation were outside this change.",
+    "Earlier FAIL/incomplete runs are retained and are not relabeled PASS."
+  ]
+}

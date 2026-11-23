@@ -103,6 +103,10 @@ namespace DATN.Trial
         private void TryWin()
         {
             if (!mMode.CheckWin()) return;
+            // A slow frame may cross the deadline by several tenths of a
+            // second. Record the Survival deadline, not that frame's overshoot.
+            if (mMode is SurvivalMode)
+                _matchSeconds = mModeConfig != null ? mModeConfig.Duration : 90f;
             mRunning = false;
             mGameWinChannel.RaiseEvent();
         }

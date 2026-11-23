@@ -52,3 +52,10 @@ Các test trên kiểm tra cổng kết quả và timeout thật; không thay th
 ## Công cụ đã ghim
 
 Unity CLI 1.0.1 và Pipeline 1.0.0; URL/SHA256 nằm trong toolchain.lock.json. Editor luôn lấy phiên bản từ ProjectVersion, mặc định tìm dưới F:/unity; đổi thư mục cài bằng biến UNITY_HARNESS_EDITOR_ROOT. Skills Unity chính thức cùng năm skill C#/ScriptableObject/Input/Tilemap/build được cài trong `.agents/skills`; xem từng SKILL.md để dùng theo ngữ cảnh. Không tự nâng Unity hoặc công cụ trong lượt sửa lỗi.
+
+
+## Survivor starter weapons and Survival boundary
+
+`combat-pickups` verifies the three actual survivor profiles (Rowan cleave 2.2, Lyra orb 7, Kael arrow 10.5), radial target gating, initialized enemy stats, real damage/collisions, projectile range expiry, and gold chests. `ui` raycasts all 14 permanent-upgrade tiles and checks that pointer selection opens the corresponding description in VI/EN. It does not purchase upgrades.
+
+`survival-boundary` simulates a 310ms frame overshoot on a real round and checks that the win clock is exactly the configured deadline. Pair it with `survival` for a full 120-second match. Evidence from 2026-11-23 is summarized in `verification-2026-11-23.json`; raw local logs/builds remain excluded from Git.

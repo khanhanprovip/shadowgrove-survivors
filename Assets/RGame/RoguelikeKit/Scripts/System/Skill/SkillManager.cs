@@ -62,6 +62,8 @@ namespace RGame.RoguelikeKit
             
             if (skillData.Level == 0)
             {
+                if (key == "ToNearestSkill" && _globalConfig.GlobalPlayer != null)
+                    _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>()?.Configure(skillData);
                 _activeSkills.Add(key);
 
                 switch (skillData.SkillType)

@@ -1,5 +1,11 @@
 # Shadowgrove Survivors
 
+## GitHub delivery
+
+- The user's repository is `https://github.com/khanhanprovip/shadowgrove-survivors` (`origin`, branch `main`). The original kit remains `upstream`; retain its license and attribution.
+- The user requests that completed, verified changes be committed and pushed to their repository automatically. Report the commit hash and push result after each completed batch; keep unfinished changes outside that commit. Do not ask again for an ordinary push already covered by this instruction.
+- Keep build outputs, QA logs/profiles, Unity caches and downloaded tool binaries out of Git. Do not force-push or rewrite existing history.
+
 Unity 2D project. Read `.agents/skills/using-unity/SKILL.md` and its relevant reference before Unity work. The project-local CLI and operator guide are in `Tools/UnityHarness/README.md`.
 
 ## Development loop
@@ -22,7 +28,7 @@ python -m unittest discover -s Tools/UnityHarness -p test_harness.py -v
 ./Tools/UnityHarness/harness.ps1 verify --suites all
 ```
 
-Choose suites relevant to the change. Available Windows suites: menus, backgrounds, skills, ui, survival, killtarget, endless, animations, hit-feedback, skill-lifetime, audio, settings-write, settings-read. Run settings-write before settings-read in the same invocation. `backgrounds` visits all ten stages and verifies terrain identity, world bounds, movement and pause. `legacy --case Smoke45|Flow65|Full100|Lose60|KillTargetLevel` wraps existing Editor tests; verify their actual reports before claiming success.
+Choose suites relevant to the change. Available Windows suites: menus, backgrounds, skills, ui, survival, killtarget, endless, animations, hit-feedback, skill-lifetime, audio, settings-write, settings-read, art, combat-pickups, survival-boundary. Run settings-write before settings-read in the same invocation. `backgrounds` visits all ten stages and verifies terrain identity, world bounds, movement and pause. `legacy --case Smoke45|Flow65|Full100|Lose60|KillTargetLevel` wraps existing Editor tests; verify their actual reports before claiming success.
 
 Results live under `Tools/UnityHarness/artifacts/`. Inspect summary, individual assertions, runtime logs and process exit codes. A missing report, timeout, FAIL assertion, exception or nonzero exit is a failure even when other assertions pass. Hidden-window screenshots do not prove visual quality. Report what was executed and what remains unverified.
 

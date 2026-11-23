@@ -113,6 +113,8 @@ namespace RGame.RoguelikeKit
                 ? "SkillAttr_" + skillData.AttributeType : "Skill_" + key);
             if (displayName == "Skill_" + key) displayName = skillData.SkillType == SkillType.AttributeSkill
                 ? LanguageManager.Get("SkillAttr_" + skillData.AttributeType) : key; // chua co dich → dung Key goc
+            if (skillData.StarterWeapon != StarterWeaponKind.Legacy)
+                displayName = StarterWeaponProfile.Name(skillData.StarterWeapon, _language == "vi");
             bool isNew = skillData.Level == 0 && skillData.SkillType != SkillType.MoneyBag;
             _name.text = displayName;
             _newBadge.text = isNew ? LanguageManager.Get("CardNew") : "";
@@ -124,6 +126,8 @@ namespace RGame.RoguelikeKit
 
             // Mo ta
             string desc = LanguageManager.Get("SkillDesc_" + key);
+            if (skillData.StarterWeapon != StarterWeaponKind.Legacy)
+                desc = StarterWeaponProfile.Description(skillData.StarterWeapon, _language == "vi");
             _description.text = skillData.SkillType == SkillType.AttributeSkill || desc == "SkillDesc_" + key ? "" : desc;
 
             // Dong chi tiet theo loai ky nang
@@ -159,6 +163,15 @@ namespace RGame.RoguelikeKit
             detail += StatLine(LanguageManager.Get("SkillAttr_Cooldown"), data.CD,
                 next != null && next.skillAttributeType == UpgradeSkillAttributeType.CDLessPercent
                     ? data.CD * (1f - next.IntValue * 0.01f) : data.CD, " s");
+            if (data.StarterWeapon != StarterWeaponKind.Legacy)
+                detail += StatLine(_language == "vi" ? "Tầm đánh" : "Range", data.AttackRange, data.AttackRange);
+            if (data.StarterWeapon == StarterWeaponKind.ThornSlash)
+            {
+                detail += StatLine(_language == "vi" ? "Số mục tiêu" : "Targets", 2 + data.Amount,
+                    2 + data.Amount + (next != null && next.skillAttributeType == UpgradeSkillAttributeType.ProjectilesCountAdd ? next.IntValue : 0));
+                _description.text = detail.TrimEnd('\n');
+                return;
+            }
             detail += StatLine(LanguageManager.Get("Stat_Amount"), data.Amount,
                 next != null && next.skillAttributeType == UpgradeSkillAttributeType.ProjectilesCountAdd
                     ? data.Amount + next.IntValue : data.Amount);

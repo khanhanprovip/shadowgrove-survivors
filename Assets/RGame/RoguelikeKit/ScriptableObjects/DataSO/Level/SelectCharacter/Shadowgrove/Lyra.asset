@@ -15,6 +15,6 @@ MonoBehaviour:
   Description: "Eclipse Arcanist \u2014 phap su danh xa, cau ma thuat nhieu dan"
   CharacterName: Lyra
   CharacterImage: {fileID: 21300000, guid: b9988570058195b4791ae249e9b85a31, type: 3}
-  BeginSkillImage: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
+  BeginSkillImage: {fileID: 21300000, guid: 46f54f20f45dbd74f942816f883be9b9, type: 3}
   CharacterPrefab: {fileID: 6482655462957775351, guid: 39f6ac801c1341ea982f295a44883147, type: 3}
   SellingPrice: 0

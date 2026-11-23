@@ -121,6 +121,20 @@ namespace DATN.Trial
                     yield return EnterRound(2, "Lyra");
                     yield return CheckObjective(GameModeId.Survival);
                     break;
+                case "survival-boundary":
+                    yield return EnterRound(0, "Rowan");
+                    _round.Pause();
+                    var boundaryFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+                    var mode = typeof(TrialController).GetField("mMode", boundaryFlags).GetValue(_round);
+                    float duration = _selection.SelectLevelSO.GameMode.Duration;
+                    typeof(TrialController).GetField("_matchSeconds", boundaryFlags).SetValue(_round, (double)duration + .31);
+                    typeof(SurvivalMode).GetField("_remaining", boundaryFlags).SetValue(mode, -.31d);
+                    typeof(TrialController).GetMethod("TryWin", boundaryFlags).Invoke(_round, null);
+                    yield return Wait(() => Visible("GameWin"), "Survival boundary result becomes visible");
+                    Require(Visible("GameWin"), "A frame crossing the Survival deadline still wins");
+                    Require(Mathf.Abs(_round.MatchSeconds - duration) < .001f, "Survival clock clamps exactly to its deadline after a 310ms overshoot");
+                    yield return CaptureFrame("survival-boundary");
+                    break;
                 case "killtarget":
                     yield return EnterRound(1, "Rowan");
                     yield return CheckObjective(GameModeId.KillTarget);
@@ -642,6 +656,16 @@ namespace DATN.Trial
                     {
                         var rect = (RectTransform)attribute.transform;
                         Require(rect.rect.width >= 250 && rect.rect.height >= 100, "Permanent-upgrade tile keeps usable dimensions");
+                        var pointer = PointerAt(attribute.transform);
+                        var hits = Raycast(pointer);
+                        Require(hits.Count > 0 && ExecuteEvents.GetEventHandler<IPointerDownHandler>(hits[0].gameObject) == attribute.gameObject,
+                            language + " " + attribute.name + " full tile receives pointer selection");
+                        ExecuteEvents.ExecuteHierarchy(hits[0].gameObject, pointer, ExecuteEvents.pointerDownHandler);
+                        var description = panel.GetComponentInChildren<PowerUpDescription>();
+                        var title = (TMP_Text)typeof(PowerUpDescription).GetField("mTitle",
+                            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(description);
+                        Require(title.text == DATN.UI.ForestUI.AttributeName(attribute.name.Trim()),
+                            language + " " + attribute.name + " click displays its actual description");
                     }
                     yield return CaptureFrame("powers-" + language);
                     Click(ButtonIn(panel, "Button Close"));
@@ -762,7 +786,9 @@ namespace DATN.Trial
                             {
                                 (LanguageManager.Get("Stat_Damage"), damage, (float)data.Damage, ""),
                                 (LanguageManager.Get("SkillAttr_Cooldown"), cd, data.CD, " s"),
-                                (LanguageManager.Get("Stat_Amount"), amount, (float)data.Amount, ""),
+                                (data.StarterWeapon == StarterWeaponKind.ThornSlash ? (language == "vi" ? "Số mục tiêu" : "Targets") : LanguageManager.Get("Stat_Amount"),
+                                    amount + (data.StarterWeapon == StarterWeaponKind.ThornSlash ? 2 : 0),
+                                    (float)data.Amount + (data.StarterWeapon == StarterWeaponKind.ThornSlash ? 2 : 0), ""),
                                 (LanguageManager.Get("Stat_Velocity"), speed, data.Velocity, ""),
                                 (LanguageManager.Get("Stat_Area"), area, (float)data.Area, "")
                             })
@@ -1000,9 +1026,12 @@ namespace DATN.Trial
             parent.GetComponentsInChildren<Button>().Single(button => button.name.Trim() == name);
 
         private static PointerEventData PointerAt(Button button)
+            => PointerAt(button.transform);
+
+        private static PointerEventData PointerAt(Transform target)
         {
-            var rect = (RectTransform)button.transform;
-            var canvas = button.GetComponentInParent<Canvas>().rootCanvas;
+            var rect = (RectTransform)target;
+            var canvas = target.GetComponentInParent<Canvas>().rootCanvas;
             Camera camera = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
             return new PointerEventData(EventSystem.current)
             {
@@ -1050,6 +1079,13 @@ namespace DATN.Trial
                 var player = _round.GlobalConfig.GlobalPlayer;
                 var manager = FindFirstObjectByType<SkillManager>();
                 var caster = manager.GetComponentInChildren<ToNearestSkillCast>();
+                var profile = player.GetComponent<StarterWeaponProfile>();
+                float expectedRange = hero == "Rowan" ? 2.2f : hero == "Lyra" ? 7f : 10.5f;
+                Require(profile != null && Mathf.Approximately(profile.Range, expectedRange), hero + " has the intended radial range: " + expectedRange);
+                Require(profile.Icon != null && profile.Effect != null, hero + " distinct starter icon and effect are assigned");
+                var runtimeSkills = (Dictionary<string, SkillDataSO>)typeof(SkillManager).GetField("_skillDataDictionary", flags).GetValue(manager);
+                Require(runtimeSkills[caster.Key].StarterWeapon == profile.Kind && runtimeSkills[caster.Key].SkillIcon == profile.Icon,
+                    hero + " runtime upgrade data and HUD use its own starter weapon");
                 var enemies = (EnemySystem)typeof(SkillCast).GetField("_enemySystem", flags).GetValue(caster);
                 var existing = enemies.GetEnemies();
                 enemies.ClearEnemies();
@@ -1069,22 +1105,94 @@ namespace DATN.Trial
                 var enemyDef = defs.First(d => d.Pool.Prefab.GetComponent<BaseEnemy>() != null);
                 var targetObject = pool.Request(enemyDef.Key);
                 var target = targetObject.GetComponent<BaseEnemy>();
-                foreach (var b in targetObject.GetComponentsInChildren<MonoBehaviour>()) b.enabled = false;
+                foreach (var b in targetObject.GetComponentsInChildren<MonoBehaviour>()) if (b is not BaseEnemy) b.enabled = false;
                 foreach (var c in targetObject.GetComponentsInChildren<Collider2D>()) c.enabled = false;
+                if (target.StatRuntime == null)
+                {
+                    enemies.AddEnemy(target);
+                    target.transform.position = player.transform.position + Vector3.right;
+                    Require(!caster.CanCast(), hero + " waits for a newly spawned enemy to initialize its HP");
+                }
+                yield return null; // The real pooled enemy must initialize its HP/hit receiver.
+                target.StatRuntime.ModifyValue("HP", 10000, true);
+                target.StatRuntime.ModifyValue("HP", 10000);
+                target.enabled = false; // Keep this real hit receiver stationary for range/collision measurements.
+                target.MyRigidbody2D.linearVelocity = Vector2.zero;
                 enemies.ClearEnemies(); enemies.AddEnemy(target);
-                target.transform.position = player.transform.position + new Vector3(12.1f, 0);
+                target.transform.position = player.transform.position + new Vector3(profile.Range + .1f, 0);
                 fire.Invoke(manager, new object[] { caster.Key }); anim.MyAnimator.Update(0);
                 Require(!caster.CanCast() && anim.MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"), hero + " outside horizontal range does not attack");
-                target.transform.position = player.transform.position + new Vector3(0, 7.1f);
+                target.transform.position = player.transform.position + new Vector3(0, profile.Range + .1f);
                 Require(!caster.CanCast(), hero + " outside vertical range does not attack");
-                target.transform.position = player.transform.position + new Vector3(3, 0);
-                Require(caster.CanCast(), hero + " detects an enemy within the original range");
+                target.transform.position = player.transform.position + new Vector3(profile.Range * .8f, profile.Range * .8f);
+                Require(!caster.CanCast(), hero + " rejects diagonal targets outside the circular range");
+                target.transform.position = player.transform.position + new Vector3(profile.Range * .6f, 0);
+                Require(caster.CanCast(), hero + " detects an enemy within its own range");
                 Require(manager.GetComponentInChildren<RandomSkillCast>().CanCast() &&
                         manager.GetComponentInChildren<ChainSkillCast>().CanCast(),
                     hero + " other targeted weapons detect a valid target");
+                int hpBefore = target.StatRuntime.GetValue("HP");
                 fire.Invoke(manager, new object[] { caster.Key }); anim.MyAnimator.Update(0);
                 Require(anim.MyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"), hero + " real target triggers Attack");
-                Require(FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None).Length > bolts, hero + " real target creates projectile");
+                if (profile.Kind == StarterWeaponKind.ThornSlash)
+                {
+                    Require(FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None).Length == bolts && target.StatRuntime.GetValue("HP") < hpBefore,
+                        "Rowan cleaves in melee and deals real damage without a projectile");
+                    var slash = FindFirstObjectByType<DATN.World.ThornSlashEffect>().GetComponent<SpriteRenderer>();
+                    using var probe = new SpriteVisibilityProbe();
+                    Require(probe.VisiblePixels(slash) >= 200, "Rowan slash renders actual visible pixels");
+                }
+                else
+                {
+                    Require(FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None).Length > bolts, hero + " real target creates projectile");
+                    Require(FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None).Any(p => p.GetComponent<SpriteRenderer>().sprite == profile.Effect),
+                        hero + " projectile uses its distinct orb/arrow sprite");
+                }
+                var combatPause = GameObject.Find("TrialPausePanel"); combatPause.SetActive(false);
+                yield return CaptureFrame("starter-" + hero);
+                combatPause.SetActive(true);
+                if (profile.Kind != StarterWeaponKind.ThornSlash)
+                {
+                    var shot = FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None)
+                        .Where(p => p.GetComponent<SpriteRenderer>().sprite == profile.Effect)
+                        .OrderBy(p => Vector2.Distance(p.transform.position, player.transform.position)).First();
+                    var enemyCollider = target.GetComponentsInChildren<Collider2D>().First(c => c.CompareTag("EnemyHit"));
+                    bool hitReturned = false;
+                    UnityEngine.Events.UnityAction<SkillBase> hitReturn = s => hitReturned = true;
+                    shot.OnDeath += hitReturn;
+                    enemyCollider.enabled = true;
+                    enemies.ClearEnemies();
+                    _round.Resume();
+                    yield return Wait(() => target.StatRuntime.GetValue("HP") < hpBefore, hero + " projectile hits the actual enemy through physics");
+                    Require(hitReturned, hero + " hit projectile returns to its real pool");
+                    shot.OnDeath -= hitReturn;
+                    _round.Pause();
+                    enemyCollider.enabled = false;
+                    enemies.ClearEnemies(); enemies.AddEnemy(target);
+                    fire.Invoke(manager, new object[] { caster.Key });
+                    shot = FindObjectsByType<ToNearestSkill>(FindObjectsSortMode.None)
+                        .Where(p => p.GetComponent<SpriteRenderer>().sprite == profile.Effect)
+                        .OrderBy(p => Vector2.Distance(p.transform.position, player.transform.position)).First();
+                    Vector3 origin = shot.transform.position;
+                    bool rangeReturned = false;
+                    UnityEngine.Events.UnityAction<SkillBase> rangeReturn = s => rangeReturned = true;
+                    shot.OnDeath += rangeReturn;
+                    target.transform.position = player.transform.position + Vector3.right * 20;
+                    var enabledColliders = existing.Where(e => e != null).SelectMany(e => e.GetComponentsInChildren<Collider2D>()).Where(c => c.enabled).ToArray();
+                    foreach (var c in enabledColliders) c.enabled = false;
+                    _round.Resume();
+                    float maximumDistance = 0, deadline = Time.realtimeSinceStartup + 2.2f;
+                    while (!rangeReturned && Time.realtimeSinceStartup < deadline)
+                    {
+                        maximumDistance = Mathf.Max(maximumDistance, Vector2.Distance(origin, shot.transform.position));
+                        yield return null;
+                    }
+                    shot.OnDeath -= rangeReturn;
+                    Require(rangeReturned && maximumDistance <= profile.Range + .01f && maximumDistance >= profile.Range * .8f,
+                        hero + " projectile expires at its own range; measured " + maximumDistance.ToString("F2"));
+                    _round.Pause();
+                    foreach (var c in enabledColliders) if (c != null) c.enabled = true;
+                }
                 target.transform.position = player.transform.position + new Vector3(20, 0);
                 typeof(PlayerAnim).GetField("_attackLockUntil", flags).SetValue(anim, 0f);
                 anim.MyAnimator.Play("Idle", 0, 0); anim.MyAnimator.Update(0);

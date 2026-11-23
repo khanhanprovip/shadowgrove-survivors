@@ -38,6 +38,12 @@ namespace RGame.RoguelikeKit
         private int mCurLevel;
 
         public UnityAction<string,string,int,UnityAction> SelectAction;
+
+        public void SetHitSurface(Image surface)
+        {
+            mBG = surface;
+            mBG.raycastTarget = true;
+        }
         
         private void Awake()
         {
