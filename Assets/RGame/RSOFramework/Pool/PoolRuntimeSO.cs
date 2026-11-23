@@ -121,7 +121,7 @@ namespace RGame.Framework
             if (!ValidatePoolExists(key))
                 return;
 
-            _activeObjects[key].Remove(obj);
+            if (!_activeObjects[key].Remove(obj)) return;
             DeactivateObject(obj, key);
             ReturnObjectToPool(obj, key);
         }

@@ -490,7 +490,6 @@ MonoBehaviour:
   statRuntime: {fileID: 11400000, guid: 4bc339572b7f1f8408c52327ccd34d22, type: 2}
   playerSpawnSO: {fileID: 11400000, guid: 2780f268bc318574eb2d611c05a0de50, type: 2}
   startStageChannelSO: {fileID: 11400000, guid: 0d2e5c5d38a6fc944b4262bb84bdc5be, type: 2}
-  gameWinChannelSO: {fileID: 11400000, guid: 342c5ed9afc9857488cb0d3c16eecbe4, type: 2}
   minSpawnRadius: 18
   maxSpawnRadius: 20
 --- !u!1 &94825684
@@ -5103,7 +5102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e84fa6ec7932e3e4fb2e515df432394a, type: 2}
   - {fileID: 11400000, guid: 83e4db98d6b82194bb5cca22e63112e4, type: 2}
   _globalConfig: {fileID: 11400000, guid: 055b856c9b45e18459c288223c3025c1, type: 2}
-  _moneyBagIcon: {fileID: -6159277369411641441, guid: 5c84ede5c82388b4591bc6bcebd20092, type: 3}
+  _moneyBagIcon: {fileID: 21300000, guid: ee1bdb89f4e15ad42a36fb8bc45e4844, type: 3}
   _addTimerChannel: {fileID: 11400000, guid: 97496d8acf13bfd4695704613cafd4d2, type: 2}
   _upgradeSkillChannel: {fileID: 11400000, guid: 53df30f32aa480a4e86da9316c710b15, type: 2}
   _levelUpgradeChannel: {fileID: 11400000, guid: 7574520b28797c544b0950058445e47c, type: 2}

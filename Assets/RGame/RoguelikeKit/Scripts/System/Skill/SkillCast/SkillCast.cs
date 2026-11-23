@@ -14,6 +14,9 @@ namespace RGame.RoguelikeKit
         [SerializeField] private Vector3 _originLocalScale;
         
         protected SkillDataSO _mySkillData;
+
+        // Directional/area weapons can cast freely; targeted weapons override this.
+        public virtual bool CanCast() => _globalConfig.GlobalPlayer != null;
         
         public virtual void Cast(SkillDataSO skillData)
         {

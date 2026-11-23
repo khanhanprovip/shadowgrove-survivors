@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: 019d31df5aa24fc4c99b3e5d2adf63a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2578034278424735049
+    second: Bound_InsideScopeSkill_InsideScopeSkill_0
+  - first:
+      213: 1918679305294069152
+    second: Bound_InsideScopeSkill_InsideScopeSkill_1
+  - first:
+      213: -8702176074140988812
+    second: Bound_InsideScopeSkill_InsideScopeSkill_2
+  - first:
+      213: -822527804750764151
+    second: Bound_InsideScopeSkill_InsideScopeSkill_3
+  - first:
+      213: -3914758801478308319
+    second: Bound_InsideScopeSkill_InsideScopeSkill_4
+  - first:
+      213: -6369890768677777733
+    second: Bound_InsideScopeSkill_InsideScopeSkill_5
+  - first:
+      213: -892228741347158392
+    second: Bound_InsideScopeSkill_InsideScopeSkill_6
+  - first:
+      213: -3817820971146663182
+    second: Bound_InsideScopeSkill_InsideScopeSkill_7
+  - first:
+      213: -5798749057787213913
+    second: Bound_InsideScopeSkill_InsideScopeSkill_8
+  - first:
+      213: -2335863757603404360
+    second: Bound_InsideScopeSkill_InsideScopeSkill_9
+  - first:
+      213: -3136590015424823796
+    second: Bound_InsideScopeSkill_InsideScopeSkill_10
+  - first:
+      213: 5696408378166188942
+    second: Bound_InsideScopeSkill_InsideScopeSkill_11
+  - first:
+      213: 8033305227545824992
+    second: Bound_InsideScopeSkill_InsideScopeSkill_12
+  - first:
+      213: -4211666882280091572
+    second: Bound_InsideScopeSkill_InsideScopeSkill_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 68.449196
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 68
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b296b79b7bf83cd0800000000000000
+      internalID: -2578034278424735049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 94
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ad32fd99a480aa10800000000000000
+      internalID: 1918679305294069152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 81
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47a4ce777f8ab3780800000000000000
+      internalID: -8702176074140988812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_3
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 68
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987e2fbc15bc594f0800000000000000
+      internalID: -822527804750764151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 94
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e2d808c9bfba9c0800000000000000
+      internalID: -3914758801478308319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_5
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 58
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbecbe2581a9997a0800000000000000
+      internalID: -6369890768677777733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 34
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 886db9ddfaa2e93f0800000000000000
+      internalID: -892228741347158392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_7
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 34
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa24ceed00640bc0800000000000000
+      internalID: -3817820971146663182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_8
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 58
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a746fc7474b68fa0800000000000000
+      internalID: -5798749057787213913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_9
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 17
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b50754d948559fd0800000000000000
+      internalID: -2335863757603404360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 25
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ef094dff79874d0800000000000000
+      internalID: -3136590015424823796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_11
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 7
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8b97243d35bd0f40800000000000000
+      internalID: 5696408378166188942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_12
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 25
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ee482cca880c7f60800000000000000
+      internalID: 8033305227545824992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bound_InsideScopeSkill_InsideScopeSkill_13
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 17
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c401b61f8472d85c0800000000000000
+      internalID: -4211666882280091572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bound_InsideScopeSkill_InsideScopeSkill_0: -2578034278424735049
+      Bound_InsideScopeSkill_InsideScopeSkill_1: 1918679305294069152
+      Bound_InsideScopeSkill_InsideScopeSkill_10: -3136590015424823796
+      Bound_InsideScopeSkill_InsideScopeSkill_11: 5696408378166188942
+      Bound_InsideScopeSkill_InsideScopeSkill_12: 8033305227545824992
+      Bound_InsideScopeSkill_InsideScopeSkill_13: -4211666882280091572
+      Bound_InsideScopeSkill_InsideScopeSkill_2: -8702176074140988812
+      Bound_InsideScopeSkill_InsideScopeSkill_3: -822527804750764151
+      Bound_InsideScopeSkill_InsideScopeSkill_4: -3914758801478308319
+      Bound_InsideScopeSkill_InsideScopeSkill_5: -6369890768677777733
+      Bound_InsideScopeSkill_InsideScopeSkill_6: -892228741347158392
+      Bound_InsideScopeSkill_InsideScopeSkill_7: -3817820971146663182
+      Bound_InsideScopeSkill_InsideScopeSkill_8: -5798749057787213913
+      Bound_InsideScopeSkill_InsideScopeSkill_9: -2335863757603404360
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

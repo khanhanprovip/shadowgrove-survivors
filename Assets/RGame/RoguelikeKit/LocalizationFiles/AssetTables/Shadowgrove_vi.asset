@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 101712088627825
-    m_Localized: Sống sót: {0}s
+    m_Localized: 'Sống sót: {0}s'
     m_Metadata:
       m_Items: []
   - m_Id: 199582914291994
@@ -95,15 +95,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 109043060325783
-    m_Localized: Hạ: {0}
+    m_Localized: 'Hạ: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 73415100261187
-    m_Localized: Thời gian: {0}
+    m_Localized: 'Thời gian: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 170799392320690
-    m_Localized: Cấp độ: {0}
+    m_Localized: 'Cấp độ: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 150195699065697
@@ -283,7 +283,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 204012337399981
-    m_Localized: Hạ: {0}/{1}
+    m_Localized: 'Hạ: {0}/{1}'
     m_Metadata:
       m_Items: []
   - m_Id: 143966124341762

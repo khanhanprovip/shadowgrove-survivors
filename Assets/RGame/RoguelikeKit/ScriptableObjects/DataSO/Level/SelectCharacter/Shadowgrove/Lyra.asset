@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27c86dbd6a826d4b8f5d24bc42a5efb, type: 3}
   m_Name: Lyra
   m_EditorClassIdentifier: 
-  Description: Eclipse Arcanist — phap su danh xa, cau ma thuat nhieu dan
+  Description: "Eclipse Arcanist \u2014 phap su danh xa, cau ma thuat nhieu dan"
   CharacterName: Lyra
-  CharacterImage: {fileID: 21300000, guid: cb0d6ed45c434f398398cdcc59bbde00, type: 3}
-  BeginSkillImage: {fileID: -5357625079516145328, guid: 0fb0920f731c6c64c95148a4aff5d790, type: 3}
+  CharacterImage: {fileID: 21300000, guid: b9988570058195b4791ae249e9b85a31, type: 3}
+  BeginSkillImage: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
   CharacterPrefab: {fileID: 6482655462957775351, guid: 39f6ac801c1341ea982f295a44883147, type: 3}
+  SellingPrice: 0

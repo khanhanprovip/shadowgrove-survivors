@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 #endregion
@@ -22,11 +23,18 @@ namespace RGame.RoguelikeKit
         public UnityAction<LevelItem> OnPointerExitAction;
         public bool IsSelected;
         private LevelConfigSO _config;
+        public LevelConfigSO Config => _config;
+        public Image PreviewImage => mPreviewImage;
+        public TextMeshProUGUI Description => mDescription;
         private string _lastLocale;
 
         public void Initialization(LevelConfigSO _configSo)
         {
             _config = _configSo;
+            // Each card uses its own level configuration. The inherited kit
+            // LocalizeStringEvent otherwise overwrites it after a locale switch.
+            if (mDescription.TryGetComponent<LocalizeStringEvent>(out var defaultDescription))
+                defaultDescription.enabled = false;
             RefreshDescription();
             mPreviewImage.sprite = _configSo.PreviewImage;
             mPreviewImage.preserveAspect = true;

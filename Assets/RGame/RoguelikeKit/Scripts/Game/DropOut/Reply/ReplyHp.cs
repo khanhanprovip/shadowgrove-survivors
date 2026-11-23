@@ -10,6 +10,7 @@ namespace RGame.RoguelikeKit
         public override void Do()
         {
             _stat.ModifyValue("HP",_replyHP);
+            ShadowgroveAudio.Play(SoundCue.Heal);
         }
     }
 }

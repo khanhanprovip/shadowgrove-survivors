@@ -37,7 +37,7 @@ namespace RGame.RoguelikeKit
             
             mLevelBar.fillAmount = line;
 
-            _levelText.text = "Level " + currentLevel;
+            _levelText.text = DATN.UI.ForestUI.Tr("Cấp ", "Level ") + currentLevel;
         }
     }
 }

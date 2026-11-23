@@ -16,10 +16,20 @@ namespace RGame.RoguelikeKit
         private void OnEnable()
         {
             _enemyHits.Clear();
+            _attackCount = 0;
+            AttackTimer = 1f;
         }
 
         private void FixedUpdate()
         {
+            // The player can be destroyed during the death fade, before the
+            // round recycles the remaining skill objects.
+            if (_playerTransform == null)
+            {
+                _enemyHits.Clear();
+                OnDeath?.Invoke(this);
+                return;
+            }
             AttackTimer += Time.fixedDeltaTime;
 
             if (AttackTimer >= 1)
@@ -41,6 +51,7 @@ namespace RGame.RoguelikeKit
                 _attackCount = 0;
                 AttackTimer = 1;
                 OnDeath?.Invoke(this);
+                return;
             }
             
             transform.position = _playerTransform.position;

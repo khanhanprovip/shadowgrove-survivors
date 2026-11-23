@@ -18,7 +18,7 @@ MonoBehaviour:
   MixAttributeSkillKey: Armor
   AttributeType: 0
   SkillPrefab: {fileID: 3228222673249282260, guid: 3768c303345980448802ecaf9109c93b, type: 3}
-  SkillIcon: {fileID: 21300000, guid: 99c3f95874157914590ac31a95f37842, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 18d2b5636e32f24489db730099a71f64, type: 3}
   Velocity: 20
   Duration: 1
   CD: 2.5

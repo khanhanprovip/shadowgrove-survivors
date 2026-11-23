@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using RGame.Framework;
 using UnityEngine;
 
@@ -35,21 +33,17 @@ namespace RGame.RoguelikeKit
             _canvasGroup.alpha = 1f;
             _canvasGroup.blocksRaycasts = true;
 
-            StartCoroutine(DelayInteractable());
+            _canvasGroup.interactable = true;
         }
         
         public void Exit()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Time.timeScale = 1;
             _attributeSO.SetAttribute("GoldCount",_attributeSO.GoldCount + _globalConfig.CurrentGetGold);
             _saveGame.RaiseEvent();
             _sceneLoader.RaiseEvent(_mainMenuScene);
         }
 
-        private IEnumerator DelayInteractable()
-        {
-            yield return new WaitForSeconds(0.5f);
-            _canvasGroup.interactable = true; 
-        }
     }
 }

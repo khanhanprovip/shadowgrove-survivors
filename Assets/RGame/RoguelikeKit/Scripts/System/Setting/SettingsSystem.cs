@@ -3,7 +3,6 @@
 using System;
 using RGame.Framework;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 #endregion
 
@@ -46,6 +45,7 @@ namespace RGame.RoguelikeKit
         /// </summary>
         private void SetCurrentSettings()
         {
+            ShadowgroveAudio.ApplySettings(mCurrentSettings);
             mChangeMusicVolumeEventChannel.RaiseEvent(mCurrentSettings.MusicVolume); // Raise event for volume change
             mChangeSfxVolumeEventChannel.RaiseEvent(mCurrentSettings.SfxVolume); // Raise event for volume change
             mChangeMasterVolumeEventChannel.RaiseEvent(mCurrentSettings.MasterVolume); // Raise event for volume change
@@ -60,12 +60,11 @@ namespace RGame.RoguelikeKit
             else
             {
                 var currentResolution = Screen.currentResolution;
-                if (mCurrentSettings.ResolutionsIndex < Screen.resolutions.Length)
+                if (mCurrentSettings.ResolutionsIndex >= 0 && mCurrentSettings.ResolutionsIndex < Screen.resolutions.Length)
                     currentResolution = Screen.resolutions[mCurrentSettings.ResolutionsIndex];
                 Screen.SetResolution(currentResolution.width, currentResolution.height, mCurrentSettings.IsFullscreen);
             }
 
-            LocalizationSettings.SelectedLocale = mCurrentSettings.LanguageLocale;
         }
 
         private static bool TryGetCommandLineResolution(out int width, out int height, out bool fullscreen)

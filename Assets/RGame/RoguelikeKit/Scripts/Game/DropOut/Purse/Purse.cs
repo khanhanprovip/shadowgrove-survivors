@@ -9,6 +9,7 @@ namespace RGame.RoguelikeKit
         public override void Do()
         {
             _globalConfig.CurrentGetGold += GoldCount;
+            ShadowgroveAudio.Play(SoundCue.Gold);
         }
     }
 }

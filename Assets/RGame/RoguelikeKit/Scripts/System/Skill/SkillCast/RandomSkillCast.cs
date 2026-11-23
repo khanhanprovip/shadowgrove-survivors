@@ -6,6 +6,9 @@ namespace RGame.RoguelikeKit
 {
     public class RandomSkillCast : SkillCast
     {
+        public override bool CanCast() => base.CanCast() &&
+            _enemySystem.GetNearestEnemies(_globalConfig.GlobalPlayer.transform.position, 12, 7).Count > 0;
+
         public override void Cast(SkillDataSO skillData)
         {
             base.Cast(skillData);

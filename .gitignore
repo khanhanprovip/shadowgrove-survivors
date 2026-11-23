@@ -75,3 +75,9 @@ AssetStoreTools*
 
 # Local project notes
 /Docs/
+
+# Project-local Unity agent harness
+/Tools/UnityHarness/.tools/
+/Tools/UnityHarness/artifacts/
+/Tools/UnityHarness/__pycache__/
+/Tools/UnityHarness/.operation.lock

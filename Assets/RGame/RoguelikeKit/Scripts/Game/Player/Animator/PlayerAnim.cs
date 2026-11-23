@@ -18,6 +18,7 @@ namespace RGame.RoguelikeKit
         }
 
         private float _attackLockUntil;
+        private int _animationHash;
 
         private void Update()
         {
@@ -38,12 +39,17 @@ namespace RGame.RoguelikeKit
         {
             if (MyAnimator == null || Time.time < _attackLockUntil) return;
             _attackLockUntil = Time.time + 0.35f;
-            MyAnimator.CrossFade("Attack", 0f);
+            _animationHash = Animator.StringToHash("Attack");
+            MyAnimator.Play(_animationHash, 0, 0f);
         }
 
         public void ChangeAnimation(string _animationName)
         {
-            MyAnimator.CrossFade(_animationName, 0);
+            if (MyAnimator == null) return;
+            int hash = Animator.StringToHash(_animationName);
+            if (hash == _animationHash) return;
+            _animationHash = hash;
+            MyAnimator.Play(hash, 0, 0f);
         }
     }
 }

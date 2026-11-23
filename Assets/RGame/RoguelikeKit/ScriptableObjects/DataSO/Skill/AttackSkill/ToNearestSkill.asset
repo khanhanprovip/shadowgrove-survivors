@@ -18,7 +18,7 @@ MonoBehaviour:
   MixAttributeSkillKey: Cooldown
   AttributeType: 0
   SkillPrefab: {fileID: 3228222673249282260, guid: 54d9681cb35354f46b3cf889783b7abb, type: 3}
-  SkillIcon: {fileID: -5357625079516145328, guid: 0fb0920f731c6c64c95148a4aff5d790, type: 3}
+  SkillIcon: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
   Velocity: 10
   Duration: 2
   CD: 1

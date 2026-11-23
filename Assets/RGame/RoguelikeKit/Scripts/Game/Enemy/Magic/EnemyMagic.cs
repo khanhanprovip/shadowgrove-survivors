@@ -24,7 +24,7 @@ namespace RGame.RoguelikeKit
         {
             _timer += Time.fixedDeltaTime;
 
-            if (_timer < 0.08f)
+            if (_timer < 0.08f && globalConfig.GlobalPlayer != null)
             {
                 _moveDir = (globalConfig.GlobalPlayer.transform.position - transform.position).normalized;
             }
@@ -54,6 +54,7 @@ namespace RGame.RoguelikeKit
         public void Return()
         {
             _timer = 0;
+            _moveDir = Vector3.zero;
         }
     }
 }

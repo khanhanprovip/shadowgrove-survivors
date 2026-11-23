@@ -43,6 +43,7 @@ namespace RGame.RoguelikeKit
         private void OpenCharacterSelectScreen()
         {
             mCharacterSelectPanel.gameObject.SetActive(true);
+            mCharacterSelectPanel.transform.SetAsLastSibling();
             mCharacterSelectPanel.Confirm += OpenLevelSelectScreen;
             mCharacterSelectPanel.Closed += CloseCharacterSelectScreen;
         }
@@ -61,14 +62,15 @@ namespace RGame.RoguelikeKit
         private void OpenLevelSelectScreen()
         {
             mLevelSelectPanel.gameObject.SetActive(true);
+            mLevelSelectPanel.transform.SetAsLastSibling();
             mLevelSelectPanel.Closed += CloseLevelSelectScreen;
-            mLevelSelectPanel.Confirm += LoadGame;
+            mLevelSelectPanel.Confirm += OpenLobby;
         }
 
         private void CloseLevelSelectScreen()
         {
             mLevelSelectPanel.Closed -= CloseLevelSelectScreen;
-            mLevelSelectPanel.Confirm -= LoadGame;
+            mLevelSelectPanel.Confirm -= OpenLobby;
             mLevelSelectPanel.gameObject.SetActive(false);
         }
 
@@ -77,6 +79,8 @@ namespace RGame.RoguelikeKit
             mGameLoad.RaiseEvent(mGameScene);
         }
 
+        private void OpenLobby() => DATN.UI.ForestLobby.Open(mLevelSelectPanel, LoadGame);
+
         #endregion
 
         #region Setting
@@ -84,6 +88,7 @@ namespace RGame.RoguelikeKit
         private void OpenSettingsScreen()
         {
             mSettingPanel.gameObject.SetActive(true);
+            mSettingPanel.transform.SetAsLastSibling();
             mSettingPanel.Closed += CloseSettingsScreen;
         }
 
@@ -100,12 +105,13 @@ namespace RGame.RoguelikeKit
         private void OpenPowerUpScreen()
         {
             mPowerUpPanel.gameObject.SetActive(true);
+            mPowerUpPanel.transform.SetAsLastSibling();
             mPowerUpPanel.Closed += ClosePowerUpScreen;
         }
 
         private void ClosePowerUpScreen()
         {
-            mPowerUpPanel.Closed -= CloseSettingsScreen;
+            mPowerUpPanel.Closed -= ClosePowerUpScreen;
             mPowerUpPanel.gameObject.SetActive(false);
         }
 

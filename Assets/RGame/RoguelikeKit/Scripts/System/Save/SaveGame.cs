@@ -3,7 +3,6 @@
 using System;
 using RGame.RoguelikeKit;
 using UnityEngine;
-using UnityEngine.Localization;
 
 #endregion
 
@@ -17,7 +16,6 @@ namespace RGame.RoguelikeKit
         public float SfxVolume;
         public int ResolutionsIndex;
         public bool IsFullscreen;
-        public Locale LanguageLocale;
         public bool IsShowDamage;
 
         public int Might;
@@ -46,7 +44,6 @@ namespace RGame.RoguelikeKit
             SfxVolume = settings.SfxVolume;
             ResolutionsIndex = settings.ResolutionsIndex;
             IsFullscreen = settings.IsFullscreen;
-            LanguageLocale = settings.LanguageLocale;
             IsShowDamage = settings.IsShowDamage;
         }
 

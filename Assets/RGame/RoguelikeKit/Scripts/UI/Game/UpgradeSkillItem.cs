@@ -21,8 +21,59 @@ namespace RGame.RoguelikeKit
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private TextMeshProUGUI _level;
         private SkillDataSO _skillData;
+        private string _language;
+        private TMP_Text _newBadge;
+        private TMP_Text _category;
+
+        private void Update()
+        {
+            if (_skillData != null && _language != LanguageManager.GetCurrentCode())
+                BuildCard(_skillData);
+        }
 
         public UnityAction<SkillDataSO> UpgradeSkillAction;
+        private void Awake()
+        {
+            _description.rectTransform.anchorMin = new Vector2(0.075f, 0.19f);
+            _description.rectTransform.anchorMax = new Vector2(0.925f, 0.60f);
+            _description.rectTransform.offsetMin = Vector2.zero;
+            _description.rectTransform.offsetMax = Vector2.zero;
+            _description.enableAutoSizing = true;
+            _description.fontSizeMin = 22f;
+            _description.fontSizeMax = 26f;
+            _description.alignment = TextAlignmentOptions.TopLeft;
+            _description.overflowMode = TextOverflowModes.Ellipsis;
+            _name.rectTransform.anchorMin = new Vector2(0.06f, 0.70f);
+            _name.rectTransform.anchorMax = new Vector2(0.94f, 0.80f);
+            _name.rectTransform.offsetMin = Vector2.zero;
+            _name.rectTransform.offsetMax = Vector2.zero;
+            _name.enableAutoSizing = true;
+            _name.fontSizeMin = 22f;
+            _name.fontSizeMax = 32f;
+            _name.fontStyle = FontStyles.Bold;
+            _name.alignment = TextAlignmentOptions.Center;
+            _level.rectTransform.anchorMin = new Vector2(0.06f, 0.625f);
+            _level.rectTransform.anchorMax = new Vector2(0.94f, 0.68f);
+            _level.rectTransform.offsetMin = Vector2.zero;
+            _level.rectTransform.offsetMax = Vector2.zero;
+            _level.enableAutoSizing = true;
+            _level.fontSizeMin = 22f;
+            _level.fontSizeMax = 26f;
+            _level.color = DATN.UI.ForestUI.Gold;
+            _level.alignment = TextAlignmentOptions.Center;
+            _icon.rectTransform.anchorMin = _icon.rectTransform.anchorMax = new Vector2(0.5f, 0.87f);
+            _icon.rectTransform.anchoredPosition = Vector2.zero;
+            _icon.rectTransform.sizeDelta = new Vector2(88f, 88f);
+            _icon.preserveAspect = true;
+            _newBadge = DATN.UI.ForestUI.Label(transform, "Jade_NewBadge", "", "", 19f,
+                .42f, .955f, .94f, .99f, TextAlignmentOptions.MidlineRight, DATN.UI.ForestUI.Gold);
+            _category = DATN.UI.ForestUI.Label(transform, "Jade_Category", "", "", 19f,
+                .06f, .955f, .41f, .99f, color: DATN.UI.ForestUI.Gold);
+            _newBadge.GetComponent<DATN.UI.ForestText>().enabled = false;
+            _category.GetComponent<DATN.UI.ForestText>().enabled = false;
+
+        }
+
 
         public void SetUI(SkillDataSO skillData)
         {
@@ -34,19 +85,46 @@ namespace RGame.RoguelikeKit
 
         private void BuildCard(SkillDataSO skillData)
         {
+            _language = LanguageManager.GetCurrentCode();
             string key = skillData.Key;
+            foreach (var button in GetComponentsInChildren<Button>(true))
+            {
+                foreach (var label in button.GetComponentsInChildren<Text>(true))
+                {
+                    label.text = _language == "vi" ? "CHỌN" : "SELECT";
+                    label.color = new Color(0.95f, 0.94f, 0.86f);
+                    label.resizeTextForBestFit = true;
+                    label.resizeTextMinSize = 20;
+                    label.resizeTextMaxSize = 30;
+                }
+                foreach (var label in button.GetComponentsInChildren<TextMeshProUGUI>(true))
+                {
+                    label.text = _language == "vi" ? "CHỌN" : "SELECT";
+                    label.color = new Color(0.95f, 0.94f, 0.86f);
+                    label.enableAutoSizing = true;
+                    label.fontSizeMin = 20f;
+                    label.fontSizeMax = 30f;
+                }
+            }
+
 
             // Ten + nhan (ky nang moi khi cap 0)
-            string displayName = LanguageManager.Get("Skill_" + key);
-            if (displayName == "Skill_" + key) displayName = key; // chua co dich → dung Key goc
+            string displayName = LanguageManager.Get(skillData.SkillType == SkillType.AttributeSkill
+                ? "SkillAttr_" + skillData.AttributeType : "Skill_" + key);
+            if (displayName == "Skill_" + key) displayName = skillData.SkillType == SkillType.AttributeSkill
+                ? LanguageManager.Get("SkillAttr_" + skillData.AttributeType) : key; // chua co dich → dung Key goc
             bool isNew = skillData.Level == 0 && skillData.SkillType != SkillType.MoneyBag;
-            _name.text = isNew
-                ? displayName + "  <color=#E8C35A>[" + LanguageManager.Get("CardNew") + "]</color>"
-                : displayName;
+            _name.text = displayName;
+            _newBadge.text = isNew ? LanguageManager.Get("CardNew") : "";
+            _category.text = skillData.SkillType == SkillType.AttributeSkill
+                ? (_language == "vi" ? "THUỘC TÍNH" : "ATTRIBUTE")
+                : skillData.SkillType == SkillType.MoneyBag
+                    ? (_language == "vi" ? "PHẦN THƯỞNG" : "REWARD")
+                    : (_language == "vi" ? "TẤN CÔNG" : "ATTACK");
 
             // Mo ta
             string desc = LanguageManager.Get("SkillDesc_" + key);
-            _description.text = desc == "SkillDesc_" + key ? "" : desc;
+            _description.text = skillData.SkillType == SkillType.AttributeSkill || desc == "SkillDesc_" + key ? "" : desc;
 
             // Dong chi tiet theo loai ky nang
             switch (skillData.SkillType)
@@ -65,41 +143,39 @@ namespace RGame.RoguelikeKit
             }
         }
 
-        /// <summary>Chi so ky nang tanh cong: sat thuong/hoi chieu/so dan... + muc nang cap.</summary>
-        private void BuildAttackDetail(SkillDataSO skillData)
+        private void BuildAttackDetail(SkillDataSO data)
         {
-            int level = skillData.Level;
-            int maxLevel = skillData.UpgradeAttribute.Count + 1;
-            _level.text = level >= maxLevel
-                ? LanguageManager.GetFormatted("CardLevel", level, level, maxLevel)
-                : LanguageManager.GetFormatted("CardLevel", level, level + 1, maxLevel);
+            int maxLevel = data.UpgradeAttribute.Count + 1;
+            _level.text = data.Level >= maxLevel
+                ? (_language == "vi" ? "Cấp tối đa " : "MAX Lv. ") + maxLevel
+                : LanguageManager.GetFormatted("CardLevel", data.Level, data.Level + 1, maxLevel);
 
+            AttackSkillAttributeMod next = data.Level > 0 && data.Level <= data.UpgradeAttribute.Count
+                ? data.UpgradeAttribute[data.Level - 1] : null;
             string detail = _description.text.Length > 0 ? _description.text + "\n" : "";
-            detail += StatLine(LanguageManager.Get("Stat_Damage"), skillData.Damage, skillData, UpgradeSkillAttributeType.DamageAdd, false);
-            detail += StatLine(LanguageManager.Get("Stat_Amount"), skillData.Amount, skillData, UpgradeSkillAttributeType.ProjectilesCountAdd, true);
-            detail += StatLine(LanguageManager.Get("Stat_Velocity"), skillData.Velocity, skillData, UpgradeSkillAttributeType.VelocityAddPercent, false);
-            detail += StatLine(LanguageManager.Get("Stat_Area"), skillData.Area, skillData, UpgradeSkillAttributeType.AreaAddPercent, true);
+            detail += StatLine(LanguageManager.Get("Stat_Damage"), data.Damage,
+                next != null && next.skillAttributeType == UpgradeSkillAttributeType.DamageAdd
+                    ? data.Damage + next.IntValue : data.Damage);
+            detail += StatLine(LanguageManager.Get("SkillAttr_Cooldown"), data.CD,
+                next != null && next.skillAttributeType == UpgradeSkillAttributeType.CDLessPercent
+                    ? data.CD * (1f - next.IntValue * 0.01f) : data.CD, " s");
+            detail += StatLine(LanguageManager.Get("Stat_Amount"), data.Amount,
+                next != null && next.skillAttributeType == UpgradeSkillAttributeType.ProjectilesCountAdd
+                    ? data.Amount + next.IntValue : data.Amount);
+            detail += StatLine(LanguageManager.Get("Stat_Velocity"), data.Velocity,
+                next != null && next.skillAttributeType == UpgradeSkillAttributeType.VelocityAddPercent
+                    ? data.Velocity * (1f + next.IntValue * 0.01f) : data.Velocity);
+            detail += StatLine(LanguageManager.Get("Stat_Area"), data.Area,
+                next != null && next.skillAttributeType == UpgradeSkillAttributeType.AreaAddPercent
+                    ? data.Area + next.IntValue : data.Area);
             _description.text = detail.TrimEnd('\n');
         }
 
-        /// <summary>Mot dong chi so: "Ten: gia tri → +X" neu nang cap lam thay doi.</summary>
-        private string StatLine(string label, float current, SkillDataSO data,
-            UpgradeSkillAttributeType modType, bool isInt)
+        private static string StatLine(string label, float current, float after, string unit = "")
         {
-            int level = data.Level;
-            string value = isInt ? ((int)current).ToString() : current.ToString("0.#");
-            string line = label + ": " + value;
-
-            // Mod cua cap ke tiep nam o index = level (list bat dau tu nang cap dau tien)
-            if (level < data.UpgradeAttribute.Count && level < data.UpgradeAttributeModValue.Count)
-            {
-                if (data.UpgradeAttribute[level].skillAttributeType == modType)
-                {
-                    int mod = data.UpgradeAttributeModValue[level];
-                    string suffix = modType == UpgradeSkillAttributeType.DamageAdd ? "%" : "";
-                    line += " <color=#88C9A1>→ +" + mod + suffix + "</color>";
-                }
-            }
+            string line = label + ": " + current.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) + unit;
+            if (!Mathf.Approximately(current, after))
+                line += " <color=#88C9A1>→ " + after.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) + unit + "</color>";
             return line + "\n";
         }
 
@@ -109,7 +185,7 @@ namespace RGame.RoguelikeKit
             int level = skillData.Level;
             int maxLevel = skillData.UpgradeAttributeModValue.Count;
             _level.text = level >= maxLevel
-                ? LanguageManager.GetFormatted("CardLevel", level, level, maxLevel)
+                ? (_language == "vi" ? "Cấp tối đa " : "MAX Lv. ") + maxLevel
                 : LanguageManager.GetFormatted("CardLevel", level, level + 1, maxLevel);
 
             string attrName = LanguageManager.Get("SkillAttr_" + skillData.AttributeType);
@@ -118,7 +194,7 @@ namespace RGame.RoguelikeKit
             if (level < skillData.UpgradeAttributeModValue.Count)
             {
                 int mod = skillData.UpgradeAttributeModValue[level];
-                detail += attrName + " <color=#88C9A1>+" + mod + "</color>";
+                detail += attrName + " <color=#8CD3BD>" + mod.ToString("+0;-0;0") + "</color>";
             }
             else
             {

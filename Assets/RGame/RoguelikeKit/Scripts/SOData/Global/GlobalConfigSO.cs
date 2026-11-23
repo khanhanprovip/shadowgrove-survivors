@@ -1,5 +1,6 @@
 #region
 
+using System;
 using RGame.Framework;
 
 #endregion
@@ -12,6 +13,13 @@ namespace RGame.RoguelikeKit
         public Player GlobalPlayer { get; set; }
         public int CurrentGetGold;
         public int CurrentGetKill;
+        public event Action EnemyDefeated;
+
+        public void RegisterEnemyDefeat()
+        {
+            CurrentGetKill++;
+            EnemyDefeated?.Invoke();
+        }
 
         public void OnGameStart()
         {

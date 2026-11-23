@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -16,7 +18,7 @@ namespace DATN.Localization
     /// </summary>
     public class LanguageManager : MonoBehaviour
     {
-        public const string PrefsKey = "DATN_LocaleCode";
+        public static string PrefsKey { get; } = ResolvePrefsKey();
 
         public static LanguageManager Instance { get; private set; }
 
@@ -26,14 +28,19 @@ namespace DATN.Localization
         private TMPro.TextMeshProUGUI _toggleLabel;
         private int _buttonAttempts;
 
-        public string CurrentCode
+        private static string ResolvePrefsKey()
         {
-            get
-            {
-                string saved = PlayerPrefs.GetString(PrefsKey, "");
-                if (saved == "vi" || saved == "en") return saved;
-                return Application.systemLanguage == SystemLanguage.Vietnamese ? "vi" : "en";
-            }
+            string profile = Environment.GetEnvironmentVariable("DATN_TEST_PROFILE_DIR");
+            return string.IsNullOrEmpty(profile) ? "DATN_LocaleCode" : "DATN_LocaleCode_" + Path.GetFileName(profile);
+        }
+
+        public string CurrentCode => GetCurrentCode();
+
+        public static string GetCurrentCode()
+        {
+            string saved = PlayerPrefs.GetString(PrefsKey, "");
+            if (saved == "vi" || saved == "en") return saved;
+            return Application.systemLanguage == SystemLanguage.Vietnamese ? "vi" : "en";
         }
 
         // ---------------- Tu dien chuoi noi tai: key → [en, vi] ----------------
@@ -224,8 +231,12 @@ namespace DATN.Localization
 
         public void Toggle()
         {
-            if (_vi == null || _en == null) return;
-            var target = CurrentCode == "vi" ? _en : _vi;
+            SetLanguage(CurrentCode == "vi" ? _en : _vi);
+        }
+
+        public void SetLanguage(Locale target)
+        {
+            if (target == null) return;
             PlayerPrefs.SetString(PrefsKey, target.Identifier.Code);
             PlayerPrefs.Save();
             StartCoroutine(SetLocale(target));
@@ -251,7 +262,7 @@ namespace DATN.Localization
         {
             if (Strings.TryGetValue(key, out var pair))
             {
-                bool vi = Instance != null && Instance.CurrentCode == "vi";
+                bool vi = GetCurrentCode() == "vi";
                 return vi ? pair[1] : pair[0];
             }
             return key;
@@ -273,9 +284,7 @@ namespace DATN.Localization
         public static string GetLevelDescription(string levelAssetName, string fallback)
         {
             if (!LevelDescriptions.TryGetValue(levelAssetName, out var pair)) return fallback;
-            bool vi = Instance != null
-                ? Instance.CurrentCode == "vi"
-                : PlayerPrefs.GetString(PrefsKey, "") == "vi";
+            bool vi = GetCurrentCode() == "vi";
             return vi ? pair[1] : pair[0];
         }
     }

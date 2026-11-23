@@ -1,0 +1,59 @@
+{
+  "generator": "built-in image_gen",
+  "assets": [
+    {
+      "key": "MoonlitRuins",
+      "prompt": "Use case: stylized-concept. Asset type: production terrain background texture for Shadowgrove Survivors, a top-down 2D dark fantasy pixel-art survival game. Create ONE square seamless tileable ground texture for MOONLIT RUINS: weathered blue slate flagstone paving, fractured ancient square slabs, sparse desaturated silver moss in cracks, a few tiny faded lunar engravings flush with the floor. Straight overhead orthographic view, no perspective, no horizon. Handcrafted crisp pixel-art clusters, muted midnight blue-gray, low contrast, atmospheric but legible. The entire image must be traversable flat floor. Broad quiet areas; tiny details spread sparingly. Uniform scale and even ambient moonlight, no center spotlight, no vignette, no shadows at image edges. Opposite edges must join naturally when repeated. No characters, enemies, UI, text, buildings, standing pillars, trees, chests or other tall objects. No bright particles, no glowing cracks resembling projectiles. Output square 1024x1024 opaque texture, full bleed.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-240c0b99-65c4-4b4c-98d7-25608e7d87a3.png",
+      "destination": "Assets/Resources/SGGround/MoonlitRuins.png"
+    },
+    {
+      "key": "SunkenMarsh",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors and even ambient light. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Drowned marsh floor: dark olive peat, muted teal shallow puddles flush with the ground, subtle wet ripples, silt, scattered tiny reeds lying flat and gray-green moss. Organic irregular shoreline fragments, no large waterbody or impassable pit. Damp ancient cursed wetland.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-b2280e17-0a76-464b-aa25-082c9e5731c8.png",
+      "destination": "Assets/Resources/SGGround/SunkenMarsh.png"
+    },
+    {
+      "key": "AshenQuarry",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors and even ambient light. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Ash quarry ground: charcoal basalt gravel, dark warm gray cracked slate, soft ash deposits, sparse muted rust mineral veins and tiny worn stone chips. Volcanic mining atmosphere, no lava, no flames, no bright embers; dark ochre accents only.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-88913890-73a3-4c07-a447-77dd31ec5468.png",
+      "destination": "Assets/Resources/SGGround/AshenQuarry.png"
+    },
+    {
+      "key": "FrostHollow",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors and even ambient light. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Frost hollow floor: desaturated blue-gray packed snow and dark slate patches with thin hoarfrost, small wind-swept snow eddies, shallow hairline ice cracks and few tiny icy stones. Quiet cold palette, keep snow medium-dark bluish rather than white, no bright ice glow or deep crevasses.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-96b7428d-b334-4f2c-b6bf-dc2576304c96.png",
+      "destination": "Assets/Resources/SGGround/FrostHollow.png"
+    },
+    {
+      "key": "CursedVillage",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors and even ambient light. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Cursed abandoned village ground: dark weathered brown cobblestone mixed with mud and scattered flat decayed wood planks, sparse dry leaves, muted burgundy stains and dusty olive moss. Medieval rural street surface viewed exactly overhead. No houses, fences, roads with edges, furniture or tall debris.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-84e8b4f2-a138-4bc6-824e-6abba790e2db.png",
+      "destination": "Assets/Resources/SGGround/CursedVillage.png"
+    },
+    {
+      "key": "ClockworkCitadel",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors, evenly lit. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Ancient clockwork citadel floor: worn dark oxidized brass and blue-gray iron floor plates, subtle rivets, inset circular gear motifs engraved into the flat floor, occasional thin joints and faint verdigris. Weathered mechanical fortress, refined low-contrast bronze and steel, NOT modern sci-fi, no raised gears, no machinery.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-8fe08538-0a6a-4c3f-9f4e-dc2bede4ea47.png",
+      "destination": "Assets/Resources/SGGround/ClockworkCitadel.png"
+    },
+    {
+      "key": "CrimsonCathedral",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors, evenly lit. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Gothic crimson cathedral floor: dark desaturated burgundy and charcoal stone tessellation, cracked black marble slabs, faded red diamond inlays, subtle worn gothic quatrefoil motifs flush with stone. Somber old sacred architecture implied only by paving, no pillars, carpets, pews, statues or blood splashes, no gold glow.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-4c6d7a7c-e56a-46c5-ab3d-ab3017659c62.png",
+      "destination": "Assets/Resources/SGGround/CrimsonCathedral.png"
+    },
+    {
+      "key": "EndlessAbyss",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors, evenly lit. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Endless abyss traversable ground: deep desaturated indigo and purple-black volcanic flagstone fragments tightly fitted into continuous dark bedrock, subtle mauve mineral streaks and faint worn arcane geometric engravings. Ancient subterranean void mood, no open holes, stars, space sky, bright neon, glowing cracks or cliff edges.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-14a6eaea-f747-4dac-93ae-d462984a229e.png",
+      "destination": "Assets/Resources/SGGround/EndlessAbyss.png"
+    },
+    {
+      "key": "EclipseThrone",
+      "prompt": "Use case: stylized-concept. Asset type: production square seamless tileable terrain texture for Shadowgrove Survivors, top-down 2D dark fantasy pixel-art survival game. Straight overhead orthographic view, no horizon or perspective. Handcrafted crisp pixel-art clusters, restrained detail, muted low-contrast colors, evenly lit. Entire image traversable flat ground, large quiet spaces for reading small sprites. Full bleed with opposite edges joining naturally on repetition. No characters, enemies, UI, text, borders, vignette, center spotlight, buildings, standing props or tall objects. No bright projectile-like glows. Opaque square texture. Eclipse throne arena floor: regal dark slate and black obsidian paving with sparse muted antique gold inlay arcs and tiny crescent and sun eclipse seals, weathered circular celestial geometry as small off-center embedded floor patterns. Final ancient forest-fantasy sanctum, muted violet-gray stone with restrained tarnished gold, no central dais, throne, furniture, dramatic spotlight, luminous portal or border.",
+      "source": "C:\\Users\\ADMIN\\.codex\\generated_images\\01a1affa-0921-7e40-9ec2-465da4e9a7b2\\exec-b043d46c-d9ea-471c-ada1-d7e955b39192.png",
+      "destination": "Assets/Resources/SGGround/EclipseThrone.png"
+    }
+  ]
+}

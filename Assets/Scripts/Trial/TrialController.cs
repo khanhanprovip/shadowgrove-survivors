@@ -52,6 +52,7 @@ namespace DATN.Trial
         private Button mPauseExitButton;
 
         public bool IsPaused => mPaused;
+        public float MatchSeconds => (float)_matchSeconds;
 
         /// <summary>Tai nguyen can thiet cho kiem thu tu dong tren ban build.</summary>
         public CommonStatRuntimeSO PlayerStat => mPlayerStat;
@@ -60,17 +61,21 @@ namespace DATN.Trial
         private void OnEnable()
         {
             mPlayerSpawnChannel.RegisterListener(OnPlayerSpawned);
-            mGameWinChannel.RegisterListener(OnResultShown);
-            mGameOverChannel.RegisterListener(OnResultShown);
+            mGameWinChannel.RegisterListener(OnWon);
+            mGameOverChannel.RegisterListener(OnLost);
+            mGlobalConfig.EnemyDefeated += OnEnemyDefeated;
             mInputReader.MenuPauseEvent += OnPausePressed;
+            mInputReader.MenuUnpauseEvent += Resume;
         }
 
         private void OnDisable()
         {
             mPlayerSpawnChannel.UnregisterListener(OnPlayerSpawned);
-            mGameWinChannel.UnregisterListener(OnResultShown);
-            mGameOverChannel.UnregisterListener(OnResultShown);
+            mGameWinChannel.UnregisterListener(OnWon);
+            mGameOverChannel.UnregisterListener(OnLost);
+            mGlobalConfig.EnemyDefeated -= OnEnemyDefeated;
             mInputReader.MenuPauseEvent -= OnPausePressed;
+            mInputReader.MenuUnpauseEvent -= Resume;
         }
 
         private GameModeSO mModeConfig;
@@ -78,20 +83,28 @@ namespace DATN.Trial
         private void Update()
         {
             LogRuntimeStats();
+            if (!mRunning || mPlayerStat.GetValue("HP") <= 0) return;
             _matchSeconds += Time.deltaTime;
-            _countingWasActive = true;
-
-            if (!mRunning) return;
 
             // Mode tra ve chuoi muc tieu da dich cho HUD moi frame
             string objective = mMode.UpdateObjective();
             if (objective != null && mTimeText != null) mTimeText.text = objective;
 
-            if (mMode.CheckWin())
-            {
-                mRunning = false;
-                EndLevelAsWin();
-            }
+            TryWin();
+        }
+
+        private void OnEnemyDefeated()
+        {
+            if (mMode is not KillTargetMode || !mRunning || mPlayerStat.GetValue("HP") <= 0) return;
+            if (mTimeText != null) mTimeText.text = mMode.UpdateObjective();
+            TryWin();
+        }
+
+        private void TryWin()
+        {
+            if (!mMode.CheckWin()) return;
+            mRunning = false;
+            mGameWinChannel.RaiseEvent();
         }
 
         /// <summary>Lay GameModeSO tu LevelConfigSO cua man dang chon (fallback: Survival 90s).</summary>
@@ -101,13 +114,7 @@ namespace DATN.Trial
                 ? mLevelAndCharacterSO.SelectLevelSO.GameMode
                 : null;
             if (mModeConfig == null)
-            {
-                // Man chua gan mode (vi du man cu cua kit) →Survival 90s nhu truoc
-                var fallback = ScriptableObject.CreateInstance<GameModeSO>();
-                fallback.ModeId = GameModeId.Survival;
-                fallback.Duration = 90f;
-                mModeConfig = fallback;
-            }
+                return new SurvivalMode();
             return mModeConfig.CreateInstance();
         }
 
@@ -125,7 +132,7 @@ namespace DATN.Trial
 
             float avgFps = _statsFrames / _statsTimer;
             int enemies = FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).Length;
-            Debug.Log($"[Trial] FPS trung binh 10s: {avgFps:F0} | quai dang song: {enemies} | mode: {mModeConfig.ModeId} | level: {mPlayerStat.GetValue("Level")}");
+            Debug.Log($"[Trial] FPS trung binh 10s: {avgFps:F0} | quai dang song: {enemies} | mode: {mModeConfig?.ModeId ?? GameModeId.Survival} | level: {mPlayerStat.GetValue("Level")}");
             _statsTimer = 0f;
             _statsFrames = 0;
         }
@@ -134,8 +141,6 @@ namespace DATN.Trial
 
         private void OnPlayerSpawned(Player _)
         {
-            // Tren restart, LevelManager.Start khong chay lai (GamePlay scene khong
-            // bi tai nap) nen phai reset chi so + bo dem tai day cho moi luot choi.
             mPlayerStat.ResetAllValues();
             mGlobalConfig.OnGameStart();
             mClearAllBuffsChannel.RaiseEvent();
@@ -148,20 +153,12 @@ namespace DATN.Trial
                 PlayerStat = mPlayerStat,
             });
             mMode.Begin();
+            _matchSeconds = 0f;
             mRunning = true;
             mEnded = false;
             mPaused = false;
             Time.timeScale = 1f;
             HidePausePanel();
-            UpdateTimeHud();
-        }
-
-        private void EndLevelAsWin()
-        {
-            if (mEnded) return;
-            mEnded = true;
-            mWon = true;
-            mGameWinChannel.RaiseEvent();
         }
 
         // ---- Pause / Resume ----
@@ -175,8 +172,9 @@ namespace DATN.Trial
 
         public void Pause()
         {
-            if (mEnded || mPaused) return;
+            if (!mRunning || mEnded || mPaused || Time.timeScale <= 0f || mPlayerStat.GetValue("HP") <= 0) return;
             mPaused = true;
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Time.timeScale = 0f;
             mInputReader.EnableMenuInput();
             ShowPausePanel();
@@ -185,6 +183,7 @@ namespace DATN.Trial
         public void Resume()
         {
             if (!mPaused) return;
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             mPaused = false;
             Time.timeScale = 1f;
             mInputReader.EnableGameplayInput();
@@ -195,6 +194,7 @@ namespace DATN.Trial
 
         public void Restart()
         {
+            ShadowgroveAudio.Play(SoundCue.UiConfirm);
             Time.timeScale = 1f;
             mPaused = false;
             mEnded = true; // chan cac update trong luc tai lai
@@ -211,6 +211,7 @@ namespace DATN.Trial
 
         public void ExitToMainMenu()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Time.timeScale = 1f;
             mPaused = false;
             mEnded = true;
@@ -223,15 +224,6 @@ namespace DATN.Trial
             mGlobalConfig.GlobalPlayer = null;
 
             mLoadMenuChannel.RaiseEvent(mMainMenuScene);
-        }
-
-        // ---- HUD dong ho ----
-
-        private void UpdateTimeHud()
-        {
-            if (mTimeText == null || mMode == null) return;
-            string objective = mMode.UpdateObjective();
-            if (objective != null) mTimeText.text = objective;
         }
 
         // ---- Xay dung UI luc runtime (khong sua scene YAML phuc tap) ----
@@ -270,7 +262,7 @@ namespace DATN.Trial
             rect.anchorMax = new Vector2(0.5f, 1f);
             rect.pivot = new Vector2(0.5f, 1f);
             rect.anchoredPosition = new Vector2(0f, -14f);
-            rect.sizeDelta = new Vector2(220f, 44f);
+            rect.sizeDelta = new Vector2(600f, 85f);
 
             mTimeText = go.GetComponent<TextMeshProUGUI>();
             mTimeText.alignment = TextAlignmentOptions.Center;
@@ -390,43 +382,38 @@ namespace DATN.Trial
         ///     giu nguyen phong cach UI cua kit, roi gan su kien Restart.
         /// </summary>
         // ---- Màn tổng kết (Mốc 8): hiện khi thắng/thua ----
-        private float _matchSeconds;
+        private double _matchSeconds;
 
-        private void OnResultShown()
+        private void OnWon() => ShowResult(true);
+        private void OnLost() => ShowResult(false);
+
+        private void ShowResult(bool won)
         {
-            if (mEnded || !_countingWasActive) return;
-            _countingWasActive = false;
-            BuildResultSummary();
+            if (mEnded) return;
+            mEnded = true;
+            mRunning = false;
+            mPaused = false;
+            HidePausePanel();
+            var upgradePanel = FindFirstObjectByType<UpgradeSkillPanel>();
+            if (upgradePanel != null) upgradePanel.gameObject.SetActive(false);
+            var treasurePanel = FindFirstObjectByType<TreasurePanel>();
+            if (treasurePanel != null) treasurePanel.gameObject.SetActive(false);
+            ShadowgroveAudio.Play(won ? SoundCue.Victory : SoundCue.Defeat);
+            BuildResultSummary(won);
         }
 
-        private bool _countingWasActive;
-
-        private void BuildResultSummary()
+        private void BuildResultSummary(bool won)
         {
-            Canvas canvas = null;
-            var canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
-            foreach (var cv in canvases) if (cv.name == "Canvas-GamePlay") canvas = cv;
-            if (canvas == null) return;
-
-            var panel = new GameObject("TrialResultSummary", typeof(RectTransform), typeof(CanvasGroup), typeof(Image));
-            panel.transform.SetParent(canvas.transform, false);
-            var pr = panel.GetComponent<RectTransform>();
-            pr.anchorMin = new Vector2(0.5f, 0.5f); pr.anchorMax = new Vector2(0.5f, 0.5f);
-            pr.anchoredPosition = new Vector2(0f, -40f); pr.sizeDelta = new Vector2(620f, 420f);
-            var bg = panel.GetComponent<Image>();
-            bg.color = new Color(0.06f, 0.1f, 0.08f, 0.96f);
-            var grp = panel.GetComponent<CanvasGroup>();
-            grp.blocksRaycasts = false; // khong chan nut choi lai/ve menu cua panel chinh
-
-            MakeLabel(panel.transform, LanguageManager.Get(mWon ? "Victory" : "Defeat"), 52f, new Vector2(0f, 150f), mWon ? new Color(0.91f,0.79f,0.35f) : new Color(0.8f,0.3f,0.3f));
-            MakeLabel(panel.transform, LanguageManager.GetFormatted("TimeSurvived", Mathf.FloorToInt(_matchSeconds / 60) + ":" + Mathf.FloorToInt(_matchSeconds % 60).ToString("00")), 34f, new Vector2(0f, 70f));
-            MakeLabel(panel.transform, LanguageManager.GetFormatted("Kills", mGlobalConfig != null ? mGlobalConfig.CurrentGetKill : 0), 34f, new Vector2(0f, 10f));
-            MakeLabel(panel.transform, LanguageManager.GetFormatted("LevelReached", mPlayerStat != null ? mPlayerStat.GetValue("Level") : 0), 34f, new Vector2(0f, -50f));
-            MakeLabel(panel.transform, LanguageManager.Get(mLevelAndCharacterSO != null && mLevelAndCharacterSO.SelectCharacterSo != null ? mLevelAndCharacterSO.SelectCharacterSo.CharacterName : ""), 30f, new Vector2(0f, -110f), new Color(0.62f,0.73f,0.66f));
+            var canvas = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+            foreach (var cv in canvas)
+            {
+                if (cv.name != "Canvas-GamePlay") continue;
+                DATN.UI.ForestUI.Result(cv, won, Mathf.FloorToInt(MatchSeconds),
+                    mGlobalConfig.CurrentGetKill, mPlayerStat.GetValue("Level"),
+                    mLevelAndCharacterSO.SelectCharacterSo.CharacterName);
+                break;
+            }
         }
-
-        private bool mWon;
-
         private TMPro.TextMeshProUGUI MakeLabel(Transform parent, string text, float size, Vector2 pos)
         {
             return MakeLabel(parent, text, size, pos, new Color(0.91f, 0.89f, 0.82f));
@@ -481,9 +468,10 @@ namespace DATN.Trial
             var button = clone.GetComponent<Button>();
             if (button != null)
             {
-                button.onClick.RemoveAllListeners();
+                button.onClick = new Button.ButtonClickedEvent();
                 button.onClick.AddListener(Restart);
             }
         }
     }
 }
+

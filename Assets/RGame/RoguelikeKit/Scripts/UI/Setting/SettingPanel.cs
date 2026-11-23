@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using DATN.Localization;
 using RGame.Framework;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,6 +34,24 @@ namespace RGame.RoguelikeKit
         private string[] localeDisplayNames;
         private string[] resolutionDisplayTexts;
 
+        private void OnEnable()
+        {
+            LocalizationSettings.SelectedLocaleChanged += RefreshLanguage;
+            RefreshLanguage(LocalizationSettings.SelectedLocale);
+        }
+
+        private void OnDisable()
+        {
+            LocalizationSettings.SelectedLocaleChanged -= RefreshLanguage;
+        }
+
+        private void RefreshLanguage(Locale locale)
+        {
+            if (availableLocales == null || locale == null) return;
+            int index = Array.IndexOf(availableLocales, locale);
+            if (index >= 0) languageItem.SetValueWithoutNotify(index);
+        }
+
         private void Start()
         {
             InitializeLocales();
@@ -42,6 +61,7 @@ namespace RGame.RoguelikeKit
 
         public void CloseButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Closed.Invoke();
         }
 
@@ -88,7 +108,8 @@ namespace RGame.RoguelikeKit
                 0, 1, true,
                 value => SettingFullscreen(value == 1));
 
-            var currentLocaleIndex = Array.IndexOf(availableLocales, _currentSettings.LanguageLocale);
+            var currentLocaleIndex = Array.FindIndex(availableLocales,
+                locale => locale.Identifier.Code == LanguageManager.GetCurrentCode());
             languageItem.Initialize(
                 currentLocaleIndex,
                 localeDisplayNames,
@@ -109,7 +130,6 @@ namespace RGame.RoguelikeKit
                 normalizedValue,
                 _currentSettings.ResolutionsIndex,
                 _currentSettings.IsFullscreen,
-                _currentSettings.LanguageLocale,
                 _currentSettings.IsShowDamage
             );
         }
@@ -123,7 +143,6 @@ namespace RGame.RoguelikeKit
                 _currentSettings.MasterVolume,
                 _currentSettings.ResolutionsIndex,
                 _currentSettings.IsFullscreen,
-                _currentSettings.LanguageLocale,
                 _currentSettings.IsShowDamage
             );
         }
@@ -137,9 +156,9 @@ namespace RGame.RoguelikeKit
                 _currentSettings.MasterVolume,
                 _currentSettings.ResolutionsIndex,
                 _currentSettings.IsFullscreen,
-                _currentSettings.LanguageLocale,
                 _currentSettings.IsShowDamage
             );
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
         }
 
         private void SettingResolution(int value)
@@ -150,7 +169,6 @@ namespace RGame.RoguelikeKit
                 _currentSettings.MasterVolume,
                 value,
                 _currentSettings.IsFullscreen,
-                _currentSettings.LanguageLocale,
                 _currentSettings.IsShowDamage
             );
         }
@@ -163,7 +181,6 @@ namespace RGame.RoguelikeKit
                 _currentSettings.MasterVolume,
                 _currentSettings.ResolutionsIndex,
                 isFullscreen,
-                _currentSettings.LanguageLocale,
                 _currentSettings.IsShowDamage
             );
         }
@@ -171,15 +188,7 @@ namespace RGame.RoguelikeKit
         private void SettingLanguage(int localeIndex)
         {
             if (localeIndex >= 0 && localeIndex < availableLocales.Length)
-                SaveSettings(
-                    _currentSettings.MusicVolume,
-                    _currentSettings.SfxVolume,
-                    _currentSettings.MasterVolume,
-                    _currentSettings.ResolutionsIndex,
-                    _currentSettings.IsFullscreen,
-                    availableLocales[localeIndex],
-                    _currentSettings.IsShowDamage
-                );
+                LanguageManager.Instance?.SetLanguage(availableLocales[localeIndex]);
         }
 
         private void SettingShowDamage(bool showDamage)
@@ -190,14 +199,13 @@ namespace RGame.RoguelikeKit
                 _currentSettings.MasterVolume,
                 _currentSettings.ResolutionsIndex,
                 _currentSettings.IsFullscreen,
-                _currentSettings.LanguageLocale,
                 showDamage
             );
         }
 
-        private void SaveSettings(float _musicVolume, float _sfxVolume, float _masterVolume, int _resolutionsIndex, bool _isFullscreen, Locale _locale, bool _damageShow)
+        private void SaveSettings(float _musicVolume, float _sfxVolume, float _masterVolume, int _resolutionsIndex, bool _isFullscreen, bool _damageShow)
         {
-            _currentSettings.SaveSettings(_musicVolume, _sfxVolume, _masterVolume, _resolutionsIndex, _isFullscreen, _locale, _damageShow);
+            _currentSettings.SaveSettings(_musicVolume, _sfxVolume, _masterVolume, _resolutionsIndex, _isFullscreen, _damageShow);
             SaveSettingsEvent.RaiseEvent();
         }
     }

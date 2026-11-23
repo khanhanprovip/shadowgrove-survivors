@@ -4,6 +4,9 @@ namespace RGame.RoguelikeKit
 {
     public class ChainSkillCast : SkillCast
     {
+        public override bool CanCast() => base.CanCast() &&
+            _enemySystem.GetNearestEnemies(_globalConfig.GlobalPlayer.transform.position, 12, 8).Count > 0;
+
         public override void Cast(SkillDataSO skillData)
         {
             base.Cast(skillData);

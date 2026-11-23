@@ -23,6 +23,11 @@ namespace RGame.RoguelikeKit
             _stat.AddAction("Exp",ExpChange);
         }
 
+        private void OnDestroy()
+        {
+            _stat.RemoveAction("Exp", ExpChange);
+        }
+
         private void ExpChange(int value, int maxValue)
         {
             int level = _stat.GetValue("Level");
@@ -31,6 +36,7 @@ namespace RGame.RoguelikeKit
             {
                 _stat.ModifyValue("Exp", expConfig.GetExperienceForLevel(level) * -1);
                 _stat.ModifyValue("Level", 1);
+                ShadowgroveAudio.Play(SoundCue.LevelUp);
                 _levelUpgradeChannel.RaiseEvent();
             }
 

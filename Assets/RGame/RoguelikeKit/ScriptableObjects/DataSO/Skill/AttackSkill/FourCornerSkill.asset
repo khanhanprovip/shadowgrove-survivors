@@ -18,7 +18,7 @@ MonoBehaviour:
   MixAttributeSkillKey: Might
   AttributeType: 0
   SkillPrefab: {fileID: 3228222673249282260, guid: 50b171f87eb878c42bc50dc9cd1a706d, type: 3}
-  SkillIcon: {fileID: -622386549785431409, guid: 90ba3cf015117ee4db81abe311323502, type: 3}
+  SkillIcon: {fileID: 21300000, guid: b30f652d9b419a242a64a0a4afb2bc14, type: 3}
   Velocity: 10
   Duration: 1
   CD: 5

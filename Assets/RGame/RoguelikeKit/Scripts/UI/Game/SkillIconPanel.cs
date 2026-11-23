@@ -50,7 +50,8 @@ namespace RGame.RoguelikeKit
                 return;
             }
 
-            Image image = _skillIcons[index].GetComponent<Image>();
+            var forestIcon = _skillIcons[index].transform.Find("Forest_SkillIcon");
+            Image image = forestIcon != null ? forestIcon.GetComponent<Image>() : _skillIcons[index].GetComponent<Image>();
             if (image != null)
             {
                 image.sprite = skillData.SkillIcon;

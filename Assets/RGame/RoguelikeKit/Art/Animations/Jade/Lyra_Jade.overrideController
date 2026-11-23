@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Lyra_Jade
+  m_Controller: {fileID: 9100000000000000000, guid: f5f56c3504f44638b858405cea3fc1b8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000000000000000, guid: 233dcef806bb4c078e79f53989bf09f0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7ca1017ef7c802f48af477cf3c42f663, type: 2}
+  - m_OriginalClip: {fileID: 7400000000000000000, guid: b04e719fb78f45038f16f67890019dcf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9cae30a77057e4242b512fa109de6dc0, type: 2}
+  - m_OriginalClip: {fileID: 7400000000000000000, guid: 7cd8111ddddf4369ba79b3a04fb06c52, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c342ad8296880c4468f0e1f9360ccb74, type: 2}

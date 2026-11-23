@@ -26,7 +26,6 @@ namespace RGame.RoguelikeKit
         [Header("Events")]
         [SerializeField] private PlayerSpawnChannelSO playerSpawnSO;
         [SerializeField] private StartStageEventChannelSO startStageChannelSO;
-        [SerializeField] private VoidEventChannelSO gameWinChannelSO;
 
         [Header("Spawn Distance (Random)")]
         [SerializeField] private float minSpawnRadius = 14f;
@@ -38,6 +37,9 @@ namespace RGame.RoguelikeKit
         private int _spawnSetIndex;
         private Transform _player;
         private int _aliveCount;
+        private bool _isEndless;
+        private float _scheduleDuration;
+        private const int EndlessEnemyLimit = 180;
         private readonly Dictionary<SpawnSet, float> _accumulators = new();
 
         private void Awake()
@@ -67,9 +69,14 @@ namespace RGame.RoguelikeKit
             // Dong thoi huy cac coroutine segment cua luot choi truoc (restart)
             // de khong sinh quai kep khi _elapsed duoc reset ve 0.
             StopAllCoroutines();
+            CleanupEnemies();
             StageConfigSO cfg = runtime.SelectStageConfig;
             _spawnSets = new List<SpawnSet>(cfg.SpawnSets);
             _spawnSets.Sort((a, b) => a.StartTime.CompareTo(b.StartTime));
+            _isEndless = runtime.IsEndless;
+            _scheduleDuration = 1f;
+            foreach (var set in _spawnSets)
+                _scheduleDuration = Mathf.Max(_scheduleDuration, Mathf.Max(set.StartTime, set.EndTime));
             _elapsed = 0f;
             _spawnSetIndex = 0;
             _aliveCount = 0;
@@ -82,7 +89,7 @@ namespace RGame.RoguelikeKit
 
             // Luc dang tai lai scene, player cu da bi huy — tam dung sinh quai
             // den khi player moi duoc sinh (OnPlayerSpawned cap nhat lai _player).
-            if (_player == null) return;
+            if (_player == null || globalConfig.GlobalPlayer == null || Time.deltaTime <= 0f) return;
 
             _elapsed += Time.deltaTime;
 
@@ -104,6 +111,14 @@ namespace RGame.RoguelikeKit
 
                 _spawnSetIndex++;
             }
+
+            if (_isEndless && _elapsed >= _scheduleDuration)
+            {
+                StopAllCoroutines();
+                _elapsed %= _scheduleDuration;
+                _spawnSetIndex = 0;
+                _accumulators.Clear();
+            }
         }
 
         private IEnumerator RunSegment(SpawnSet spawnSet)
@@ -111,7 +126,7 @@ namespace RGame.RoguelikeKit
             SpawnSet set = spawnSet;
             if (!_accumulators.ContainsKey(set)) _accumulators[set] = 0f;
 
-            while (_elapsed < spawnSet.EndTime)
+            while (_elapsed < spawnSet.EndTime && globalConfig.GlobalPlayer != null)
             {
                 float t01 = Mathf.InverseLerp(spawnSet.StartTime, spawnSet.EndTime, _elapsed);
                 float intensity = spawnSet.IntensityCurve.Evaluate(t01);
@@ -132,60 +147,45 @@ namespace RGame.RoguelikeKit
 
         private void RandomSpawnEnemy(SpawnSet set)
         {
-            EnemySpawnInfo info = PickRandom(set.Entries);
-            if (info == null) return;
-
-            GameObject go = poolRuntime.Request(info.PoolKey);
-            go.transform.position = GetSpawnPosition();
-            BaseEnemy enemy = go.GetComponent<BaseEnemy>();
-            enemy.OnDeath += HandleEnemyDeath;
-            enemySystem.AddEnemy(enemy);
-            _aliveCount++;
+            SpawnEnemy(set, GetSpawnPosition());
         }
 
         private void CircleSpawnEnemy(SpawnSet set, int count)
         {
             var enemies = GetCirclePosition(_player.position,set.CircleRadius, count);
             
-            for (int i = 0; i < count; i++)
-            {
-                EnemySpawnInfo info = PickRandom(set.Entries);
-                if (info == null) return;
-                GameObject go = poolRuntime.Request(info.PoolKey);
-                go.transform.position = enemies[i];
-                BaseEnemy enemy = go.GetComponent<BaseEnemy>();
-                enemy.OnDeath += HandleEnemyDeath;
-                enemySystem.AddEnemy(enemy);
-            }
-            _aliveCount += count;
+            foreach (var position in enemies)
+                SpawnEnemy(set, position);
         }
 
         private void DenseSpawnEnemy(SpawnSet set, int count)
         {
             var enemies = GetDensePosition(count);
             
-            for (int i = 0; i < count; i++)
-            {
-                EnemySpawnInfo info = PickRandom(set.Entries);
-                if (info == null) return;
-                GameObject go = poolRuntime.Request(info.PoolKey);
-                go.transform.position = enemies[i];
-                BaseEnemy enemy = go.GetComponent<BaseEnemy>();
-                enemy.OnDeath += HandleEnemyDeath;
-                enemySystem.AddEnemy(enemy);
-            }
-            _aliveCount += count;
+            foreach (var position in enemies)
+                SpawnEnemy(set, position);
         }
         
-        private void HandleEnemyDeath(BaseEnemy enemy)
+        private void SpawnEnemy(SpawnSet set, Vector3 position)
         {
-            if (!enemy) return;
-            enemy.OnDeath -= HandleEnemyDeath;
+            if (_isEndless && _aliveCount >= EndlessEnemyLimit) return;
+            var info = PickRandom(set.Entries);
+            if (info == null) return;
+
+            var obj = poolRuntime.Request(info.PoolKey);
+            if (obj == null) return;
+            obj.transform.position = position;
+            var enemy = obj.GetComponent<BaseEnemy>();
+            enemy.Returned += HandleEnemyReturned;
+            enemySystem.AddEnemy(enemy);
+            _aliveCount++;
+        }
+
+        private void HandleEnemyReturned(BaseEnemy enemy)
+        {
+            enemy.Returned -= HandleEnemyReturned;
             enemySystem.RemoveEnemy(enemy);
             _aliveCount--;
-            poolRuntime.Return(enemy.gameObject);
-            if (_aliveCount <= 0 && _spawnSetIndex >= _spawnSets.Count)
-                gameWinChannelSO.RaiseEvent();
         }
 
         private Vector3 GetSpawnPosition()
@@ -265,7 +265,11 @@ namespace RGame.RoguelikeKit
         {
             foreach (BaseEnemy e in enemySystem.GetEnemies())
             {
-                if (e) poolRuntime.Return(e.gameObject);
+                if (e != null)
+                {
+                    e.Returned -= HandleEnemyReturned;
+                    poolRuntime.Return(e.gameObject);
+                }
             }
             enemySystem.ClearEnemies();
             _aliveCount = 0;

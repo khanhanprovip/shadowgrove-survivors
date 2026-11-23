@@ -13,8 +13,8 @@ namespace RGame.RoguelikeKit
 {
     public class CharacterSelectPanel : MonoBehaviour
     {
-        private static readonly Color NormalColor = new Color(0.10f, 0.18f, 0.13f, 0.98f);
-        private static readonly Color FocusColor = new Color(0.58f, 0.46f, 0.20f, 1f);
+        private static readonly Color NormalColor = Color.white;
+        private static readonly Color FocusColor = new Color(1.1f, 1.1f, 0.87f, 1f);
         [SerializeField] private GameObject mSelectList;
         [SerializeField] private CharacterItem mCharacterPrefab;
         [SerializeField] private List<CharacterSelectConfigSO> mCharacterSos;
@@ -28,6 +28,7 @@ namespace RGame.RoguelikeKit
         private void Start()
         {
             CreateCharacterItem();
+            DATN.UI.ForestUI.Refresh();
         }
 
         private void CreateCharacterItem()
@@ -50,11 +51,13 @@ namespace RGame.RoguelikeKit
 
         public void ClosedButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Closed.Invoke();
         }
 
         public void ConfirmButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiConfirm);
             Confirm.Invoke();
         }
 
@@ -80,6 +83,7 @@ namespace RGame.RoguelikeKit
                 }
                 item.BackgroundImage.color = FocusColor;
                 item.IsSelected = true;
+                ShadowgroveAudio.Play(SoundCue.UiSelect);
             }
             else
             {
@@ -115,3 +119,4 @@ namespace RGame.RoguelikeKit
         }
     }
 }
+

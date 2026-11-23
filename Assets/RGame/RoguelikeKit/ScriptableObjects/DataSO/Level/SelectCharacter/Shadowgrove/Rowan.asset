@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27c86dbd6a826d4b8f5d24bc42a5efb, type: 3}
   m_Name: Rowan
   m_EditorClassIdentifier: 
-  Description: Warden of Thorns — can bang, luoi liem gai sat thuong rong
+  Description: "Warden of Thorns \u2014 can bang, luoi liem gai sat thuong rong"
   CharacterName: Rowan
-  CharacterImage: {fileID: 21300000, guid: 3869f56ea3624c8dacec191b05e09499, type: 3}
-  BeginSkillImage: {fileID: -5357625079516145328, guid: 0fb0920f731c6c64c95148a4aff5d790, type: 3}
+  CharacterImage: {fileID: 21300000, guid: 4d8e761788e3bef4ab1febe1215bdd72, type: 3}
+  BeginSkillImage: {fileID: 21300000, guid: ee5fd533c7a9f0247a12a70ed358ac77, type: 3}
   CharacterPrefab: {fileID: 6482655462957775351, guid: 2ba3b95e7a6647f283303487517f688c, type: 3}
+  SellingPrice: 0

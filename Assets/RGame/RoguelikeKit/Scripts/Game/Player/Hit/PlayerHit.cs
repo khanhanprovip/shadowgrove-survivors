@@ -23,6 +23,8 @@ namespace RGame.RoguelikeKit
         public UnityAction OnDie;
 
         private bool _isDie;
+        private float _nextHitFlashAt;
+        private static readonly Color HitTint = new Color(0.28f, 0.02f, 0.02f, 0f);
         
         public void OnHit(int damage)
         {
@@ -36,6 +38,7 @@ namespace RGame.RoguelikeKit
             }
             
             mStat.ModifyValue("HP",damage * -1);
+            ShadowgroveAudio.Play(SoundCue.PlayerHit);
 
             if (mStat.GetValue("HP") <= 0)
             {
@@ -44,24 +47,28 @@ namespace RGame.RoguelikeKit
                 
                 foreach (var spriteRenderer in mSpriteRenderers)
                 {
+                    mHitAnimationSO.Stop(spriteRenderer);
                     var material = spriteRenderer.material;
-                    
-                    material.DOFloat(0f, "_Alpha", 0.2f)
-                        .SetEase(Ease.Linear);
+                    Tween fade = material.HasProperty("_Alpha")
+                        ? material.DOFloat(0f, "_Alpha", 0.2f)
+                        : spriteRenderer.DOFade(0f, 0.2f);
+                    fade.SetEase(Ease.Linear).SetUpdate(true).SetLink(gameObject);
                 }
 
-                _shadowSpriteRenderer.DOFade(0, 0.8f).OnComplete(() =>
+                _shadowSpriteRenderer.DOFade(0, 0.8f).SetUpdate(true).SetLink(gameObject).OnComplete(() =>
                 {
                     _onGameOverEventChannel.RaiseEvent();
                 });
 
                 _playerDieEventChannel.RaiseEvent();
             }
-            else
+            else if (Time.unscaledTime >= _nextHitFlashAt)
             {
+                // Limit only the visual feedback; every hit still applies damage.
+                _nextHitFlashAt = Time.unscaledTime + 0.35f;
                 foreach (var spriteRenderer in mSpriteRenderers)
                 {
-                    mHitAnimationSO.Play(spriteRenderer);
+                    mHitAnimationSO.Play(spriteRenderer, HitTint, 0.025f, 0.095f, unscaled: true);
                 }
             }
         }

@@ -100,12 +100,12 @@ namespace RGame.RoguelikeKit
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            mBG.color = Color.red;
+            mBG.color = new Color(1.1f, 1.1f, .87f);
         }
         
         public void OnPointerExit(PointerEventData eventData)
         {
-            mBG.color = mOriginColor;
+            mBG.color = Color.white;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -115,7 +115,11 @@ namespace RGame.RoguelikeKit
 
         public void UpdateInfo()
         {
-            if (mCurLevel == mMaxLevel) return;
+            if (mCurLevel == mMaxLevel)
+            {
+                SelectAction?.Invoke(mAttributeName, mDescription, -1, null);
+                return;
+            }
             
             SelectAction?.Invoke(mAttributeName,mDescription,mRequireGold[mCurLevel],Upgrade);
         }

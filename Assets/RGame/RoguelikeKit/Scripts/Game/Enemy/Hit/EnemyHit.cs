@@ -28,14 +28,13 @@ namespace RGame.RoguelikeKit
         public void SetStat(CommonStatRuntimeSO _stat)
         {
             _selfStat = _stat;
-            OnDeathEnd += DieEnd;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            OnDeathEnd -= DieEnd;
-            //_hitAnimationSO.Remove(_spriteRenderers);
-            //_dissolveAnimationSO.Remove(_spriteRenderers);
+            _isDead = false;
+            _hitAnimationSO.Stop(_spriteRenderers);
+            _dissolveAnimationSO.Stop(_spriteRenderers);
         }
 
         public void Hit(int damage)
@@ -43,6 +42,8 @@ namespace RGame.RoguelikeKit
             if(_isDead) return;
             
             _selfStat.ModifyValue("HP",damage * -1);
+            ShadowgroveAudio.Play(SoundCue.EnemyHit);
+            DATN.World.JadeImpact.Show(_spriteRenderers);
 
             var go = poolRuntimeSo.Request("DamagePopup");
             go.GetComponent<DamagePopup>().Show(transform.position,damage);
@@ -60,9 +61,5 @@ namespace RGame.RoguelikeKit
             }
         }
 
-        private void DieEnd()
-        {
-            _isDead = false;
-        }
     }
 }

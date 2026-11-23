@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: d17c8e98c98180a4db0856fa63873feb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1248374503005855308
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_0
+  - first:
+      213: 4742371165652666942
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_1
+  - first:
+      213: 2953657263271453418
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_2
+  - first:
+      213: 8261139177833767997
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_3
+  - first:
+      213: 1801938386086595102
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_4
+  - first:
+      213: -5432107801950190480
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_5
+  - first:
+      213: -5824257677744334254
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_6
+  - first:
+      213: 6296404091597037108
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_7
+  - first:
+      213: -1839073813663239183
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_8
+  - first:
+      213: -2814660053815896637
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_9
+  - first:
+      213: 1490416026658408334
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_10
+  - first:
+      213: 460570318303098349
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_11
+  - first:
+      213: -3761664884867417614
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_12
+  - first:
+      213: 7849376114158413353
+    second: Crisp_InsideScopeSkill_InsideScopeSkill_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 68.449196
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 68
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b16ea1f002ecaee0800000000000000
+      internalID: -1248374503005855308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 94
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a48c1f27940d140800000000000000
+      internalID: 4742371165652666942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 81
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae22c8db1af7df820800000000000000
+      internalID: 2953657263271453418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_3
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 68
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3428d6105675a270800000000000000
+      internalID: 8261139177833767997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 94
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a05d14a65c10910800000000000000
+      internalID: 1801938386086595102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_5
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 58
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07481231cb64d94b0800000000000000
+      internalID: -5432107801950190480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 34
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25a15b510841c2fa0800000000000000
+      internalID: -5824257677744334254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_7
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 34
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43e15f95922516750800000000000000
+      internalID: 6296404091597037108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_8
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 58
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f331ec3c1c4a76e0800000000000000
+      internalID: -1839073813663239183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_9
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 17
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c552d0089150f8d0800000000000000
+      internalID: -2814660053815896637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 25
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e87068cca750fa410800000000000000
+      internalID: 1490416026658408334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_11
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 7
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de57b88a346446600800000000000000
+      internalID: 460570318303098349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_12
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 25
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9ba65a7b1ebcbc0800000000000000
+      internalID: -3761664884867417614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crisp_InsideScopeSkill_InsideScopeSkill_13
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 17
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92629d0fcf59eec60800000000000000
+      internalID: 7849376114158413353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Crisp_InsideScopeSkill_InsideScopeSkill_0: -1248374503005855308
+      Crisp_InsideScopeSkill_InsideScopeSkill_1: 4742371165652666942
+      Crisp_InsideScopeSkill_InsideScopeSkill_10: 1490416026658408334
+      Crisp_InsideScopeSkill_InsideScopeSkill_11: 460570318303098349
+      Crisp_InsideScopeSkill_InsideScopeSkill_12: -3761664884867417614
+      Crisp_InsideScopeSkill_InsideScopeSkill_13: 7849376114158413353
+      Crisp_InsideScopeSkill_InsideScopeSkill_2: 2953657263271453418
+      Crisp_InsideScopeSkill_InsideScopeSkill_3: 8261139177833767997
+      Crisp_InsideScopeSkill_InsideScopeSkill_4: 1801938386086595102
+      Crisp_InsideScopeSkill_InsideScopeSkill_5: -5432107801950190480
+      Crisp_InsideScopeSkill_InsideScopeSkill_6: -5824257677744334254
+      Crisp_InsideScopeSkill_InsideScopeSkill_7: 6296404091597037108
+      Crisp_InsideScopeSkill_InsideScopeSkill_8: -1839073813663239183
+      Crisp_InsideScopeSkill_InsideScopeSkill_9: -2814660053815896637
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

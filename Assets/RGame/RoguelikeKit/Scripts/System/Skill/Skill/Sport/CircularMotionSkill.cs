@@ -15,15 +15,23 @@ namespace RGame.RoguelikeKit
         private float _duration;
         private float _timer;
         private Transform _centerTransform;
+
+        private void OnEnable() => _timer = 0f;
         
         private void FixedUpdate()
         {
+            if (_centerTransform == null)
+            {
+                OnDeath?.Invoke(this);
+                return;
+            }
             _timer += Time.fixedDeltaTime;
 
             if (_timer >= _duration)
             {
                 _timer = 0;
                 OnDeath?.Invoke(this);
+                return;
             }
             
             _angle += _velocity * Time.fixedDeltaTime;

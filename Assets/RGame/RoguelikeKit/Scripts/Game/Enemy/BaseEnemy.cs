@@ -23,6 +23,7 @@ namespace RGame.RoguelikeKit
         public EnemyHit MyHit { get; private set; }
         public BaseEnemyWeapon MyWeapon { get; private set; }
         public UnityAction<BaseEnemy> OnDeath { get; set; }
+        public event Action<BaseEnemy> Returned;
         public CommonStatRuntimeSO StatRuntime => _stat;
         public string Key { get; set; }
 
@@ -97,16 +98,21 @@ namespace RGame.RoguelikeKit
 
         private void HandleDeathEnd()
         {
+            if (!_isDead || !isActiveAndEnabled) return;
             OnDeath?.Invoke(this);
-            _isDead = false;
-            _globalConfig.CurrentGetKill++;
-            _stat.ModifyValue("HP", MaxHP - _stat.GetValue("HP"));
+            _poolRuntime.Return(gameObject);
+            _globalConfig.RegisterEnemyDefeat();
         }
 
         public virtual void Request() { }
 
         public virtual void Return()
         {
+            _isDead = false;
+            _playerTransform = null;
+            MyRigidbody2D.linearVelocity = Vector2.zero;
+            if (_stat != null) _stat.ModifyValue("HP", MaxHP - _stat.GetValue("HP"));
+            Returned?.Invoke(this);
         }
     }
 

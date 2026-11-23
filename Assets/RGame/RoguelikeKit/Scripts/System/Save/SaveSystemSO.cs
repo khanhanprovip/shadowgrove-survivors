@@ -31,15 +31,28 @@ namespace RGame.RoguelikeKit
 
         public void LoadSaveDataFromDisk()
         {
-            if (FileManager.LoadFromFile(saveFilename, out var json))
+            if (!TryLoad(saveFilename) && !TryLoad(backupSaveFilename)) return;
+            LoadSettings();
+            LoadPowerUp();
+            LoadCharacter();
+        }
+
+        private bool TryLoad(string fileName)
+        {
+            if (!FileManager.LoadFromFile(fileName, out var json) || string.IsNullOrWhiteSpace(json))
+                return false;
+            try
             {
-                Save.LoadFromJson(json);
-                LoadSettings();
-                LoadPowerUp();
-                LoadCharacter();
+                var saved = new SaveGame();
+                saved.LoadFromJson(json);
+                Save = saved;
+                return true;
             }
-            else
-                Debug.LogError("Load Save Error");
+            catch (System.ArgumentException e)
+            {
+                Debug.LogWarning($"Could not read save {fileName}: {e.Message}");
+                return false;
+            }
         }
 
         public void SaveDataToDisk()
@@ -48,9 +61,7 @@ namespace RGame.RoguelikeKit
             SavePowerUp();
             SaveCharacter();
             
-            if (FileManager.MoveFile(saveFilename, backupSaveFilename))
-                if (!FileManager.WriteToFile(saveFilename, Save.ToJson()))
-                    Debug.LogError("Save Error");
+            FileManager.WriteToFile(saveFilename, Save.ToJson(), backupSaveFilename);
         }
 
         public void WriteEmptySaveFile()

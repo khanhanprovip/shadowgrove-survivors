@@ -18,7 +18,7 @@ MonoBehaviour:
   MixAttributeSkillKey: HPMax
   AttributeType: 0
   SkillPrefab: {fileID: 3228222673249282260, guid: 5a61fbec4b9318a4faede6332495114f, type: 3}
-  SkillIcon: {fileID: 1855454349221281607, guid: 0f52c8a19cac7624182c2a9772676363, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 79bc167e7d125ee4eb301ea8013af595, type: 3}
   Velocity: 7
   Duration: 7
   CD: 10

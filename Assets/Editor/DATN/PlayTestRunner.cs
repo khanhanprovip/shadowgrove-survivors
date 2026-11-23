@@ -8,6 +8,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DATN.Modes;
 using Object = UnityEngine.Object;
 using TrialController = DATN.Trial.TrialController;
 
@@ -28,7 +30,8 @@ namespace DATN
     public static class PlayTestRunner
     {
         private const string InitScene = "Assets/RGame/RoguelikeKit/Scenes/Initialization.unity";
-        private const string ReportDir = "F:/Do_An_KT/_assistant_work";
+        private static string ReportDir => Environment.GetEnvironmentVariable("DATN_TEST_OUTPUT_DIR")
+                                           ?? "F:/Do_An_KT/_assistant_work";
         private const string GlobalConfigPath =
             "Assets/RGame/RoguelikeKit/ScriptableObjects/RuntimeDataSO/Global/GlobalConfigSO.asset";
 
@@ -39,6 +42,8 @@ namespace DATN
         private const string KeyDuration = "DATN_PT_Duration";
         private const string KeyStartWallClock = "DATN_PT_StartWall";
         private const string KeyMode = "DATN_PT_Mode";
+        private const string KeyCharacter = "DATN_PT_Character";
+        private const string KeyLevel = "DATN_PT_Level";
 
         // State runtime (chi ton tai trong 1 domain — duoc reset khoi tau moi lan reload)
         private static readonly List<string> Errors = new();
@@ -76,66 +81,32 @@ namespace DATN
         public static void Full100()
         {
             SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_full100.txt"));
+            Begin(130f, Path.Combine(ReportDir, "playtest_full100.txt"));
         }
 
         public static void Full100Rowan()
         {
-            SelectCharacterForTest("Rowan");
             SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_full100_rowan.txt"));
+            Begin(130f, Path.Combine(ReportDir, "playtest_full100_rowan.txt"), "Rowan");
         }
 
         public static void Full100Lyra()
         {
-            SelectCharacterForTest("Lyra");
             SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_full100_lyra.txt"));
+            Begin(130f, Path.Combine(ReportDir, "playtest_full100_lyra.txt"), "Lyra");
         }
 
         public static void Full100Kael()
         {
-            SelectCharacterForTest("Kael");
             SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_full100_kael.txt"));
+            Begin(130f, Path.Combine(ReportDir, "playtest_full100_kael.txt"), "Kael");
         }
 
         /// <summary>Kiem thu man KillTarget moi (LV2): thang khi ha du 30 quai.</summary>
         public static void KillTargetLevel()
         {
-            SelectCharacterForTest("Rowan");
-            var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
-                "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
-            var lv = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelConfigSO>(
-                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectLevel/LV2_MoonlitRuins.asset");
-            if (lac != null && lv != null)
-            {
-                var so = new SerializedObject(lac);
-                so.FindProperty("SelectLevelSO").objectReferenceValue = lv;
-                so.ApplyModifiedPropertiesWithoutUndo();
-                Debug.Log("[PlayTest] Da chon LV2_MoonlitRuins (KillTarget) cho lan test");
-            }
             SessionState.SetString(KeyMode, "full");
-            Begin(100f, Path.Combine(ReportDir, "playtest_killtarget_lv2.txt"));
-        }
-
-        private static void SelectCharacterForTest(string charName)
-        {
-            var lac = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.LevelAndCharacterSO>(
-                "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
-            var cfg = AssetDatabase.LoadAssetAtPath<RGame.RoguelikeKit.CharacterSelectConfigSO>(
-                "Assets/RGame/RoguelikeKit/ScriptableObjects/DataSO/Level/SelectCharacter/Shadowgrove/" + charName + ".asset");
-            if (lac != null && cfg != null)
-            {
-                var so = new SerializedObject(lac);
-                so.FindProperty("SelectCharacterSo").objectReferenceValue = cfg;
-                so.ApplyModifiedPropertiesWithoutUndo();
-                Debug.Log("[PlayTest] Da gan nhan vat " + charName + " cho lan test nay");
-            }
-            else
-            {
-                Debug.LogError("[PlayTest] KHONG tim thay " + charName + ".asset hoac LevelAndCharacterSO!");
-            }
+            Begin(160f, Path.Combine(ReportDir, "playtest_killtarget_lv2.txt"), "Rowan", 1);
         }
 
         public static void Flow65()
@@ -152,12 +123,14 @@ namespace DATN
 
         private static string Mode => SessionState.GetString(KeyMode, "smoke");
 
-        private static void Begin(float duration, string reportFile)
+        private static void Begin(float duration, string reportFile, string character = "Rowan", int levelIndex = 0)
         {
             Directory.CreateDirectory(ReportDir);
             SessionState.SetBool(KeyActive, true);
             SessionState.SetString(KeyReport, reportFile);
             SessionState.SetFloat(KeyDuration, duration);
+            SessionState.SetString(KeyCharacter, character);
+            SessionState.SetInt(KeyLevel, levelIndex);
             SessionState.SetFloat(KeyStartWallClock, Time.realtimeSinceStartup);
 
             SubscribeAll();
@@ -222,27 +195,12 @@ namespace DATN
             float duration = SessionState.GetFloat(KeyDuration, 45f);
 
             // ---- Phan 1: doi MainMenu xuat hien roi lai menu qua cac nut that ----
-            if (!_menuDriven && elapsed > 6f)
+            if (!_menuDriven && elapsed > 6f) DriveMenu();
+            if (!_menuDriven && elapsed > 35f)
             {
-                var mainMenu = Object.FindFirstObjectByType<UIMainMenu>(FindObjectsInactive.Include);
-                if (mainMenu != null)
-                {
-                    var charPanel = Object.FindFirstObjectByType<CharacterSelectPanel>(FindObjectsInactive.Include);
-                    var levelPanel = Object.FindFirstObjectByType<LevelSelectPanel>(FindObjectsInactive.Include);
-                    if (charPanel != null && levelPanel != null)
-                    {
-                        mainMenu.NewGameButton();
-                        charPanel.ConfirmButton();
-                        levelPanel.ConfirmButton();
-                        _menuDriven = true;
-                        Events.Add("PASS | Da lai menu: NewGame → Confirm nhan vat → Confirm man (Trial Forest mac dinh)");
-                    }
-                }
-                else if (elapsed > 30f)
-                {
-                    Finish("FAIL: Khong tim thay UIMainMenu sau 30 giay (MainMenu chua nap?)");
-                    return;
-                }
+                Events.Add("FAIL | Menu did not reach level confirmation");
+                Finish("Menu timeout");
+                return;
             }
 
             // ---- Phan 2: quan sat gameplay, mau 1 giay/lan ----
@@ -266,11 +224,52 @@ namespace DATN
                 return;
             }
 
-            if (elapsed >= duration && _menuDriven && !_finished)
+            if ((elapsed >= duration || (_winSeenAt >= 0f && elapsed >= _winSeenAt + 1f)) && _menuDriven && !_finished)
             {
                 FinalChecks();
                 Finish($"Ket thuc kiem thu dung han sau {elapsed:F0}s");
             }
+        }
+
+        private static int _menuStep;
+
+        private static void DriveMenu()
+        {
+            if (_menuStep == 0)
+            {
+                var menu = Object.FindFirstObjectByType<UIMainMenu>();
+                if (menu == null) return;
+                menu.NewGameButton();
+                _menuStep++;
+                return;
+            }
+
+            string character = SessionState.GetString(KeyCharacter, "Rowan");
+            if (_menuStep == 1)
+            {
+                var panel = Object.FindFirstObjectByType<CharacterSelectPanel>();
+                if (panel == null) return;
+                foreach (var item in panel.GetComponentsInChildren<CharacterItem>())
+                {
+                    if (!Array.Exists(item.GetComponentsInChildren<TMPro.TMP_Text>(),
+                            label => label.text == character)) continue;
+                    item.GetComponent<Button>().onClick.Invoke();
+                    panel.ConfirmButton();
+                    _menuStep++;
+                    break;
+                }
+                return;
+            }
+
+            int levelIndex = SessionState.GetInt(KeyLevel, 0);
+            var levels = Object.FindFirstObjectByType<LevelSelectPanel>();
+            if (levels == null) return;
+            var items = levels.GetComponentsInChildren<LevelItem>();
+            if (items.Length <= levelIndex) return;
+            items[levelIndex].GetComponent<Button>().onClick.Invoke();
+            levels.ConfirmButton();
+            _menuDriven = true;
+            Events.Add($"PASS | New Game → {character} → level {levelIndex + 1} → Confirm");
         }
 
         private static void SampleGameplay(float elapsed)
@@ -325,14 +324,15 @@ namespace DATN
         ///     - full: kiem tra HUD dong ho va man chien thang hien sau 90 giay.
         /// </summary>
         private static bool _flowPaused, _flowResumed, _flowRestarted, _winChecked, _hudChecked;
-        private static bool _postRestartChecked, _sawZeroKillsAfterRestart;
+        private static bool _postRestartChecked;
+        private static Player _previousPlayer;
         private static int _killsAtPause = -1, _killsBeforeRestart = -1;
 
         private static void RunModeScriptedActions(float elapsed)
         {
             if (Mode == "flow")
             {
-                if (!_flowPaused && elapsed >= 25f)
+                if (!_flowPaused && elapsed >= 25f && Time.timeScale > 0f)
                 {
                     _flowPaused = true;
                     var ctrl = Object.FindFirstObjectByType<TrialController>(FindObjectsInactive.Include);
@@ -360,12 +360,13 @@ namespace DATN
                     ctrl?.Resume();
                     bool resumed = Mathf.Approximately(Time.timeScale, 1f);
                     var panel = GameObject.Find("TrialPausePanel");
-                    Events.Add($"{(resumed && panel != null && !panel.activeSelf ? "PASS" : "FAIL")} | Resume(): timeScale={Time.timeScale}, panel an={(panel == null || !panel.activeSelf)}");
+                    Events.Add($"{(resumed && panel == null ? "PASS" : "FAIL")} | Resume(): timeScale={Time.timeScale}, panel an={panel == null}");
                 }
 
                 if (!_flowRestarted && elapsed >= 40f)
                 {
                     _flowRestarted = true;
+                    _previousPlayer = Object.FindFirstObjectByType<Player>();
                     _killsBeforeRestart = _globalConfig != null ? _globalConfig.CurrentGetKill : -1;
                     Events.Add($"INFO | Truoc Restart: kills={_killsBeforeRestart} — goi Restart()");
 
@@ -373,26 +374,18 @@ namespace DATN
                     ctrl?.Restart();
                 }
 
-                if (_flowRestarted && !_postRestartChecked && elapsed >= 50f)
+                if (_flowRestarted && !_postRestartChecked)
                 {
-                    // Kiem qua trinh reset: kills phai da tung ve 0 (chay nhanh nen co the
-                    // da kip giet them quai moi) hoac dang thap hon truoc restart.
+                    var player = Object.FindFirstObjectByType<Player>();
+                    if (player == null || player == _previousPlayer) return;
+                    var ctrl = Object.FindFirstObjectByType<TrialController>();
+                    if (ctrl == null || ctrl.GlobalConfig.GlobalPlayer != player) return;
+                    _postRestartChecked = true;
                     int killsAfter = _globalConfig != null ? _globalConfig.CurrentGetKill : -1;
-                    if (killsAfter == 0 || killsAfter < _killsBeforeRestart || _sawZeroKillsAfterRestart)
-                    {
-                        _postRestartChecked = true;
-                        var map = GameObject.Find("Map");
-                        int tiles = map != null ? map.transform.childCount : 0;
-                        var player = Object.FindFirstObjectByType<Player>(FindObjectsInactive.Exclude);
-                        Events.Add($"PASS | Restart reset trang thai: kills {_killsBeforeRestart} → {killsAfter} (da thay bang 0: {_sawZeroKillsAfterRestart})");
-                        Events.Add($"{(tiles >= 1000 && player != null ? "PASS" : "FAIL")} | Sau Restart: map tiles={tiles}, player={(player != null ? "CO" : "KHONG")}");
-                        Events.Add($"{(Time.timeScale > 0f ? "PASS" : "FAIL")} | Sau Restart: timeScale={Time.timeScale}");
-                    }
-                }
-
-                if (_flowRestarted && !_sawZeroKillsAfterRestart && _globalConfig != null && _globalConfig.CurrentGetKill == 0)
-                {
-                    _sawZeroKillsAfterRestart = true;
+                    bool reset = _killsBeforeRestart > 0 && killsAfter == 0 &&
+                                 ctrl.MatchSeconds < 0.25f && ctrl.PlayerStat.GetValue("Level") == 1 &&
+                                 Mathf.Approximately(Time.timeScale, 1f);
+                    Events.Add($"{(reset ? "PASS" : "FAIL")} | Restart: kills {_killsBeforeRestart} → {killsAfter}, match={ctrl.MatchSeconds:F3}s, level={ctrl.PlayerStat.GetValue("Level")}, timeScale={Time.timeScale}");
                 }
             }
             else if (Mode == "full")
@@ -435,14 +428,23 @@ namespace DATN
                 }
 
             // Phat hien chien thang lien tuc (khong doi moc 92s cu the)
-                if (_winSeenAt < 0f && elapsed >= 85f)
+                if (_winSeenAt < 0f)
                 {
                     var winPanel = GameObject.Find("GameWin");
                     var group = winPanel != null ? winPanel.GetComponent<CanvasGroup>() : null;
                     if (group != null && group.alpha > 0.9f)
                     {
                         _winSeenAt = elapsed;
-                        Events.Add($"PASS | CHIEN THANG xay ra tai t={elapsed:F0}s (alpha={group.alpha:F2}), timeScale={Time.timeScale}");
+                        var ctrl = Object.FindFirstObjectByType<TrialController>();
+                        var selection = AssetDatabase.LoadAssetAtPath<LevelAndCharacterSO>(
+                            "Assets/RGame/RoguelikeKit/ScriptableObjects/LogicSO/Level/LevelAndCharacterSO.asset");
+                        var config = selection.SelectLevelSO.GameMode;
+                        int kills = ctrl.GlobalConfig.CurrentGetKill;
+                        bool objectiveMet = config.ModeId == GameModeId.KillTarget
+                            ? kills == config.TargetKills
+                            : Mathf.Abs(ctrl.MatchSeconds - config.Duration) < 0.25f;
+                        objectiveMet &= Mathf.Approximately(Time.timeScale, 0f);
+                        Events.Add($"{(objectiveMet ? "PASS" : "FAIL")} | {config.ModeId}: match={ctrl.MatchSeconds:F3}s, kills={kills}, timeScale={Time.timeScale}");
                         var restartBtn = winPanel.transform.Find("RestartBtn");
                         Events.Add($"{(restartBtn != null ? "PASS" : "FAIL")} | Nut CHOI LAI tren man thang: {(restartBtn != null ? "CO" : "KHONG")}");
                     }
@@ -545,8 +547,9 @@ namespace DATN
             if (Mode == "full")
             {
                 Events.Add(_winSeenAt >= 0
-                    ? $"PASS | TONG KET: chien thang xac nhan tai t={_winSeenAt:F0}s (gio dong ho match = 90s, lech voi gio tuong do cac lan len cap tam dung)"
-                    : "FAIL | TONG KET: khong thay man chien thang trong 100s");
+                    ? $"PASS | TONG KET: chien thang xac nhan tai t={_winSeenAt:F0}s"
+                    : "FAIL | TONG KET: khong thay man chien thang");
+                Events.Add($"{(_skillPicks > 0 ? "PASS" : "FAIL")} | Upgrade selections: {_skillPicks}");
                 Events.Add($"INFO | So lan tu chon ky nang nang cap: {_skillPicks} | so lan mo ruong tu xac nhan: {_treasurePicks}");
 
                 var stat = AssetDatabase.LoadAssetAtPath<RGame.CommonStat.CommonStatRuntimeSO>(
@@ -559,6 +562,10 @@ namespace DATN
                     ? $"PASS | TONG KET: THAT BAI xac nhan tai t={_loseSeenAt:F0}s khi nhan vat het mau (bot dung yen)"
                     : "FAIL | TONG KET: nhan vat khong chet trong 60s (khong kiem duoc luong thua)");
             }
+            else if (Mode == "flow" && !_postRestartChecked)
+            {
+                Events.Add("FAIL | Restart did not spawn a new player");
+            }
         }
 
         private static void Finish(string reason)
@@ -569,7 +576,8 @@ namespace DATN
 
             // Ghi report NGAY trong domain nay — domain reload khi thoat play
             // se xoa sach Events/Errors trong RAM.
-            SessionState.SetInt(KeyErrorCount, Errors.Count);
+            int failures = Events.FindAll(line => line.StartsWith("FAIL |", StringComparison.Ordinal)).Count;
+            SessionState.SetInt(KeyErrorCount, Errors.Count + failures);
             WriteReport(reason);
             SessionState.SetBool(KeyDone, true);
             EditorApplication.isPlaying = false;

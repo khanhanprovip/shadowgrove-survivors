@@ -1,34 +1,17 @@
-﻿#region
-
 using System.Collections;
 using RGame.Framework;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-
-#endregion
 
 namespace RGame.RoguelikeKit
 {
-    /// <summary>
-    /// Manages scene loading and unloading operations in the game.
-    /// Handles transitions between gameplay and menu scenes with loading screens and fade effects.
-    /// </summary>
     public class SceneLoader : MonoBehaviour
     {
-        [Header("Scene References")] 
         [SerializeField] private GameSceneSO gameplaySceneSO;
-
-        [Header("Input System")] 
         [SerializeField] private InputReader inputReader;
-
-        [Header("Event Channels - Listen")] 
         [SerializeField] private LoadEventChannelSO loadLevelChannel;
         [SerializeField] private LoadEventChannelSO loadMenuChannel;
-
-        [Header("Event Channels - Broadcast")] 
         [SerializeField] private BoolEventChannelSO toggleLoadingScreenChannel;
         [SerializeField] private FadeChannelSO fadeRequestChannel;
         [SerializeField] private VoidEventChannelSO sceneReadyChannel;
@@ -36,11 +19,6 @@ namespace RGame.RoguelikeKit
         private const float FadeDuration = 1.5f;
         private bool isLoading;
         private GameSceneSO currentLoadedScene;
-        private GameSceneSO pendingSceneToLoad;
-        
-        private AsyncOperationHandle<SceneInstance> gameplayManagerLoadingHandle;
-        private SceneInstance gameplayManagerSceneInstance;
-        private AsyncOperationHandle<SceneInstance> currentSceneLoadingHandle;
 
         private void OnEnable()
         {
@@ -54,105 +32,73 @@ namespace RGame.RoguelikeKit
             loadMenuChannel.OnLoadingRequested -= HandleMenuLoadRequest;
         }
 
-        private void HandleLevelLoadRequest(GameSceneSO sceneToLoad, bool showLoadingScreen, bool fadeScreen)
+        private void HandleLevelLoadRequest(GameSceneSO scene, bool showLoadingScreen, bool fadeScreen)
         {
-            if (isLoading) return;
+            if (!isLoading) StartCoroutine(TransitionTo(scene, true));
+        }
 
-            pendingSceneToLoad = sceneToLoad;
+        private void HandleMenuLoadRequest(GameSceneSO scene, bool showLoadingScreen, bool fadeScreen)
+        {
+            if (!isLoading) StartCoroutine(TransitionTo(scene, false));
+        }
+
+        private IEnumerator TransitionTo(GameSceneSO nextScene, bool gameplay)
+        {
             isLoading = true;
-
-            if (!IsGameplayManagerLoaded())
-            {
-                LoadGameplayManager();
-            }
-            else
-            {
-                StartCoroutine(UnloadCurrentSceneRoutine());
-            }
-        }
-
-        private void HandleMenuLoadRequest(GameSceneSO menuToLoad, bool showLoadingScreen, bool fadeScreen)
-        {
-            if (isLoading) return;
-
-            pendingSceneToLoad = menuToLoad;
-            isLoading = true;
-
-            if (IsGameplayManagerLoaded())
-            {
-                UnloadGameplayManager();
-            }
-
-            StartCoroutine(UnloadCurrentSceneRoutine());
-        }
-
-        private bool IsGameplayManagerLoaded()
-        {
-            return gameplayManagerSceneInstance.Scene != null && gameplayManagerSceneInstance.Scene.isLoaded;
-        }
-
-        private void LoadGameplayManager()
-        {
-            gameplayManagerLoadingHandle = gameplaySceneSO.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
-            gameplayManagerLoadingHandle.Completed += OnGameplayManagerLoaded;
-        }
-
-        private void UnloadGameplayManager()
-        {
-            Addressables.UnloadSceneAsync(gameplayManagerLoadingHandle);
-        }
-
-        private void OnGameplayManagerLoaded(AsyncOperationHandle<SceneInstance> handle)
-        {
-            gameplayManagerSceneInstance = gameplayManagerLoadingHandle.Result;
-            StartCoroutine(UnloadCurrentSceneRoutine());
-        }
-
-        private IEnumerator UnloadCurrentSceneRoutine()
-        {
             inputReader.DisableAllInput();
             fadeRequestChannel.FadeOut(FadeDuration);
-
-            yield return new WaitForSeconds(FadeDuration);
+            yield return new WaitForSecondsRealtime(FadeDuration);
 
             toggleLoadingScreenChannel.RaiseEvent(true);
+            yield return UnloadScene(currentLoadedScene);
+            currentLoadedScene = null;
+            yield return UnloadScene(gameplaySceneSO);
 
-            if (currentLoadedScene != null && currentLoadedScene.sceneReference.OperationHandle.IsValid())
+            // Recreate the manager scene when starting a new attempt. It owns
+            // the skills, timers and result UI for the previous attempt.
+            if (gameplay)
             {
-                var unloadOperation = currentLoadedScene.sceneReference.UnLoadScene();
-
-                // Phai doi unload hoan tat truoc khi load scene moi: Addressables tu choi
-                // nap lai AssetReference scene khi handle cu chua duoc giai phong
-                // (gay loi "already been loaded" khi restart cung mot scene).
-                while (unloadOperation.IsValid() && !unloadOperation.IsDone)
+                var managers = gameplaySceneSO.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+                yield return managers;
+                if (managers.Status != AsyncOperationStatus.Succeeded)
                 {
-                    yield return null;
+                    FinishFailedLoad(gameplaySceneSO);
+                    yield break;
                 }
             }
 
-            LoadPendingScene();
-        }
+            var load = nextScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+            yield return load;
+            if (load.Status != AsyncOperationStatus.Succeeded)
+            {
+                FinishFailedLoad(nextScene);
+                yield break;
+            }
 
-        private void LoadPendingScene()
-        {
-            currentSceneLoadingHandle = pendingSceneToLoad.sceneReference.LoadSceneAsync(
-                LoadSceneMode.Additive, 
-                true, 
-                0);
-                
-            currentSceneLoadingHandle.Completed += OnSceneLoaded;
-        }
-
-        private void OnSceneLoaded(AsyncOperationHandle<SceneInstance> handle)
-        {
-            currentLoadedScene = pendingSceneToLoad;
-            SceneManager.SetActiveScene(handle.Result.Scene);
+            currentLoadedScene = nextScene;
+            SceneManager.SetActiveScene(load.Result.Scene);
+            ShadowgroveAudio.SetScene(gameplay);
             LightProbes.TetrahedralizeAsync();
-
             isLoading = false;
             toggleLoadingScreenChannel.RaiseEvent(false);
             fadeRequestChannel.FadeIn(FadeDuration);
             sceneReadyChannel.RaiseEvent();
+        }
+
+        private static IEnumerator UnloadScene(GameSceneSO scene)
+        {
+            if (scene == null || !scene.sceneReference.OperationHandle.IsValid()) yield break;
+            var unload = scene.sceneReference.UnLoadScene();
+            while (unload.IsValid() && !unload.IsDone)
+                yield return null;
+        }
+
+        private void FinishFailedLoad(GameSceneSO scene)
+        {
+            Debug.LogError($"Unable to load scene {scene.name}.");
+            isLoading = false;
+            toggleLoadingScreenChannel.RaiseEvent(false);
+            fadeRequestChannel.FadeIn(FadeDuration);
         }
     }
 }

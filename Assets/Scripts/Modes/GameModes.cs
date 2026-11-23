@@ -10,10 +10,10 @@ namespace DATN.Modes
     public class SurvivalMode : IGameMode
     {
         private GameModeContext _ctx;
-        private float _remaining;
+        private double _remaining;
         private bool _finished;
 
-        public float Remaining => Mathf.Max(0f, _remaining);
+        public float Remaining => Mathf.Max(0f, (float)_remaining);
 
         public void Initialize(GameModeContext context)
         {

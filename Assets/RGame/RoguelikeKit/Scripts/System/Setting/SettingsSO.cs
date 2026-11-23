@@ -2,7 +2,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.Localization;
 
 #endregion
 
@@ -16,7 +15,6 @@ namespace RGame.RoguelikeKit
         public float SfxVolume;
         public int ResolutionsIndex;
         public bool IsFullscreen;
-        public Locale LanguageLocale;
         public bool IsShowDamage;
     }
 
@@ -31,10 +29,9 @@ namespace RGame.RoguelikeKit
         public int ResolutionsIndex => mSettingConfig.ResolutionsIndex;
         public bool IsFullscreen => mSettingConfig.IsFullscreen;
         public bool IsShowDamage => mSettingConfig.IsShowDamage;
-        public Locale LanguageLocale => mSettingConfig.LanguageLocale;
 
         public void SaveSettings(float _newMusicVolume, float _newSfxVolume, float _newMasterVolume,
-            int _newResolutionsIndex, bool _fullscreenState, Locale _locale, bool _isShowDamage)
+            int _newResolutionsIndex, bool _fullscreenState, bool _isShowDamage)
         {
             mSettingConfig.MasterVolume = _newMasterVolume;
             mSettingConfig.MusicVolume = _newMusicVolume;
@@ -42,7 +39,6 @@ namespace RGame.RoguelikeKit
             mSettingConfig.ResolutionsIndex = _newResolutionsIndex;
             mSettingConfig.IsFullscreen = _fullscreenState;
             mSettingConfig.IsShowDamage = _isShowDamage;
-            mSettingConfig.LanguageLocale = _locale;
         }
 
         public void LoadSavedSettings(SaveGame _savedFile)
@@ -52,7 +48,6 @@ namespace RGame.RoguelikeKit
             mSettingConfig.SfxVolume = _savedFile.SfxVolume;
             mSettingConfig.ResolutionsIndex = _savedFile.ResolutionsIndex;
             mSettingConfig.IsFullscreen = _savedFile.IsFullscreen;
-            mSettingConfig.LanguageLocale = _savedFile.LanguageLocale;
             mSettingConfig.IsShowDamage = _savedFile.IsShowDamage;
         }
     }

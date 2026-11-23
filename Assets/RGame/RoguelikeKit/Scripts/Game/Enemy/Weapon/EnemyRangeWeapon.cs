@@ -14,18 +14,11 @@ namespace RGame.RoguelikeKit
 
         protected override void FixedUpdate()
         {
+            var player = _globalConfig.GlobalPlayer;
+            _isPlayerInRange = player != null && _stat != null &&
+                               Vector3.Distance(transform.position, player.transform.position) <=
+                               _stat.GetValue("AttackRange");
             base.FixedUpdate();
-
-            float range = _stat.GetValue("AttackRange");
-
-            if (Vector3.Distance(transform.position, _globalConfig.GlobalPlayer.transform.position) <= range)
-            {
-                _isPlayerInRange = true;
-            }
-            else
-            {
-                _isPlayerInRange = false;
-            }
         }
 
         protected override void PerformAttack()
@@ -34,6 +27,7 @@ namespace RGame.RoguelikeKit
                 return;
 
             GameObject projectile = _poolRuntime.Request(_magicKey);
+            if (projectile == null) return;
             projectile.transform.position = transform.position;
             EnemyMagic magic = projectile.GetComponent<EnemyMagic>();
            // magic?.Init(_stat.GetValue("Attack"));

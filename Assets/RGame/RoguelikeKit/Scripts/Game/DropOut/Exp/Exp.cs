@@ -9,6 +9,7 @@ namespace RGame.RoguelikeKit
         
         public override void Do()
         {
+            ShadowgroveAudio.Play(SoundCue.Experience);
             _stat.ModifyValue("Exp", (int)Mathf.Round(_exp * _stat.GetValue("Growth") * 0.01f));
         }
     }

@@ -27,10 +27,29 @@ namespace RGame.RoguelikeKit
         [SerializeField] private SpriteRenderer _shadowRenderer;
         [SerializeField] private List<DropOutGO> _dropOutGoes;
         private bool hasSentDissolveCommand;
+        [SerializeField] private GlobalConfigSO _touchGoldConfig;
+        [SerializeField, Min(1)] private int _touchGold = 50;
 
         private void FixedUpdate()
         {
             if (hasSentDissolveCommand) return;
+
+            // Jade gold chests are collected on touch, rather than broken by
+            // stray projectiles. Other legacy breakable props keep their drops.
+            if (_touchGoldConfig != null)
+            {
+                foreach (var hit in Physics2D.OverlapCircleAll(transform.position, 0.55f))
+                {
+                    if (!hit.CompareTag("PlayerHit")) continue;
+                    hasSentDissolveCommand = true;
+                    _touchGoldConfig.CurrentGetGold += _touchGold;
+                    ShadowgroveAudio.Play(SoundCue.Gold);
+                    gameObject.SetActive(false);
+                    Destroy(gameObject);
+                    break;
+                }
+                return;
+            }
 
             var colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f);
 

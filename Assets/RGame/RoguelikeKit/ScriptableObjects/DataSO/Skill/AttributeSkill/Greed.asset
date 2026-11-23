@@ -15,9 +15,10 @@ MonoBehaviour:
   Description: 
   SkillType: 1
   Key: BothSideSkill
+  MixAttributeSkillKey: 
   AttributeType: 12
   SkillPrefab: {fileID: 3228222673249282260, guid: 3768c303345980448802ecaf9109c93b, type: 3}
-  SkillIcon: {fileID: -6445947069674826639, guid: 9e50204b936f0d54684376423ee717b9, type: 3}
+  SkillIcon: {fileID: 21300000, guid: b6e7725d2a3a6d347be119146e873dae, type: 3}
   Velocity: 20
   Duration: 1
   CD: 5

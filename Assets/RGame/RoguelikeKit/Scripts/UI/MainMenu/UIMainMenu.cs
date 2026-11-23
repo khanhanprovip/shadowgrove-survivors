@@ -16,16 +16,19 @@ namespace RGame.RoguelikeKit
 
         public void NewGameButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             NewGameButtonAction.Invoke();
         }
 
         public void SettingsButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             SettingsButtonAction.Invoke();
         }
 
         public void PowerUpButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             PowerUpButtonAction.Invoke();
         }
 

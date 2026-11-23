@@ -18,7 +18,9 @@ namespace DATN.Trial
     /// </summary>
     public class DatnAutoTestDriver : MonoBehaviour
     {
-        private const string ReportPath = "F:/Do_An_KT/_assistant_work/build_test_report.txt";
+        private static string ReportDirectory => Environment.GetEnvironmentVariable("DATN_TEST_OUTPUT_DIR")
+                                                 ?? "F:/Do_An_KT/_assistant_work";
+        private static string ReportPath => Path.Combine(ReportDirectory, "build_test_report.txt");
         // Gameplay starts after the menu flow (about 12s). A 90-second Survival
         // stage therefore needs more than 102s wall time before its result panel
         // can be asserted. Keep a small post-result observation window as well.
@@ -41,9 +43,11 @@ namespace DATN.Trial
         private void Start()
         {
             bool autoTest = false;
+            string suite = null;
             foreach (string arg in Environment.GetCommandLineArgs())
             {
                 if (arg == "-datn-autotest") autoTest = true;
+                if (arg.StartsWith("-datn-suite=", StringComparison.Ordinal)) suite = arg.Substring(12);
                 // -datn-lang=vi hoac -datn-lang=en: ep ngon ngu cho lan kiem thu
                 if (arg.StartsWith("-datn-lang="))
                 {
@@ -60,6 +64,14 @@ namespace DATN.Trial
 
             Application.runInBackground = true;
             DontDestroyOnLoad(gameObject);
+            if (!string.IsNullOrEmpty(suite))
+            {
+                gameObject.AddComponent<DatnRegression>().Begin(suite, ReportDirectory);
+                Destroy(this);
+                return;
+            }
+
+            Directory.CreateDirectory(ReportDirectory);
             Application.logMessageReceived += OnLog;
             _start = Time.unscaledTime;
             _events.Add($"AUTO TEST BUILD — {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)}");
@@ -236,7 +248,7 @@ namespace DATN.Trial
         {
             try
             {
-                string path = Path.Combine("F:/Do_An_KT/_assistant_work", fileName);
+                string path = Path.Combine(ReportDirectory, fileName);
                 ScreenCapture.CaptureScreenshot(path); // ghi PNG cuoi frame
                 _events.Add($"INFO | Da yeu cau chup anh: {fileName} (t={elapsed:F0}s)");
                 return true;
@@ -295,7 +307,8 @@ namespace DATN.Trial
                 Debug.LogError($"[AutoTest] Khong ghi duoc report: {ex.Message}");
             }
 
-            Application.Quit(_errors.Count > 0 ? 1 : 0);
+            bool failed = _errors.Count > 0 || _events.Exists(line => line.StartsWith("FAIL |", StringComparison.Ordinal));
+            Application.Quit(failed ? 1 : 0);
         }
     }
 }

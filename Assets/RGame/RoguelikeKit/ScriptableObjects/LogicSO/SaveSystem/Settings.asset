@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   mSettingConfig:
-    MasterVolume: 0
-    MusicVolume: 0
-    SfxVolume: 0
+    MasterVolume: 0.7
+    MusicVolume: 0.6
+    SfxVolume: 0.8
     ResolutionsIndex: 0
     IsFullscreen: 0
-    LanguageLocale: {fileID: 0}
     IsShowDamage: 0

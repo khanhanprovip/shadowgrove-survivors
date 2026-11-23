@@ -44,6 +44,7 @@ namespace RGame.RoguelikeKit
         /// </summary>
         public override void Return()
         {
+            base.Return();
             _timer = 0;
             _moveDir = Vector2.zero;
         }

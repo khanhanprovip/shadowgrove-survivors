@@ -80,7 +80,8 @@ namespace RGame.RoguelikeKit
             newSkillDataSo.Duration = this.Duration;             
             newSkillDataSo.CD = this.CD;             
             newSkillDataSo.Damage = this.Damage;             
-            newSkillDataSo.Amount = this.Amount;                          
+            newSkillDataSo.Amount = this.Amount;
+            newSkillDataSo.Area = this.Area;                          
             newSkillDataSo.UpgradeAttribute = new List<AttackSkillAttributeMod>(this.UpgradeAttribute);             
             newSkillDataSo.UpgradeAttributeModValue = new List<int>(this.UpgradeAttributeModValue);
             newSkillDataSo.MoneyAmount = this.MoneyAmount;                         

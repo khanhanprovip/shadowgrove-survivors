@@ -23,30 +23,62 @@ namespace RGame.RoguelikeKit
         private readonly int _blendColorId = Shader.PropertyToID("_BlendColor");
 
         private readonly Dictionary<SpriteRenderer, Sequence> _seqMap = new();
+        private readonly Dictionary<SpriteRenderer, Color> _baseColors = new();
 
-        public void OnEnable() => _seqMap.Clear();
+        public void OnEnable()
+        {
+            _seqMap.Clear();
+            _baseColors.Clear();
+        }
 
         public void OnDisable()
         {
             foreach (var seq in _seqMap.Values) seq.Kill();
+            foreach (var pair in _baseColors)
+                if (pair.Key) pair.Key.color = pair.Value;
             _seqMap.Clear();
+            _baseColors.Clear();
         }
 
         public void Play(SpriteRenderer sr)
+        {
+            Play(sr, mHitColor, mHitDuration, mFadeDuration);
+        }
+
+        public void Play(SpriteRenderer sr, Color hitColor, float hitDuration, float fadeDuration,
+            bool unscaled = false)
         {
             if (!sr) return;
 
             // if already animating, stop first
             Stop(sr);
 
-            Sequence seq = DOTween.Sequence();
+            Sequence seq = DOTween.Sequence().SetUpdate(unscaled);
+
+            if (!sr.material.HasProperty(_blendColorId))
+            {
+                // Built-in sprite shaders tint through vertex color, not _BlendColor.
+                // Preserve alpha so damage feedback never hides the character.
+                Color normal = sr.color;
+                float strength = Mathf.Clamp01(Mathf.Max(hitColor.r, hitColor.g, hitColor.b));
+                Color hue = strength > 0f
+                    ? new Color(hitColor.r / strength, hitColor.g / strength, hitColor.b / strength, normal.a)
+                    : normal;
+                Color target = Color.Lerp(normal, hue, strength);
+                target.a = normal.a;
+                _baseColors[sr] = normal;
+                seq.Append(sr.DOColor(target, hitDuration).SetEase(mHitEase));
+                seq.Append(sr.DOColor(normal, fadeDuration).SetEase(mFadeEase));
+                _seqMap[sr] = seq;
+                return;
+            }
 
             seq.Append(
                 DOTween.To(
                         () => sr.material.GetColor(_blendColorId),
                         c => sr.material.SetColor(_blendColorId, c),
-                        mHitColor,
-                        mHitDuration)
+                        hitColor,
+                        hitDuration)
                     .SetEase(mHitEase)
             );
 
@@ -55,7 +87,7 @@ namespace RGame.RoguelikeKit
                         () => sr.material.GetColor(_blendColorId),
                         c => sr.material.SetColor(_blendColorId, c),
                         mNormalColor,
-                        mFadeDuration)
+                        fadeDuration)
                     .SetEase(mFadeEase)
             );
 
@@ -70,14 +102,19 @@ namespace RGame.RoguelikeKit
                 _seqMap.Remove(sr);
             }
 
-            if (sr) ResetMaterial(sr.material);
+            if (sr)
+            {
+                if (_baseColors.TryGetValue(sr, out var normal)) sr.color = normal;
+                ResetMaterial(sr.material);
+            }
+            _baseColors.Remove(sr);
         }
 
         public void Remove(SpriteRenderer sr) => Stop(sr);
 
         public void ResetMaterial(Material mat)
         {
-            if (mat) mat.SetColor(_blendColorId, mNormalColor);
+            if (mat && mat.HasProperty(_blendColorId)) mat.SetColor(_blendColorId, mNormalColor);
         }
     }
 }

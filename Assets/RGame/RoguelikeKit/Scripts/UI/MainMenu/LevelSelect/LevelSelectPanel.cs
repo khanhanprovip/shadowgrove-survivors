@@ -10,8 +10,8 @@ namespace RGame.RoguelikeKit
 {
     public class LevelSelectPanel : MonoBehaviour
     {
-        private static readonly Color NormalColor = new Color(0.10f, 0.18f, 0.13f, 0.98f);
-        private static readonly Color FocusColor = new Color(0.58f, 0.46f, 0.20f, 1f);
+        private static readonly Color NormalColor = Color.white;
+        private static readonly Color FocusColor = new Color(1.1f, 1.1f, 0.87f, 1f);
         [SerializeField] private GameObject mSelectList;
         [SerializeField] private LevelItem mLevelPrefab;
         [SerializeField] private List<LevelConfigSO> mLevelSos;
@@ -37,15 +37,18 @@ namespace RGame.RoguelikeKit
                 levelItem.OnPointerDownAction += PointerDownAction;
                 _levelItems.Add(levelItem);
             }
+            DATN.UI.ForestUI.Refresh();
         }
 
         public void ClosedButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
             Closed.Invoke();
         }
 
         public void ConfirmButton()
         {
+            ShadowgroveAudio.Play(SoundCue.UiConfirm);
             Confirm.Invoke();
         }
         
@@ -69,6 +72,7 @@ namespace RGame.RoguelikeKit
             }
             item.BackgroundImage.color = FocusColor;
             item.IsSelected = true;
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
         }
 
         private void OnDestroy()
@@ -82,3 +86,4 @@ namespace RGame.RoguelikeKit
         }
     }
 }
+

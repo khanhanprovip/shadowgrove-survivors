@@ -41,6 +41,7 @@ namespace RGame.RoguelikeKit
         public void Show(List<SkillDataSO> skillDataSos)
         {
             Time.timeScale = 0;
+            ShadowgroveAudio.Play(SoundCue.Treasure);
             
             canvasGroup.alpha = 1f;
             canvasGroup.interactable = true; 
@@ -62,6 +63,7 @@ namespace RGame.RoguelikeKit
 
         public void EnterSkill()
         {
+            if (!isActiveAndEnabled || !IsVisible || !enterBtn.isActiveAndEnabled) return;
             // Apply all skill upgrades when user confirms
             foreach (var skill in currentSkills)
             {

@@ -24,7 +24,6 @@ MonoBehaviour:
     SfxVolume: 0
     ResolutionsIndex: 0
     IsFullscreen: 0
-    LanguageLocale: {fileID: 0}
     IsShowDamage: 0
     Might: 0
     HPMax: 0

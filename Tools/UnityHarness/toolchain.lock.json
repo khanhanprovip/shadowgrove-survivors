@@ -1,0 +1,8 @@
+{
+  "cliVersion": "1.0.1",
+  "cliUrl": "https://public-cdn.cloud.unity3d.com/hub/prod/cli/1.0.1/unity-windows-x64.exe",
+  "cliSha256": "c06c2e86941162e8d46957d39a6089162ad52a00023433881b5e9a18ea220d17",
+  "pipelineVersion": "1.0.0",
+  "editorRoot": "F:/unity",
+  "initializationScene": "Assets/RGame/RoguelikeKit/Scenes/Initialization.unity"
+}

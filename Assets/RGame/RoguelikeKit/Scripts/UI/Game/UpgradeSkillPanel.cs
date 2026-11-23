@@ -40,6 +40,8 @@ namespace RGame.RoguelikeKit
         
         public void Show()
         {
+            // Keep the dimmer and cards above the HUD created after scene load.
+            transform.SetAsLastSibling();
             Time.timeScale = 0;
             
             _canvasGroup.alpha = 1f;
@@ -49,6 +51,8 @@ namespace RGame.RoguelikeKit
 
         public void UpgradeSkill(SkillDataSO skill)
         {
+            if (!isActiveAndEnabled || !IsVisible) return;
+            ShadowgroveAudio.Play(SoundCue.UiConfirm);
             Time.timeScale = 1;
             
             // Handle money bag selection or regular skill upgrade

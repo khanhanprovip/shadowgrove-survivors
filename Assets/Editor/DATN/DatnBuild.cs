@@ -14,7 +14,6 @@ namespace DATN
 {
     public static class DatnBuild
     {
-        private const string OutputDir = "F:/Do_An_KT/Build/ShadowgroveSurvivors";
         private const string ExeName = "ShadowgroveSurvivors.exe";
 
         public static void BuildWindows64()
@@ -28,12 +27,14 @@ namespace DATN
 
                 Debug.Log($"[Build] Scenes trong Build Settings: {string.Join(", ", scenes)}");
 
-                Directory.CreateDirectory(OutputDir);
+                string outputDir = Environment.GetEnvironmentVariable("DATN_BUILD_OUTPUT_DIR")
+                                   ?? "F:/Do_An_KT/Build/ShadowgroveSurvivors";
+                Directory.CreateDirectory(outputDir);
 
                 var options = new BuildPlayerOptions
                 {
                     scenes = scenes,
-                    locationPathName = Path.Combine(OutputDir, ExeName),
+                    locationPathName = Path.Combine(outputDir, ExeName),
                     target = BuildTarget.StandaloneWindows64,
                     options = BuildOptions.None
                 };

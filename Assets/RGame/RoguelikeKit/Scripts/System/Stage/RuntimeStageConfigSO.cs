@@ -12,5 +12,6 @@ namespace RGame.RoguelikeKit
     {
         public StageConfigSO SelectStageConfig;
         public Transform EnemyParent;
+        public bool IsEndless;
     }
 }

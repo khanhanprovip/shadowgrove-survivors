@@ -119,11 +119,16 @@ namespace RGame.RoguelikeKit
             // bo qua dot cast nay de tranh MissingReferenceException o SkillCast.
             if (_globalConfig.GlobalPlayer == null) return;
 
+            var cast = _skillCastDictionary[key];
+            if (!cast.CanCast()) return;
+
+            cast.Cast(_skillDataDictionary[key]);
+
             // Shadowgrove (Moc 5): phat animation Attack cua nhan vat moi lan cast
             var playerAnim = _globalConfig.GlobalPlayer.GetComponent<PlayerAnim>();
             if (playerAnim != null) playerAnim.PlayAttack();
 
-            _skillCastDictionary[key].Cast(_skillDataDictionary[key]);
+            ShadowgroveAudio.Play(SoundCue.Cast);
         }
 
         private void UpdateSkillEndTime(string key)

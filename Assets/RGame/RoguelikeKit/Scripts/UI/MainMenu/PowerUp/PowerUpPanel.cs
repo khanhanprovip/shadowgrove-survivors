@@ -29,6 +29,7 @@ namespace RGame.RoguelikeKit
 
         private void OnDestroy()
         {
+            if (mAttributes == null || mDescription == null) return;
             for (int i = 0; i < mAttributes.Length; i++)
             {
                 mAttributes[i].SelectAction -= mDescription.SelectPowerUp;
