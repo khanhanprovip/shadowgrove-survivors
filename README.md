@@ -1,145 +1,47 @@
-# Survivors Roguelike Kit
+# Shadowgrove Survivors
 
-Build your own Vampire Survivors-style game in Unity with a complete, open-source project template.
+![Shadowgrove Survivors](Media/ShadowgroveLogo.png)
 
-![Unity](https://img.shields.io/badge/Unity-6-black)
-![Render Pipeline](https://img.shields.io/badge/Render%20Pipeline-Built--in-blue)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Documentation](https://img.shields.io/badge/Documentation-GitBook-orange)](https://roogame.gitbook.io/roogame/survivors-roguelike-kit)
+Đồ án game Unity 2D thuộc thể loại survivors roguelike, với chủ đề rừng cổ và phong cách Nhật Thực Ngọc Bích. Phiên bản này được phát triển và duy trì bởi [khanhanprovip](https://github.com/khanhanprovip), dựa trên Survivors Roguelike Kit của Roo-Roo-Roo.
 
-A complete Unity 2D survivors-like roguelike game template, originally released as a Unity Asset Store asset.
-The original Asset Store version was sold for $30 and received 150+ wishlists before this open-source release.
+![Gameplay Windows](Media/ShadowgroveGameplay.png)
 
-Survivors Roguelike Kit is a modular Unity project for building 2D survivor-style roguelike games. It includes a playable game loop, character and level selection, skills, enemies, buffs, loot, procedural stage spawning, and ScriptableObject-driven configuration workflows.
+## Nội dung hiện có
 
-This project is now open source so developers can learn from it, extend it, and use it as a foundation for their own games.
+- Ba nhân vật: Rowan, Lyra và Kael; sprite, portrait và animation Idle/Run/Attack.
+- Mười màn chơi với nền riêng; ba chế độ Survival, KillTarget và Endless.
+- Survival thắng sau 90 hoặc 120 giây tùy màn; KillTarget thắng ở 30 kill; Endless tăng độ khó và kết thúc khi người chơi chết.
+- UI tiếng Việt/Anh: menu, chọn nhân vật/màn, chuẩn bị trận, HUD, kỹ năng, cài đặt, tạm dừng và kết quả.
+- Bộ hình quái/boss, icon và VFX theo cùng phong cách; nháy đỏ nhẹ khi nhận sát thương.
+- Rương nhận 50 vàng trong trận khi chạm; chống nhận lặp.
+- Âm thanh, save, nâng cấp và các công cụ kiểm thử Unity/Windows.
 
-## Preview
+Bộ chiêu khởi đầu riêng cho ba nhân vật và thao tác chọn ô Sức mạnh đang được hoàn thiện; chưa coi là đã kiểm thử trong bản hiện tại.
 
-![Survivors Roguelike Kit cover](Media/GithubCover.PNG)
+## Chạy dự án
 
-![Survivors Roguelike Kit gameplay demo](Media/Demo1.4-small.gif)
+1. Dùng Unity **6000.3.21f1** theo `ProjectSettings/ProjectVersion.txt`.
+2. Mở project bằng Unity Hub, chờ import package/Addressables.
+3. Mở scene `Assets/RGame/RoguelikeKit/Scenes/Initialization.unity` và nhấn Play.
 
-| Character Select | Level Select |
-| --- | --- |
-| ![Character select preview](Media/CharacterSelect.png) | ![Level select preview](Media/LevelSelect.png) |
+Dự án dùng Built-in Render Pipeline và Unity Input System. Giữ các file `.meta` khi sao chép asset.
 
-| Settings | Power Up |
-| --- | --- |
-| ![Settings preview](Media/Setting.png) | ![Power up preview](Media/PowerUp.png) |
+## Kiểm thử và build
 
-| Skill Upgrade | Combat |
-| --- | --- |
-| ![Skill upgrade preview](Media/SkillUpgrede.png) | ![Combat preview](Media/Fight.png) |
+Xem [Tools/UnityHarness/README.md](Tools/UnityHarness/README.md). Harness hỗ trợ build Windows x64, profile QA riêng và các ca UI, kỹ năng, animation, nhận đòn, ba chế độ, nền 10 màn, âm thanh và lưu cài đặt.
 
-## Features
-
-- Complete 2D survivors-like roguelike game template
-- ScriptableObject-driven game architecture
-- Modular combat and skill system
-- Active skills, passive attribute skills, and evolution weapons
-- Buff system with burn, freeze, slow, and other examples
-- Enemy system with melee, ranged, and charge behaviours
-- Procedural stage spawning with multiple spawn patterns
-- Procedural map configuration with weighted tile generation
-- EXP, loot, pickup, and level-up systems
-- Character selection and level selection UI
-- Floating damage number display
-- Save, settings, object pooling, and event-channel based runtime systems
-- Built for fast prototyping through the Unity Inspector
-
-## Requirements
-
-- Unity 6
-- Built-in Render Pipeline
-- DOTween, already included in this project
-
-## Quick Start
-
-You can clone this repository directly and open it with Unity Hub using Unity 6.
-
-This project uses Unity's Built-in Render Pipeline by default.
-
-```bash
-git clone https://github.com/Roo-Roo-Roo/survivors-roguelike-kit.git
+```powershell
+./Tools/UnityHarness/harness.ps1 doctor
+./Tools/UnityHarness/harness.ps1 verify --suites all
 ```
 
-If you want to import the kit into your own Unity project, use the release package from the GitHub Releases panel on the right side of this repository page.
+Build, log, cache Unity và bộ thực thi CLI tải về không được đưa vào Git. Kết quả từng lần chạy được lưu cục bộ trong `Tools/UnityHarness/artifacts/`; không coi việc có harness là chứng minh mọi ca đã đạt.
 
-I plan to provide separate release packages for:
+## Nguồn gốc và giấy phép
 
-- Unity 2021
-- Unity 2022
-- Unity 6
+- Mã nền: [Survivors Roguelike Kit — Roo-Roo-Roo](https://github.com/Roo-Roo-Roo/survivors-roguelike-kit).
+- Giữ nguyên [giấy phép MIT và bản quyền gốc](LICENSE); thông tin dự án gốc được lưu ở [UPSTREAM_README.md](UPSTREAM_README.md).
+- Phần mở rộng Shadowgrove gồm nội dung nhân vật/màn/chế độ, bản địa hóa, giao diện, tài nguyên hình ảnh mới và hệ thống QA. Một số hình ảnh được tạo bằng công cụ AI và xử lý để tích hợp vào Unity.
+- Plug-in, font và các thành phần bên thứ ba giữ giấy phép riêng. DOTween và các tài nguyên nền kế thừa từ kit không được tuyên bố là do tác giả phiên bản này tự viết.
 
-Read the installation and import guide here:
-
-https://roogame.gitbook.io/roogame/survivors-roguelike-kit
-
-In general:
-
-1. Clone this repository and open it with Unity Hub, or import a release package into your own Unity project.
-2. Use a Unity project with the Built-in Render Pipeline.
-3. Open the initialization scene.
-4. Press Play.
-
-## Documentation
-
-Full documentation:
-
-https://roogame.gitbook.io/roogame/survivors-roguelike-kit
-
-Useful topics include:
-
-- Core concepts overview
-- Adding a new playable character
-- Adding a new enemy
-- Adding a new stage configuration
-- Adding a new map configuration
-- Adding a new level
-- Adding a new attack skill
-- Adding a new buff
-- Configuring the EXP system
-
-## Commercial Support
-
-This project is free and open source.
-
-I am available for freelance Unity work, including:
-
-- Bug fixing
-- Gameplay systems
-- Game customization
-- Prototype development
-- Unity project integration
-- Custom game development
-
-Contact:
-
-- Email: wufengovo@gmail.com
-- PayPal donation: https://paypal.me/roorooroo999
-
-中文支持：
-
-如果你需要 Unity 项目外包、Bug 修复、玩法系统定制、游戏定制开发、原型开发或商业项目集成支持，可以通过邮箱联系我。
-
-- 邮箱：wufengovo@gmail.com
-- PayPal 捐赠：https://paypal.me/roorooroo999
-
-## License
-
-This project is released under the MIT License.
-
-Please check third-party assets and dependencies separately.
-
-## Third-Party Notice
-
-DOTween is the only third-party plugin currently included in this project.
-
-If you use this project for commercial work, please obtain the appropriate DOTween license from the official DOTween website:
-
-https://dotween.demigiant.com/
-
-The pixel art assets and UI assets were generated with AI tools.
-
-The hand-drawn style assets were created by Roo-Roo-Roo.
+Đây là dự án phát triển dựa trên một bộ kit mã nguồn mở; việc sở hữu repo này không thay đổi tác giả hay bản quyền của các thành phần gốc.
