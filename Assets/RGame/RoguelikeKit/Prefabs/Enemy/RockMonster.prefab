@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 6613381130318938592}
   - component: {fileID: 1463552420188269933}
   - component: {fileID: 7188811122921354681}
+  - component: {fileID: 4646034508277733611}
   m_Layer: 7
   m_Name: RockMonster
   m_TagString: Enemy
@@ -227,6 +228,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5820239652728137686
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -245,6 +247,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -266,9 +270,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 2444902693067708209, guid: 1b67b9fd736f0cc4381a6f292f6c0a41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -278,7 +284,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &4223334893630139990
 Rigidbody2D:
@@ -366,10 +371,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalConfig: {fileID: 11400000, guid: 055b856c9b45e18459c288223c3025c1, type: 2}
-  _valueConfig: {fileID: 11400000, guid: b51267d730c7c3d469b88b9c0005a048, type: 2}
+  _valueConfig: {fileID: 11400000, guid: cdf26542c0d1a434695518484d4121f2, type: 2}
   _poolRuntime: {fileID: 11400000, guid: 52af97b42e2615f48803c999102a7193, type: 2}
   _dropKeys:
   - Box
+  teleportCooldown: 5
 --- !u!114 &7188811122921354681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,3 +389,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   excludedRenderers: []
+--- !u!114 &4646034508277733611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293904244494095651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd84f2b7b5b5d454ea86a6fc12787b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RGame.RoguelikeKit.EnemyRank
+  Tier: 0

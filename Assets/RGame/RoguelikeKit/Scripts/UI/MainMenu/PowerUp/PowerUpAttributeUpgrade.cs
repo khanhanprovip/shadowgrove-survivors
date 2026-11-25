@@ -53,8 +53,9 @@ namespace RGame.RoguelikeKit
 
         private void Start()
         {
+            PermanentBalance.Apply(mAttributeSo, mStatSO);
             var tempLevel = mAttributeSo.GetAttribute(mAttributeName);
-            for (int i = 0; i < tempLevel; i++)
+            for (int i = 0; i < Mathf.Min(tempLevel, mMaxLevel); i++)
             {
                 UpgradeInit();
             }
@@ -81,7 +82,6 @@ namespace RGame.RoguelikeKit
         
         private void UpgradeInit()
         {
-            mStatSO.ModifyValue(mAttributeName, mAttributeChangeValue[mCurLevel]);
             mLevelInfos[mCurLevel].ShowChildren();
             
             mCurLevel++;
@@ -89,16 +89,17 @@ namespace RGame.RoguelikeKit
         
         private void Upgrade()
         {
-            if (mCurLevel == mMaxLevel) return;
+            if (mCurLevel >= mMaxLevel) return;
 
-            if (mAttributeSo.GoldCount < mRequireGold[mCurLevel]) return;
+            int cost = PermanentBalance.Cost(mAttributeName, mCurLevel);
+            if (mAttributeSo.GoldCount < cost) return;
             
-            mStatSO.ModifyValue(mAttributeName, mAttributeChangeValue[mCurLevel]);
             mLevelInfos[mCurLevel].ShowChildren();
             
             mCurLevel++;
-            mAttributeSo.SetAttribute("GoldCount",mAttributeSo. GoldCount - mRequireGold[mCurLevel - 1]);
+            mAttributeSo.SetAttribute("GoldCount",mAttributeSo.GoldCount - cost);
             mAttributeSo.SetAttribute(mAttributeName,mCurLevel);
+            PermanentBalance.Apply(mAttributeSo, mStatSO);
             _saveGameChannel.RaiseEvent();
             mUpdateGoldUI.RaiseEvent();
             UpdateInfo();
@@ -121,13 +122,13 @@ namespace RGame.RoguelikeKit
 
         public void UpdateInfo()
         {
-            if (mCurLevel == mMaxLevel)
+            if (mCurLevel >= mMaxLevel)
             {
                 SelectAction?.Invoke(mAttributeName, mDescription, -1, null);
                 return;
             }
             
-            SelectAction?.Invoke(mAttributeName,mDescription,mRequireGold[mCurLevel],Upgrade);
+            SelectAction?.Invoke(mAttributeName,mDescription,PermanentBalance.Cost(mAttributeName,mCurLevel),Upgrade);
         }
     }
 }

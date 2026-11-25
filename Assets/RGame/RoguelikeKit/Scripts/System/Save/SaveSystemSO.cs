@@ -63,6 +63,12 @@ namespace RGame.RoguelikeKit
             
             FileManager.WriteToFile(saveFilename, Save.ToJson(), backupSaveFilename);
         }
+        public void BankEarnings(int amount)
+        {
+            if(amount<=0)return;
+            _attribute.SetAttribute("GoldCount",_attribute.GoldCount+amount);
+            SaveDataToDisk();
+        }
 
         public void WriteEmptySaveFile()
         {

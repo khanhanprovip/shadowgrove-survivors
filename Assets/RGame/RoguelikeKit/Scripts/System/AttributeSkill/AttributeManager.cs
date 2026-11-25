@@ -8,20 +8,12 @@ namespace RGame.RoguelikeKit
     {
         [SerializeField] private CommonStatRuntimeSO _powerUpStat;
         [SerializeField] private CommonStatRuntimeSO _playerStat;
+        [SerializeField] private AttributeSO _ownedUpgrades;
 
-        private void Awake()
+        public void InitAttribute(CommonStatRuntimeSO target = null)
         {
-            InitAttribute();
-        }
-
-        private void Start()
-        {
-            
-            
-        }
-
-        private void InitAttribute()
-        {
+            if(target!=null)_playerStat=target;
+            if (_ownedUpgrades != null) PermanentBalance.Apply(_ownedUpgrades, _powerUpStat);
             _playerStat.ModifyValue("HP",_powerUpStat.GetValue("HPMax"),true);
             _playerStat.ModifyValue("HP",_powerUpStat.GetValue("HPMax"));
             

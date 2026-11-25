@@ -27,7 +27,7 @@ namespace RGame.RoguelikeKit
         public override void MixSkill()
         {
             base.MixSkill();
-            _mySkillData.Area *= 2;
+            _mySkillData.Area += 30;
         }
     }
 }

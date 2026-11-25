@@ -25,6 +25,8 @@ MonoBehaviour:
   Damage: 20
   Amount: 1
   Area: 0
+  StarterWeapon: 0
+  AttackRange: 0
   UpgradeAttribute:
   - skillAttributeType: 1
     IntValue: 10
@@ -46,4 +48,4 @@ MonoBehaviour:
     IntValue: 20
   - skillAttributeType: 4
     IntValue: 20
-  UpgradeAttributeModValue: 0a0000000a0000000a0000000a0000000a000000
+  UpgradeAttributeModValue: 0800000008000000080000000800000008000000

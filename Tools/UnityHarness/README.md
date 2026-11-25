@@ -53,9 +53,33 @@ Các test trên kiểm tra cổng kết quả và timeout thật; không thay th
 
 Unity CLI 1.0.1 và Pipeline 1.0.0; URL/SHA256 nằm trong toolchain.lock.json. Editor luôn lấy phiên bản từ ProjectVersion, mặc định tìm dưới F:/unity; đổi thư mục cài bằng biến UNITY_HARNESS_EDITOR_ROOT. Skills Unity chính thức cùng năm skill C#/ScriptableObject/Input/Tilemap/build được cài trong `.agents/skills`; xem từng SKILL.md để dùng theo ngữ cảnh. Không tự nâng Unity hoặc công cụ trong lượt sửa lỗi.
 
+## Boss, cân bằng và nhịp sinh quái
+
+```powershell
+./Tools/UnityHarness/harness.ps1 verify --suites balance,pause-skills,spawn-pacing,bosses --timeout 750
+```
+
+- `balance`: giữ các bậc đã mua, mở menu nhiều lần không cộng lặp, vào trận nhận đúng bonus, XP lớn qua đúng các ngưỡng, ngân hàng vàng không cộng hai lần, mua tiếp và đọc lại save. Chỉ sửa profile QA của lượt chạy.
+- `pause-skills`: cả Rowan/Lyra/Kael ở VI/EN, danh sách 12 kỹ năng, cuộn bằng sự kiện wheel qua raycast thật; thời gian và chỉ số không đổi khi đọc.
+- `spawn-pacing`: đo hai cửa sổ 30 giây liên tiếp trong Endless; đầu trận ít quái hơn cửa sổ sau; lịch boss không thay đổi. Bot chỉ có đệm HP và tắt tầm vũ khí trong ca này để đếm lượt sinh không bị lẫn với lượt hạ quái.
+- `enemy-cap`: chạy tới trần 40 quái thật, thử thêm 200 yêu cầu sinh, kiểm tra không sinh vượt trần, không quá 2 quái mới/frame, đo FPS ở tải đầy rồi hạ một quái và xác nhận có lượt sinh bù. Các ca Survival/KillTarget/Endless cũng ghi nhận số quái lớn nhất và kiểm tra trần chung.
+- `bosses`: mốc boss đầu được chạy bằng thời gian mô phỏng thật đến 300 giây; các mốc sau dùng bước nhảy đồng hồ QA, không tuyên bố đã chơi tay 30 phút. Kiểm tra 6 lượt (300 → 1.800 HP, loại thứ 6 quay về loại đầu), 25 chiêu ngẫu nhiên, nhịp chuẩn bị không có cảnh báo sàn, sát thương/vị trí an toàn, banner tên màu không chặn input, animation render thực tế, tên màu VI/EN, tỷ lệ pixel nhìn thấy, dọn quái, tạm ngưng/khôi phục wave, +5 cấp/+500 vàng và không cộng dồn boss. HP bot được tăng trong bộ nhớ của profile QA để vượt mốc năm phút; HP boss sản phẩm được chụp trước khi tăng độ bền riêng cho phần quan sát đủ chiêu. EXP còn trên sân được thu hồi trong ca này để cô lập phần thưởng.
+
+`Tools/Art/BossAuthoring.cs` tạo/import sprite, prefab, vai trò và cấu hình cân bằng bằng Unity API; atlas gốc ở `Tools/Art/Sources/BossAtlas.png`. `Tools/Art/BossFrameAnimationAuthoring.cs` là pipeline hiện tại: cắt 10 sheet Locomotion/Combat 4×4 và giữ Hit/Death từ năm sheet gốc bằng Sprite Editor Data Provider, căn PPU/pivot theo alpha của Idle0, tạo 30 clip và năm Animator Controller, 36 sprite/boss, nhịp giữ khung riêng cho mỗi boss, hit đỏ nhẹ và dissolve riêng. Bộ shader/mesh cũ được giữ để đối chiếu, không phải animation đang dùng. `Tools/Art/BossWire.cs` nối nguồn tiến độ đã mua, sự kiện sinh nhân vật và dịch vụ lưu vàng, rồi kiểm tra tham chiếu sau khi mở lại scene. Boss Resources không giữ bản sao pool/global/save; director truyền đúng context của trận khi lấy boss ra khỏi pool.
+
 
 ## Survivor starter weapons and Survival boundary
 
 `combat-pickups` verifies the three actual survivor profiles (Rowan cleave 2.2, Lyra orb 7, Kael arrow 10.5), radial target gating, initialized enemy stats, real damage/collisions, projectile range expiry, and gold chests. `ui` raycasts all 14 permanent-upgrade tiles and checks that pointer selection opens the corresponding description in VI/EN. It does not purchase upgrades.
 
 `survival-boundary` simulates a 310ms frame overshoot on a real round and checks that the win clock is exactly the configured deadline. Pair it with `survival` for a full 120-second match. Evidence from 2026-11-23 is summarized in `verification-2026-11-23.json`; raw local logs/builds remain excluded from Git.
+
+Native boss animation QA kiểm tra đủ 180 sprite qua GPU, sáu clip mỗi boss qua 41 mẫu thời gian/clip (không giả định keyframe cách đều), đổi sprite/pixel thật khi chạy AI và đứng yên, hit/death, đóng băng khi pause. Phần đo hình ảnh tạm cô lập collider nhận đòn của boss để vũ khí từ thưởng trước không làm nhiễu HP; các kiểm tra nhận đòn/thưởng gọi EnemyHit thật và khôi phục collider trước khi hạ boss. Preview qua `Tools/Art/BossRuntimeInspect.cs` + `BossAnimationPreview.cs` dùng clip thật trong Play Mode, rồi `assemble_boss_preview.py` ghép GIF; đây là preview các tư thế, không phải video chơi một trận.
+
+VFX được tạo bởi `BossSkillVfx` và `BossCastingVfx`: mỗi boss có motif/màu riêng, buffer cố định và material dùng chung. Chỉ đòn đã kích hoạt mới vẽ trên sàn; windup chỉ có ánh phép trên thân/tay. Suite `bosses` yêu cầu đủ VFX của 25 chiêu, kiểm tra toàn bộ line con ẩn trước khi kích hoạt và vị trí hiệu ứng đóng băng khi pause. Boss khóa hướng trái/phải theo hướng ngắm khi bắt đầu cast; hướng gần thẳng đứng giữ hướng ngang trước đó. Chỉ lật SpriteRenderer, không lật tên, thanh máu hay collider. QA đưa mục tiêu sang trái/phải/trên và chạy vòng qua giữa cast để kiểm tra khóa hướng.
+
+Phần quan sát chết/thưởng dùng vòng chờ theo thời gian thực và lấy mẫu alpha trước khi trả pool, đồng thời xử lý đủ năm bảng chọn. Không chờ bằng `WaitForSeconds` qua thời điểm bảng thưởng làm `timeScale=0`; thiếu báo cáo hoặc timeout luôn bị coi là FAIL.
+
+Đối với Hit dài 0,18 giây, QA lấy mẫu sprite/alpha mỗi frame trước khi ghi PNG. Chỉ sau khi thấy khung hình thay đổi mới đóng băng pose để chụp; encode ảnh 1080p không được tính vào cửa sổ quan sát animation.
+
+QA còn kích hoạt/hủy trực tiếp SlowBuff, FreezingBuff và BurnBuff trên mỗi boss: shader mới không có `_TimeSpeed`, nên hai buff đầu chỉ đọc/ghi thuộc tính shader được hỗ trợ; hiệu chỉnh Speed vẫn giữ nguyên. Shader boss hỗ trợ `_FlameRedBlend` để màu cháy hiện đúng và trở về trung tính khi hết hiệu ứng. Kiểm tra bao gồm alpha render thật và hoàn trả Speed/shadow offset; đây không phải thay đổi quy tắc khống chế hoặc thời gian cast của boss.

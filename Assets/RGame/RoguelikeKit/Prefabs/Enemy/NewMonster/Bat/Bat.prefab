@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 255931993699110237}
   - component: {fileID: 8316304560295811546}
   - component: {fileID: 232770062298003352}
+  - component: {fileID: 4144913356322388921}
   m_Layer: 9
   m_Name: Bat
   m_TagString: Enemy
@@ -196,10 +197,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalConfig: {fileID: 11400000, guid: 055b856c9b45e18459c288223c3025c1, type: 2}
-  _valueConfig: {fileID: 11400000, guid: d0aae61c5099f54428eb5d512592b005, type: 2}
+  _valueConfig: {fileID: 11400000, guid: 7414ddb580292b84496d42e1e149e443, type: 2}
   _poolRuntime: {fileID: 11400000, guid: 52af97b42e2615f48803c999102a7193, type: 2}
   _dropKeys:
   - Exp40
+--- !u!114 &4144913356322388921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154470369426367514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd84f2b7b5b5d454ea86a6fc12787b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RGame.RoguelikeKit.EnemyRank
+  Tier: 0
 --- !u!1 &507004386237871460
 GameObject:
   m_ObjectHideFlags: 0

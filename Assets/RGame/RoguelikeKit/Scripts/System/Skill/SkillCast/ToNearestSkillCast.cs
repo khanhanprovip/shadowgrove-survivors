@@ -63,8 +63,7 @@ namespace RGame.RoguelikeKit
         public override void MixSkill()
         {
             base.MixSkill();
-            _mySkillData.CD = 0.15f;
-            _mySkillData.Damage = 5;
+            _mySkillData.CD = Mathf.Max(0.3f, _mySkillData.CD * 0.8f);
         }
     }
 }

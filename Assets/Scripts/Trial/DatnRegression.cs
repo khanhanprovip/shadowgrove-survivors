@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using DATN.Localization;
 using DATN.Modes;
+using DG.Tweening;
 using RGame.RoguelikeKit;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace DATN.Trial
 {
     // Opt-in integration tests for a built player. Clicks are sent only to the
     // top hit from the live EventSystem, including CanvasGroup and viewport checks.
-    public sealed class DatnRegression : MonoBehaviour
+    public sealed partial class DatnRegression : MonoBehaviour
     {
         private static readonly string[] Levels =
         {
@@ -100,6 +101,11 @@ namespace DATN.Trial
 
             switch (suite)
             {
+                case "bosses": yield return CheckBosses(); break;
+                case "balance": yield return CheckBalance(); break;
+                case "pause-skills": yield return CheckPauseSkills(); break;
+                case "spawn-pacing": yield return CheckSpawnPacing(); break;
+                case "enemy-cap": yield return CheckEnemyCap(); break;
                 case "menus":
                     yield return CaptureFrame("menu");
                     for (int i = 0; i < Levels.Length; i++)
@@ -325,6 +331,7 @@ namespace DATN.Trial
 
         private IEnumerator CheckObjective(GameModeId mode, bool testSimultaneousDeaths = false)
         {
+            int peakEnemies=0;
             var config = _selection.SelectLevelSO.GameMode;
             int initialCurse = _round.PlayerStat.GetValue("Curse");
             int earlySpawnCount = -1;
@@ -335,6 +342,7 @@ namespace DATN.Trial
 
             while (!Visible("GameWin") && !Visible("GameOver") && Time.realtimeSinceStartup < timeLimit)
             {
+                peakEnemies=Math.Max(peakEnemies,ActiveEnemies());
                 if (!checkedEndless) HealTestPlayer();
                 if (Time.timeScale == 0f) PickUpgradeOrTreasure();
                 if (testSimultaneousDeaths && !burstStarted && Time.timeScale > 0f &&
@@ -378,6 +386,7 @@ namespace DATN.Trial
                 yield return null;
             }
 
+            Require(peakEnemies<=FindFirstObjectByType<StageManager>().EnemyLimit,$"{mode}: peak active enemies {peakEnemies} stays inside shared performance cap");
             Require(_round.GlobalConfig.CurrentGetKill > 0, "Automatic attack killed an enemy");
             Require(_upgradeCount > 0 && _round.PlayerStat.GetValue("Level") > 1,
                 $"Character level-up and upgrade selection: {_upgradeCount}");
@@ -474,6 +483,9 @@ namespace DATN.Trial
                 var hit = player.GetComponentInChildren<PlayerHit>();
                 var renderer = player.GetComponentInChildren<PlayerAnim>().MyAnimator.GetComponent<SpriteRenderer>();
                 var material = renderer.material;
+                var feedbackTargets=(SpriteRenderer[])typeof(PlayerHit).GetField("mSpriteRenderers",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(hit);
+                Record("INFO",$"{hero} feedback actual renderer={renderer.GetInstanceID()}, configured={string.Join(",",feedbackTargets.Select(x=>x==null?"null":x.GetInstanceID().ToString()))}, nextFlash={typeof(PlayerHit).GetField("_nextHitFlashAt",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(hit)}, unscaled={Time.unscaledTime}, clock={Time.realtimeSinceStartup}");
+                yield return null; // Keep setup/logging costs outside the measured feedback frame.
                 bool blendShader = material.HasProperty("_BlendColor");
                 Color normal = renderer.color;
                 Require(normal.a > 0.95f, hero + " starts opaque with " + material.shader.name);
@@ -500,11 +512,11 @@ namespace DATN.Trial
                     maxOther = Mathf.Max(maxOther, tint.g, tint.b);
                     minAlpha = Mathf.Min(minAlpha, renderer.color.a,
                         material.HasProperty("_Alpha") ? material.GetFloat("_Alpha") : 1f);
-                    Require(renderer.enabled && renderer.sprite != null, hero + " remains rendered during damage feedback");
+                    if(!renderer.enabled||renderer.sprite==null)Require(false,hero+" disappeared during damage feedback");
                     yield return null;
                 }
                 Require(hits == 5 && before - _round.PlayerStat.GetValue("HP") == hits, hero + " all five hits still apply damage");
-                Require(peak > 0.02f && peak <= 0.29f && maxOther <= 0.025f, hero + " uses a subtle red tint instead of a white flash");
+                Require(peak > 0.02f && peak <= 0.29f && maxOther <= 0.025f, $"{hero} uses a subtle red tint instead of a white flash: red={peak:F3}, other={maxOther:F3}, pulses={pulses}, timeScale={Time.timeScale}, tweenScale={DOTween.timeScale}, tweenComponents={FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include,FindObjectsSortMode.None).Count(x=>x.GetType().Name=="DOTweenComponent"&&x.isActiveAndEnabled)}");
                 Require(pulses == 1, hero + " five close hits produce one visual pulse");
                 Require(minAlpha >= 0.95f, hero + " stays opaque throughout the feedback");
                 Require(blendShader ? material.GetColor("_BlendColor").maxColorComponent < 0.001f :
@@ -532,19 +544,31 @@ namespace DATN.Trial
                 animator.updateMode = AnimatorUpdateMode.UnscaledTime;
                 foreach (string state in new[] { "Idle", "Run", "Attack" })
                 {
+                    // Verify every pose before the timing window. A synchronous
+                    // first GPU readback must not consume most of a short clip.
+                    int count=state=="Idle"?4:6;
+                    for(int frame=0;frame<count;frame++)
+                    {
+                        animator.Play(state,0,(frame+.05f)/count);animator.Update(0);
+                        Require(renderer.sprite!=null&&visibility.VisiblePixels(renderer)>=200,
+                            $"{hero} {state} frame {frame} has visible pixels on the real animated renderer: {renderer.sprite?.name}");
+                    }
+                    yield return null;
                     animator.Play(state, 0, 0);
                     animator.Update(0f); // Apply the requested state before sampling its rendered frames.
                     var frames = new HashSet<string>();
                     string previousSprite = null;
                     float end = Time.realtimeSinceStartup + 0.8f;
-                    while (Time.realtimeSinceStartup < end)
+                    float hardEnd=Time.realtimeSinceStartup+6;
+                    int processed=0;
+                    while (Time.realtimeSinceStartup<hardEnd && (Time.realtimeSinceStartup<end||frames.Count<3))
                     {
                         yield return null;
-                        Require(renderer.enabled && renderer.sprite != null && renderer.color.a > 0.95f,
-                            hero + " " + state + " visible frame");
-                        Require(renderer.sortingOrder >= 50, hero + " remains above the ground");
-                        Require(visibility.VisiblePixels(renderer) >= 200,
-                            hero + " " + state + " has visible rendered pixels: " + renderer.sprite.name);
+                        if(!renderer.enabled||renderer.sprite==null||renderer.color.a<=.95f)
+                            Require(false,hero+" "+state+" lost its visible sprite");
+                        if(renderer.sortingOrder<50)Require(false,hero+" dropped below the ground");
+                        if(visibility.VisiblePixels(renderer)<200)Require(false,hero+" "+state+" rendered a transparent frame: "+renderer.sprite.name);
+                        processed++;
                         frames.Add(renderer.sprite.name);
                         if (previousSprite != renderer.sprite.name)
                         {
@@ -552,8 +576,10 @@ namespace DATN.Trial
                             Record("INFO", $"{hero} {state}: {renderer.sprite.name}, normalized={info.normalizedTime:F3}, unscaledDelta={Time.unscaledDeltaTime:F4}");
                             previousSprite = renderer.sprite.name;
                         }
+                        if(state=="Attack"&&frames.Count<3&&animator.GetCurrentAnimatorStateInfo(0).normalizedTime>1.05f)
+                        {animator.Play(state,0,0);animator.Update(0);}
                     }
-                    Require(frames.Count >= 3, hero + " " + state + " advances through valid frames");
+                    Require(frames.Count >= 3, $"{hero} {state}: {frames.Count} distinct poses advance; every one of {processed} sampled frames passed pixel/opacity/sorting checks");
                 }
                 animator.updateMode = AnimatorUpdateMode.Normal;
                 animation.enabled = true;
@@ -565,6 +591,7 @@ namespace DATN.Trial
                 int attacks = 0;
                 float nextAttack = Time.realtimeSinceStartup;
                 float until = Time.realtimeSinceStartup + 4f;
+                int normalFrames=0;
                 while (Time.realtimeSinceStartup < until)
                 {
                     if (Time.timeScale == 0f) PickUpgradeOrTreasure();
@@ -575,12 +602,12 @@ namespace DATN.Trial
                         nextAttack = Time.realtimeSinceStartup + 0.55f;
                     }
                     yield return null;
-                    Require(renderer.sprite != null, hero + " remains visible during normal animation updates");
-                    Require(renderer.enabled && renderer.color.a >= 0.95f && visibility.VisiblePixels(renderer) >= 200,
-                        hero + " remains rendered while auto-attacking without taking damage");
+                    if(renderer.sprite==null||!renderer.enabled||renderer.color.a<.95f||visibility.VisiblePixels(renderer)<200)
+                        Require(false,hero+" disappeared while auto-attacking without taking damage");
+                    normalFrames++;
                 }
                 Require(attacks >= 4 && _round.PlayerStat.GetValue("HP") >= hpBefore,
-                    hero + " no-damage visibility window: " + attacks + " attacks, HP " + hpBefore + " → " + _round.PlayerStat.GetValue("HP"));
+                    hero + " no-damage visibility window: " + attacks + " attacks across "+normalFrames+" checked frames, HP " + hpBefore + " → " + _round.PlayerStat.GetValue("HP"));
                 for (int i = 0; i < colliders.Length; i++) colliders[i].enabled = colliderStates[i];
                 visibility.Dispose();
                 _round.ExitToMainMenu();
@@ -1299,14 +1326,36 @@ namespace DATN.Trial
 
         private IEnumerator CaptureFrame(string name)
         {
-            // Let localization, late layout and the requested UI state reach the
-            // rendered frame before a following click closes or changes the panel.
             yield return null;
             Canvas.ForceUpdateCanvases();
-            yield return new WaitForEndOfFrame();
-            var texture = ScreenCapture.CaptureScreenshotAsTexture();
-            File.WriteAllBytes(Path.Combine(_output, name + ".png"), texture.EncodeToPNG());
-            Destroy(texture);
+            bool completed = false;
+            Exception captureError = null;
+            IEnumerator CaptureRenderedFrame()
+            {
+                yield return new WaitForEndOfFrame();
+                Texture2D texture = null;
+                try
+                {
+                    texture = ScreenCapture.CaptureScreenshotAsTexture();
+                    File.WriteAllBytes(Path.Combine(_output, name + ".png"), texture.EncodeToPNG());
+                }
+                catch (Exception error) { captureError = error; }
+                finally
+                {
+                    if (texture != null) Destroy(texture);
+                    completed = true;
+                }
+            }
+            var pending = StartCoroutine(CaptureRenderedFrame());
+            float deadline = Time.realtimeSinceStartup + 3f;
+            while (!completed && Time.realtimeSinceStartup < deadline) yield return null;
+            if (!completed)
+            {
+                StopCoroutine(pending);
+                throw new TimeoutException("No rendered end-of-frame for screenshot '" + name +
+                    "'. Keep the QA Player visible; minimized rendering cannot prove a visual result.");
+            }
+            if (captureError != null) throw new InvalidOperationException("Screenshot failed: " + name, captureError);
         }
 
         private void Capture(string name) => ScreenCapture.CaptureScreenshot(Path.Combine(_output, name + ".png"));

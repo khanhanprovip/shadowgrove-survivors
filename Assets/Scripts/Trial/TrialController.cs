@@ -52,6 +52,7 @@ namespace DATN.Trial
         private Button mPauseExitButton;
 
         public bool IsPaused => mPaused;
+        public bool IsEnded => mEnded;
         public float MatchSeconds => (float)_matchSeconds;
 
         /// <summary>Tai nguyen can thiet cho kiem thu tu dong tren ban build.</summary>
@@ -82,6 +83,7 @@ namespace DATN.Trial
 
         private void Update()
         {
+            if(mPaused&&_pauseLanguage!=LanguageManager.GetCurrentCode())RefreshPauseTexts();
             LogRuntimeStats();
             if (!mRunning || mPlayerStat.GetValue("HP") <= 0) return;
             _matchSeconds += Time.deltaTime;
@@ -198,6 +200,7 @@ namespace DATN.Trial
 
         public void Restart()
         {
+            mGlobalConfig.BankGold();
             ShadowgroveAudio.Play(SoundCue.UiConfirm);
             Time.timeScale = 1f;
             mPaused = false;
@@ -215,6 +218,7 @@ namespace DATN.Trial
 
         public void ExitToMainMenu()
         {
+            mGlobalConfig.BankGold();
             ShadowgroveAudio.Play(SoundCue.UiSelect);
             Time.timeScale = 1f;
             mPaused = false;
@@ -311,11 +315,13 @@ namespace DATN.Trial
         }
 
         private TextMeshProUGUI _pauseTitle;
+        private string _pauseLanguage;
         private TextMeshProUGUI _pauseResumeLabel, _pauseRestartLabel, _pauseExitLabel;
 
         /// <summary>Cap nhat lai chuoi pause panel theo ngon ngu hien tai.</summary>
         private void RefreshPauseTexts()
         {
+            _pauseLanguage=LanguageManager.GetCurrentCode();
             if (_pauseTitle == null) return;
             _pauseTitle.text = LanguageManager.Get("Pause");
             _pauseResumeLabel.text = LanguageManager.Get("Resume");

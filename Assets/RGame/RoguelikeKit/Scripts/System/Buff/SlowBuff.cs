@@ -28,11 +28,16 @@ namespace RGame.RoguelikeKit
             {
                 _material = renderer.material;
                 
-                _originalShadowOffset = _material.GetVector("_ShadowOffset");
-                _originalTimeSpeed = _material.GetFloat("_TimeSpeed");
-                
-                _material.SetVector("_ShadowOffset", new Vector4(999f, _originalShadowOffset.y, 0f, 0f));
-                _material.SetFloat("_TimeSpeed", _originalTimeSpeed * SlowPercentage * 0.01f);
+                if (_material.HasProperty("_ShadowOffset"))
+                {
+                    _originalShadowOffset = _material.GetVector("_ShadowOffset");
+                    _material.SetVector("_ShadowOffset", new Vector4(999f, _originalShadowOffset.y, 0f, 0f));
+                }
+                if (_material.HasProperty("_TimeSpeed"))
+                {
+                    _originalTimeSpeed = _material.GetFloat("_TimeSpeed");
+                    _material.SetFloat("_TimeSpeed", _originalTimeSpeed * SlowPercentage * 0.01f);
+                }
             }
             
             _slowBuff = PoolRuntimeSo.Request("SlowBuff");
@@ -47,8 +52,8 @@ namespace RGame.RoguelikeKit
             Owner.StatRuntime.ModifyValue("Speed", _deltaValue);
             
             _material = Owner.MySpriteRenderer.material;
-            _material.SetVector("_ShadowOffset", _originalShadowOffset);
-            _material.SetFloat("_TimeSpeed", _originalTimeSpeed);
+            if (_material.HasProperty("_ShadowOffset")) _material.SetVector("_ShadowOffset", _originalShadowOffset);
+            if (_material.HasProperty("_TimeSpeed")) _material.SetFloat("_TimeSpeed", _originalTimeSpeed);
             
             PoolRuntimeSo.Return(_slowBuff);
             Owner.OnDeath -= OnOwnerDestroy;

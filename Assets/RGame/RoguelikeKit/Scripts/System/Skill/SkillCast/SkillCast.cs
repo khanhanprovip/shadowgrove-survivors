@@ -14,6 +14,7 @@ namespace RGame.RoguelikeKit
         [SerializeField] private Vector3 _originLocalScale;
         
         protected SkillDataSO _mySkillData;
+        public void BindData(SkillDataSO data) { _mySkillData=data; }
 
         // Directional/area weapons can cast freely; targeted weapons override this.
         public virtual bool CanCast() => _globalConfig.GlobalPlayer != null;
@@ -27,6 +28,7 @@ namespace RGame.RoguelikeKit
         public virtual void MixSkill()
         {
             _mySkillData.CurrentState = SkillCurrentState.Mixed;
+            _mySkillData.Damage = Mathf.CeilToInt(_mySkillData.Damage*1.2f);
         }
         
         protected void HandleSkillDeath(SkillBase skill)

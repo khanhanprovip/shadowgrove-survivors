@@ -31,6 +31,18 @@ namespace RGame.RoguelikeKit
         protected Transform _playerTransform;
         private bool _isDead;
         private int MaxHP;
+        private int encounterHealth;
+        public int MaxHealth => MaxHP;
+        public void ConfigureContext(GlobalConfigSO global,PoolRuntimeSO pool)
+        {
+            _globalConfig=global;_poolRuntime=pool;MyHit?.SetPool(pool);MyWeapon?.SetContext(global);
+        }
+        public void SetEncounterHealth(int health)
+        {
+            encounterHealth = Mathf.Max(1, health);
+            MaxHP = encounterHealth;
+            if (_stat != null) _stat.ModifyValue("HP", MaxHP - _stat.GetValue("HP"));
+        }
         
         protected virtual void Awake()
         {
@@ -55,6 +67,7 @@ namespace RGame.RoguelikeKit
             }
 
             MaxHP = _stat.GetValue("HP");
+            if (encounterHealth > 0) SetEncounterHealth(encounterHealth);
         }
 
         private void OnEnable()

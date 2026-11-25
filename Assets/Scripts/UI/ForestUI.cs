@@ -230,9 +230,11 @@ namespace DATN.UI
         }
         public static void Pause(Transform p)
         {
-            Picture(p,"Forest_PausePlate","Panel",.32f,.15f,.68f,.85f).transform.SetAsFirstSibling();Picture(p,"Forest_PauseSeal","sigil",.44f,.65f,.56f,.82f,true);
-            foreach(var l in p.GetComponentsInChildren<TMP_Text>(true))if(l.transform.parent==p){Place(l.transform,.34f,.56f,.66f,.65f);l.color=Gold;}
-            foreach(var b in p.GetComponentsInChildren<Button>(true)){float y=b.name=="TiepTucBtn"?.43f:b.name=="ChoiLaiBtn"?.32f:.21f;Place(b.transform,.37f,y,.63f,y+.075f);ButtonStyle(b,b.name=="TiepTucBtn");}
+            Picture(p,"Forest_PausePlate","Panel",.04f,.1f,.96f,.9f).transform.SetAsFirstSibling();Picture(p,"Forest_PauseSeal","sigil",.1f,.62f,.27f,.84f,true);
+            foreach(var l in p.GetComponentsInChildren<TMP_Text>(true))if(l.transform.parent==p){Place(l.transform,.07f,.53f,.3f,.62f);l.color=Gold;}
+            foreach(var b in p.GetComponentsInChildren<Button>(true)){float y=b.name=="TiepTucBtn"?.41f:b.name=="ChoiLaiBtn"?.30f:.19f;Place(b.transform,.07f,y,.3f,y+.075f);ButtonStyle(b,b.name=="TiepTucBtn");}
+            Label(p,"Forest_OwnedHeading","KỸ NĂNG ĐANG SỞ HỮU","YOUR CURRENT SKILLS",30,.34f,.79f,.93f,.86f,color:Gold);
+            if(p.GetComponent<PauseSkillInventory>()==null)p.gameObject.AddComponent<PauseSkillInventory>();
         }
         public static void Result(Canvas canvas,bool won,int seconds,int kills,int level,string hero)
         {

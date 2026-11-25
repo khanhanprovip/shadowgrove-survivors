@@ -1,0 +1,737 @@
+fileFormatVersion: 2
+guid: bc1f5ae2e2ebe2646ae4ddc9977b0179
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2926852328518510110
+    second: EclipseWraith_0
+  - first:
+      213: -7096224723731395836
+    second: EclipseWraith_1
+  - first:
+      213: 1950156762985524605
+    second: EclipseWraith_2
+  - first:
+      213: -5241519572186609137
+    second: EclipseWraith_3
+  - first:
+      213: -7453281288588432309
+    second: EclipseWraith_4
+  - first:
+      213: 1588537892960914258
+    second: EclipseWraith_5
+  - first:
+      213: 5094280520371596817
+    second: EclipseWraith_6
+  - first:
+      213: 8394318254669325660
+    second: EclipseWraith_7
+  - first:
+      213: 4307695710295743304
+    second: EclipseWraith_8
+  - first:
+      213: 4091478447646073675
+    second: EclipseWraith_9
+  - first:
+      213: -7650839108985460625
+    second: EclipseWraith_10
+  - first:
+      213: -6424155284471654778
+    second: EclipseWraith_11
+  - first:
+      213: 9205704959744047878
+    second: EclipseWraith_12
+  - first:
+      213: 2284424345359728560
+    second: EclipseWraith_13
+  - first:
+      213: -8988249010844631270
+    second: EclipseWraith_14
+  - first:
+      213: 7119260745537656225
+    second: EclipseWraith_15
+  - first:
+      213: 6012306448427210510
+    second: EclipseWraith_16
+  - first:
+      213: 6501463775540643440
+    second: EclipseWraith_17
+  - first:
+      213: -5147400506329217108
+    second: EclipseWraith_18
+  - first:
+      213: 6926413292241184146
+    second: EclipseWraith_19
+  - first:
+      213: 8290127381045214360
+    second: EclipseWraith_20
+  - first:
+      213: 8018343148600122722
+    second: EclipseWraith_21
+  - first:
+      213: 5801094706089011503
+    second: EclipseWraith_22
+  - first:
+      213: -7683397239014894898
+    second: EclipseWraith_23
+  - first:
+      213: -76979980271728815
+    second: EclipseWraith_24
+  - first:
+      213: -1615338950360023908
+    second: EclipseWraith_25
+  - first:
+      213: -1177716378955647207
+    second: EclipseWraith_26
+  - first:
+      213: 2053297025444683319
+    second: EclipseWraith_27
+  - first:
+      213: -219208752985826788
+    second: EclipseWraith_28
+  - first:
+      213: 134558451825702524
+    second: EclipseWraith_29
+  - first:
+      213: 6302927790751879993
+    second: EclipseWraith_30
+  - first:
+      213: -1731812799019128074
+    second: EclipseWraith_31
+  - first:
+      213: 6917902246813214745
+    second: EclipseWraith_32
+  - first:
+      213: -2537616483697010234
+    second: EclipseWraith_33
+  - first:
+      213: -770675040610661814
+    second: EclipseWraith_34
+  - first:
+      213: 8760653414991093509
+    second: EclipseWraith_35
+  - first:
+      213: 1701347028211160340
+    second: EclipseWraith_36
+  - first:
+      213: -160724472184165950
+    second: EclipseWraith_37
+  - first:
+      213: 5521552794341698908
+    second: EclipseWraith_38
+  - first:
+      213: -5915427502800344062
+    second: EclipseWraith_39
+  - first:
+      213: 1373068302597019147
+    second: EclipseWraith_40
+  - first:
+      213: -2940358443387826563
+    second: EclipseWraith_41
+  - first:
+      213: -940009554013606497
+    second: EclipseWraith_42
+  - first:
+      213: 1408351270905035808
+    second: EclipseWraith_43
+  - first:
+      213: 3868901083962283237
+    second: EclipseWraith_44
+  - first:
+      213: -4478961747684191863
+    second: EclipseWraith_45
+  - first:
+      213: 6865820938698828073
+    second: EclipseWraith_46
+  - first:
+      213: 4829880203621485741
+    second: EclipseWraith_47
+  - first:
+      213: 1805437298974999414
+    second: EclipseWraith_48
+  - first:
+      213: -4122015815140132748
+    second: EclipseWraith_49
+  - first:
+      213: 6105379617651845304
+    second: EclipseWraith_50
+  - first:
+      213: -7758860441125741098
+    second: EclipseWraith_51
+  - first:
+      213: -4594988196721312283
+    second: EclipseWraith_52
+  - first:
+      213: -3923009762181462162
+    second: EclipseWraith_53
+  - first:
+      213: 6670609458165757050
+    second: EclipseWraith_54
+  - first:
+      213: -324720912040791916
+    second: EclipseWraith_55
+  - first:
+      213: -8007237845367790000
+    second: EclipseWraith_56
+  - first:
+      213: -8292620474629836408
+    second: EclipseWraith_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 28.22951
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 940
+        width: 314
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa3a4a7fee4f01346bdb8904f405472e
+      internalID: -638458323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_01
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 940
+        width: 313
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0be54e88cba45499f436b210a0a36d
+      internalID: -1007625568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_02
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 940
+        width: 313
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 875d392029d1789439a5df3234ac02e4
+      internalID: 552893598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_03
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 940
+        width: 314
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3584930c5bfd0be4aa930530000c237e
+      internalID: -969630736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_04
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 627
+        width: 314
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b907931f10af9f4a85024eca95238a3
+      internalID: -77729440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_05
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 627
+        width: 313
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26fd1d6b77d2525499605ad65d0350cd
+      internalID: 471273893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_06
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 627
+        width: 313
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61b1bd0d9b425a45a3855efe3acff29
+      internalID: 187004828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_07
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 627
+        width: 314
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b20d1849d502c50469438d2b822ea65c
+      internalID: -2103270396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_08
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 314
+        width: 314
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69f89bbf07ef9646b08c2900a7210e2
+      internalID: 2022594466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_09
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 314
+        width: 313
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc8a84c2a84eab4c9ea33d76f80e80d
+      internalID: 1010023368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_10
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 314
+        width: 313
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceaced1b4065fd24aa7d51d4024fbf62
+      internalID: 652469162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_11
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 314
+        width: 314
+        height: 313
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05111821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad7b0dbc1e48ff84db32a23ed06d9fdf
+      internalID: -158958481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 314
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4592b18edbb10c645b3fb5f2e04543f5
+      internalID: 298335326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_13
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 0
+        width: 313
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f178ece6ebdd394e8cb78caf9c603b4
+      internalID: 1273505947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_14
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 313
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7719e6cda5e87564e8cae5e07d453da5
+      internalID: -1120079328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EclipseWraith_Locomotion_15
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 0
+        width: 314
+        height: 314
+      alignment: 9
+      pivot: {x: 0.5, y: 0.050955415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d3ab56f5e54a74489045b62b0c93ad6
+      internalID: 2025203760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6372f5270abcc33439a0d60ef83569b7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EclipseWraith_Locomotion_00: -638458323
+      EclipseWraith_Locomotion_01: -1007625568
+      EclipseWraith_Locomotion_02: 552893598
+      EclipseWraith_Locomotion_03: -969630736
+      EclipseWraith_Locomotion_04: -77729440
+      EclipseWraith_Locomotion_05: 471273893
+      EclipseWraith_Locomotion_06: 187004828
+      EclipseWraith_Locomotion_07: -2103270396
+      EclipseWraith_Locomotion_08: 2022594466
+      EclipseWraith_Locomotion_09: 1010023368
+      EclipseWraith_Locomotion_10: 652469162
+      EclipseWraith_Locomotion_11: -158958481
+      EclipseWraith_Locomotion_12: 298335326
+      EclipseWraith_Locomotion_13: 1273505947
+      EclipseWraith_Locomotion_14: -1120079328
+      EclipseWraith_Locomotion_15: 2025203760
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

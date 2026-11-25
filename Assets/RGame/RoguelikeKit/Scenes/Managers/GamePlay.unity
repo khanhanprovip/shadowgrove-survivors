@@ -492,6 +492,7 @@ MonoBehaviour:
   startStageChannelSO: {fileID: 11400000, guid: 0d2e5c5d38a6fc944b4262bb84bdc5be, type: 2}
   minSpawnRadius: 18
   maxSpawnRadius: 20
+  maxActiveEnemies: 40
 --- !u!1 &94825684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _powerUpStat: {fileID: 11400000, guid: 13f0666635c13734da2b9e1fd17c40ae, type: 2}
   _playerStat: {fileID: 11400000, guid: 4bc339572b7f1f8408c52327ccd34d22, type: 2}
+  _ownedUpgrades: {fileID: 11400000, guid: 3fe8cc45f33e15d4ab9b49289c6376a4, type: 2}
 --- !u!4 &756908611
 Transform:
   m_ObjectHideFlags: 0
@@ -2770,6 +2772,8 @@ MonoBehaviour:
   _levelUpgradeChannel: {fileID: 11400000, guid: 7574520b28797c544b0950058445e47c, type: 2}
   _poolRuntime: {fileID: 11400000, guid: 52af97b42e2615f48803c999102a7193, type: 2}
   expConfig: {fileID: 11400000, guid: afef12d4d5994ce47ac43821fbef199a, type: 2}
+  _attributes: {fileID: 756908610}
+  _playerSpawn: {fileID: 11400000, guid: 2780f268bc318574eb2d611c05a0de50, type: 2}
 --- !u!4 &802702162
 Transform:
   m_ObjectHideFlags: 0

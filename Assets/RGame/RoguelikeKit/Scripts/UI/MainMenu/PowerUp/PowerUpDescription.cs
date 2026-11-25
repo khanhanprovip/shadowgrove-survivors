@@ -37,7 +37,7 @@ namespace RGame.RoguelikeKit
             mTitle.color = DATN.UI.ForestUI.Gold;
             mDescription.color = DATN.UI.ForestUI.Ink;
             mGoldCount.color = DATN.UI.ForestUI.Ink;
-            mDescription.text = language == "vi" ? VietnameseDescription(currentTitle) : currentDescription;
+            mDescription.text = PermanentBalance.Description(currentTitle, language == "vi");
             mGoldCount.text = currentCost < 0 ? DATN.UI.ForestUI.Tr("TỐI ĐA", "MAX") : currentCost.ToString();
         }
 

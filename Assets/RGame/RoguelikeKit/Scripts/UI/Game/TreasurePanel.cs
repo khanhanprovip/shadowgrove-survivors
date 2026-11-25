@@ -40,6 +40,7 @@ namespace RGame.RoguelikeKit
 
         public void Show(List<SkillDataSO> skillDataSos)
         {
+            transform.SetAsLastSibling();
             Time.timeScale = 0;
             ShadowgroveAudio.Play(SoundCue.Treasure);
             
@@ -49,7 +50,7 @@ namespace RGame.RoguelikeKit
 
             currentSkills = skillDataSos;
 
-            for (int i = 0; i < skillDataSos.Capacity; i++)
+            for (int i = 0; i < skillDataSos.Count; i++)
             {
 
                 imageList[i].transform.parent.gameObject.SetActive(true);
@@ -58,7 +59,7 @@ namespace RGame.RoguelikeKit
                 imageList[i].sprite = skillDataSos[i].SkillIcon; // Money bag icon
             }
 
-            StartCoroutine(IconAddAnimation(skillDataSos.Capacity));
+            StartCoroutine(IconAddAnimation(skillDataSos.Count));
         }
 
         public void EnterSkill()

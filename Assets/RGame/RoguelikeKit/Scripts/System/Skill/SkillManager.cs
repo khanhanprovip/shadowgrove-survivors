@@ -27,6 +27,16 @@ namespace RGame.RoguelikeKit
 
         private int _activeAttackSkill;
         private int _activeAttributeSkill;
+        private int pendingTreasure;
+        private void Update()
+        {
+            if(pendingTreasure<=0||Time.timeScale<=0||_globalConfig.GlobalPlayer==null||_playerStat.GetValue("HP")<=0)return;
+            pendingTreasure--;PresentTreasurePanel();
+        }
+        public IEnumerable<SkillDataSO> OwnedSkills
+        {
+            get { foreach (var key in _activeSkills) yield return _skillDataDictionary[key]; }
+        }
         
         private void Awake()
         {
@@ -90,7 +100,9 @@ namespace RGame.RoguelikeKit
             {
                 if (_skillDataDictionary[key].CheckLevelToMax())
                 {
+                    _skillCastDictionary[key].BindData(skillData);
                     _skillCastDictionary[key].MixSkill();
+                    UpdateSkillEndTime(key);
                     return;
                 }
                 
@@ -243,6 +255,10 @@ namespace RGame.RoguelikeKit
         }
 
         private void OpenTreasurePanel()
+        {
+            pendingTreasure++;
+        }
+        private void PresentTreasurePanel()
         {
             int random = Random.Range(0, 6);
 

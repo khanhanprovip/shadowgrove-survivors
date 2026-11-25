@@ -22,28 +22,30 @@ MonoBehaviour:
   Velocity: 0
   Duration: 5
   CD: 5
-  Damage: 5
+  Damage: 6
   Amount: 1
   Area: 0
+  StarterWeapon: 0
+  AttackRange: 0
   UpgradeAttribute:
   - skillAttributeType: 4
-    IntValue: 20
+    IntValue: 10
   - skillAttributeType: 0
-    IntValue: 5
+    IntValue: 3
   - skillAttributeType: 4
-    IntValue: 20
+    IntValue: 10
   - skillAttributeType: 0
-    IntValue: 5
+    IntValue: 3
   - skillAttributeType: 0
-    IntValue: 5
+    IntValue: 3
   - skillAttributeType: 4
-    IntValue: 20
+    IntValue: 10
   - skillAttributeType: 0
-    IntValue: 5
+    IntValue: 3
   - skillAttributeType: 4
-    IntValue: 20
+    IntValue: 10
   - skillAttributeType: 0
-    IntValue: 5
+    IntValue: 3
   - skillAttributeType: 4
-    IntValue: 20
+    IntValue: 10
   UpgradeAttributeModValue: 

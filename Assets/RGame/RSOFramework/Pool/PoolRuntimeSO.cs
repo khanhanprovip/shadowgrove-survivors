@@ -19,6 +19,13 @@ namespace RGame.Framework
         
         private Transform _rootTransform;
         private bool _isInitialized;
+        public GameObject GetPrefab(string key)
+        {
+            if (_poolConfigs.TryGetValue(key, out var pool)) return pool.Prefab;
+            foreach (var definition in _poolDefinitions)
+                if (definition.Key == key) return definition.Pool?.Prefab;
+            return null;
+        }
 
         private void OnDisable()
         {

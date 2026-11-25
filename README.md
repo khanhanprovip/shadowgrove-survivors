@@ -15,6 +15,13 @@
 - Bộ hình quái/boss, icon và VFX theo cùng phong cách; nháy đỏ nhẹ khi nhận sát thương.
 - Rương nhận 50 vàng trong trận khi chạm; chống nhận lặp.
 - Âm thanh, save, nâng cấp và các công cụ kiểm thử Unity/Windows.
+- Quái thường 30 HP, tinh anh 90 HP. Tối đa 40 quái thường hoạt động trên toàn bản đồ trong mọi chế độ; đạt trần thì ngừng sinh thêm, có chỗ trống mới sinh bù. Nhịp sinh quái nhẹ ở đầu trận rồi tăng dần; đợt vòng/cụm dùng chung ngân sách sinh, không quá 2 quái mới trong một frame.
+- Boss chỉ xuất hiện trong Endless, mỗi 5 phút theo đồng hồ trận. Khi boss xuất hiện, quái nhỏ và đạn quái được dọn, quái nhỏ tạm ngừng sinh cho đến khi boss bị hạ.
+- Năm boss xoay tua: Ảnh Hồn Nhật Thực, Cổ Vương Gai, Ai Nữ Băng Sương, Huyết Nguyệt Đao Phủ và Tiên Tri Vực Thẳm. Mỗi boss có 5 chiêu theo chủ đề, chọn ngẫu nhiên và tránh lặp ngay chiêu vừa dùng; chuẩn bị ra đòn qua chuyển động cơ thể, không vẽ cảnh báo trên sàn hoặc nhãn báo chiêu riêng.
+- Boss đầu 300 HP, mỗi lượt tiếp theo thêm 300 HP, kể cả sau khi quay lại boss đầu. Boss cao khoảng 5 lần nhân vật, có tên màu riêng phía trên thanh máu. Không cộng dồn hai boss nếu trận đánh kéo dài qua mốc tiếp theo. Có banner tên/màu khi xuất hiện; năm bộ sprite animation riêng (180 sprite, 30 clip) cho chờ, di chuyển, chuẩn bị, tấn công, nhận đòn và chết. Ảnh Hồn giữ trượng/niệm phép; Cổ Vương bước bằng rễ/giáng tay; Ai Nữ lướt/bung tinh thể; Đao Phủ lao/vung lưỡi hái; Tiên Tri co/phóng xúc tu.
+- VFX chiêu theo năm chủ đề linh hồn/gai/băng/lưỡi hái/mắt vực thẳm; hiệu ứng tay và thân khi chuẩn bị, vệt/đạn/vòng khi đòn đã kích hoạt. Boss quay trái/phải theo hướng ngắm và giữ hướng suốt đòn; di chuyển theo hướng đi, không lật tên/thanh máu. Hướng gần thẳng đứng giữ hướng ngang gần nhất.
+- Hạ boss nhận trực tiếp 5 cấp và 500 vàng. Năm lượt chọn nâng cấp được xếp hàng; vàng được lưu theo phần chưa ghi nhận để tránh mất hoặc cộng hai lần khi chơi lại/về menu.
+- Màn tạm dừng có danh sách kỹ năng tấn công/thuộc tính đang sở hữu, cấp và chỉ số, hỗ trợ cuộn và VI/EN.
 
 ## Chiêu khởi đầu
 
@@ -27,6 +34,8 @@
 Chỉ tung đòn khi có quái hợp lệ trong tầm tròn. Đạn được thu hồi khi trúng hoặc hết tầm. Màn chọn nhân vật, HUD và thẻ nâng cấp dùng tên/icon riêng. Các ô Sức mạnh có vùng bấm phủ toàn ô để xem đúng mô tả, kể cả khi thuộc tính đã tối đa.
 
 Đã kiểm tra UI, combat/rương và thẻ kỹ năng trên bản Windows ở 1280×720 và 1920×1080. Đồng hồ Survival được chặn đúng mốc 90/120 giây khi frame vượt hạn. [Kết quả và phạm vi kiểm chứng](Tools/UnityHarness/verification-2026-11-23.json).
+
+Đợt boss/animation/VFX và cân bằng có [báo cáo kiểm chứng ngày 25/11/2026](Tools/UnityHarness/verification-2026-11-25.json), kèm đường dẫn build/log, ảnh thực tế, các lượt FAIL đã sửa và giới hạn kiểm thử.
 
 ## Chạy dự án
 
@@ -59,5 +68,5 @@ Build, log, cache Unity và bộ thực thi CLI tải về không được đưa
 ## Giới hạn đã biết
 
 - Khi rất đông quái dồn một chỗ, FPS có thể giảm mạnh; chưa tối ưu stress test dài hạn.
-- Các vấn đề đã ghi nhận về ngân hàng vàng cuối trận, nâng cấp vĩnh viễn và xác thực save chưa thuộc đợt sửa hình ảnh/kỹ năng này.
+- Nâng cấp vĩnh viễn dùng mức cộng và giá mới, giữ số bậc đã mua và vàng hiện có. Việc mở lại menu không cộng lặp chỉ số. Xác thực nội dung save bất thường chưa thuộc đợt sửa này.
 - Bộ kiểm thử UI dùng raycast và sự kiện pointer thật của Unity; kiểm tra chuột Windows ở ô Sức mạnh chưa hoàn tất do người dùng dừng Computer Use.

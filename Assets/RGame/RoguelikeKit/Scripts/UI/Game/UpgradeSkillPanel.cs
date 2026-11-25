@@ -7,6 +7,7 @@ namespace RGame.RoguelikeKit
 {
     public class UpgradeSkillPanel : MonoBehaviour
     {
+        public static event Action SelectionCompleted;
         [SerializeField] private UpgradeSkillUIChannel _upgradeSkillUIChannel;
         [SerializeField] private StringEventChannelSO _upgradeSkillChannel;
         [SerializeField] private UpgradeSkillItem[] _upgradeSkillPrefab;
@@ -31,6 +32,7 @@ namespace RGame.RoguelikeKit
 
             for (int i = 0; i < skills.Count; i++)
             {
+                _upgradeSkillPrefab[i].UpgradeSkillAction -= UpgradeSkill;
                 _upgradeSkillPrefab[i].UpgradeSkillAction += UpgradeSkill;
                 
                 // Set UI for skill or money bag
@@ -73,6 +75,7 @@ namespace RGame.RoguelikeKit
             {
                 _upgradeSkillPrefab[i].UpgradeSkillAction -= UpgradeSkill;
             }
+            SelectionCompleted?.Invoke();
         }
     }
 }

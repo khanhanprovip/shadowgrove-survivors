@@ -18,6 +18,7 @@ namespace RGame.RoguelikeKit
         public UnityAction OnDeathEnd { get; set; }
         
         private bool _isDead;
+        public void SetPool(PoolRuntimeSO pool) { poolRuntimeSo=pool; }
 
         private void OnEnable()
         {

@@ -15,6 +15,11 @@ namespace RGame.RoguelikeKit
         protected CommonStatRuntimeSO _stat;
         protected bool _isPlayerInRange;
         private float _attackTimer;
+        public void SetContext(GlobalConfigSO global) { _globalConfig=global; }
+        protected virtual void OnDisable()
+        {
+            _isPlayerInRange=false; _playerHit=null; _attackTimer=0;
+        }
 
         /// <summary>
         /// Assigns the stat runtime for damage and cooldown values.
@@ -26,6 +31,7 @@ namespace RGame.RoguelikeKit
 
         protected virtual void FixedUpdate()
         {
+            if (_stat != null && _stat.GetValue("HP") <= 0) return;
             if (_playerHit == null && _globalConfig.GlobalPlayer != null)
             {
                 _playerHit = _globalConfig.GlobalPlayer.GetComponentInChildren<PlayerHit>();

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 984743243293898303}
   - component: {fileID: 9071124183319114101}
   - component: {fileID: 2149870321795947617}
+  - component: {fileID: 8191460433137409479}
   m_Layer: 7
   m_Name: GroveColossus
   m_TagString: Enemy
@@ -275,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _globalConfig: {fileID: 11400000, guid: 055b856c9b45e18459c288223c3025c1, type: 2}
-  _valueConfig: {fileID: 11400000, guid: 1d79ea28f92746b599e991d6179a0506, type: 2}
+  _valueConfig: {fileID: 11400000, guid: 5bfabdd1a46657e4281beb440759546f, type: 2}
   _poolRuntime: {fileID: 11400000, guid: 52af97b42e2615f48803c999102a7193, type: 2}
   _dropKeys:
   - Exp80
@@ -293,6 +294,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   excludedRenderers: []
+--- !u!114 &8191460433137409479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101547999572780385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd84f2b7b5b5d454ea86a6fc12787b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RGame.RoguelikeKit.EnemyRank
+  Tier: 2
 --- !u!1 &7464123556089071034
 GameObject:
   m_ObjectHideFlags: 0

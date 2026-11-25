@@ -27,6 +27,7 @@ namespace RGame.RoguelikeKit
 
         private void Show()
         {
+            _globalConfig.BankGold();
             Time.timeScale = 0;
             poolRuntime.RecycleAll();
             _clearAllBuffs.RaiseEvent();
@@ -40,7 +41,7 @@ namespace RGame.RoguelikeKit
         {
             ShadowgroveAudio.Play(SoundCue.UiSelect);
             Time.timeScale = 1;
-            _attributeSO.SetAttribute("GoldCount",_attributeSO.GoldCount + _globalConfig.CurrentGetGold);
+            _globalConfig.BankGold();
             _saveGame.RaiseEvent();
             _sceneLoader.RaiseEvent(_mainMenuScene);
         }

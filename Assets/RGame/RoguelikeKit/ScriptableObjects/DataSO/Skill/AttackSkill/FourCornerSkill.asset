@@ -25,25 +25,27 @@ MonoBehaviour:
   Damage: 10
   Amount: 1
   Area: 0
+  StarterWeapon: 0
+  AttackRange: 0
   UpgradeAttribute:
   - skillAttributeType: 0
-    IntValue: 10
+    IntValue: 3
   - skillAttributeType: 4
     IntValue: 10
   - skillAttributeType: 1
+    IntValue: 5
+  - skillAttributeType: 0
+    IntValue: 3
+  - skillAttributeType: 4
+    IntValue: 10
+  - skillAttributeType: 1
+    IntValue: 5
+  - skillAttributeType: 4
     IntValue: 10
   - skillAttributeType: 0
-    IntValue: 10
+    IntValue: 3
   - skillAttributeType: 4
     IntValue: 10
   - skillAttributeType: 1
-    IntValue: 10
-  - skillAttributeType: 4
-    IntValue: 10
-  - skillAttributeType: 0
-    IntValue: 10
-  - skillAttributeType: 4
-    IntValue: 10
-  - skillAttributeType: 1
-    IntValue: 10
+    IntValue: 5
   UpgradeAttributeModValue: 

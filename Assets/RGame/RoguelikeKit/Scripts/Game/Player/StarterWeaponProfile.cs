@@ -19,6 +19,8 @@ namespace RGame.RoguelikeKit
             data.StarterWeapon = Kind;
             data.AttackRange = Range;
             data.SkillIcon = Icon;
+            data.Damage = Kind == StarterWeaponKind.ThornSlash ? 12 : Kind == StarterWeaponKind.DarkOrb ? 10 : 8;
+            data.CD = Kind == StarterWeaponKind.ThornSlash ? .9f : Kind == StarterWeaponKind.DarkOrb ? 1.15f : .85f;
             data.Velocity = Kind == StarterWeaponKind.Arrow ? 16f : Kind == StarterWeaponKind.DarkOrb ? 9f : 0f;
         }
 

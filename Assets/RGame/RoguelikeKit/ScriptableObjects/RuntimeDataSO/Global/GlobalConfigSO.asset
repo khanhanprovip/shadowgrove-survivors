@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: GlobalConfigSO
   m_EditorClassIdentifier: 
   Description: 
+  MoveSpeedBalanceFactor: 0.05
+  CurrentGetGold: 0
+  CurrentGetKill: 0
+  _saveSystem: {fileID: 11400000, guid: d7b40561bfbb9f74ab1b497aed9696b5, type: 2}

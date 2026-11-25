@@ -33,7 +33,7 @@ namespace RGame.RoguelikeKit
         {
             base.MixSkill();
             _mySkillData.Velocity = _mySkillData.Velocity * 1.5f;
-            _mySkillData.Amount += 3;
+            _mySkillData.Amount += 1;
         }
     }
 }
