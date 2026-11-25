@@ -38,6 +38,7 @@ namespace RGame.RoguelikeKit
 
         public void AddBuff(BaseEnemy _owner, BaseBuff _buff)
         {
+            if(_owner is EndlessBossEnemy boss && boss.Entering)return;
             if (mOwnerBuff.ContainsKey((_owner, _buff.BuffName)))
             {
                 var existingBuff = mOwnerBuff[(_owner, _buff.BuffName)];

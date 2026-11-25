@@ -54,6 +54,7 @@ namespace DATN.Trial
                 }
                 var boss=director.ActiveBoss;var brain=boss.GetComponent<BossBrain>();
                 yield return Wait(()=>boss.StatRuntime!=null,"Boss stats initialize");
+                yield return CheckBossEntrance(boss,director,visibility);
                 var rig=boss.GetComponent<BossVisualAnimation>();
                 // QA only: reward choices may add untargeted weapons. Isolate their
                 // collision damage while measuring animation and exact reward amounts.
@@ -162,7 +163,16 @@ namespace DATN.Trial
                             if(rig.Motion==BossMotion.Windup&&brain.CastAge>=.3f&&brain.CastAge<1.1f)
                             {
                                 windupSeen=true;
-                                if(!capturedWindup){capturedWindup=true;yield return CaptureFrame("boss-"+encounter+"-windup");}
+                                if(!capturedWindup)
+                                {
+                                    var castLines=boss.GetComponentsInChildren<LineRenderer>(true).Where(l=>l.name.StartsWith("Boss Cast ")&&l.enabled).ToArray();
+                                    var fxBounds=LineBounds(castLines);
+                                    var canonical=boss.GetComponent<BossVisualAnimation>().StandingSprite.bounds;
+                                    Require(castLines.Length>=3&&fxBounds.max.y>boss.transform.position.y+canonical.size.y*.40f&&
+                                            (fxBounds.size.x>canonical.size.x*.55f||fxBounds.size.y>canonical.size.y*.5f),
+                                        "Casting VFX scale with the boss body and reach the upper body instead of remaining at its feet");
+                                    capturedWindup=true;yield return CaptureFrame("boss-"+encounter+"-windup");
+                                }
                             }
                             if(rig.Motion==BossMotion.Attack&&brain.CastAge>=1.28f&&BossSkillVfx.ActiveVisualCount>0)
                             {
@@ -330,7 +340,16 @@ namespace DATN.Trial
             }
             yield return Wait(()=>FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).Any(e=>e.GetComponent<EnemyRank>()?.Tier!=EnemyTier.Boss),"Ordinary waves resume after boss");
             starterWeapon.Range=originalWeaponRange;
+            JumpClock(director.NextAt-.02f);Time.timeScale=1;
+            yield return Wait(()=>director.ActiveBoss!=null,"Arrival available for exit cancellation");
+            Require(director.ActiveBoss.Entering,"Exit is exercised during the boss entrance");
+            var exitWallet=Resources.FindObjectsOfTypeAll<AttributeSO>().Single(x=>x.name=="AttributeSO");
+            int expectedExitGold=exitWallet.GoldCount+_round.GlobalConfig.UnbankedGold;
             _round.ExitToMainMenu();yield return WaitForMenu();
+            yield return new WaitForSecondsRealtime(.25f);
+            Require(FindObjectsByType<BossEntrance>(FindObjectsSortMode.None).All(x=>!x.IsEntering)&&
+                    BossHazard.ActiveCount==0&&exitWallet.GoldCount==expectedExitGold,
+                "Exit during entrance clears the ceremony without attacks or free boss rewards");
             foreach(int stage in new[]{0,1})
             {
                 yield return EnterRound(stage,"Kael");
@@ -338,6 +357,83 @@ namespace DATN.Trial
                 Require(!FindFirstObjectByType<EndlessBossDirector>().IsEncounterActive&&FindFirstObjectByType<EndlessBossDirector>().EncounterCount==0,"Survival/KillTarget never start boss encounters");
                 yield return LeaveFromPause();
             }
+        }
+        IEnumerator CheckBossEntrance(EndlessBossEnemy boss,EndlessBossDirector director,SpriteVisibilityProbe visibility)
+        {
+            Time.timeScale=1;
+            var entry=boss.GetComponent<BossEntrance>();var brain=boss.GetComponent<BossBrain>();
+            Require(entry!=null&&entry.IsEntering&&boss.Entering,"Boss reserves the encounter before entering combat");
+            Require(entry.Elapsed<BossEntrance.WarningSeconds&&boss.MySpriteRenderer.color.a<.01f&&director.ArrivalBanner.IsVisible,
+                "Warning banner precedes the visible boss reveal");
+            int hp=boss.StatRuntime.GetValue("HP");boss.MyHit.Hit(999999);
+            Require(boss.StatRuntime.GetValue("HP")==hp&&!brain.enabled&&!boss.MyWeapon.enabled&&
+                    boss.GetComponentsInChildren<Collider2D>(true).All(c=>!c.enabled)&&BossHazard.ActiveCount==0,
+                "Entrance blocks damage, contact attacks and boss AI");
+            int speed=boss.StatRuntime.GetValue("Speed");
+            var slow=ScriptableObject.CreateInstance<SlowBuff>();slow.SlowPercentage=100;slow.BuffName="SlowBuff";
+            FindFirstObjectByType<BuffManager>().AddBuff(boss,slow);Destroy(slow);
+            Require(boss.StatRuntime.GetValue("Speed")==speed,"Entrance rejects premature status effects");
+            yield return CaptureFrame("arrival-"+entry.Kind+"-warning");
+            float deadline=Time.realtimeSinceStartup+10;
+            bool sampledPause=false,captured=false,moved=false,visible=false,noEarlyAttack=true;
+            var hero=_round.GlobalConfig.GlobalPlayer.transform;Vector3 heroStart=hero.position;
+            var heroSprite=hero.GetComponent<PlayerAnim>().MyAnimator.GetComponent<SpriteRenderer>();
+            var entryLines=boss.GetComponentsInChildren<LineRenderer>(true).Where(l=>l.name.StartsWith("Boss Entrance FX ")).ToArray();
+            bool movedHero=false,heroVisible=true;
+            Vector3 firstVisible=boss.transform.position;
+            while(entry.IsEntering&&Time.realtimeSinceStartup<deadline)
+            {
+                if(boss.MySpriteRenderer.color.a>.25f)
+                {
+                    if(!visible){firstVisible=boss.transform.position;visible=true;}
+                    moved|=Vector3.Distance(firstVisible,boss.transform.position)>.05f;
+                    noEarlyAttack&=!brain.enabled&&!boss.MyWeapon.enabled&&BossHazard.ActiveCount==0;
+                    heroVisible&=boss.MySpriteRenderer.sortingOrder<heroSprite.sortingOrder&&entryLines.All(l=>!l.enabled||l.sortingOrder<heroSprite.sortingOrder);
+                }
+                if(!movedHero&&entry.Elapsed>BossEntrance.WarningSeconds+.2f){hero.position+=Vector3.up*.8f;movedHero=true;}
+                if(!sampledPause&&entry.Elapsed>BossEntrance.WarningSeconds+.5f)
+                {
+                    _round.Pause();
+                    float elapsed=entry.Elapsed,clock=boss.GetComponent<BossVisualAnimation>().AnimationClock;
+                    var pos=boss.transform.position;var color=boss.MySpriteRenderer.color;
+                    var lines=boss.GetComponentsInChildren<LineRenderer>(true).Where(l=>l.name.StartsWith("Boss Entrance FX ")&&l.enabled).ToArray();
+                    var positions=CaptureLinePositions(lines);
+                    yield return new WaitForSecondsRealtime(.2f);
+                    Require(entry.Elapsed==elapsed&&boss.transform.position==pos&&boss.MySpriteRenderer.color==color&&
+                            boss.GetComponent<BossVisualAnimation>().AnimationClock==clock&&SameLinePositions(lines,positions),
+                        "Pause freezes entrance position, opacity, native animation and ceremony VFX");
+                    _round.Resume();sampledPause=true;
+                }
+                if(!captured&&entry.Elapsed>BossEntrance.WarningSeconds+BossEntrance.RevealSeconds*.70f)
+                {
+                    var fxBounds=LineBounds(boss.GetComponentsInChildren<LineRenderer>(true).Where(l=>l.name.StartsWith("Boss Entrance FX ")&&l.enabled).ToArray());
+                    Require(fxBounds.max.y>boss.transform.position.y+entry.BodyHeight*.25f&&
+                            (fxBounds.size.x>entry.TargetBounds.size.x*.5f||fxBounds.size.y>entry.BodyHeight*.5f),
+                        "Entrance VFX span the giant body and extend above the feet");
+                    yield return CaptureFrame("arrival-"+entry.Kind+"-reveal");captured=true;
+                }
+                yield return null;
+            }
+            Require(!entry.IsEntering&&!boss.Entering&&sampledPause&&captured&&visible&&moved,
+                $"{entry.Style} completes a visible moving entrance on scaled time (elapsed={entry.Elapsed:0.00}, visible={visible}, moved={moved}, pause={sampledPause}, captured={captured}, entering={entry.IsEntering})");
+            Require(noEarlyAttack,"Boss cannot cast or deal contact damage during its visible arrival");
+            Require(movedHero&&heroVisible,"Moving survivor stays in front of the giant body and entrance VFX");
+            hero.position=heroStart;
+            bool direction=entry.Kind==2?firstVisible.y>boss.transform.position.y:
+                entry.Kind==3?firstVisible.x>boss.transform.position.x:firstVisible.y<boss.transform.position.y;
+            Require(direction,$"{entry.Style} follows its distinct entry direction");
+            Require(brain.enabled&&boss.MyWeapon.enabled&&boss.GetComponentsInChildren<Collider2D>(true).Any(c=>c.enabled)&&
+                    boss.MySpriteRenderer.color.a>.99f&&visibility.RenderedSignature(boss.MySpriteRenderer).OpaquePixels>200,
+                "Completed arrival restores visible body, colliders and combat exactly once");
+            Require(boss.GetComponentsInChildren<LineRenderer>(true).Where(l=>l.name.StartsWith("Boss Entrance FX ")).All(l=>!l.enabled),
+                "Ceremony VFX are hidden after entry; they are not attack telegraphs");
+        }
+        static Bounds LineBounds(LineRenderer[] lines)
+        {
+            bool first=true;Bounds bounds=default;
+            foreach(var line in lines)for(int i=0;i<line.positionCount;i++)
+            {var point=line.GetPosition(i);if(first){bounds=new Bounds(point,Vector3.zero);first=false;}else bounds.Encapsulate(point);}
+            return bounds;
         }
         void CheckBossStatusShader(EndlessBossEnemy boss,PoolRuntimeSO pool,SpriteVisibilityProbe visibility)
         {
@@ -507,13 +603,13 @@ namespace DATN.Trial
             var name=banner.GetComponentsInChildren<TMP_Text>(true).Single(t=>t.name=="BossArrivalName");
             var announcement=banner.GetComponentsInChildren<TMP_Text>(true).Single(t=>t.name=="BossArrivalAnnouncement");
             Require(name.text==BossCatalog.Name(kind,vi)&&name.color==BossCatalog.Colors[kind]&&
-                    announcement.text==(vi?"BOSS XUẤT HIỆN":"BOSS APPROACHES"),
+                    announcement.text==(vi?"BOSS ĐANG ĐẾN":"BOSS INCOMING"),
                 $"Arrival banner localizes the { (vi?"Vietnamese":"English") } boss name and applies its catalog color");
             var group=banner.GetComponentInChildren<CanvasGroup>(true);
             var graphics=banner.GetComponentsInChildren<Graphic>(true);
             Require(group!=null&&!group.blocksRaycasts&&!group.interactable&&graphics.All(g=>!g.raycastTarget),
                 "Boss arrival banner does not intercept pointer input");
-            Require(banner.ShownSeconds>=0f&&banner.ShownSeconds<3.1f,"Arrival banner tracks its bounded three-second display");
+            Require(banner.ShownSeconds>=0f&&banner.ShownSeconds<BossArrivalBanner.DisplayDuration,"Arrival banner tracks its bounded warning and reveal display");
             Canvas.ForceUpdateCanvases();
             name.ForceMeshUpdate();announcement.ForceMeshUpdate();
             Require(!name.isTextOverflowing&&!announcement.isTextOverflowing,"Boss arrival name and announcement fit their text rectangles");
@@ -547,24 +643,33 @@ namespace DATN.Trial
                 Vector2 to=shape==BossHazard.Shape.Line?p+Vector2.right*3:Vector2.right;
                 float radius=shape==BossHazard.Shape.Ring?3:.6f;
                 int hp=_round.PlayerStat.GetValue("HP");
-                BossHazard.Create(boss.transform,target,shape,from,to,radius,1.1f,.4f,Color.red);
-                yield return new WaitForSeconds(.5f);
-                Require(_round.PlayerStat.GetValue("HP")==hp,shape+" warning cannot damage before its windup");
-                var warning=FindObjectsByType<BossHazard>(FindObjectsSortMode.None)
-                    .SingleOrDefault(h=>h.gameObject.activeInHierarchy&&h.IsTelegraph);
-                var warningLines=warning!=null?warning.GetComponentsInChildren<LineRenderer>(true):Array.Empty<LineRenderer>();
-                Require(warning!=null&&warningLines.Length>0&&warningLines.All(line=>!line.enabled),
-                    shape+" warning keeps every root and child line renderer hidden throughout the windup");
-                yield return new WaitForSeconds(.45f);
-                Require(_round.PlayerStat.GetValue("HP")==hp,
-                    shape+" still waits for the full 1.1-second windup while no warning is drawn");
-                yield return new WaitForSeconds(.2f);
+                var attack=BossHazard.Create(boss.transform,target,shape,from,to,radius,1.1f,.4f,Color.red);
+                var warningLines=attack.GetComponentsInChildren<LineRenderer>(true);
+                bool hidden=true,noEarlyDamage=true;int warningSamples=0;
+                float created=Time.time,firstDamageAfter=-1,deadline=Time.realtimeSinceStartup+4;
+                // Measure the actual first damage frame. Chained scaled waits can
+                // overshoot the windup when a Windows frame stalls or encodes a PNG.
+                while(attack.gameObject.activeSelf&&Time.realtimeSinceStartup<deadline)
+                {
+                    if(attack.IsTelegraph)
+                    {
+                        warningSamples++;hidden&=warningLines.All(line=>!line.enabled);
+                        noEarlyDamage&=_round.PlayerStat.GetValue("HP")==hp;
+                    }
+                    yield return null;
+                    if(_round.PlayerStat.GetValue("HP")!=hp&&firstDamageAfter<0)firstDamageAfter=Time.time-created;
+                }
+                Require(warningSamples>0&&noEarlyDamage,shape+" warning cannot damage before its windup");
+                Require(warningLines.Length>0&&hidden,shape+" warning keeps every root and child line renderer hidden throughout the windup");
+                Require(!attack.gameObject.activeSelf&&firstDamageAfter>=1.099f,
+                    $"{shape} waits for the full 1.1-second windup (actual first damage={firstDamageAfter:0.000}s, warning samples={warningSamples})");
                 int damage=Mathf.Max(1,(int)(8*_round.PlayerStat.GetValue("Armor")*.01f));
                 Require(_round.PlayerStat.GetValue("HP")==hp-damage,shape+" active geometry hits through real PlayerHit exactly once");
                 BossHazard.ClearAll();hp=_round.PlayerStat.GetValue("HP");
-                BossHazard.Create(boss.transform,target,shape,p+Vector2.right*12,p+Vector2.right*15,.6f,1.1f,.4f,Color.red);
-                yield return new WaitForSeconds(1.65f);
-                Require(_round.PlayerStat.GetValue("HP")==hp,shape+" allows safe positions outside the visible danger area");
+                var safe=BossHazard.Create(boss.transform,target,shape,p+Vector2.right*12,p+Vector2.right*15,.6f,1.1f,.4f,Color.red);
+                deadline=Time.realtimeSinceStartup+4;
+                while(safe.gameObject.activeSelf&&Time.realtimeSinceStartup<deadline)yield return null;
+                Require(!safe.gameObject.activeSelf&&_round.PlayerStat.GetValue("HP")==hp,shape+" allows safe positions outside the visible danger area");
             }
             BossHazard.ClearAll();boss.transform.position=previousBossPosition;_round.PlayerStat.ModifyValue("Recovery",recovery);boss.enabled=true;boss.MyWeapon.enabled=true;Time.timeScale=1;
         }

@@ -9,7 +9,7 @@ namespace DATN.UI
     [DisallowMultipleComponent]
     public sealed class BossArrivalBanner : MonoBehaviour
     {
-        private const float DisplayDuration = 3f;
+        public const float DisplayDuration = BossEntrance.TotalSeconds + .8f;
         private const float FadeInDuration = 0.22f;
         private const float FadeOutDuration = 0.38f;
 
@@ -143,8 +143,8 @@ namespace DATN.UI
             _announcementLabel = ForestUI.Label(
                 contentRect,
                 "BossArrivalAnnouncement",
-                "BOSS XUẤT HIỆN",
-                "BOSS APPROACHES",
+                "BOSS ĐANG ĐẾN",
+                "BOSS INCOMING",
                 18f,
                 0.31f, 0.833f, 0.69f, 0.854f,
                 TextAlignmentOptions.Center,
@@ -207,7 +207,7 @@ namespace DATN.UI
             bool vietnamese = code == "vi";
 
             if (_announcementLabel != null)
-                _announcementLabel.text = vietnamese ? "BOSS XUẤT HIỆN" : "BOSS APPROACHES";
+                _announcementLabel.text = vietnamese ? "BOSS ĐANG ĐẾN" : "BOSS INCOMING";
 
             if (_bossNameLabel != null && _displayedKind >= 0)
             {

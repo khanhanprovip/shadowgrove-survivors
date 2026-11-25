@@ -6,7 +6,7 @@ namespace RGame.RoguelikeKit
     [DefaultExecutionOrder(1600)]
     public sealed class BossCastingVfx : MonoBehaviour
     {
-        private const float CastWindow = 1.1f;
+        private const float CastWindow = 2f;
         private const int HandPointCount = 25;
         private const int ChestPointCount = 25;
 
@@ -54,17 +54,19 @@ namespace RGame.RoguelikeKit
             if (_leftOuter == null)
                 BuildLines();
 
-            Bounds bounds = _body.bounds;
+            Bounds bounds = CanonicalBounds(_boss);
             Vector2 bodyCenter = bounds.center;
             float width = Mathf.Max(0.1f, bounds.size.x);
             float height = Mathf.Max(0.1f, bounds.size.y);
-            float glyphRadius = Mathf.Max(0.07f, Mathf.Min(width, height) * 0.085f);
-            Vector2 leftHand = bodyCenter + new Vector2(-width * 0.30f, height * 0.17f);
-            Vector2 rightHand = bodyCenter + new Vector2(width * 0.30f, height * 0.17f);
-            Vector2 chest = bodyCenter + new Vector2(0f, height * 0.19f);
+            float release = Mathf.SmoothStep(0,1,Mathf.Clamp01((castAge-1.05f)/.22f));
+            float glyphRadius = height * .145f * (1+.45f*release);
+            float handHeight=_brain.Kind==1?.40f:_brain.Kind==4?.46f:.57f;
+            Vector2 leftHand = new Vector2(bodyCenter.x-width*.24f,bounds.min.y+height*handHeight);
+            Vector2 rightHand = new Vector2(bodyCenter.x+width*.24f,bounds.min.y+height*handHeight);
+            Vector2 chest = new Vector2(bodyCenter.x,bounds.min.y+height*(_brain.Kind==4?.68f:.53f));
 
             float fadeIn = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(castAge / 0.12f));
-            float fadeOut = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((CastWindow - castAge) / 0.18f));
+            float fadeOut = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((CastWindow - castAge) / 0.45f));
             float pulse = 0.88f + 0.12f * Mathf.Sin(castAge * 16f);
             float opacity = fadeIn * fadeOut * pulse;
 
@@ -72,7 +74,7 @@ namespace RGame.RoguelikeKit
             Color core;
             Color rune;
             GetPalette(_brain.Kind, out outer, out core, out rune);
-            outer.a = 0.23f * opacity;
+            outer.a = 0.18f * opacity;
             core.a = 0.70f * opacity;
             rune.a = 0.43f * opacity;
 
@@ -88,7 +90,19 @@ namespace RGame.RoguelikeKit
                 leftHand, glyphRadius, castAge, 0f, _brain.Kind, outer, core);
             DrawHand(_rightOuter, _rightCore, _rightOuterBuffer, _rightCoreBuffer,
                 rightHand, glyphRadius, castAge, Mathf.PI * 0.72f, _brain.Kind, outer, core);
-            DrawChest(chest, glyphRadius * 0.82f, castAge, _brain.Kind, rune);
+            DrawChest(chest, glyphRadius * (_brain.Kind==3?1.5f:_brain.Kind==4?1.25f:.72f), castAge, _brain.Kind, rune);
+        }
+
+        internal static Bounds CanonicalBounds(EndlessBossEnemy boss)
+        {
+            var renderer=boss.MySpriteRenderer;
+            var rig=boss.GetComponent<BossVisualAnimation>();
+            if(rig==null||rig.StandingSprite==null)return renderer.bounds;
+            var local=rig.StandingSprite.bounds;var center=local.center;
+            if(renderer.flipX)center.x=-center.x;
+            var scale=renderer.transform.lossyScale;
+            return new Bounds(renderer.transform.TransformPoint(center),
+                Vector3.Scale(local.size,new Vector3(Mathf.Abs(scale.x),Mathf.Abs(scale.y),Mathf.Abs(scale.z))));
         }
 
         public void Hide()
@@ -185,7 +199,7 @@ namespace RGame.RoguelikeKit
                         radial = (i % 4 < 2) ? 0.76f : 1f;
                         break;
                     case 3: // Open scythe crescent
-                        angle = t * Mathf.PI * 1.48f + phase + age * -0.75f;
+                        angle = t * Mathf.PI * 1.48f + phase + age * -0.75f + Mathf.Atan2(_brain.CastDirection.y,_brain.CastDirection.x);
                         break;
                     default: // Oracle eye
                         break;
@@ -221,7 +235,7 @@ namespace RGame.RoguelikeKit
                 else if (kind == 2)
                     radial = (i % 4 < 2) ? 0.77f : 1f;
                 else if (kind == 3)
-                    angle = t * Mathf.PI * 1.45f + age * -0.65f;
+                    angle = t * Mathf.PI * 1.45f + age * -0.65f + Mathf.Atan2(_brain.CastDirection.y,_brain.CastDirection.x);
 
                 Vector2 point;
                 if (kind == 4)

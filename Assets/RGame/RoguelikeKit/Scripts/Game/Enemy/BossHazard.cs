@@ -40,7 +40,9 @@ namespace RGame.RoguelikeKit
             h.velocity = velocity; h.age = 0; h.hit = false; h.tint = tint; h.orbitAngle = Mathf.Atan2(to.y,to.x);
             if(h.skillVfx==null)h.skillVfx=h.gameObject.AddComponent<BossSkillVfx>();
             int kind=owner!=null&&owner.TryGetComponent<BossBrain>(out var brain)?brain.Kind:0;
-            h.skillVfx.Init(kind,shape,from,to,radius,tint);
+            var boss=owner!=null?owner.GetComponent<EndlessBossEnemy>():null;
+            float bodyHeight=boss!=null?BossCastingVfx.CanonicalBounds(boss).size.y:0;
+            h.skillVfx.Init(kind,shape,from,to,radius,tint,bodyHeight);
             h.gameObject.SetActive(true); h.Draw(); return h;
         }
         static float SegmentDistance(Vector2 p, Vector2 a, Vector2 b)

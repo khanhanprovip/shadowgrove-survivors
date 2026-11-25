@@ -18,6 +18,8 @@ namespace RGame.RoguelikeKit
         public UnityAction OnDeathEnd { get; set; }
         
         private bool _isDead;
+        private EndlessBossEnemy _boss;
+        private void Awake(){_boss=GetComponentInParent<EndlessBossEnemy>();}
         public void SetPool(PoolRuntimeSO pool) { poolRuntimeSo=pool; }
 
         private void OnEnable()
@@ -40,7 +42,7 @@ namespace RGame.RoguelikeKit
 
         public void Hit(int damage)
         {
-            if(_isDead) return;
+            if(_isDead||(_boss!=null&&_boss.Entering)) return;
             
             _selfStat.ModifyValue("HP",damage * -1);
             ShadowgroveAudio.Play(SoundCue.EnemyHit);

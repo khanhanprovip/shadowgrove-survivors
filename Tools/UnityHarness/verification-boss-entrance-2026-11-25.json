@@ -1,0 +1,281 @@
+{
+  "date": "2026-11-25",
+  "status": "verified",
+  "project": "F:\\Do_An_KT\\survivors-roguelike-kit",
+  "unity": "6000.3.21f1",
+  "baselineCommit": "f10a3953666a15b126904aaf4490072fbc5e0f37",
+  "scope": [
+    "Thêm cảnh báo trước và 5 màn xuất hiện riêng; camera chuyển nhẹ thay vì snap.",
+    "Phóng lớn VFX xuất hiện và chiêu đánh theo kích thước cơ thể boss; đưa tụ/phóng phép lên vùng tay/ngực/vũ khí.",
+    "Giữ nguyên HP, sát thương, bán kính va chạm, phần thưởng, save và chu kỳ boss; chỉ thêm giai đoạn chưa tương tác trước khi chiến đấu."
+  ],
+  "entrance": {
+    "warningSeconds": 0.85,
+    "revealSeconds": 2.55,
+    "bannerMaxGameSeconds": 4.2,
+    "styles": {
+      "EclipseWraith": "Cổng ngọc bích, lướt lên và hé hiện thân",
+      "ThornRegent": "Trồi lên từ đất, rễ lớn lan quanh thân",
+      "FrostMourner": "Đáp từ trên xuống giữa tinh thể băng lớn",
+      "CrimsonHarvester": "Lao từ mép màn hình với vệt đỏ theo thân/vũ khí",
+      "AbyssOracle": "Mắt lớn thức tỉnh trên xoáy tím, xúc tu mở ra"
+    },
+    "interaction": "Không nhận damage/buff, không tiếp xúc gây damage hoặc cast khi đang vào trận; sau đó khôi phục và khởi động AI đúng một lần. Pause giữ thời gian, alpha, vị trí, sprite clock và VFX. Thoát menu hủy callback, không phát thưởng."
+  },
+  "vfx": {
+    "reference": "Bounds của StandingSprite, độc lập pose đang chiếu để tránh thay kích thước mỗi frame.",
+    "bodyEffects": "Glyph tay/ngực lớn lên khi phóng phép, tồn tại trong windup và attack; cung lưỡi hái theo hướng ngắm. VFX trên thân/ceremony giữ sau sprite người chơi khi người chơi di chuyển.",
+    "groundEffects": "Trang trí đạn/nổ lớn hơn, alpha và độ dày giới hạn; vòng/vệt chỉ vùng gây sát thương giữ nguyên.",
+    "collisionChanges": false
+  },
+  "build": {
+    "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\Windows-x64\\ShadowgroveSurvivors.exe",
+    "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+    "assemblySha256": "a24ac8cb43e983e596c23fed0b01f3523e5e038e5fe0f160e685de0eb64d8e99"
+  },
+  "delivery": {
+    "folder": "F:\\Do_An_KT\\Build\\ShadowgroveSurvivors_BossEntrance_2026-11-25",
+    "exe": "F:\\Do_An_KT\\Build\\ShadowgroveSurvivors_BossEntrance_2026-11-25\\ShadowgroveSurvivors.exe",
+    "files": 193,
+    "allSha256Match": true
+  },
+  "verification": {
+    "720p": {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144",
+      "summary": {
+        "action": "verify",
+        "passed": true,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "cases": [
+        {
+          "passed": true,
+          "passCount": 573,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=bosses",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 229.93,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\stdout.log"
+          }
+        }
+      ]
+    },
+    "1080pFinal": {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800",
+      "summary": {
+        "action": "verify",
+        "passed": true,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "cases": [
+        {
+          "passed": true,
+          "passCount": 535,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=bosses",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 204.24,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    "1080pAdditionalFlows": {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496",
+      "overallRunPassed": false,
+      "cases": [
+        {
+          "passed": true,
+          "passCount": 93,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "combat-pickups",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\02-combat-pickups-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=combat-pickups",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\02-combat-pickups-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 42.36,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\02-combat-pickups-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 68,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "menus",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\03-menus-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=menus",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\03-menus-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 95.15,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496\\03-menus-1920x1080\\stdout.log"
+          }
+        }
+      ],
+      "note": "Boss boundary measurement failed in this run, was fixed and rerun in 1080pFinal; menu/combat results remain PASS."
+    },
+    "productionAssetsChangedBetween720AndFinal": [],
+    "qaOnlyChangeBetween720AndFinal": [
+      "Assets/Scripts/Trial/DatnBossRegression.cs"
+    ],
+    "assetChangesAfterFinalBuild": [],
+    "checks": [
+      "6 lượt boss gồm tái sử dụng boss đầu; 25 chiêu, HP 300..1800, +5 cấp/+500 vàng, toàn bộ kiểm tra boss trước đây.",
+      "Banner trước khi body hiện, từng hướng xuất hiện, alpha render thật, collider/vũ khí/AI khóa và khôi phục, từ chối hit/buff sớm.",
+      "Bounds VFX đủ lớn và vươn lên thân; người chơi đổi vị trí vẫn ở phía trước body/VFX.",
+      "Pause giữ entrance/FX/animation; thoát menu giữa entrance không phát thưởng hoặc để sót đòn.",
+      "Đo thời điểm first damage thực tế cho Disc/Line/Ring/Bolt/Orbit thay vì cộng các lần WaitForSeconds. Lượt final ghi khoảng 1.105s, không trước 1.1s."
+    ],
+    "screens720": [
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-0-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-0-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-1-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-1-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-2-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-2-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-3-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-3-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-4-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194122-verify-9144\\01-bosses-1280x720\\arrival-4-warning.png"
+    ],
+    "screens1080": [
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-0-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-0-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-1-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-1-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-2-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-2-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-3-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-3-warning.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-4-reveal.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\arrival-4-warning.png"
+    ],
+    "castingScreens1080": [
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\boss-0-windup.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\boss-1-windup.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\boss-2-windup.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\boss-3-windup.png",
+      "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-195049-verify-39800\\01-bosses-1920x1080\\boss-4-windup.png"
+    ],
+    "editorConsole": "Tools/UnityHarness/artifacts/20261125-192620-live-29888/command.json: compilationFailed=false, console errors=0; final cold build/runtime logs retained."
+  },
+  "preservedFailedOrSupersededRuns": [
+    {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-192654-verify-38832",
+      "reason": "Preflight refused cold build while owned Editor was still quitting; retried after confirmed shutdown."
+    },
+    {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-192730-verify-26520",
+      "reason": "QA movement threshold per frame missed slow Oracle movement at high FPS. Fixed to measure cumulative visible displacement, then rerun."
+    },
+    {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-194632-test-20496",
+      "reason": "Fixed waits overshot 1.1s windup on a slow frame; replaced by frame-by-frame actual first-damage observation. Runtime errors were 0; assertion failure kept."
+    },
+    {
+      "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261125-193527-verify-4576",
+      "reason": "Intermediate larger-VFX version PASS (bosses 547, combat 92); final additionally follows survivor draw order during entry."
+    }
+  ],
+  "limits": [
+    "First five-minute boundary uses actual simulation at increased timeScale; later boundaries use isolated QA clock jumps. Later screenshot HUD times therefore do not represent a natural 30-minute match.",
+    "No multi-hour manual soak, low-end GPU or ultrawide verification. Game muted separately during QA; no audible listening assessment.",
+    "Only existing nonfatal pool/ComputeBuffer/Unity analytics connectivity warnings remain in logs; final passing cases have runtime errors 0."
+  ],
+  "changedFiles": [
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossCastingVfx.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossEntrance.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossEntrance.cs.meta",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossHazard.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossSkillVfx.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/BossVisualAnimation.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/EndlessBossEnemy.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/Game/Enemy/Hit/EnemyHit.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/System/Buff/BuffManager.cs",
+    "Assets/RGame/RoguelikeKit/Scripts/System/Stage/EndlessBossDirector.cs",
+    "Assets/Scripts/Trial/DatnBossRegression.cs",
+    "Assets/Scripts/UI/BossArrivalBanner.cs",
+    "README.md",
+    "Tools/UnityHarness/README.md",
+    "Tools/UnityHarness/verification-boss-entrance-2026-11-25.json"
+  ]
+}

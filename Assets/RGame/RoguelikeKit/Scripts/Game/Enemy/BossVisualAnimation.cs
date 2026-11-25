@@ -122,7 +122,9 @@ namespace RGame.RoguelikeKit
             else
             {
                 float castAge = _brain != null ? _brain.CastAge : -1f;
-                if (_enemy != null && _enemy.Casting && castAge >= 0f)
+                if (_enemy != null && _enemy.Entering)
+                    Motion = _enemy.EntranceMotion;
+                else if (_enemy != null && _enemy.Casting && castAge >= 0f)
                     Motion = castAge < WindupDuration ? BossMotion.Windup : BossMotion.Attack;
                 else if (_hitRemaining > 0f)
                     Motion = BossMotion.Hit;

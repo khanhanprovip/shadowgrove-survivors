@@ -16,10 +16,10 @@ namespace RGame.RoguelikeKit
         float nextAt=300, baseCameraSize;
         Vector3 cameraCenter;
         Camera cam;
-        bool frameImmediately;
         TrialController round;
         BossArrivalBanner arrival;
         BossVisualAnimation activeVisual;
+        BossEntrance entrance;
         public BossArrivalBanner ArrivalBanner => arrival;
         public EndlessBossEnemy ActiveBoss { get; private set; }
         public int EncounterCount { get; private set; }
@@ -67,11 +67,21 @@ namespace RGame.RoguelikeKit
             ActiveBoss.SetEncounterHealth(300*(EncounterCount+1));
             obj.transform.position=global.GlobalPlayer.transform.position+new Vector3(5.5f,-7,0);
             ActiveBoss.OnDeath+=OnDefeated;ActiveBoss.Returned+=OnReturned;enemies.AddEnemy(ActiveBoss);
-            ActiveBoss.GetComponent<BossBrain>().Begin(kind,global.GlobalPlayer.GetComponentInChildren<PlayerHit>());
+            var brain=ActiveBoss.GetComponent<BossBrain>();brain.Kind=kind;
+            var sorting=ActiveBoss.GetComponent<DynamicSortOrder>();if(sorting!=null)sorting.enabled=false;
+            var heroRenderer=global.GlobalPlayer.GetComponent<PlayerAnim>().MyAnimator.GetComponent<SpriteRenderer>();
+            ActiveBoss.MySpriteRenderer.sortingOrder=heroRenderer.sortingOrder-5;
+            entrance=obj.GetComponent<BossEntrance>()??obj.AddComponent<BossEntrance>();
+            var arrivingBoss=ActiveBoss;
+            entrance.Begin(kind,()=>
+            {
+                if(ActiveBoss==arrivingBoss&&round!=null&&!round.IsEnded&&round.PlayerStat.GetValue("HP")>0)
+                    brain.Begin(kind,global.GlobalPlayer.GetComponentInChildren<PlayerHit>());
+            },heroRenderer);
             arrival.Show(kind);
             EncounterCount++;nextAt=(Mathf.Floor(round.MatchSeconds/300)+1)*300;
             cam=Camera.main;
-            if(cam!=null){baseCameraSize=cam.orthographicSize;cameraCenter=cam.transform.position;frameImmediately=true;}
+            if(cam!=null){baseCameraSize=cam.orthographicSize;cameraCenter=cam.transform.position;}
         }
         void OnDefeated(BaseEnemy enemy)
         {
@@ -87,7 +97,7 @@ namespace RGame.RoguelikeKit
         void OnReturned(BaseEnemy enemy)
         {
             enemy.OnDeath-=OnDefeated;enemy.Returned-=OnReturned;enemies.RemoveEnemy(enemy);
-            ActiveBoss=null;activeVisual=null;BossHazard.ClearAll();RestoreCamera();
+            ActiveBoss=null;activeVisual=null;entrance=null;BossHazard.ClearAll();RestoreCamera();
             arrival.Hide();
             if(round!=null&&nextAt<=round.MatchSeconds)nextAt=(Mathf.Floor(round.MatchSeconds/300)+1)*300;
         }
@@ -97,8 +107,10 @@ namespace RGame.RoguelikeKit
             BossHazard.ClearAll();
             if(ActiveBoss!=null)
             {
+                entrance?.Cancel();
                 var enemy=ActiveBoss;enemy.OnDeath-=OnDefeated;enemy.Returned-=OnReturned;
                 enemies.RemoveEnemy(enemy);pool.Return(enemy.gameObject);ActiveBoss=null;activeVisual=null;
+                entrance=null;
             }
             RestoreCamera();
         }
@@ -106,15 +118,15 @@ namespace RGame.RoguelikeKit
         void LateUpdate()
         {
             if(ActiveBoss==null||cam==null||global.GlobalPlayer==null||Time.deltaTime<=0)return;
-            var bounds=activeVisual!=null?activeVisual.StableWorldBounds:ActiveBoss.MySpriteRenderer.bounds;
+            var bounds=entrance!=null&&entrance.IsEntering?entrance.TargetBounds:
+                activeVisual!=null?activeVisual.StableWorldBounds:ActiveBoss.MySpriteRenderer.bounds;
             bounds.Encapsulate(global.GlobalPlayer.transform.position+Vector3.up*2);
             bounds.Encapsulate(global.GlobalPlayer.transform.position-Vector3.up);
             bounds.Expand(new Vector3(5,5,0));
             float size=Mathf.Max(baseCameraSize*1.2f,bounds.size.y*.55f,bounds.size.x*.55f/cam.aspect);
-            float blend=frameImmediately?1:Time.deltaTime*3;
+            float blend=1-Mathf.Exp(-Time.deltaTime*3);
             cam.orthographicSize=Mathf.Lerp(cam.orthographicSize,Mathf.Min(baseCameraSize*2.2f,size),blend);
             cameraCenter=Vector3.Lerp(cameraCenter,new Vector3(bounds.center.x,bounds.center.y+cam.orthographicSize*.18f,cam.transform.position.z),blend);
-            frameImmediately=false;
             cam.transform.position=cameraCenter;
         }
         void OnDisable(){CancelEncounter();}

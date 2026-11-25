@@ -20,6 +20,7 @@
 - Năm boss xoay tua: Ảnh Hồn Nhật Thực, Cổ Vương Gai, Ai Nữ Băng Sương, Huyết Nguyệt Đao Phủ và Tiên Tri Vực Thẳm. Mỗi boss có 5 chiêu theo chủ đề, chọn ngẫu nhiên và tránh lặp ngay chiêu vừa dùng; chuẩn bị ra đòn qua chuyển động cơ thể, không vẽ cảnh báo trên sàn hoặc nhãn báo chiêu riêng.
 - Boss đầu 300 HP, mỗi lượt tiếp theo thêm 300 HP, kể cả sau khi quay lại boss đầu. Boss cao khoảng 5 lần nhân vật, có tên màu riêng phía trên thanh máu. Không cộng dồn hai boss nếu trận đánh kéo dài qua mốc tiếp theo. Có banner tên/màu khi xuất hiện; năm bộ sprite animation riêng (180 sprite, 30 clip) cho chờ, di chuyển, chuẩn bị, tấn công, nhận đòn và chết. Ảnh Hồn giữ trượng/niệm phép; Cổ Vương bước bằng rễ/giáng tay; Ai Nữ lướt/bung tinh thể; Đao Phủ lao/vung lưỡi hái; Tiên Tri co/phóng xúc tu.
 - VFX chiêu theo năm chủ đề linh hồn/gai/băng/lưỡi hái/mắt vực thẳm; hiệu ứng tay và thân khi chuẩn bị, vệt/đạn/vòng khi đòn đã kích hoạt. Boss quay trái/phải theo hướng ngắm và giữ hướng suốt đòn; di chuyển theo hướng đi, không lật tên/thanh máu. Hướng gần thẳng đứng giữ hướng ngang gần nhất.
+- Boss có màn xuất hiện riêng sau banner cảnh báo: cổng ngọc bích, rễ trồi từ đất, đáp xuống giữa tinh thể băng, lao từ mép màn hình và thức tỉnh từ xoáy vực thẳm. Camera chuyển nhẹ; boss chưa nhận/gây sát thương hoặc ra chiêu trong đoạn xuất hiện. Pause dừng toàn bộ chuyển động; thoát menu hủy màn xuất hiện và không phát thưởng.
 - Hạ boss nhận trực tiếp 5 cấp và 500 vàng. Năm lượt chọn nâng cấp được xếp hàng; vàng được lưu theo phần chưa ghi nhận để tránh mất hoặc cộng hai lần khi chơi lại/về menu.
 - Màn tạm dừng có danh sách kỹ năng tấn công/thuộc tính đang sở hữu, cấp và chỉ số, hỗ trợ cuộn và VI/EN.
 
@@ -36,6 +37,8 @@ Chỉ tung đòn khi có quái hợp lệ trong tầm tròn. Đạn được thu
 Đã kiểm tra UI, combat/rương và thẻ kỹ năng trên bản Windows ở 1280×720 và 1920×1080. Đồng hồ Survival được chặn đúng mốc 90/120 giây khi frame vượt hạn. [Kết quả và phạm vi kiểm chứng](Tools/UnityHarness/verification-2026-11-23.json).
 
 Đợt boss/animation/VFX và cân bằng có [báo cáo kiểm chứng ngày 25/11/2026](Tools/UnityHarness/verification-2026-11-25.json), kèm đường dẫn build/log, ảnh thực tế, các lượt FAIL đã sửa và giới hạn kiểm thử.
+
+[Báo cáo màn xuất hiện và VFX lớn theo cơ thể boss](Tools/UnityHarness/verification-boss-entrance-2026-11-25.json) ghi riêng kết quả 720p/1080p và vị trí build bàn giao mới.
 
 ## Chạy dự án
 

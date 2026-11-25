@@ -5,6 +5,8 @@ namespace RGame.RoguelikeKit
     {
         public bool Casting;
         public Vector2 DashVelocity;
+        public bool Entering { get; internal set; }
+        public BossMotion EntranceMotion { get; internal set; }
         // The authored three-quarter poses face right. Mirror the body only;
         // the nameplate, physics and world-space attack geometry stay upright.
         public void FaceDirection(Vector2 direction)
@@ -15,6 +17,7 @@ namespace RGame.RoguelikeKit
         protected override void Move()
         {
             if (StatRuntime == null) return;
+            if (Entering) { MyRigidbody2D.linearVelocity=Vector2.zero;return; }
             Vector2 delta = _playerTransform.position - transform.position;
             MyRigidbody2D.linearVelocity = DashVelocity.sqrMagnitude > 0 ? DashVelocity :
                 Casting || delta.magnitude < 2f ? Vector2.zero : delta.normalized * 1.05f;
@@ -23,6 +26,7 @@ namespace RGame.RoguelikeKit
         public override void Return()
         {
             Casting = false; DashVelocity = Vector2.zero;
+            Entering=false;
             if(MySpriteRenderer!=null)MySpriteRenderer.flipX=false;
             base.Return();
         }

@@ -111,6 +111,7 @@ namespace RGame.RoguelikeKit
         private Vector2 _to;
         private Vector2 _lastCenter;
         private float _radius;
+        private float _bodyHeight,_bodyScale;
         private Color _tint;
         private int _kind;
         private int _trailNext;
@@ -126,7 +127,7 @@ namespace RGame.RoguelikeKit
             BuildLines();
         }
 
-        public void Init(int kind, BossHazard.Shape shape, Vector2 from, Vector2 to, float radius, Color tint)
+        public void Init(int kind, BossHazard.Shape shape, Vector2 from, Vector2 to, float radius, Color tint, float bodyHeight=0)
         {
             BuildLines();
             Hide();
@@ -136,6 +137,8 @@ namespace RGame.RoguelikeKit
             _from = from;
             _to = to;
             _radius = Mathf.Max(0.04f, radius);
+            _bodyHeight=Mathf.Max(0,bodyHeight);
+            _bodyScale=Mathf.Clamp(bodyHeight*.18f,1f,2.6f);
             _tint = tint;
             _trailNext = 0;
             _trailCount = 0;
@@ -332,7 +335,8 @@ namespace RGame.RoguelikeKit
         private void DrawImpact(Vector2 center, float age)
         {
             float pop = 0.78f + 0.22f * Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(age / 0.12f));
-            float baseRadius = _radius * pop * (_shape == BossHazard.Shape.Disc ? 0.84f : 0.96f);
+            float baseRadius = _shape==BossHazard.Shape.Ring?_radius*pop*.96f:
+                Mathf.Max(_radius*.84f,_bodyHeight*.16f)*pop;
             float rotation = age * (_kind == 3 ? -0.55f : 0.45f);
             int mainCount = PointCount;
             bool mainLoop = _kind != 3;
@@ -415,7 +419,7 @@ namespace RGame.RoguelikeKit
         private void DrawMover(Vector2 center, float age)
         {
             RecordTrail(center);
-            float r = Mathf.Max(0.08f, _radius * 0.68f);
+            float r = Mathf.Max(0.08f, Mathf.Max(_radius * 0.68f * _bodyScale,_bodyHeight*.065f));
             float rotation = age * (_kind == 3 ? -2.1f : 1.7f);
             int count = PointCount;
             bool loop = _kind != 3;
@@ -516,7 +520,7 @@ namespace RGame.RoguelikeKit
         private void Apply(LineRenderer line, Vector3[] buffer, int count, bool loop, float width)
         {
             line.loop = loop;
-            line.widthMultiplier = width;
+            line.widthMultiplier = width*Mathf.Min(_bodyScale,1.65f);
             line.positionCount = count;
             line.SetPositions(buffer);
             line.enabled = true;
