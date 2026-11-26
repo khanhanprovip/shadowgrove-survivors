@@ -19,6 +19,12 @@ namespace RGame.RoguelikeKit
         private bool processingExp, choiceOpen;
         private TrialController round;
         public int PendingChoices => pendingChoices;
+        internal void RestoreRunStats(System.Action restore)
+        {
+            processingExp=true;
+            try{restore();}finally{processingExp=false;}
+            _updateLevelUIChannel.RaiseEvent();
+        }
         private void Start()
         {
             _globalConfig.OnGameStart();

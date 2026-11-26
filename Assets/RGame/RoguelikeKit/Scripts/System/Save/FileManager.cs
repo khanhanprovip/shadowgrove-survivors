@@ -31,7 +31,7 @@ namespace RGame.RoguelikeKit
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to write to {path}: {e}");
+                Debug.LogWarning($"Failed to write to {path}: {e.Message}");
                 return false;
             }
             finally

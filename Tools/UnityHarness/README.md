@@ -55,6 +55,8 @@ Unity CLI 1.0.1 và Pipeline 1.0.0; URL/SHA256 nằm trong toolchain.lock.json. 
 
 ## Boss, cân bằng và nhịp sinh quái
 
+Lưu/tải nguyên trạng trận, nút tiếp tục và các ca kiểm thử liên quan: [RUN_CHECKPOINT.md](RUN_CHECKPOINT.md).
+
 ```powershell
 ./Tools/UnityHarness/harness.ps1 verify --suites balance,pause-skills,spawn-pacing,bosses --timeout 750
 ```
@@ -63,7 +65,7 @@ Unity CLI 1.0.1 và Pipeline 1.0.0; URL/SHA256 nằm trong toolchain.lock.json. 
 - `pause-skills`: cả Rowan/Lyra/Kael ở VI/EN, danh sách 12 kỹ năng, cuộn bằng sự kiện wheel qua raycast thật; thời gian và chỉ số không đổi khi đọc.
 - `spawn-pacing`: đo hai cửa sổ 30 giây liên tiếp trong Endless; đầu trận ít quái hơn cửa sổ sau; lịch boss không thay đổi. Bot chỉ có đệm HP và tắt tầm vũ khí trong ca này để đếm lượt sinh không bị lẫn với lượt hạ quái.
 - `enemy-cap`: chạy tới trần 40 quái thật, thử thêm 200 yêu cầu sinh, kiểm tra không sinh vượt trần, không quá 2 quái mới/frame, đo FPS ở tải đầy rồi hạ một quái và xác nhận có lượt sinh bù. Các ca Survival/KillTarget/Endless cũng ghi nhận số quái lớn nhất và kiểm tra trần chung.
-- `bosses`: mốc boss đầu được chạy bằng thời gian mô phỏng thật đến 300 giây; các mốc sau dùng bước nhảy đồng hồ QA, không tuyên bố đã chơi tay 30 phút. Kiểm tra 6 lượt (300 → 1.800 HP, loại thứ 6 quay về loại đầu), 25 chiêu ngẫu nhiên, nhịp chuẩn bị không có cảnh báo sàn, sát thương/vị trí an toàn, banner tên màu không chặn input, animation render thực tế, tên màu VI/EN, tỷ lệ pixel nhìn thấy, dọn quái, tạm ngưng/khôi phục wave, +5 cấp/+500 vàng và không cộng dồn boss. HP bot được tăng trong bộ nhớ của profile QA để vượt mốc năm phút; HP boss sản phẩm được chụp trước khi tăng độ bền riêng cho phần quan sát đủ chiêu. EXP còn trên sân được thu hồi trong ca này để cô lập phần thưởng.
+- `bosses`: mốc boss đầu được chạy bằng thời gian mô phỏng thật đến 300 giây; các mốc sau dùng bước nhảy đồng hồ QA, không tuyên bố đã chơi tay 30 phút. Kiểm tra 6 lượt (300 → 1.800 HP), đủ năm loại trong nhóm xáo trộn trước khi lặp và không lặp liền giữa hai nhóm, 25 chiêu ngẫu nhiên, nhịp chuẩn bị không có cảnh báo sàn, sát thương/vị trí an toàn, banner tên màu không chặn input, animation render thực tế, tên màu VI/EN, tỷ lệ pixel nhìn thấy, dọn quái, tạm ngưng/khôi phục wave, +5 cấp/+500 vàng và không cộng dồn boss. HP bot được tăng trong bộ nhớ của profile QA để vượt mốc năm phút; HP boss sản phẩm được chụp trước khi tăng độ bền riêng cho phần quan sát đủ chiêu. EXP còn trên sân được thu hồi trong ca này để cô lập phần thưởng.
 
 `Tools/Art/BossAuthoring.cs` tạo/import sprite, prefab, vai trò và cấu hình cân bằng bằng Unity API; atlas gốc ở `Tools/Art/Sources/BossAtlas.png`. `Tools/Art/BossFrameAnimationAuthoring.cs` là pipeline hiện tại: cắt 10 sheet Locomotion/Combat 4×4 và giữ Hit/Death từ năm sheet gốc bằng Sprite Editor Data Provider, căn PPU/pivot theo alpha của Idle0, tạo 30 clip và năm Animator Controller, 36 sprite/boss, nhịp giữ khung riêng cho mỗi boss, hit đỏ nhẹ và dissolve riêng. Bộ shader/mesh cũ được giữ để đối chiếu, không phải animation đang dùng. `Tools/Art/BossWire.cs` nối nguồn tiến độ đã mua, sự kiện sinh nhân vật và dịch vụ lưu vàng, rồi kiểm tra tham chiếu sau khi mở lại scene. Boss Resources không giữ bản sao pool/global/save; director truyền đúng context của trận khi lấy boss ra khỏi pool.
 

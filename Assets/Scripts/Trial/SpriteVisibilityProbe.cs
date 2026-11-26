@@ -18,6 +18,7 @@ namespace DATN.Trial
         private readonly Dictionary<Sprite, int> _coverage = new();
         private readonly MaterialPropertyBlock _propertyBlock = new();
         private bool _disposed;
+        internal Color32[] LastRenderedPixels()=>_signatureReadback.GetPixels32();
 
         internal readonly struct RenderSignature
         {

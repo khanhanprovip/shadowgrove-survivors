@@ -17,8 +17,35 @@ namespace DATN.Trial
     {
         const BindingFlags Private = BindingFlags.Instance|BindingFlags.NonPublic;
         void JumpClock(float seconds) => typeof(TrialController).GetField("_matchSeconds",Private).SetValue(_round,(double)seconds);
+        void CheckBossDeck()
+        {
+            var randomState=UnityEngine.Random.state;
+            try
+            {
+                string first=null;bool varied=false;
+                for(int seed=1;seed<=12;seed++)
+                {
+                    UnityEngine.Random.InitState(seed);var deck=new BossEncounterDeck();int previous=-1;bool valid=true;string sequence="";
+                    for(int bag=0;bag<20;bag++)
+                    {
+                        int mask=0;
+                        for(int i=0;i<5;i++){int kind=deck.Draw();valid&=kind>=0&&kind<5&&(mask&(1<<kind))==0&&kind!=previous;mask|=1<<kind;previous=kind;if(bag==0)sequence+=kind;}
+                        valid&=mask==31;
+                    }
+                    Require(valid,$"Shuffle seed {seed}: 20 complete bags with no early or adjacent repeat");
+                    if(first==null)first=sequence;else varied|=first!=sequence;
+                    deck.Reset();deck.Draw();deck.Draw();var snapshot=deck.Capture();var restored=new BossEncounterDeck();
+                    Require(restored.Restore(snapshot),"Valid partial boss bag restores");
+                    Require(Enumerable.Range(0,3).All(_=>deck.Draw()==restored.Draw()),"Restored bag preserves all remaining boss choices");
+                    snapshot.cards[0]=snapshot.cards[1];Require(!restored.Restore(snapshot),"Duplicate boss entries are rejected");
+                }
+                Require(varied,"Boss order varies between random seeds");
+            }
+            finally{UnityEngine.Random.state=randomState;}
+        }
         IEnumerator CheckBosses()
         {
+            CheckBossDeck();
             yield return SelectLanguage("vi");
             yield return EnterRound(8,"Rowan");
             _round.PlayerStat.ModifyValue("HP",100000,true);
@@ -40,16 +67,17 @@ namespace DATN.Trial
             Require(director.ActiveBoss==null,"No boss before the first five-minute boundary");
             while(director.ActiveBoss==null&&Time.realtimeSinceStartup<deadline){HealTestPlayer();if(Time.timeScale==0)PickUpgradeOrTreasure();else Time.timeScale=1;yield return null;}
             Require(director.ActiveBoss!=null&&_round.MatchSeconds>=300,"First boss appears at the real five-minute boundary");
-            yield return CheckBossArrivalBanner(director,0,true);
+            yield return CheckBossArrivalBanner(director,director.ActiveBoss.GetComponent<BossBrain>().Kind,true);
             Require(FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).All(e=>e==director.ActiveBoss),"Boss arrival clears ordinary enemies");
             using var visibility=new SpriteVisibilityProbe();
+            int kindMask=0,previousKind=-1;
             for(int encounter=0;encounter<6;encounter++)
             {
                 if(encounter>0)
                 {
                     JumpClock(director.NextAt-.05f); Time.timeScale=1;
                     yield return Wait(()=>director.ActiveBoss!=null,"Next five-minute boss boundary");
-                    yield return CheckBossArrivalBanner(director,encounter%5,false);
+                    yield return CheckBossArrivalBanner(director,director.ActiveBoss.GetComponent<BossBrain>().Kind,false);
                     Record("INFO","Later boundary reached with QA clock jump; first boundary used normal simulation");
                 }
                 var boss=director.ActiveBoss;var brain=boss.GetComponent<BossBrain>();
@@ -62,8 +90,11 @@ namespace DATN.Trial
                 foreach(var receiver in receiverColliders)receiver.enabled=false;
                 yield return new WaitForSeconds(.3f);
                 Record("INFO","Boss receiver collider isolated for visual sampling; hit/reward tests call the real EnemyHit directly");
-                Require(brain.Kind==encounter%5&&boss.MaxHealth==300*(encounter+1)&&boss.StatRuntime.GetValue("HP")>0,
+                Require(brain.Kind>=0&&brain.Kind<5&&brain.Kind!=previousKind&&boss.MaxHealth==300*(encounter+1)&&boss.StatRuntime.GetValue("HP")>0,
                     $"Encounter {encounter+1}: rotation {brain.Kind}, HP {boss.MaxHealth}");
+                if(encounter<5){Require((kindMask&(1<<brain.Kind))==0,"Boss bag does not repeat before all five appear");kindMask|=1<<brain.Kind;}
+                if(encounter==4)Require(kindMask==31,"Live encounters include all five bosses before a new bag");
+                previousKind=brain.Kind;
                 Require(rig!=null&&rig.StandingSprite!=null,$"{BossCatalog.Ids[brain.Kind]} exposes Idle frame 0 as its canonical standing sprite");
                 if(encounter<5)yield return CheckBossFrameCoverage(boss,rig,visibility);
                 Require(visibility.VisiblePixels(boss.MySpriteRenderer)>200,"Boss actual prefab material renders opaque pixels");
@@ -194,14 +225,24 @@ namespace DATN.Trial
                         $"{BossCatalog.Ids[brain.Kind]} produced actual screenshots during windup and attack");
                     Require(FindObjectsByType<BaseEnemy>(FindObjectsSortMode.None).All(e=>e==boss),"No small enemy spawns while boss is active");
                     brain.StopFight();
+                    // RandomSkill deals instant damage and bypasses colliders.
+                    // Remove the QA boss from auto-targeting only while observing
+                    // Idle/Hit, so real player attacks cannot replace Idle with Hit.
+                    var idleRoster=(EnemySystem)typeof(StageManager).GetField("enemySystem",Private).GetValue(FindFirstObjectByType<StageManager>());
+                    idleRoster.RemoveEnemy(boss);
+                    var idleBuffs=FindFirstObjectByType<BuffManager>();
+                    var priorStatuses=(System.Collections.IEnumerable)typeof(BuffManager).GetField("mBuffActivateKeys",Private).GetValue(idleBuffs);
+                    foreach(var status in priorStatuses.Cast<BaseBuff>().Where(b=>b.Owner==boss).ToArray())idleBuffs.RemoveBuff(status);
+                    Time.timeScale=1;
                     boss.transform.position=_round.GlobalConfig.GlobalPlayer.transform.position+Vector3.right*1.2f;
                     boss.DashVelocity=Vector2.zero;boss.MyRigidbody2D.linearVelocity=Vector2.zero;
-                    yield return null;
+                    yield return Wait(()=>rig!=null&&rig.Motion==BossMotion.Idle,"Prior hit feedback finishes before idle observation");
                     Require(rig!=null&&rig.Motion==BossMotion.Idle,$"{BossCatalog.Ids[brain.Kind]} enters its idle pose when movement and casting stop");
                     if(rig!=null)
                     {
                         Time.timeScale=1;
                         var idleBefore=visibility.RenderedSignature(rig.AnimatedRenderer);float idleClock=rig.AnimationClock;
+                        int idleHP=boss.StatRuntime.GetValue("HP");
                         var idleClip=rig.ClipFor(BossMotion.Idle);
                         float idleWindow=Mathf.Clamp(idleClip!=null?idleClip.length*1.1f:1f,1f,3f);
                         var previousIdleFrame=rig.AnimatedRenderer.sprite;var previousIdleMotion=rig.Motion;
@@ -222,9 +263,12 @@ namespace DATN.Trial
                         }
                         Require(rig.Motion==BossMotion.Idle&&idleElapsed>=idleWindow&&idleFrameChanged&&idlePixelsChanged,
                             $"{BossCatalog.Ids[brain.Kind]} idle clip changes sprite and rendered alpha over its {idleWindow:0.00}s observation window ({idleElapsed:0.00}s elapsed, clip={idleClip?.length:0.00}s, frame={previousIdleFrame?.name})");
+                        Require(boss.StatRuntime.GetValue("HP")==idleHP,"Idle observation is isolated from player direct-damage casts");
                         yield return CaptureFrame("boss-"+encounter+"-idle");
 
                         int bossHP=boss.StatRuntime.GetValue("HP");
+                        Time.timeScale=.1f;
+                        Record("INFO","Hit observation uses 0.1x QA time so GPU readback cannot consume the 0.18 game-second clip");
                         boss.MyHit.Hit(1);yield return null;
                         Require(rig.Motion==BossMotion.Hit&&boss.StatRuntime.GetValue("HP")==bossHP-1,
                             $"{BossCatalog.Ids[brain.Kind]} enters its hit animation from real damage");
@@ -233,9 +277,9 @@ namespace DATN.Trial
                         bool hitFrameChanged=false,hitPixelsChanged=false;
                         // A 1080p PNG encode can outlast this 0.18-second clip. Observe
                         // the native frame change first; capture only after proof exists.
-                        float hitDeadline=Time.realtimeSinceStartup+.8f;
+                        float hitDeadline=Time.realtimeSinceStartup+3f;
                         int hitSamples=0;
-                        while(!hitFrameChanged&&rig.Motion==BossMotion.Hit&&Time.realtimeSinceStartup<hitDeadline)
+                        while(!(hitFrameChanged&&hitPixelsChanged)&&rig.Motion==BossMotion.Hit&&Time.realtimeSinceStartup<hitDeadline)
                         {
                             yield return null;
                             var hitAfter=visibility.RenderedSignature(rig.AnimatedRenderer);
@@ -254,7 +298,9 @@ namespace DATN.Trial
                         {
                             Time.timeScale=0;yield return CaptureFrame("boss-"+encounter+"-hit");Time.timeScale=1;
                         }
+                        Time.timeScale=1;
                     }
+                    idleRoster.AddEnemy(boss);
                     _round.Pause();yield return null;
                     float clock=_round.MatchSeconds;var position=boss.transform.position;
                     int active=BossHazard.ActiveCount;
@@ -803,6 +849,7 @@ namespace DATN.Trial
             foreach(string hero in Heroes)
             {
                 yield return EnterRound(0,hero);_round.Pause();
+                CheckContactShadows(hero);
                 var manager=FindFirstObjectByType<SkillManager>();
                 foreach(string key in new[]{"BothSideSkill","RandomSkill","BouncingSkill","ChainSkill","CircularMotionSkill","Armor","Might","HPMax","Cooldown","Magnet","Growth"})manager.UpgradeSkill(key);
                 foreach(string language in new[]{"vi","en"})
@@ -823,12 +870,52 @@ namespace DATN.Trial
                     yield return null;
                     Require(scroll.verticalNormalizedPosition<originalScroll-.01f,$"Mouse wheel scrolls owned skills: {originalScroll:0.00} -> {scroll.verticalNormalizedPosition:0.00}");
                     yield return CaptureFrame("pause-"+hero+"-"+language+"-scrolled");
-                    scroll.verticalNormalizedPosition=1;yield return CaptureFrame("pause-"+hero+"-"+language);
+                    scroll.verticalNormalizedPosition=1;yield return null;
+                    var firstButton=scroll.content.GetComponentsInChildren<Button>().First();
+                    var click=PointerAt(firstButton.transform);var clickHits=Raycast(click);
+                    Require(clickHits.Count>0&&ExecuteEvents.ExecuteHierarchy(clickHits[0].gameObject,click,ExecuteEvents.pointerClickHandler)==firstButton.gameObject,"Owned skill row opens details through pointer input");
+                    Require(!string.IsNullOrEmpty(view.SelectedSkillKey)&&view.DisplayedDetail.Length>200,"Selected skill shows its mechanic and live values");
+                    if(hero=="Rowan")Require(!view.DisplayedDetail.Contains("Thiêu đốt:")&&!view.DisplayedDetail.Contains("Burn:")&&(view.DisplayedDetail.Contains("Góc chém:")||view.DisplayedDetail.Contains("Cleave angle:")),"Rowan details show the real cleave cone and do not inherit the ranged projectile burn");
+                    var detail=view.GetComponentsInChildren<ScrollRect>().Single(s=>s!=scroll);
+                    Require(detail.content.rect.height>detail.viewport.rect.height,"Long skill description has its own scroll area");
+                    var wheel=PointerAt(detail.viewport);wheel.scrollDelta=new Vector2(0,-8);var detailHits=Raycast(wheel);
+                    Require(detailHits.Count>0&&ExecuteEvents.ExecuteHierarchy(detailHits[0].gameObject,wheel,ExecuteEvents.scrollHandler)==detail.gameObject,"Detail panel receives wheel input");
+                    yield return null;Require(detail.verticalNormalizedPosition<.99f,"Skill details can scroll to evolution information");
+                    detail.verticalNormalizedPosition=1;yield return CaptureFrame("pause-"+hero+"-"+language);
                     yield return new WaitForSecondsRealtime(.2f);
                     Require(clock==_round.MatchSeconds&&before==string.Join(",",_round.PlayerStat.GetAllValues().Select(x=>x.Key+":"+_round.PlayerStat.GetValue(x.Key))),"Reading inventory changes neither time nor stats");
                 }
                 _round.Resume();yield return LeaveFromPause();
             }
+        }
+        void CheckContactShadows(string hero)
+        {
+            using var probe=new SpriteVisibilityProbe();
+            var shadow=_round.GlobalConfig.GlobalPlayer.GetComponentInChildren<PlayerHit>().ContactShadow;
+            Require(shadow!=null&&shadow.GetComponent<SoftContactShadow>()!=null,$"{hero}: existing contact shadow uses the soft ellipse");
+            Require(probe.RenderedSignature(shadow).OpaquePixels>0,$"{hero}: contact shadow contains visible rendered pixels");
+            var ellipse=probe.LastRenderedPixels();
+            Require(ellipse.Max(x=>x.a)<=60&&ellipse.Count(x=>x.a>0)<128*128/3,$"{hero}: shadow alpha={ellipse.Max(x=>x.a)}, coverage={ellipse.Count(x=>x.a>0)} / 16384; faint flattened ellipse");
+            var go=new GameObject("QA shadow alpha mask",typeof(SpriteRenderer));
+            var tex=new Texture2D(32,32,TextureFormat.RGBA32,false);
+            var activeEnemy=FindFirstObjectByType<BaseEnemy>();var sourceMaterial=activeEnemy.MySpriteRenderer.sharedMaterial;
+            Record("INFO","Actual enemy material: "+sourceMaterial.name+" / shader "+sourceMaterial.shader.name);
+            Require(sourceMaterial.HasProperty("_ShadowScale"),"Actual enemy prefab material supports silhouette shadows");
+            var material=new Material(sourceMaterial);
+            var sprite=Sprite.Create(tex,new Rect(0,0,32,32),new Vector2(.5f,.5f),32,0,SpriteMeshType.FullRect);
+            try
+            {
+                var renderer=go.GetComponent<SpriteRenderer>();renderer.sprite=sprite;renderer.sharedMaterial=material;
+                material.SetFloat("_Cutoff",0);material.SetFloat("_DistortionStrength",0);material.SetVector("_ShadowOffset",new Vector4(0,-.35f,0,0));
+                material.SetColor("_ShadowColor",new Color(0,0,0,.9f));
+                var pixels=new Color32[32*32];tex.SetPixels32(pixels);tex.Apply();
+                Require(probe.RenderedSignature(renderer).OpaquePixels==0,"Fully transparent enemy pixels cast no rectangular shadow");
+                for(int y=8;y<24;y++)for(int x=8;x<24;x++)if(Vector2.Distance(new Vector2(x,y),new Vector2(15.5f,15.5f))<8)pixels[y*32+x]=new Color32(255,255,255,255);
+                tex.SetPixels32(pixels);tex.Apply();probe.RenderedSignature(renderer);var rendered=probe.LastRenderedPixels();
+                var lower=rendered.Take(128*34).ToArray();
+                Require(lower.Any(x=>x.a>0)&&lower.All(x=>x.a<=60),"Enemy silhouette shadow is visible below the body with capped opacity");
+            }
+            finally{Destroy(go);Destroy(sprite);Destroy(tex);Destroy(material);}
         }
     }
 }

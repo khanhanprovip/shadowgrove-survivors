@@ -16,6 +16,29 @@ namespace RGame.RoguelikeKit
         private readonly List<BaseBuff> mBuffActivateKeys = new List<BaseBuff>();
         private readonly Dictionary<(BaseEnemy, string), BaseBuff> mOwnerBuff = new Dictionary<(BaseEnemy, string), BaseBuff>();
         private readonly List<BaseBuff> mWaitRemoveKey = new List<BaseBuff>();
+        internal List<RunBuff> CaptureRunBuffs(RunStateFields fields)
+        {
+            var result=new List<RunBuff>();
+            foreach(var buff in mBuffActivateKeys)
+            {
+                if(buff.Owner==null||!buff.Owner.gameObject.activeInHierarchy||fields.Id(buff.Owner)==null)continue;
+                string name=buff.name.Replace("(Clone)","").Trim();
+                result.Add(new RunBuff{owner=fields.Id(buff.Owner),asset=buff.GetType().FullName+":"+name,age=mBuffActivateDic[buff],fields=fields.Capture(buff)});
+            }
+            return result;
+        }
+        internal void RestoreRunBuffs(List<RunBuff> saved,RunStateFields fields)
+        {
+            foreach(var state in saved)
+            {
+                var owner=fields.Resolve(state.owner) as BaseEnemy;
+                var asset=Resources.FindObjectsOfTypeAll<BaseBuff>().FirstOrDefault(b=>!b.name.EndsWith("(Clone)")&&b.GetType().FullName+":"+b.name==state.asset);
+                if(owner==null||asset==null||state.age<0||state.age>asset.Duration+1)throw new ArgumentException("Invalid saved status effect");
+                AddBuff(owner,asset);
+                var instance=mBuffActivateKeys.Last(b=>b.Owner==owner&&b.GetType()==asset.GetType());
+                fields.Restore(instance,state.fields);mBuffActivateDic[instance]=state.age;
+            }
+        }
 
         private void OnEnable()
         {
@@ -54,12 +77,15 @@ namespace RGame.RoguelikeKit
                 mBuffActivateDic.Add(buff, 0f);
                 mBuffActivateKeys.Add(buff);
                 buff.Owner = _owner;
+                _owner.Returned-=OnOwnerReturned;_owner.Returned+=OnOwnerReturned;
                 buff.Activate();
             }
         }
 
         public void RemoveBuff(BaseBuff _buff)
         {
+            if(!mBuffActivateDic.ContainsKey(_buff))return;
+            var owner=_buff.Owner;
             _buff.DeActivate();
             
             mBuffActivateDic.Remove(_buff);
@@ -67,6 +93,11 @@ namespace RGame.RoguelikeKit
             
             var ownerBuffPair = mOwnerBuff.FirstOrDefault(x => x.Value == _buff);
             if (ownerBuffPair.Value != null) mOwnerBuff.Remove(ownerBuffPair.Key);
+            if(owner!=null&&!mBuffActivateKeys.Any(b=>b.Owner==owner))owner.Returned-=OnOwnerReturned;
+        }
+        private void OnOwnerReturned(BaseEnemy owner)
+        {
+            foreach(var buff in mBuffActivateKeys.Where(b=>b.Owner==owner).ToArray())RemoveBuff(buff);
         }
         
         public void ClearAllBuffs()

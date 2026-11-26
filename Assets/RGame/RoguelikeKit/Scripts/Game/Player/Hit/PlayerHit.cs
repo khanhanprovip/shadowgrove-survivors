@@ -23,6 +23,8 @@ namespace RGame.RoguelikeKit
         public UnityAction OnDie;
 
         private bool _isDie;
+        internal SpriteRenderer ContactShadow => _shadowSpriteRenderer;
+        internal Color RunRestingColor(SpriteRenderer renderer)=>mHitAnimationSO.RestingColor(renderer);
         private float _nextHitFlashAt;
         private static readonly Color HitTint = new Color(0.28f, 0.02f, 0.02f, 0f);
         

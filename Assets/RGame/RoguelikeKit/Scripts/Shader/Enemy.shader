@@ -68,13 +68,15 @@ Shader "RoguelikeKit/Enemy"
             float _DistortionStrength;
             float _DistortionFrequency;
             float _TimeSpeed;
+            sampler2D _NoiseTex;
+            float _Cutoff;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 
                 float4 vertexPos = v.vertex;
-                vertexPos.xy *= _ShadowScale.xy;
+                vertexPos.xy *= float2(min(abs(_ShadowScale.x),1.05),min(abs(_ShadowScale.y),0.15));
                 vertexPos.xy += _ShadowOffset;
                 
                 float time = _Time.y * _TimeSpeed;
@@ -91,7 +93,11 @@ Shader "RoguelikeKit/Enemy"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return _ShadowColor;
+                clip(col.a-0.0039);
+                if(_Cutoff>0.001)clip(tex2D(_NoiseTex,i.uv).r-_Cutoff-0.001);
+                fixed4 shadow=_ShadowColor;
+                shadow.a=min(saturate(_ShadowColor.a),0.22)*col.a*(1-saturate(_Cutoff));
+                return shadow;
             }
             ENDCG
         }

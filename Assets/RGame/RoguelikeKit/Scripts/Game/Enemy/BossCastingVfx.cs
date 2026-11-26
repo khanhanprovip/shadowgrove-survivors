@@ -32,7 +32,9 @@ namespace RGame.RoguelikeKit
             Hide();
         }
 
-        private void LateUpdate()
+        private void LateUpdate()=>Render(false);
+        internal void RestoreFrozenVisual()=>Render(true);
+        private void Render(bool frozenRestore)
         {
             if (_brain == null || _boss == null || _body == null)
             {
@@ -48,7 +50,7 @@ namespace RGame.RoguelikeKit
             }
 
             // LateUpdate is still called while paused; leave the current windup pose frozen.
-            if (Time.timeScale <= 0f || Time.deltaTime <= 0f)
+            if (!frozenRestore&&(Time.timeScale <= 0f || Time.deltaTime <= 0f))
                 return;
 
             if (_leftOuter == null)

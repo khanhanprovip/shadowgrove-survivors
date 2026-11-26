@@ -24,6 +24,8 @@ namespace RGame.RoguelikeKit
 
         private readonly Dictionary<SpriteRenderer, Sequence> _seqMap = new();
         private readonly Dictionary<SpriteRenderer, Color> _baseColors = new();
+        internal Color RestingColor(SpriteRenderer renderer)=>_baseColors.TryGetValue(renderer,out var color)?color:renderer.color;
+        internal Color NormalBlend=>mNormalColor;
 
         public void OnEnable()
         {

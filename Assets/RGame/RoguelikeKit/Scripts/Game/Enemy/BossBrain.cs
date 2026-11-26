@@ -21,7 +21,12 @@ namespace RGame.RoguelikeKit
         Image fill;
         TMP_Text title, health;
         RectTransform header;
-        Coroutine routine;
+        // Explicit phases make an in-flight cast resumable across application runs.
+        enum FightPhase { Stopped, Ready, Windup, Dash, Recovery }
+        FightPhase phase;
+        float remaining;
+        int nextSkill;
+        Vector2 lockedTarget;
         SpriteRenderer survivorRenderer;
         BossVisualAnimation visual;
         public void Begin(int kind, PlayerHit target)
@@ -33,38 +38,42 @@ namespace RGame.RoguelikeKit
             survivorRenderer=target.GetComponentInParent<Player>().GetComponentsInChildren<SpriteRenderer>().Where(s=>s.sprite!=null&&!s.name.ToLowerInvariant().Contains("shadow")).OrderByDescending(s=>s.bounds.size.y).First();
             CastCount=0; CurrentSkill=-1; UsedSkillMask=0;
             CastDirection=enemy.MySpriteRenderer.flipX?Vector2.left:Vector2.right;
-            if (routine != null) StopCoroutine(routine);
-            routine=StartCoroutine(Fight());
+            phase=FightPhase.Ready;remaining=1.5f;nextSkill=Random.Range(0,5);
         }
-        IEnumerator Fight()
+        void Update()
         {
-            yield return new WaitForSeconds(1.5f);
-            int next=Random.Range(0,5);
-            while (player != null && enemy.StatRuntime != null && enemy.StatRuntime.GetValue("HP")>0)
+            if(phase==FightPhase.Stopped||Time.deltaTime<=0)return;
+            if(player==null||enemy.StatRuntime==null)return;
+            if(enemy.StatRuntime.GetValue("HP")<=0){StopFight();return;}
+            remaining-=Time.deltaTime;if(remaining>0)return;
+            if(phase==FightPhase.Ready)
             {
-                CurrentSkill=next; UsedSkillMask|=1<<next; CastCount++; enemy.Casting=true;castStarted=Time.time;
+                CurrentSkill=nextSkill; UsedSkillMask|=1<<nextSkill; CastCount++; enemy.Casting=true;castStarted=Time.time;
                 Vector2 p=player.transform.position, b=transform.position;
                 Vector2 dir=(p-b).normalized; if(dir.sqrMagnitude<.1f)dir=Vector2.down;
-                CastDirection=dir;
+                CastDirection=dir;lockedTarget=p;
                 enemy.FaceDirection(CastDirection);
-                Cast(Kind,next,b,p,dir);
-                yield return new WaitForSeconds(1.1f);
-                if (enemy.StatRuntime.GetValue("HP")<=0) break;
-                if (Kind==3 && next==0)
+                Cast(Kind,nextSkill,b,p,dir);
+                phase=FightPhase.Windup;remaining=1.1f;return;
+            }
+            if(phase==FightPhase.Windup)
+            {
+                if (Kind==3 && CurrentSkill==0)
                 {
-                    enemy.DashVelocity=dir*9f;
-                    yield return new WaitForSeconds(.7f);
-                    enemy.DashVelocity=Vector2.zero;
+                    enemy.DashVelocity=CastDirection*9f;phase=FightPhase.Dash;remaining=.7f;return;
                 }
-                if ((Kind==0 && next==3)||(Kind==3 && next==3))
-                    transform.position=p; // The boss's windup animation precedes this movement.
-                yield return new WaitForSeconds(.9f);
+                if ((Kind==0 && CurrentSkill==3)||(Kind==3 && CurrentSkill==3))transform.position=lockedTarget;
+                phase=FightPhase.Recovery;remaining=.9f;return;
+            }
+            if(phase==FightPhase.Dash)
+            {enemy.DashVelocity=Vector2.zero;phase=FightPhase.Recovery;remaining=.9f;return;}
+            if(phase==FightPhase.Recovery)
+            {
                 enemy.Casting=false;
                 int pick=Random.Range(0,4);
-                next=pick>=next?pick+1:pick;
-                yield return new WaitForSeconds(2.5f);
+                nextSkill=pick>=CurrentSkill?pick+1:pick;
+                phase=FightPhase.Ready;remaining=2.5f;
             }
-            StopFight();
         }
         static Vector2 Turn(Vector2 d,float degrees) => Quaternion.Euler(0,0,degrees)*d;
         void Hazard(BossHazard.Shape s,Vector2 a,Vector2 b,float r,float duration=1f,Vector2 velocity=default,float delay=1.1f)
@@ -171,7 +180,7 @@ namespace RGame.RoguelikeKit
         public void StopFight()
         {
             if(enemy!=null){enemy.Casting=false;enemy.DashVelocity=Vector2.zero;}
-            if(routine!=null){StopCoroutine(routine);routine=null;}
+            phase=FightPhase.Stopped;remaining=0;
             BossHazard.ClearAll();
         }
         void OnDisable(){StopFight();if(header!=null)header.gameObject.SetActive(false);}

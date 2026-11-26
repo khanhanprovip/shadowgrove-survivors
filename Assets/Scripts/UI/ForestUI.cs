@@ -126,8 +126,12 @@ namespace DATN.UI
         {
             Background(p.transform,false);var shade=Picture(p.transform,"Forest_MenuShade",null,0,0,.53f,1);shade.color=new Color(.025f,.055f,.035f,.60f);shade.transform.SetSiblingIndex(1);
             Label(p.transform,"Forest_Tag","KHU RỪNG KHÔNG NGỦ","THE FOREST NEVER SLEEPS",23,.075f,.80f,.65f,.85f,color:Gold);
-            Picture(p.transform,"Forest_Logo","Logo",.055f,.475f,.57f,.79f,true);
-            Label(p.transform,"Forest_Copy","Khi khu rừng thức giấc, bạn có sống sót đến bình minh?","When the forest wakes, will you survive until dawn?",27,.075f,.39f,.45f,.46f,color:Muted);
+            Picture(p.transform,"Forest_Logo","Logo",.055f,.515f,.57f,.79f,true);
+            Label(p.transform,"Forest_Copy","Khi khu rừng thức giấc, bạn có sống sót đến bình minh?","When the forest wakes, will you survive until dawn?",25,.075f,.445f,.45f,.505f,color:Muted);
+            var continueObject=new GameObject("ButtonContinueRun",typeof(RectTransform),typeof(Image),typeof(Button),typeof(RunContinueButton));continueObject.transform.SetParent(p.transform,false);
+            var continueButton=continueObject.GetComponent<Button>();continueButton.targetGraphic=continueObject.GetComponent<Image>();
+            Existing(continueButton,"TIẾP TỤC TRẬN ĐÃ LƯU","CONTINUE SAVED RUN",.075f,.37f,.34f,.435f,true);
+            continueButton.onClick.AddListener(()=>UnityEngine.Object.FindFirstObjectByType<UIMenuManager>()?.ContinueSavedRun());
             var group=p.transform.Find("PanelButtons");if(group!=null){StopLayout(group);Place(group,0,0,1,1);}
             foreach(var b in p.GetComponentsInChildren<Button>(true)){
                 if(b.name=="ButtonNewGame")Existing(b,"BẮT ĐẦU HÀNH TRÌNH","BEGIN THE JOURNEY",.075f,.29f,.34f,.36f,true);
@@ -232,9 +236,10 @@ namespace DATN.UI
         {
             Picture(p,"Forest_PausePlate","Panel",.04f,.1f,.96f,.9f).transform.SetAsFirstSibling();Picture(p,"Forest_PauseSeal","sigil",.1f,.62f,.27f,.84f,true);
             foreach(var l in p.GetComponentsInChildren<TMP_Text>(true))if(l.transform.parent==p){Place(l.transform,.07f,.53f,.3f,.62f);l.color=Gold;}
-            foreach(var b in p.GetComponentsInChildren<Button>(true)){float y=b.name=="TiepTucBtn"?.41f:b.name=="ChoiLaiBtn"?.30f:.19f;Place(b.transform,.07f,y,.3f,y+.075f);ButtonStyle(b,b.name=="TiepTucBtn");}
+            foreach(var b in p.GetComponentsInChildren<Button>(true)){float y=b.name=="TiepTucBtn"?.41f:b.name=="ChoiLaiBtn"?.31f:b.name=="SaveRunBtn"?.21f:.11f;Place(b.transform,.07f,y,.3f,y+.075f);ButtonStyle(b,b.name=="TiepTucBtn");}
             Label(p,"Forest_OwnedHeading","KỸ NĂNG ĐANG SỞ HỮU","YOUR CURRENT SKILLS",30,.34f,.79f,.93f,.86f,color:Gold);
             if(p.GetComponent<PauseSkillInventory>()==null)p.gameObject.AddComponent<PauseSkillInventory>();
+            if(p.GetComponent<RunSaveStatus>()==null)p.gameObject.AddComponent<RunSaveStatus>();
         }
         public static void Result(Canvas canvas,bool won,int seconds,int kills,int level,string hero)
         {

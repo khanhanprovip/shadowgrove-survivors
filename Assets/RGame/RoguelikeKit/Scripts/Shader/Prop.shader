@@ -1,4 +1,4 @@
-Shader "RoguelikeKit/Enemy"
+Shader "RoguelikeKit/Prop"
 {
     Properties
     {

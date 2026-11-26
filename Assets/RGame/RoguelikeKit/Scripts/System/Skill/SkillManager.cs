@@ -37,6 +37,41 @@ namespace RGame.RoguelikeKit
         {
             get { foreach (var key in _activeSkills) yield return _skillDataDictionary[key]; }
         }
+        internal void BindRunSkills(RunStateFields fields)
+        {
+            foreach(var data in OwnedSkills)
+            {fields.Bind("skill:"+data.Key,data);if(data.CurrentCD!=null)fields.Bind("cooldown:"+data.Key,data.CurrentCD);}
+        }
+        internal List<RunSkill> CaptureRunSkills(RunStateFields fields)
+        {
+            var result=new List<RunSkill>();
+            foreach(var data in OwnedSkills)result.Add(new RunSkill{key=data.Key,level=data.Level,state=data.CurrentState,fields=fields.Capture(data),cycle=data.CurrentCD!=null?data.CurrentCD.Value:0});
+            return result;
+        }
+        internal void PrepareRunSkills(List<RunSkill> saved)
+        {
+            var timers=FindFirstObjectByType<TimeStepManager>();
+            foreach(var data in OwnedSkills)if(data.CurrentCD!=null){timers.RemoveTimer(data.CurrentCD);Destroy(data.CurrentCD);data.CurrentCD=null;}
+            _activeSkills.Clear();_activeAttackSkill=0;_activeAttributeSkill=0;
+            foreach(var panel in FindObjectsByType<SkillIconPanel>(FindObjectsSortMode.None))panel.ResetForRunRestore();
+            foreach(var state in saved)
+            {
+                if(!_skillDataDictionary.TryGetValue(state.key,out var data))throw new System.ArgumentException("Unknown saved skill");
+                int max=data.SkillType==SkillType.AttackSkill?data.UpgradeAttribute.Count+1:data.UpgradeAttributeModValue.Count;
+                if(state.level<1||state.level>max||_activeSkills.Contains(state.key))throw new System.ArgumentException("Invalid saved skill level");
+                _activeSkills.Add(state.key);data.Level=state.level;data.CurrentState=state.state;
+                if(data.SkillType==SkillType.AttackSkill)
+                {
+                    _activeAttackSkill++;
+                    if(_pool.GetPrefab(data.Key)==null)_pool.Register(new PoolDefinition(data.Key,new SolePool(data.SkillPrefab,1)));
+                    data.CurrentCD=ScriptableObject.CreateInstance<FloatWrapper>();data.CurrentCD.Value=state.cycle;
+                    string key=data.Key;_addTimerChannel.RaiseEvent(data.CurrentCD,()=>CreateSkill(key));
+                    _skillCastDictionary[key].BindData(data);
+                }
+                else _activeAttributeSkill++;
+                _addSkillIconChannel.RaiseEvent(data);
+            }
+        }
         
         private void Awake()
         {
@@ -383,6 +418,8 @@ namespace RGame.RoguelikeKit
             _upgradeSkillChannel.UnregisterListener(UpgradeSkill);
             _levelUpgradeChannel.UnregisterListener(OnCharacterUpgrade);
             _openTreasureChannel.UnregisterListener(OpenTreasurePanel);
+            foreach(var data in _skillDataDictionary.Values)
+            {if(data.CurrentCD!=null)Destroy(data.CurrentCD);Destroy(data);}
         }
     }
 }

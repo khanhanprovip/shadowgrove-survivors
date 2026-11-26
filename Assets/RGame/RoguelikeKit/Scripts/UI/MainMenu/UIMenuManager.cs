@@ -78,6 +78,12 @@ namespace RGame.RoguelikeKit
         {
             mGameLoad.RaiseEvent(mGameScene);
         }
+        public void ContinueSavedRun()
+        {
+            var context=System.Linq.Enumerable.FirstOrDefault(Resources.FindObjectsOfTypeAll<LevelAndCharacterSO>(),x=>x.name=="LevelAndCharacterSO");
+            if(context==null)context=System.Linq.Enumerable.FirstOrDefault(Resources.FindObjectsOfTypeAll<LevelAndCharacterSO>());
+            if(context!=null&&RunCheckpointSession.PrepareResume(context))LoadGame();
+        }
 
         private void OpenLobby() => DATN.UI.ForestLobby.Open(mLevelSelectPanel, LoadGame);
 

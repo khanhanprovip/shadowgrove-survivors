@@ -107,6 +107,8 @@ namespace RGame.RoguelikeKit
             }
         }
         public void Cancel(){completed=null;if(IsEntering)Restore();else HideLines();}
+        internal void RestoreFrozenVisual()
+        {if(IsEntering&&Elapsed>=WarningSeconds)Draw(Mathf.Clamp01((Elapsed-WarningSeconds)/RevealSeconds));}
         void OnDisable(){Cancel();}
 
         void Apply(int index,Color color,float alpha,bool loop,float width)

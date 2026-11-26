@@ -15,6 +15,7 @@ namespace RGame.RoguelikeKit
         {
             MyRigidbody = transform.GetComponent<Rigidbody2D>();
             MyAnimator = transform.GetComponent<Animator>();
+            SoftContactShadow.Configure(GetComponentInChildren<PlayerHit>()?.ContactShadow,GetComponent<SpriteRenderer>());
         }
 
         private float _attackLockUntil;

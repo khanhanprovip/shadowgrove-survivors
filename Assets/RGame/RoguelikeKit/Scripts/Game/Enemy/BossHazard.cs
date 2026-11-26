@@ -21,6 +21,11 @@ namespace RGame.RoguelikeKit
         public bool IsTelegraph => age < warning;
         public static int ActiveCount { get { Pool.RemoveAll(x => x == null); return Pool.FindAll(x => x.gameObject.activeSelf).Count; } }
         public static void ClearAll() { foreach (var item in Pool) if (item != null) item.gameObject.SetActive(false); }
+        internal void RestoreVisual()
+        {
+            int kind=owner.GetComponent<BossBrain>().Kind;var boss=owner.GetComponent<EndlessBossEnemy>();
+            skillVfx.Init(kind,shape,from,to,radius,tint,boss!=null?BossCastingVfx.CanonicalBounds(boss).size.y:0);Draw();
+        }
         public static BossHazard Create(Transform owner, PlayerHit target, Shape shape, Vector2 from, Vector2 to,
             float radius, float warning, float duration, Color tint, Vector2 velocity = default)
         {

@@ -39,6 +39,11 @@ namespace RGame.RoguelikeKit
 
             mStartStageEventChannelSo.RaiseEvent(waveConfig);
             Destroy(waveConfig);
+            if(RunCheckpointSession.HasPending)
+            {
+                yield return null; // Player.Start registers the starter and round context.
+                yield return RunCheckpointSession.RestoreAfterSpawn();
+            }
         }
     }
 }

@@ -13,6 +13,16 @@ namespace RGame.RoguelikeKit
         private int _attackSkillIconIndex = 0;
         private int _attributeSkillIndex;
         private const int ATTRIBUTE_INDEX_START = 6;
+        internal void ResetForRunRestore()
+        {
+            _attackSkillIconIndex=0;_attributeSkillIndex=ATTRIBUTE_INDEX_START;
+            foreach(var slot in _skillIcons)
+            {
+                var forest=slot.transform.Find("Forest_SkillIcon");
+                var image=forest!=null?forest.GetComponent<Image>():slot.GetComponent<Image>();
+                if(image!=null){image.sprite=null;image.color=Color.clear;}
+            }
+        }
 
         private void Awake()
         {

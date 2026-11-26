@@ -50,6 +50,7 @@ namespace DATN.Trial
         private Button mPauseResumeButton;
         private Button mPauseRestartButton;
         private Button mPauseExitButton;
+        private Button mPauseSaveButton;
 
         public bool IsPaused => mPaused;
         public bool IsEnded => mEnded;
@@ -58,6 +59,9 @@ namespace DATN.Trial
         /// <summary>Tai nguyen can thiet cho kiem thu tu dong tren ban build.</summary>
         public CommonStatRuntimeSO PlayerStat => mPlayerStat;
         public GlobalConfigSO GlobalConfig => mGlobalConfig;
+        internal LevelAndCharacterSO RunSelection=>mLevelAndCharacterSO;
+        internal object RunMode=>mMode;
+        internal void RestorePauseView(){mPaused=false;Time.timeScale=1;Pause();}
 
         private void OnEnable()
         {
@@ -305,11 +309,13 @@ namespace DATN.Trial
             mPauseResumeButton = CreateButton(mPausePanel.transform, "TiepTucBtn", "", new Vector2(0f, 30f));
             mPauseRestartButton = CreateButton(mPausePanel.transform, "ChoiLaiBtn", "", new Vector2(0f, -40f));
             mPauseExitButton = CreateButton(mPausePanel.transform, "VeMenuBtn", "", new Vector2(0f, -110f));
+            mPauseSaveButton=CreateButton(mPausePanel.transform,"SaveRunBtn","",new Vector2(0,-180));
             RefreshPauseTexts();
 
             mPauseResumeButton.onClick.AddListener(Resume);
             mPauseRestartButton.onClick.AddListener(Restart);
             mPauseExitButton.onClick.AddListener(ExitToMainMenu);
+            mPauseSaveButton.onClick.AddListener(()=>RunCheckpointSession.SaveAndExit(this));
 
             mPausePanel.SetActive(false);
         }
@@ -327,6 +333,7 @@ namespace DATN.Trial
             _pauseResumeLabel.text = LanguageManager.Get("Resume");
             _pauseRestartLabel.text = LanguageManager.Get("Restart");
             _pauseExitLabel.text = LanguageManager.Get("BackToMenu");
+            if(mPauseSaveButton!=null)mPauseSaveButton.GetComponentInChildren<TextMeshProUGUI>().text=LanguageManager.GetCurrentCode()=="vi"?"LƯU VÀ VỀ MENU":"SAVE & MAIN MENU";
         }
 
         private void ShowPausePanel()

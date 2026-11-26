@@ -106,6 +106,8 @@ namespace RGame.RoguelikeKit
         private LineRenderer _mainLine;
         private LineRenderer _coreLine;
         private LineRenderer _accentLine;
+        private readonly LineRenderer[] _details=new LineRenderer[5];
+        private readonly Vector3[] _detailBuffer=new Vector3[16];
         private BossHazard.Shape _shape;
         private Vector2 _from;
         private Vector2 _to;
@@ -149,7 +151,7 @@ namespace RGame.RoguelikeKit
 
         public void Tick(float activeAge, float duration, Vector2 center, Vector2 currentFrom, Vector2 currentTo)
         {
-            if (!_initialized || duration <= 0f || Time.timeScale <= 0f || Time.deltaTime <= 0f)
+            if (!_initialized || duration <= 0f)
                 return;
 
             if (activeAge >= duration)
@@ -186,6 +188,7 @@ namespace RGame.RoguelikeKit
                     DrawImpact(center, activeAge);
                     break;
             }
+            DrawDetails(center,currentFrom,currentTo,activeAge,opacity);
         }
 
         public void Hide()
@@ -199,6 +202,7 @@ namespace RGame.RoguelikeKit
             if (_mainLine != null) _mainLine.enabled = false;
             if (_coreLine != null) _coreLine.enabled = false;
             if (_accentLine != null) _accentLine.enabled = false;
+            foreach(var detail in _details)if(detail!=null)detail.enabled=false;
             _trailCount = 0;
             _trailNext = 0;
             _hasMoverSample = false;
@@ -212,6 +216,8 @@ namespace RGame.RoguelikeKit
                 _accentLine = BossVfxShared.CreateLine(transform, "Boss VFX Accent", 19985, 0.11f);
             if (_coreLine == null)
                 _coreLine = BossVfxShared.CreateLine(transform, "Boss VFX Core", 19988, 0.045f);
+            for(int i=0;i<_details.Length;i++)if(_details[i]==null)
+                _details[i]=BossVfxShared.CreateLine(transform,"Boss themed stroke "+i,19986,.09f);
             BindMaterials();
         }
 
@@ -220,6 +226,51 @@ namespace RGame.RoguelikeKit
             BossVfxShared.BindMaterial(_mainLine);
             BossVfxShared.BindMaterial(_accentLine);
             BossVfxShared.BindMaterial(_coreLine);
+            foreach(var detail in _details)BossVfxShared.BindMaterial(detail);
+        }
+
+        // Distinct silhouettes complement the exact damage border. These strokes
+        // are cosmetic, pooled with the hazard and use only fixed-size buffers.
+        private void DrawDetails(Vector2 center,Vector2 from,Vector2 to,float age,float opacity)
+        {
+            bool moving=_shape==BossHazard.Shape.Bolt||_shape==BossHazard.Shape.Orbit;
+            float extent=moving?Mathf.Max(_radius*.8f,_bodyHeight*.065f):Mathf.Max(_radius*.78f,_bodyHeight*.12f);
+            float growth=Mathf.SmoothStep(0,1,Mathf.Clamp01(age/.18f));
+            for(int n=0;n<_details.Length;n++)
+            {
+                Vector2 origin=_shape==BossHazard.Shape.Line?Vector2.Lerp(from,to,(n+.5f)/5):center;
+                float angle=n*Mathf.PI*2/5+(_kind==3?-age*.7f:age*.18f);
+                Vector2 axis=new Vector2(Mathf.Cos(angle),Mathf.Sin(angle)),side=new Vector2(-axis.y,axis.x);
+                for(int i=0;i<_detailBuffer.Length;i++)
+                {
+                    float t=i/15f;Vector2 p;
+                    switch(_kind)
+                    {
+                        case 0: // Tapering spirit flames with a drifting wisp tip.
+                            p=origin+axis*(extent*(.25f+t*.85f))+side*(Mathf.Sin(t*Mathf.PI*2-age*4+n)*extent*.19f*(1-t));break;
+                        case 1: // Forked angular roots: trunk, thorn, and sharp tip.
+                            float branch=t<.55f?t/.55f:1-(t-.55f)/.45f;
+                            p=origin+axis*(extent*t)+side*(extent*.25f*branch*(i%3==0?1:-.35f));break;
+                        case 2: // Five pointed crystal shards, not a circular snow ring.
+                            Vector2 a=origin+axis*extent*.22f,b=origin+axis*extent*.62f+side*extent*.17f,c=origin+axis*extent*1.12f,d=origin+axis*extent*.62f-side*extent*.17f;
+                            float edge=t*4;p=edge<1?Vector2.Lerp(a,b,edge):edge<2?Vector2.Lerp(b,c,edge-1):edge<3?Vector2.Lerp(c,d,edge-2):Vector2.Lerp(d,a,edge-3);break;
+                        case 3: // Layered scythe crescents with tapered outer tips.
+                            float arc=-1.05f+t*2.1f;
+                            p=origin+axis*(Mathf.Cos(arc)*extent*(.65f+n*.075f))+side*(Mathf.Sin(arc)*extent);break;
+                        default: // Almond eyes, a slit pupil, and two curved tentacles.
+                            if(n<2){float x=(t*2-1)*extent;p=origin+new Vector2(x,Mathf.Sin(t*Mathf.PI)*extent*.42f*(n==0?1:-1));}
+                            else if(n==2)p=origin+new Vector2(0,(t-.5f)*extent*.65f);
+                            else p=origin+new Vector2((t-.5f)*extent*1.8f,Mathf.Sin(t*Mathf.PI*2+age*2)*extent*.22f+(n==3?1:-1)*extent*.65f);
+                            break;
+                    }
+                    _detailBuffer[i]=ToPoint(Vector2.Lerp(origin,p,growth));
+                }
+                var line=_details[n];line.loop=_kind==2;
+                line.widthMultiplier=1;
+                line.startWidth=(_kind==3?.15f:.10f)*Mathf.Min(_bodyScale,1.65f);line.endWidth=.018f;
+                Color color=Color.Lerp(_tint,_coreLine.startColor,.5f);color.a=opacity*(_kind==1?.65f:.48f);
+                line.startColor=color;color.a*=.45f;line.endColor=color;line.positionCount=16;line.SetPositions(_detailBuffer);line.enabled=true;
+            }
         }
 
         private void SetPalette(float opacity)

@@ -18,12 +18,13 @@ namespace RGame.RoguelikeKit
         private int bankedGold;
         public int UnbankedGold => Math.Max(0, CurrentGetGold-bankedGold);
         public void BankGold()
+        {TryBankGold();}
+        public bool TryBankGold()
         {
-            if(_saveSystem==null)return;
             int amount=UnbankedGold;
-            if(amount<=0)return;
-            _saveSystem.BankEarnings(amount);
-            bankedGold=CurrentGetGold;
+            if(amount<=0)return true;
+            if(_saveSystem==null||!_saveSystem.TryBankEarnings(amount))return false;
+            bankedGold=CurrentGetGold;return true;
         }
         public event Action EnemyDefeated;
 

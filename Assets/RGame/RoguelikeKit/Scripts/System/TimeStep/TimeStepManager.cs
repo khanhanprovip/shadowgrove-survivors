@@ -25,6 +25,28 @@ namespace RGame.RoguelikeKit
         [SerializeField] private AddTimerChannel _addTimerChannel;
         
         private List<TimerData> _activeTimers = new List<TimerData>();
+        internal void RemoveTimer(FloatWrapper end)=>_activeTimers.RemoveAll(t=>t.EndTime==end);
+        internal List<RunTimer> CaptureRunTimers(RunStateFields fields)
+        {
+            var result=new List<RunTimer>();
+            foreach(var timer in _activeTimers)
+            {
+                string key=fields.Id(timer.EndTime);
+                if(key==null)throw new InvalidOperationException("Unbound gameplay timer");
+                result.Add(new RunTimer{key=key,elapsed=timer.Timer,end=timer.EndTime.Value});
+            }
+            return result;
+        }
+        internal void RestoreRunTimers(List<RunTimer> saved,RunStateFields fields)
+        {
+            if(saved.Count!=_activeTimers.Count)throw new InvalidOperationException("Checkpoint timer count mismatch");
+            foreach(var state in saved)
+            {
+                var timer=_activeTimers.Find(t=>fields.Id(t.EndTime)==state.key);
+                if(timer==null)throw new InvalidOperationException("Checkpoint timer is missing");
+                timer.Timer=state.elapsed;timer.EndTime.Value=state.end;
+            }
+        }
 
         private void OnEnable()
         {

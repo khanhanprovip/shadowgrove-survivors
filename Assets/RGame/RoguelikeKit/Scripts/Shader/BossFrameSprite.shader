@@ -67,7 +67,7 @@ Shader "RoguelikeKit/BossFrameSprite"
                 }
 
                 fixed4 shadow = _ShadowColor;
-                shadow.a = min(saturate(_ShadowColor.a), 0.32) * sprite.a * (1.0 - saturate(_Cutoff));
+                shadow.a = min(saturate(_ShadowColor.a), 0.22) * sprite.a * (1.0 - saturate(_Cutoff));
                 return shadow;
             }
             ENDCG

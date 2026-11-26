@@ -17,7 +17,7 @@ PROJECT = HERE.parent.parent
 LOCK = json.loads((HERE / 'toolchain.lock.json').read_text())
 CLI = HERE / '.tools' / 'unity' / LOCK['cliVersion'] / 'unity.exe'
 SUITES = ['menus', 'backgrounds', 'skills', 'ui', 'survival', 'killtarget', 'endless',
-          'animations', 'hit-feedback', 'skill-lifetime', 'audio', 'settings-write', 'settings-read', 'art', 'combat-pickups', 'survival-boundary', 'bosses', 'balance', 'pause-skills', 'spawn-pacing', 'enemy-cap']
+          'animations', 'hit-feedback', 'skill-lifetime', 'audio', 'settings-write', 'settings-read', 'art', 'combat-pickups', 'survival-boundary', 'bosses', 'balance', 'pause-skills', 'spawn-pacing', 'enemy-cap', 'run-save-write', 'run-save-read', 'run-save-modes', 'run-save-bosses']
 LEGACY = {'Smoke45': 'playtest_smoke45.txt', 'Flow65': 'playtest_flow65.txt',
           'Full100': 'playtest_full100.txt', 'Lose60': 'playtest_lose60.txt',
           'KillTargetLevel': 'playtest_killtarget_lv2.txt'}
@@ -244,7 +244,7 @@ def test_player(binary, suites, run, width, height, timeout):
         case = run / f'{index + 1:02d}-{suite}-{width}x{height}'
         case.mkdir()
         # Each case isolated; settings-write/read intentionally share only their own profile.
-        profile = run / (f'{run.name}-settings' if suite.startswith('settings-') else f'{run.name}-{index}-{suite}')
+        profile = run / (f'{run.name}-settings' if suite.startswith('settings-') else f'{run.name}-run-save' if suite.startswith('run-save-') else f'{run.name}-{index}-{suite}')
         proc = invoke([binary, '-datn-autotest', f'-datn-suite={suite}', '-screen-width', str(width),
                        '-screen-height', str(height), '-screen-fullscreen', '0', '-force-d3d11',
                        '-logFile', case / 'player.log'], case / 'stdout.log', timeout,

@@ -67,6 +67,12 @@ namespace RGame.RoguelikeKit
                 StopAnimation(animData);
             }
         }
+        internal float CaptureProgress(SpriteRenderer renderer)=>mAnimationDataMap.TryGetValue(renderer,out var data)&&data.CurrentSequence!=null&&data.CurrentSequence.IsActive()?data.CurrentSequence.ElapsedPercentage():0;
+        internal void ResumeProgress(SpriteRenderer renderer,float progress,UnityAction finished)
+        {
+            Play(renderer,finished);
+            if(mAnimationDataMap.TryGetValue(renderer,out var data)&&data.CurrentSequence!=null)data.CurrentSequence.Goto(Mathf.Clamp01(progress)*data.CurrentSequence.Duration(),true);
+        }
 
         public void Remove(SpriteRenderer spriteRenderer)
         {

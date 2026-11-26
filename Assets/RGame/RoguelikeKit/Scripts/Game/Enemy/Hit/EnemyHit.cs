@@ -21,6 +21,10 @@ namespace RGame.RoguelikeKit
         private EndlessBossEnemy _boss;
         private void Awake(){_boss=GetComponentInParent<EndlessBossEnemy>();}
         public void SetPool(PoolRuntimeSO pool) { poolRuntimeSo=pool; }
+        internal float CaptureDeathProgress()=>_isDead?_dissolveAnimationSO.CaptureProgress(_spriteRenderers):-1;
+        internal Color RunNormalBlend=>_hitAnimationSO.NormalBlend;
+        internal void ResumeDeathProgress(float progress)
+        {if(progress>=0){_isDead=true;_dissolveAnimationSO.ResumeProgress(_spriteRenderers,progress,OnDeathEnd);}}
 
         private void OnEnable()
         {

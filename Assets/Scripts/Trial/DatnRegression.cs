@@ -101,6 +101,10 @@ namespace DATN.Trial
 
             switch (suite)
             {
+                case "run-save-write":yield return CheckRunSaveWrite();break;
+                case "run-save-modes":yield return CheckRunSaveModes();break;
+                case "run-save-bosses":yield return CheckRunSaveBosses();break;
+                case "run-save-read":yield return CheckRunSaveRead();break;
                 case "bosses": yield return CheckBosses(); break;
                 case "balance": yield return CheckBalance(); break;
                 case "pause-skills": yield return CheckPauseSkills(); break;

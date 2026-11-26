@@ -15,6 +15,7 @@ namespace RGame.RoguelikeKit
         public UnityAction<SkillBase> OnDeath { get; set; }
         
         public string Key { get; set; }
+        public BaseBuff StatusEffect => _baseBuff;
 
         public void Request()
         {

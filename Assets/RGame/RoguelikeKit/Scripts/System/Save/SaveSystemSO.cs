@@ -56,18 +56,24 @@ namespace RGame.RoguelikeKit
         }
 
         public void SaveDataToDisk()
+        {TrySaveDataToDisk();}
+        private bool TrySaveDataToDisk()
         {
             SaveSettings();
             SavePowerUp();
             SaveCharacter();
             
-            FileManager.WriteToFile(saveFilename, Save.ToJson(), backupSaveFilename);
+            return FileManager.WriteToFile(saveFilename, Save.ToJson(), backupSaveFilename);
         }
         public void BankEarnings(int amount)
+        {TryBankEarnings(amount);}
+        public bool TryBankEarnings(int amount)
         {
-            if(amount<=0)return;
-            _attribute.SetAttribute("GoldCount",_attribute.GoldCount+amount);
-            SaveDataToDisk();
+            if(amount<=0)return true;
+            int previous=_attribute.GoldCount;
+            _attribute.SetAttribute("GoldCount",previous+amount);
+            if(TrySaveDataToDisk())return true;
+            _attribute.SetAttribute("GoldCount",previous);Save.SaveAttributes(_attribute);return false;
         }
 
         public void WriteEmptySaveFile()

@@ -43,6 +43,34 @@ namespace RGame.RoguelikeKit
         [SerializeField, Range(10,100)] private int maxActiveEnemies = 40;
         public int EnemyLimit => maxActiveEnemies;
         public int SpawnedThisRun { get; private set; }
+        internal PoolRuntimeSO RunPool=>poolRuntime;
+        internal void CaptureRunSchedule(RunCheckpoint state)
+        {
+            foreach(var set in _spawnSets)state.spawnBudgets.Add(_accumulators.TryGetValue(set,out var value)?value:0);
+            foreach(var pending in pendingBursts){state.burstSets.Add(_spawnSets.IndexOf(pending.set));state.burstOffsets.Add(pending.offset);}
+        }
+        internal void PrepareRunRestore()
+        {StopAllCoroutines();bosses.CancelEncounter();CleanupEnemies();poolRuntime.RecycleAll();pendingBursts.Clear();_accumulators.Clear();}
+        internal void AttachRunEnemy(BaseEnemy enemy)
+        {
+            enemySystem.AddEnemy(enemy);if(enemy is EndlessBossEnemy)return;
+            enemy.Returned-=HandleEnemyReturned;enemy.Returned+=HandleEnemyReturned;
+        }
+        internal void RestoreRunSchedule(RunCheckpoint state)
+        {
+            if(state.spawnBudgets.Count!=_spawnSets.Count||state.burstSets.Count!=state.burstOffsets.Count)throw new ArgumentException("Invalid spawn schedule");
+            StopAllCoroutines();_accumulators.Clear();pendingBursts.Clear();
+            for(int i=0;i<_spawnSets.Count;i++)
+            {
+                _accumulators[_spawnSets[i]]=state.spawnBudgets[i];
+                if(_spawnSets[i].Pattern==SpawnPatternType.Random&&_elapsed>=_spawnSets[i].StartTime&&_elapsed<_spawnSets[i].EndTime)StartCoroutine(RunSegment(_spawnSets[i]));
+            }
+            for(int i=0;i<state.burstSets.Count;i++)
+            {
+                int index=state.burstSets[i];if(index<0||index>=_spawnSets.Count)throw new ArgumentException("Invalid queued spawn");
+                pendingBursts.Enqueue((_spawnSets[index],state.burstOffsets[i]));
+            }
+        }
         private readonly Dictionary<SpawnSet, float> _accumulators = new();
         private EndlessBossDirector bosses;
         private float runSeconds,spawnTokens=1;

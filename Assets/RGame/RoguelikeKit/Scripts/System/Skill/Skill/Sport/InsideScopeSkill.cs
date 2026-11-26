@@ -70,7 +70,7 @@ namespace RGame.RoguelikeKit
                 EnemyHit enemyHit = other.GetComponent<EnemyHit>();
                 if (enemyHit != null)
                 {
-                    _enemyHits.Add(enemyHit);
+                    if(!_enemyHits.Contains(enemyHit))_enemyHits.Add(enemyHit);
                 }
             }
         }

@@ -20,6 +20,23 @@ namespace RGame.RoguelikeKit
         BossArrivalBanner arrival;
         BossVisualAnimation activeVisual;
         BossEntrance entrance;
+        readonly BossEncounterDeck deck=new BossEncounterDeck();
+        public BossDeckState CaptureDeck()=>deck.Capture();
+        internal void RestoreDeck(BossDeckState state){if(!deck.Restore(state))throw new ArgumentException("Invalid saved boss bag");}
+        internal void PrepareRestoredBoss(EndlessBossEnemy boss,bool entering)
+        {
+            ActiveBoss=boss;activeVisual=boss.GetComponent<BossVisualAnimation>();
+            boss.ConfigureContext(global,pool);boss.OnDeath+=OnDefeated;boss.Returned+=OnReturned;
+            var brain=boss.GetComponent<BossBrain>();var hero=global.GlobalPlayer.GetComponentInChildren<PlayerHit>();
+            brain.Begin(brain.Kind,hero);
+            cam=Camera.main;
+            entrance=boss.GetComponent<BossEntrance>()??boss.gameObject.AddComponent<BossEntrance>();
+            if(entering)
+            {
+                entrance.Begin(brain.Kind,()=>brain.Begin(brain.Kind,hero),global.GlobalPlayer.GetComponent<SpriteRenderer>());
+                arrival.Show(brain.Kind);
+            }
+        }
         public BossArrivalBanner ArrivalBanner => arrival;
         public EndlessBossEnemy ActiveBoss { get; private set; }
         public int EncounterCount { get; private set; }
@@ -32,7 +49,7 @@ namespace RGame.RoguelikeKit
         }
         public void ResetRun(bool isEndless)
         {
-            CancelEncounter();endless=isEndless;EncounterCount=0;nextAt=300;
+            CancelEncounter();endless=isEndless;EncounterCount=0;nextAt=300;deck.Reset();
             round=FindFirstObjectByType<TrialController>();
         }
         public void Tick()
@@ -51,7 +68,7 @@ namespace RGame.RoguelikeKit
         }
         void Spawn()
         {
-            int kind=EncounterCount%5;
+            int kind=deck.Peek();
             string key="EndlessBoss_"+BossCatalog.Ids[kind];
             if(pool.GetPrefab(key)==null)
             {
@@ -59,6 +76,7 @@ namespace RGame.RoguelikeKit
                 if(prefab==null){Debug.LogError("Missing boss prefab: "+key);return;}
                 pool.Register(new PoolDefinition(key,new SolePool(prefab,1)));
             }
+            deck.Draw();
             clearWave();
             foreach(var missile in FindObjectsByType<EnemyMagic>(FindObjectsSortMode.None))pool.Return(missile.gameObject);
             var obj=pool.Request(key);
