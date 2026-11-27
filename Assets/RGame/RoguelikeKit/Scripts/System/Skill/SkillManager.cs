@@ -72,6 +72,28 @@ namespace RGame.RoguelikeKit
                 _addSkillIconChannel.RaiseEvent(data);
             }
         }
+
+        /// <summary>Restore the original 11-level starter track before legacy checkpoint validation.</summary>
+        public bool ConfigureLegacyStarter()
+        {
+            if (!_skillDataDictionary.TryGetValue("ToNearestSkill", out var runtimeData) ||
+                _globalConfig == null || _globalConfig.GlobalPlayer == null)
+                return false;
+
+            SkillDataSO legacyDefinition = null;
+            foreach (var candidate in _skillData)
+            {
+                if (candidate != null && candidate.Key == "ToNearestSkill")
+                {
+                    legacyDefinition = candidate;
+                    break;
+                }
+            }
+
+            var profile = _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>();
+            return legacyDefinition != null && profile != null &&
+                   profile.ConfigureLegacyStarter(runtimeData, legacyDefinition);
+        }
         
         private void Awake()
         {
@@ -104,11 +126,12 @@ namespace RGame.RoguelikeKit
             }
 
             var skillData = _skillDataDictionary[key];
+            if (!IsSignatureAvailableForSelectedHero(skillData, skillData.Level == 0)) return;
             
             if (skillData.Level == 0)
             {
                 if (key == "ToNearestSkill" && _globalConfig.GlobalPlayer != null)
-                    _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>()?.Configure(skillData);
+                    _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>()?.Configure(skillData, _playerStat);
                 _activeSkills.Add(key);
 
                 switch (skillData.SkillType)
@@ -135,8 +158,13 @@ namespace RGame.RoguelikeKit
             {
                 if (_skillDataDictionary[key].CheckLevelToMax())
                 {
-                    _skillCastDictionary[key].BindData(skillData);
-                    _skillCastDictionary[key].MixSkill();
+                    // Signatures stop at level 5; generic skills keep their
+                    // existing optional evolution path.
+                    if (skillData.StarterWeapon == StarterWeaponKind.Legacy)
+                    {
+                        _skillCastDictionary[key].BindData(skillData);
+                        _skillCastDictionary[key].MixSkill();
+                    }
                     UpdateSkillEndTime(key);
                     return;
                 }
@@ -171,13 +199,18 @@ namespace RGame.RoguelikeKit
             var cast = _skillCastDictionary[key];
             if (!cast.CanCast()) return;
 
-            cast.Cast(_skillDataDictionary[key]);
+            var skillData = _skillDataDictionary[key];
+            cast.Cast(skillData);
 
             // Shadowgrove (Moc 5): phat animation Attack cua nhan vat moi lan cast
             var playerAnim = _globalConfig.GlobalPlayer.GetComponent<PlayerAnim>();
             if (playerAnim != null) playerAnim.PlayAttack();
 
-            ShadowgroveAudio.Play(SoundCue.Cast);
+            var profile = _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>();
+            if (profile != null && !profile.UsesLegacyStarter && skillData.StarterWeapon == profile.Kind)
+                ShadowgroveAudio.PlayHero(profile.Kind);
+            else
+                ShadowgroveAudio.Play(SoundCue.Cast);
         }
 
         private void UpdateSkillEndTime(string key)
@@ -211,6 +244,16 @@ namespace RGame.RoguelikeKit
             if (skillData.SkillType is SkillType.AttackSkill)
             {
                 var attributeMod = skillData.UpgradeAttribute[skillData.Level - 1];
+
+                if (attributeMod.skillAttributeType == UpgradeSkillAttributeType.SignatureLevel)
+                {
+                    var profile = _globalConfig.GlobalPlayer != null
+                        ? _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>()
+                        : null;
+                    if (profile == null || !profile.ApplySignatureUpgrade(skillData, attributeMod.IntValue))
+                        Debug.LogError("Unable to apply signature level " + attributeMod.IntValue + " for " + key);
+                    return;
+                }
                 
                 switch (attributeMod.skillAttributeType)
                 {
@@ -261,6 +304,7 @@ namespace RGame.RoguelikeKit
             foreach (var skill in _skillDataDictionary.Values)
             {
                 if (skill.CheckLevelToMax()) continue;
+                if (!IsSignatureAvailableForSelectedHero(skill)) continue;
                 if(skill.SkillType is SkillType.AttributeSkill && _activeAttributeSkill == 6 && !_activeSkills.Contains(skill.Key)) continue;
                 if(skill.SkillType is SkillType.AttackSkill && _activeAttackSkill == 6 && !_activeSkills.Contains(skill.Key)) continue;
                 
@@ -287,6 +331,16 @@ namespace RGame.RoguelikeKit
             }
 
             _upgradeSkillUIChannel.RaiseEvent(skillDataList);
+        }
+
+        private bool IsSignatureAvailableForSelectedHero(SkillDataSO skill, bool allowUnconfiguredStarter = false)
+        {
+            if (skill == null || skill.Key != "ToNearestSkill") return true;
+            var player = _globalConfig != null ? _globalConfig.GlobalPlayer : null;
+            var profile = player != null ? player.GetComponent<StarterWeaponProfile>() : null;
+            if (profile == null) return skill.StarterWeapon == StarterWeaponKind.Legacy;
+            return skill.StarterWeapon == profile.Kind ||
+                (allowUnconfiguredStarter && skill.StarterWeapon == StarterWeaponKind.Legacy);
         }
 
         private void OpenTreasurePanel()
@@ -316,7 +370,7 @@ namespace RGame.RoguelikeKit
             
             foreach (var skill in _skillDataDictionary.Values)
             {
-                if (skill.CurrentState is SkillCurrentState.WaitMix)
+                if (IsSignatureAvailableForSelectedHero(skill) && skill.CurrentState is SkillCurrentState.WaitMix)
                 {
                     count--;
                     skillDataList.Add(skill);
@@ -337,6 +391,7 @@ namespace RGame.RoguelikeKit
             
             foreach (var skill in _skillDataDictionary.Values)
             {
+                if (!IsSignatureAvailableForSelectedHero(skill)) continue;
                 if (skill.CheckLevelToMax())
                 {
                     continue;

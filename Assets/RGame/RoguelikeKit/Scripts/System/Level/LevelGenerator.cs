@@ -24,6 +24,7 @@ namespace RGame.RoguelikeKit
             var map = new GameObject("Map");
             mGeneratorMapChannelSO.RaiseEvent(mLevelAndCharacterSO.SelectLevelSO.MapConfig, map.transform);
             DATN.World.LevelBackground.Apply(mLevelAndCharacterSO.SelectLevelSO, map.transform);
+            DATN.World.StageLayout.Apply(mLevelAndCharacterSO.SelectLevelSO,map.transform);
 
             //Generate Player
             var player = Instantiate(mLevelAndCharacterSO.SelectCharacterSo.CharacterPrefab, transform.position, transform.rotation);
@@ -35,7 +36,7 @@ namespace RGame.RoguelikeKit
             waveConfig.SelectStageConfig = mLevelAndCharacterSO.SelectLevelSO.StageConfig;
             waveConfig.EnemyParent = enemies.transform;
             var mode = mLevelAndCharacterSO.SelectLevelSO.GameMode;
-            waveConfig.IsEndless = mode != null && mode.ModeId == DATN.Modes.GameModeId.Endless;
+            waveConfig.IsEndless = mode != null && RunCheckpointSession.PendingModeId(mode.ModeId) == DATN.Modes.GameModeId.Endless;
 
             mStartStageEventChannelSo.RaiseEvent(waveConfig);
             Destroy(waveConfig);

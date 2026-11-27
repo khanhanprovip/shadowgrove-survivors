@@ -1,0 +1,190 @@
+{
+  "date": "2026-11-28",
+  "unity": "6000.3.21f1",
+  "delivery": "F:\\Do_An_KT\\Build\\ShadowgroveSurvivors_BossRush_2026-11-28",
+  "deliveryFilesHashVerified": 192,
+  "finalBuildRun": "20261128-023804-verify-17656",
+  "runs": [
+    {
+      "run": "20261127-173033-verify-12784",
+      "build": {
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+        "assemblySha256": "1437277a0a1ae2cfc47096bf16688a890309950fd5af5d2c4f81dcecd0cdad62"
+      },
+      "cases": [
+        {
+          "suite": "level-heal",
+          "passed": true,
+          "assertions": 86,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\01-level-heal-1280x720"
+        },
+        {
+          "suite": "boss-rush",
+          "passed": true,
+          "assertions": 163,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\02-boss-rush-1280x720"
+        },
+        {
+          "suite": "campaign-bosses",
+          "passed": true,
+          "assertions": 112,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\03-campaign-bosses-1280x720"
+        },
+        {
+          "suite": "hero-kits",
+          "passed": true,
+          "assertions": 79,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\04-hero-kits-1280x720"
+        },
+        {
+          "suite": "backgrounds",
+          "passed": true,
+          "assertions": 161,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173033-verify-12784\\05-backgrounds-1280x720"
+        }
+      ]
+    },
+    {
+      "run": "20261127-173649-verify-17204",
+      "build": {
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+        "assemblySha256": "8a57ee10ea5137cdefc369a991ae2ee5e7c87516c6075008180935b349c81f6c"
+      },
+      "cases": [
+        {
+          "suite": "endless",
+          "passed": true,
+          "assertions": 13,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\01-endless-1920x1080"
+        },
+        {
+          "suite": "bosses",
+          "passed": false,
+          "assertions": 351,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\02-bosses-1920x1080"
+        },
+        {
+          "suite": "audio",
+          "passed": true,
+          "assertions": 38,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\03-audio-1920x1080"
+        },
+        {
+          "suite": "backgrounds",
+          "passed": true,
+          "assertions": 161,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\04-backgrounds-1920x1080"
+        },
+        {
+          "suite": "level-heal",
+          "passed": true,
+          "assertions": 85,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\05-level-heal-1920x1080"
+        },
+        {
+          "suite": "boss-rush",
+          "passed": false,
+          "assertions": 167,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-173649-verify-17204\\06-boss-rush-1920x1080"
+        }
+      ]
+    },
+    {
+      "run": "20261127-174636-verify-38552",
+      "build": {
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-174636-verify-38552\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+        "assemblySha256": "2de0b65351ef11451512dff65bc023ac8143aba25233a8decce83367eb61b904"
+      },
+      "cases": [
+        {
+          "suite": "bosses",
+          "passed": true,
+          "assertions": 612,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-174636-verify-38552\\01-bosses-1920x1080"
+        },
+        {
+          "suite": "hero-kits",
+          "passed": true,
+          "assertions": 79,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-174636-verify-38552\\02-hero-kits-1920x1080"
+        },
+        {
+          "suite": "endless-boundary",
+          "passed": true,
+          "assertions": 7,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-174636-verify-38552\\03-endless-boundary-1920x1080"
+        }
+      ]
+    },
+    {
+      "run": "20261127-175210-verify-6044",
+      "build": {
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-175210-verify-6044\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+        "assemblySha256": "153988ae8888d4c1854e4a4f6e0440106fca9a5e906735b6bacc2bf742ed736c"
+      },
+      "cases": [
+        {
+          "suite": "boss-rush",
+          "passed": false,
+          "assertions": 185,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-175210-verify-6044\\01-boss-rush-1920x1080"
+        },
+        {
+          "suite": "level-heal",
+          "passed": true,
+          "assertions": 86,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261127-175210-verify-6044\\02-level-heal-1920x1080"
+        }
+      ]
+    },
+    {
+      "run": "20261128-023804-verify-17656",
+      "build": {
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-023804-verify-17656\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "sha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556",
+        "assemblySha256": "b9708b7cb686bb9cd82d143dcf575bc51b64686484bc09e57f20f987066fb09a"
+      },
+      "cases": [
+        {
+          "suite": "boss-rush",
+          "passed": true,
+          "assertions": 180,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-023804-verify-17656\\01-boss-rush-1920x1080"
+        },
+        {
+          "suite": "hero-kits",
+          "passed": true,
+          "assertions": 79,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-023804-verify-17656\\02-hero-kits-1920x1080"
+        },
+        {
+          "suite": "level-heal",
+          "passed": true,
+          "assertions": 87,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-023804-verify-17656\\03-level-heal-1920x1080"
+        },
+        {
+          "suite": "hit-feedback",
+          "passed": true,
+          "assertions": 33,
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-023804-verify-17656\\04-hit-feedback-1920x1080"
+        }
+      ]
+    }
+  ],
+  "resolvedFailures": [
+    "Live boss animation sampling was hit by direct-damage player weapons: scoped target-roster isolation preserves the unchanged-HP assertion; bosses rerun passed 612.",
+    "Boss Rush death case exposed negative Armor healing the survivor. PlayerHit now clamps to at least one damage; negative-armor real death path rerun passed.",
+    "Hero card selection label overlapped new passive/signature labels: separated vertical bands and reviewed fresh VI/EN screenshots."
+  ],
+  "verificationLimits": [
+    "Survival boss phases use explicit QA clock injection, not three complete 120-second manual matches.",
+    "Boss suite simulates first 300-second boundary; subsequent encounters use QA clock jumps.",
+    "SFX output and routing measured; human judgement of timbre and extended balance remain unverified.",
+    "Legacy eleven-rank starter track is checked in runtime; no real user checkpoint or purchased save was reset."
+  ]
+}

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV6_CursedVillage
   m_EditorClassIdentifier: 
-  Description: Ngôi Làng Bị Nguyền | Cursed Village — Vo tan
-  LevelDescription: Ngôi Làng Bị Nguyền | Cursed Village — Vo tan
+  Description: "Ng\xF4i L\xE0ng B\u1ECB Nguy\u1EC1n | Cursed Village \u2014 Vo tan"
+  LevelDescription: "Ng\xF4i L\xE0ng B\u1ECB Nguy\u1EC1n | Cursed Village \u2014
+    Vo tan"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: 44700a39fada4c5aaddb5512f900a787, type: 2}
+  GameMode: {fileID: 11400000, guid: fdbf154ff51c17441afbc1bfc1f873b4, type: 2}

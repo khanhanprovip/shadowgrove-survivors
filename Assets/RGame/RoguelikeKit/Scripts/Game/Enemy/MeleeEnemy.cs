@@ -54,7 +54,7 @@ namespace RGame.RoguelikeKit
         
         private void NormalMovement(Vector3 playerPosition, Vector3 currentPosition)
         {
-            Vector3 direction = (playerPosition - currentPosition).normalized;
+            Vector3 direction = DATN.World.StageLayout.Chase(currentPosition,playerPosition);
             float speed = StatRuntime.GetValue("Speed") * _globalConfig.MoveSpeedBalanceFactor;
 
             MyRigidbody2D.linearVelocity = direction * speed;
@@ -93,7 +93,7 @@ namespace RGame.RoguelikeKit
             Vector3 teleportPosition = playerPosition + (Vector3)(teleportDirection * TELEPORT_DISTANCE);
             
             // Apply teleport
-            transform.position = teleportPosition;
+            transform.position = DATN.World.StageLayout.ResolvePosition(teleportPosition);
             
             // Optional: Add teleport effect here
             OnTeleport(teleportPosition);

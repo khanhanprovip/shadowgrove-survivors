@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV3_SunkenMarsh
   m_EditorClassIdentifier: 
-  Description: Đầm Lầy Chìm | Sunken Marsh — Song sot 120s
-  LevelDescription: Đầm Lầy Chìm | Sunken Marsh — Song sot 120s
+  Description: "\u0110\u1EA7m L\u1EA7y Ch\xECm | Sunken Marsh \u2014 Song sot 120s"
+  LevelDescription: "\u0110\u1EA7m L\u1EA7y Ch\xECm | Sunken Marsh \u2014 Song sot
+    120s"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: b20e05910e3f4e08a2c39300e45b171e, type: 2}
+  GameMode: {fileID: 11400000, guid: 524b2a5f0f743bb48b28050d540545bc, type: 2}

@@ -19,6 +19,7 @@ namespace RGame.RoguelikeKit
         private bool processingExp, choiceOpen;
         private TrialController round;
         public int PendingChoices => pendingChoices;
+        public bool HasOpenChoice => choiceOpen;
         internal void RestoreRunStats(System.Action restore)
         {
             processingExp=true;
@@ -61,6 +62,7 @@ namespace RGame.RoguelikeKit
                 {
                     int cost = Mathf.Max(1, expConfig.GetExperienceForLevel(_stat.GetValue("Level")));
                     _stat.ModifyValue("Level", 1);
+                    HealOnLevelUp();
                     _stat.ModifyValue("Exp", -cost);
                     pendingChoices++;
                 }
@@ -74,9 +76,21 @@ namespace RGame.RoguelikeKit
         {
             if (count <= 0) return;
             _stat.ModifyValue("Level", count);
+            HealOnLevelUp();
             pendingChoices += count;
             _updateLevelUIChannel.RaiseEvent();
             TryPresent();
+        }
+        public void GrantUpgradeChoices(int count)
+        {
+            if(count<=0)return;
+            pendingChoices+=count;TryPresent();
+        }
+        private void HealOnLevelUp()
+        {
+            // Level rewards heal living players; snapshot restore never calls this.
+            int hp=_stat.GetValue("HP");
+            if(hp>0)_stat.ModifyValue("HP",Mathf.Max(0,_stat.GetMaxValue("HP")-hp));
         }
         private void TryPresent()
         {

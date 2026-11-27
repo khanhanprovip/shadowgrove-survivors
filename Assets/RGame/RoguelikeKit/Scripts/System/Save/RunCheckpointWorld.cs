@@ -71,7 +71,7 @@ namespace RGame.RoguelikeKit
         public RunCheckpoint Capture()
         {
             if(!round.IsPaused||round.IsEnded||round.PlayerStat.GetValue("HP")<=0)throw new InvalidOperationException("Only a paused active round can be saved");
-            var state=new RunCheckpoint{id=Guid.NewGuid().ToString(),savedUtc=DateTime.UtcNow.ToString("O"),hero=round.RunSelection.SelectCharacterSo.CharacterName,stage=round.RunSelection.SelectLevelSO.name,
+            var state=new RunCheckpoint{worldRevision=DATN.World.StageLayout.Current!=null?DATN.World.StageLayout.CurrentRevision:0,id=Guid.NewGuid().ToString(),savedUtc=DateTime.UtcNow.ToString("O"),hero=round.RunSelection.SelectCharacterSo.CharacterName,stage=round.RunSelection.SelectLevelSO.name,
                 clock=round.MatchSeconds,random=JsonUtility.ToJson(UnityEngine.Random.state),stats=Stats(round.PlayerStat)};
             entities.Add("hero",round.GlobalConfig.GlobalPlayer.gameObject);
             int index=0;
@@ -124,6 +124,7 @@ namespace RGame.RoguelikeKit
         public IEnumerator Restore(RunCheckpoint state)
         {
             Time.timeScale=0;Object.FindFirstObjectByType<BuffManager>().ClearAllBuffs();stage.PrepareRunRestore();
+            if(state.worldRevision<1&&!skills.ConfigureLegacyStarter())throw new ArgumentException("Legacy starter configuration is unavailable");
             skills.PrepareRunSkills(state.skills);entities.Add("hero",round.GlobalConfig.GlobalPlayer.gameObject);
             var freshProps=Object.FindObjectsByType<DropBox>(FindObjectsSortMode.None);
             foreach(var entity in state.entities.Where(e=>e.id!="hero"&&!e.id.StartsWith("hazard:")))

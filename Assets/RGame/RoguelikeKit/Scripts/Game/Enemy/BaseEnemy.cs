@@ -92,7 +92,10 @@ namespace RGame.RoguelikeKit
                 _playerTransform = _globalConfig.GlobalPlayer.transform;
          
             if (_playerTransform != null)
+            {
                 Move();
+                MyRigidbody2D.linearVelocity=DATN.World.StageLayout.Constrain(MyRigidbody2D.position,MyRigidbody2D.linearVelocity,this is EndlessBossEnemy?2f:.55f);
+            }
         }
 
         protected abstract void Move();

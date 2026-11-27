@@ -526,6 +526,13 @@ namespace DATN.Trial
                 $"{BossCatalog.Ids[boss.GetComponent<BossBrain>().Kind]} uses a real animated body sprite renderer");
             if(rig==null||rig.AnimatedRenderer==null)yield break;
 
+            // Receiver colliders are disabled during visual sampling, but targeted
+            // auto-skills such as RandomSkill call MyHit.Hit directly. Remove this
+            // boss from player targeting so hit flash cannot contaminate the sample.
+            var roster=(EnemySystem)typeof(StageManager).GetField("enemySystem",Private).GetValue(FindFirstObjectByType<StageManager>());
+            roster.RemoveEnemy(boss);
+            Require(!roster.GetEnemies().Contains(boss),"Live animation sample excludes boss from player auto-targeting");
+
             Require(rig.StandingSprite!=null,"Boss animation rig retains its canonical Idle frame 0 sprite");
             int hp=boss.StatRuntime.GetValue("HP");
             Time.timeScale=3;
@@ -550,8 +557,10 @@ namespace DATN.Trial
             Require(moveSeen,$"{BossCatalog.Ids[boss.GetComponent<BossBrain>().Kind]} enters its move animation while approaching the survivor");
             Require(frameChanged&&silhouetteChanged&&previous.OpaquePixels>200,
                 $"{BossCatalog.Ids[boss.GetComponent<BossBrain>().Kind]} advances native sprite frames with changing opaque pixels in fresh GPU renders");
-            Require(boss.StatRuntime.GetValue("HP")==hp,
-                $"{BossCatalog.Ids[boss.GetComponent<BossBrain>().Kind]} rendered animation samples do not rely on hit flash");
+            int sampledHP=boss.StatRuntime.GetValue("HP");
+            Require(sampledHP==hp,
+                $"{BossCatalog.Ids[boss.GetComponent<BossBrain>().Kind]} rendered animation samples do not rely on hit flash (HP {hp}->{sampledHP})");
+            roster.AddEnemy(boss);
         }
         IEnumerator CheckBossFrameCoverage(EndlessBossEnemy boss,BossVisualAnimation rig,SpriteVisibilityProbe visibility)
         {

@@ -24,6 +24,9 @@ namespace RGame.RoguelikeKit
         private LineRenderer _rightOuter;
         private LineRenderer _rightCore;
         private LineRenderer _chestRune;
+        private SpriteRenderer _leftSigil;
+        private SpriteRenderer _rightSigil;
+        private SpriteRenderer _chestSigil;
 
         private void Awake()
         {
@@ -53,7 +56,7 @@ namespace RGame.RoguelikeKit
             if (!frozenRestore&&(Time.timeScale <= 0f || Time.deltaTime <= 0f))
                 return;
 
-            if (_leftOuter == null)
+            if (_leftOuter == null || _leftSigil == null || _rightSigil == null || _chestSigil == null)
                 BuildLines();
 
             Bounds bounds = CanonicalBounds(_boss);
@@ -87,12 +90,32 @@ namespace RGame.RoguelikeKit
             SetSorting(_rightOuter, layer, order);
             SetSorting(_rightCore, layer, order);
             SetSorting(_chestRune, layer, order);
+            SetSorting(_leftSigil, layer, order);
+            SetSorting(_rightSigil, layer, order);
+            SetSorting(_chestSigil, layer, order);
 
             DrawHand(_leftOuter, _leftCore, _leftOuterBuffer, _leftCoreBuffer,
                 leftHand, glyphRadius, castAge, 0f, _brain.Kind, outer, core);
             DrawHand(_rightOuter, _rightCore, _rightOuterBuffer, _rightCoreBuffer,
                 rightHand, glyphRadius, castAge, Mathf.PI * 0.72f, _brain.Kind, outer, core);
-            DrawChest(chest, glyphRadius * (_brain.Kind==3?1.5f:_brain.Kind==4?1.25f:.72f), castAge, _brain.Kind, rune);
+            float chestRadius=glyphRadius * (_brain.Kind==3?1.5f:_brain.Kind==4?1.25f:.72f);
+            DrawChest(chest, chestRadius, castAge, _brain.Kind, rune);
+
+            Sprite[] castFrames=BossVfxShared.CastSprites(_brain.Kind);
+            if(castFrames.Length>0)
+            {
+                int frame=Mathf.Clamp(Mathf.FloorToInt(castAge/CastWindow*castFrames.Length),0,castFrames.Length-1);
+                float castAngle=Mathf.Atan2(_brain.CastDirection.y,_brain.CastDirection.x)*Mathf.Rad2Deg;
+                DrawCastSprite(_leftSigil,castFrames[frame],leftHand,glyphRadius*1.32f,castAngle+castAge*34f,rune,opacity);
+                DrawCastSprite(_rightSigil,castFrames[frame],rightHand,glyphRadius*1.32f,castAngle-castAge*34f,rune,opacity);
+                DrawCastSprite(_chestSigil,castFrames[frame],chest,chestRadius*1.45f,castAngle+castAge*16f,core,opacity*.72f);
+            }
+            else
+            {
+                if(_leftSigil!=null)_leftSigil.enabled=false;
+                if(_rightSigil!=null)_rightSigil.enabled=false;
+                if(_chestSigil!=null)_chestSigil.enabled=false;
+            }
         }
 
         internal static Bounds CanonicalBounds(EndlessBossEnemy boss)
@@ -114,6 +137,9 @@ namespace RGame.RoguelikeKit
             if (_rightOuter != null) _rightOuter.enabled = false;
             if (_rightCore != null) _rightCore.enabled = false;
             if (_chestRune != null) _chestRune.enabled = false;
+            if (_leftSigil != null) _leftSigil.enabled = false;
+            if (_rightSigil != null) _rightSigil.enabled = false;
+            if (_chestSigil != null) _chestSigil.enabled = false;
         }
 
         private void CacheReferences()
@@ -130,14 +156,14 @@ namespace RGame.RoguelikeKit
 
         private void BuildLines()
         {
-            if (_leftOuter != null)
-                return;
-
-            _leftOuter = BossVfxShared.CreateLine(transform, "Boss Cast Left Glow", 100, 0.13f);
-            _leftCore = BossVfxShared.CreateLine(transform, "Boss Cast Left Core", 101, 0.035f);
-            _rightOuter = BossVfxShared.CreateLine(transform, "Boss Cast Right Glow", 100, 0.13f);
-            _rightCore = BossVfxShared.CreateLine(transform, "Boss Cast Right Core", 101, 0.035f);
-            _chestRune = BossVfxShared.CreateLine(transform, "Boss Cast Rune", 101, 0.045f);
+            if (_leftOuter == null) _leftOuter = BossVfxShared.CreateLine(transform, "Boss Cast Left Glow", 100, 0.13f);
+            if (_leftCore == null) _leftCore = BossVfxShared.CreateLine(transform, "Boss Cast Left Core", 101, 0.035f);
+            if (_rightOuter == null) _rightOuter = BossVfxShared.CreateLine(transform, "Boss Cast Right Glow", 100, 0.13f);
+            if (_rightCore == null) _rightCore = BossVfxShared.CreateLine(transform, "Boss Cast Right Core", 101, 0.035f);
+            if (_chestRune == null) _chestRune = BossVfxShared.CreateLine(transform, "Boss Cast Rune", 101, 0.045f);
+            if (_leftSigil == null) _leftSigil = BossVfxShared.CreateSprite(transform, "Boss Cast Left Sigil", 100);
+            if (_rightSigil == null) _rightSigil = BossVfxShared.CreateSprite(transform, "Boss Cast Right Sigil", 100);
+            if (_chestSigil == null) _chestSigil = BossVfxShared.CreateSprite(transform, "Boss Cast Chest Sigil", 100);
         }
 
         private static void GetPalette(int kind, out Color outer, out Color core, out Color rune)
@@ -176,6 +202,28 @@ namespace RGame.RoguelikeKit
         {
             line.sortingLayerID = layer;
             line.sortingOrder = order;
+        }
+
+        private static void SetSorting(SpriteRenderer sprite, int layer, int order)
+        {
+            if(sprite==null)return;
+            sprite.sortingLayerID = layer;
+            sprite.sortingOrder = order;
+        }
+
+        private static void DrawCastSprite(SpriteRenderer renderer, Sprite sprite, Vector2 center,
+            float diameter, float angle, Color tint, float opacity)
+        {
+            if(renderer==null||sprite==null||sprite.bounds.size.x<=0.0001f||sprite.bounds.size.y<=0.0001f)return;
+            renderer.sprite=sprite;
+            renderer.transform.rotation=Quaternion.Euler(0f,0f,angle);
+            renderer.transform.localScale=new Vector3(diameter/sprite.bounds.size.x,diameter/sprite.bounds.size.y,1f);
+            Vector3 pivotOffset=Vector3.Scale(sprite.bounds.center,renderer.transform.localScale);
+            renderer.transform.position=(Vector3)center-renderer.transform.rotation*pivotOffset;
+            Color color=Color.Lerp(Color.white,tint,.42f);
+            color.a=.86f*opacity;
+            renderer.color=color;
+            renderer.enabled=true;
         }
 
         private void DrawHand(LineRenderer outerLine, LineRenderer coreLine,

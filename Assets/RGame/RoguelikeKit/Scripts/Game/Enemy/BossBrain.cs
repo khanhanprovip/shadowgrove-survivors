@@ -58,6 +58,7 @@ namespace RGame.RoguelikeKit
             }
             if(phase==FightPhase.Windup)
             {
+                ShadowgroveAudio.PlayBoss(Kind);
                 if (Kind==3 && CurrentSkill==0)
                 {
                     enemy.DashVelocity=CastDirection*9f;phase=FightPhase.Dash;remaining=.7f;return;

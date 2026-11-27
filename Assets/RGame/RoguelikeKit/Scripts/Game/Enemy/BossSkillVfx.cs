@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RGame.RoguelikeKit
@@ -5,6 +7,20 @@ namespace RGame.RoguelikeKit
     internal static class BossVfxShared
     {
         private static Material _lineMaterial;
+        private static readonly Dictionary<string, Sprite[]> SpriteFrames = new();
+        private static readonly string[,] SkillSpritePaths =
+        {
+            { "SGJade/VFX/SpiritBloom", "SGJade/VFX/ThornFan", "SGJade/VFX/WardenHalo", "SGJade/VFX/Impact", "SGJade/VFX/SpiritBloom" },
+            { "SGJade/VFX/ThornFan", "SGJade/VFX/RootLash", "SGJade/VFX/ThornOrbit", "SGJade/VFX/RootLash", "SGJade/VFX/ThornOrbit" },
+            { "SGJade/VFX/CrossBolt", "SGJade/VFX/EclipseBolt", "SGJade/VFX/CrossBolt", "SGJade/VFX/CrossBolt", "SGJade/VFX/WardenHalo" },
+            { "SGJade/VFX/ThornFan", "SGJade/VFX/ThornFan", "SGJade/VFX/CrossBolt", "SGJade/VFX/Impact", "SGJade/VFX/EclipseBolt" },
+            { "SGJade/VFX/EclipseBolt", "SGJade/VFX/WildMagic", "SGJade/VFX/SpiritBloom", "SGJade/VFX/CrossBolt", "SGJade/VFX/CrossBolt" }
+        };
+        private static readonly string[] CastSpritePaths =
+        {
+            "SGJade/VFX/SpiritBloom", "SGJade/VFX/ThornOrbit", "SGJade/VFX/CrossBolt",
+            "SGJade/VFX/ThornFan", "SGJade/VFX/WildMagic"
+        };
 
         static BossVfxShared()
         {
@@ -18,6 +34,7 @@ namespace RGame.RoguelikeKit
         private static void ResetForSubsystem()
         {
             DisposeLineMaterial();
+            SpriteFrames.Clear();
         }
 
         public static Material LineMaterial
@@ -69,6 +86,68 @@ namespace RGame.RoguelikeKit
                 line.sharedMaterial = shared;
         }
 
+        public static SpriteRenderer CreateSprite(Transform parent, string name, int sortingOrder)
+        {
+            var spriteObject = new GameObject(name, typeof(SpriteRenderer));
+            spriteObject.transform.SetParent(parent, false);
+            var sprite = spriteObject.GetComponent<SpriteRenderer>();
+            sprite.sharedMaterial = LineMaterial;
+            sprite.sortingOrder = sortingOrder;
+            sprite.enabled = false;
+            return sprite;
+        }
+
+        public static void BindMaterial(SpriteRenderer sprite)
+        {
+            if (sprite == null)
+                return;
+
+            Material shared = LineMaterial;
+            if (sprite.sharedMaterial != shared)
+                sprite.sharedMaterial = shared;
+        }
+
+        public static Sprite[] SkillSprites(int kind, int skill)
+        {
+            int boss = Mathf.Clamp(kind, 0, 4);
+            int attack = Mathf.Clamp(skill, 0, 4);
+            return LoadSpriteFrames(SkillSpritePaths[boss, attack]);
+        }
+
+        public static Sprite[] CastSprites(int kind)
+        {
+            return LoadSpriteFrames(CastSpritePaths[Mathf.Clamp(kind, 0, CastSpritePaths.Length - 1)]);
+        }
+
+        private static Sprite[] LoadSpriteFrames(string resourcePath)
+        {
+            if (SpriteFrames.TryGetValue(resourcePath, out var frames))
+                return frames;
+
+            frames = Resources.LoadAll<Sprite>(resourcePath);
+            if (frames == null || frames.Length == 0)
+                frames = Array.Empty<Sprite>();
+            else if (frames.Length > 1)
+                Array.Sort(frames, CompareSpriteFrames);
+
+            SpriteFrames.Add(resourcePath, frames);
+            return frames;
+        }
+
+        private static int CompareSpriteFrames(Sprite left, Sprite right)
+        {
+            return FrameNumber(left).CompareTo(FrameNumber(right));
+        }
+
+        private static int FrameNumber(Sprite sprite)
+        {
+            if (sprite == null)
+                return 0;
+
+            int separator = sprite.name.LastIndexOf('_');
+            return separator >= 0 && int.TryParse(sprite.name.Substring(separator + 1), out int frame) ? frame : 0;
+        }
+
         private static void DisposeLineMaterial()
         {
             if (_lineMaterial == null)
@@ -106,6 +185,7 @@ namespace RGame.RoguelikeKit
         private LineRenderer _mainLine;
         private LineRenderer _coreLine;
         private LineRenderer _accentLine;
+        private SpriteRenderer _motifSprite;
         private readonly LineRenderer[] _details=new LineRenderer[5];
         private readonly Vector3[] _detailBuffer=new Vector3[16];
         private BossHazard.Shape _shape;
@@ -116,8 +196,10 @@ namespace RGame.RoguelikeKit
         private float _bodyHeight,_bodyScale;
         private Color _tint;
         private int _kind;
+        private int _skillIndex = -1;
         private int _trailNext;
         private int _trailCount;
+        private Vector2 _moverDirection;
         private bool _initialized;
         private bool _visible;
         private bool _hasMoverSample;
@@ -129,7 +211,7 @@ namespace RGame.RoguelikeKit
             BuildLines();
         }
 
-        public void Init(int kind, BossHazard.Shape shape, Vector2 from, Vector2 to, float radius, Color tint, float bodyHeight=0)
+        public void Init(int kind, BossHazard.Shape shape, Vector2 from, Vector2 to, float radius, Color tint, float bodyHeight=0, int skillIndex=-1)
         {
             BuildLines();
             Hide();
@@ -142,8 +224,10 @@ namespace RGame.RoguelikeKit
             _bodyHeight=Mathf.Max(0,bodyHeight);
             _bodyScale=Mathf.Clamp(bodyHeight*.18f,1f,2.6f);
             _tint = tint;
+            _skillIndex = skillIndex;
             _trailNext = 0;
             _trailCount = 0;
+            _moverDirection = Vector2.zero;
             _lastCenter = from;
             _hasMoverSample = false;
             _initialized = true;
@@ -189,6 +273,7 @@ namespace RGame.RoguelikeKit
                     break;
             }
             DrawDetails(center,currentFrom,currentTo,activeAge,opacity);
+            DrawMotif(center,currentFrom,currentTo,activeAge,duration,opacity);
         }
 
         public void Hide()
@@ -202,6 +287,7 @@ namespace RGame.RoguelikeKit
             if (_mainLine != null) _mainLine.enabled = false;
             if (_coreLine != null) _coreLine.enabled = false;
             if (_accentLine != null) _accentLine.enabled = false;
+            if (_motifSprite != null) _motifSprite.enabled = false;
             foreach(var detail in _details)if(detail!=null)detail.enabled=false;
             _trailCount = 0;
             _trailNext = 0;
@@ -216,6 +302,8 @@ namespace RGame.RoguelikeKit
                 _accentLine = BossVfxShared.CreateLine(transform, "Boss VFX Accent", 19985, 0.11f);
             if (_coreLine == null)
                 _coreLine = BossVfxShared.CreateLine(transform, "Boss VFX Core", 19988, 0.045f);
+            if (_motifSprite == null)
+                _motifSprite = BossVfxShared.CreateSprite(transform, "Boss VFX Filled Motif", 19980);
             for(int i=0;i<_details.Length;i++)if(_details[i]==null)
                 _details[i]=BossVfxShared.CreateLine(transform,"Boss themed stroke "+i,19986,.09f);
             BindMaterials();
@@ -226,7 +314,85 @@ namespace RGame.RoguelikeKit
             BossVfxShared.BindMaterial(_mainLine);
             BossVfxShared.BindMaterial(_accentLine);
             BossVfxShared.BindMaterial(_coreLine);
+            BossVfxShared.BindMaterial(_motifSprite);
             foreach(var detail in _details)BossVfxShared.BindMaterial(detail);
+        }
+
+        private void DrawMotif(Vector2 center, Vector2 from, Vector2 to, float age, float duration, float opacity)
+        {
+            if (_motifSprite == null)
+                return;
+
+            Sprite[] frames = BossVfxShared.SkillSprites(_kind, _skillIndex);
+            if (frames.Length == 0)
+            {
+                _motifSprite.enabled = false;
+                return;
+            }
+
+            int frameIndex = frames.Length == 1
+                ? 0
+                : Mathf.Clamp(Mathf.FloorToInt(Mathf.Clamp01(age / duration) * frames.Length), 0, frames.Length - 1);
+            Sprite sprite = frames[frameIndex];
+            if (sprite == null)
+            {
+                _motifSprite.enabled = false;
+                return;
+            }
+
+            Vector2 direction = Vector2.right;
+            if (_shape == BossHazard.Shape.Line)
+                direction = (to - from).sqrMagnitude > 0.0001f ? (to - from).normalized : Vector2.right;
+            else if (_shape == BossHazard.Shape.Bolt && _moverDirection.sqrMagnitude > 0.0001f)
+                direction = _moverDirection;
+            else if (_shape == BossHazard.Shape.Orbit)
+            {
+                Vector2 radial = center - _from;
+                direction = radial.sqrMagnitude > 0.0001f ? new Vector2(-radial.y, radial.x).normalized : Vector2.right;
+            }
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if (_shape != BossHazard.Shape.Line && _shape != BossHazard.Shape.Bolt && _shape != BossHazard.Shape.Orbit)
+                angle += age * (_kind == 3 ? -42f : 34f) + _skillIndex * 13f;
+
+            float height;
+            float width;
+            if (_shape == BossHazard.Shape.Line)
+            {
+                Vector2 delta = to - from;
+                width = Mathf.Max(delta.magnitude, _bodyHeight * 0.18f);
+                height = Mathf.Max(_radius * 1.45f, _bodyHeight * 0.12f);
+                center = (from + to) * 0.5f;
+            }
+            else if (_shape == BossHazard.Shape.Ring)
+            {
+                width = Mathf.Max(_radius * 2f, _bodyHeight * 0.16f);
+                height = width;
+            }
+            else
+            {
+                height = Mathf.Max(_radius * 1.8f, _bodyHeight * 0.15f);
+                float aspect = sprite.bounds.size.y > 0.0001f ? sprite.bounds.size.x / sprite.bounds.size.y : 1f;
+                width = height * Mathf.Clamp(aspect, 0.72f, 2.2f);
+            }
+
+            Vector3 size = sprite.bounds.size;
+            if (size.x <= 0.0001f || size.y <= 0.0001f)
+            {
+                _motifSprite.enabled = false;
+                return;
+            }
+
+            var spriteTransform = _motifSprite.transform;
+            spriteTransform.rotation = Quaternion.Euler(0f, 0f, angle);
+            spriteTransform.localScale = new Vector3(width / size.x, height / size.y, 1f);
+            Vector3 scaledPivot = Vector3.Scale(sprite.bounds.center, spriteTransform.localScale);
+            spriteTransform.position = (Vector3)center - spriteTransform.rotation * scaledPivot;
+            _motifSprite.sprite = sprite;
+            Color color = Color.Lerp(Color.white, _tint, 0.48f);
+            color.a = opacity * 0.88f;
+            _motifSprite.color = color;
+            _motifSprite.enabled = true;
         }
 
         // Distinct silhouettes complement the exact damage border. These strokes
@@ -508,6 +674,7 @@ namespace RGame.RoguelikeKit
 
             Vector2 movement = center - _lastCenter;
             bool hasDirection = _hasMoverSample && movement.sqrMagnitude >= 0.00000001f;
+            _moverDirection = hasDirection ? movement.normalized : Vector2.zero;
             _lastCenter = center;
             _hasMoverSample = true;
 

@@ -243,7 +243,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5421137555364
-    m_Localized: Lv. {0} → {1} / {2}
+    m_Localized: "Lv. {0} \u2192 {1} / {2}"
     m_Metadata:
       m_Items: []
   - m_Id: 89981525826060
@@ -290,8 +290,234 @@ MonoBehaviour:
     m_Localized: Endless
     m_Metadata:
       m_Items: []
-  m_Metadata:
-    m_Items: []
+  - m_Id: 523231232
+    m_Localized: Close-range cleave for clustered enemies. Steady recovery, but he
+      must get close to deal damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311616
+    m_Localized: Mid-range caster who fires dark orbs at the nearest target. Slower
+      than an arrow, so moving enemies can evade it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311617
+    m_Localized: Long-range archer who quickly shoots the nearest target in range.
+      Strong reach, single-target damage; reposition when enemies close in.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311618
+    m_Localized: Barkheart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311619
+    m_Localized: Recover 1 HP each second.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311620
+    m_Localized: Old-growth vitality restores 1 HP to Rowan each second. This passive
+      is always active and has no upgrade levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311621
+    m_Localized: Thorn Cleave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311622
+    m_Localized: Automatically cleave the nearest enemy and nearby foes in front.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311623
+    m_Localized: Rowan turns toward the nearest enemy in range and sweeps a broad
+      thorn arc. The slash only hits enemies within melee range and has a target
+      limit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311624
+    m_Localized: First Briar Cut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311625
+    m_Localized: "Cleave in a 110\xB0 arc; hit up to 3 targets within 2.2 units."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311626
+    m_Localized: Sharpened Briars
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311627
+    m_Localized: +2 damage coefficient.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311628
+    m_Localized: Thorn Fan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311629
+    m_Localized: +1 maximum target per cleave.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311630
+    m_Localized: Farther Thorns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311631
+    m_Localized: Increase cleave range to 2.4 units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311632
+    m_Localized: Rending Roots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311633
+    m_Localized: +2 damage coefficient and reduce cooldown to 0.81 seconds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311634
+    m_Localized: Maximum level reached. No evolution.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311635
+    m_Localized: Eclipse Study
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311636
+    m_Localized: Dark Orbs travel 12% faster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311637
+    m_Localized: Lyra compresses the Dark Orb's path, increasing its travel speed
+      by 12%. This passive supports her signature only and has no upgrade levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311638
+    m_Localized: Dark Orb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311639
+    m_Localized: Automatically fire a dark orb at the nearest enemy in range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311640
+    m_Localized: Lyra fires a bright-cored dark orb at the nearest enemy in mid-range.
+      Each orb damages one target and fades; she does not fire when no valid enemy
+      is in range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311641
+    m_Localized: Eclipse Orb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311642
+    m_Localized: 1 orb, 1 target; 7-unit range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311643
+    m_Localized: Dense Eclipse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311644
+    m_Localized: +2 damage coefficient.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311645
+    m_Localized: Swift Umbral Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311646
+    m_Localized: Increase orb speed from 9 to 10.8.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311647
+    m_Localized: Wider Orbit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311648
+    m_Localized: Increase range to 7.5; reduce cooldown to 1.08 seconds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311649
+    m_Localized: Twin Eclipse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311650
+    m_Localized: +1 orb toward another target; gain 1 more damage coefficient.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311651
+    m_Localized: Maximum level reached. No evolution.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311652
+    m_Localized: Hawkwind Step
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311653
+    m_Localized: Move 8% faster.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311654
+    m_Localized: Kael keeps his distance with a light step, increasing his movement
+      speed by 8%. This passive is always active and has no upgrade levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311655
+    m_Localized: Ember Arrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311656
+    m_Localized: Automatically fire a fast arrow at the nearest enemy in long range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311657
+    m_Localized: Kael fires a fast ember arrow at the nearest enemy in long range.
+      Each arrow hits one target and disappears; he does not fire outside range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311658
+    m_Localized: Ember Arrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311659
+    m_Localized: 1 arrow, 1 target; 10.5-unit range.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311660
+    m_Localized: Ash-Forged Point
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311661
+    m_Localized: +2 damage coefficient.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311662
+    m_Localized: Wind-Thread Fletching
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311663
+    m_Localized: Increase arrow speed from 16 to 18.4.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311664
+    m_Localized: Farshot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311665
+    m_Localized: Increase arrow range to 12 units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311666
+    m_Localized: Twin Embers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311667
+    m_Localized: +1 arrow toward another target; +2 damage coefficient; reduce cooldown
+      to 0.78 seconds.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311668
+    m_Localized: Maximum level reached. No evolution.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

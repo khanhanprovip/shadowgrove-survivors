@@ -61,6 +61,7 @@ namespace DATN.Trial
         public GlobalConfigSO GlobalConfig => mGlobalConfig;
         internal LevelAndCharacterSO RunSelection=>mLevelAndCharacterSO;
         internal object RunMode=>mMode;
+        internal GameModeSO RunModeConfig=>mModeConfig;
         internal void RestorePauseView(){mPaused=false;Time.timeScale=1;Pause();}
 
         private void OnEnable()
@@ -94,6 +95,9 @@ namespace DATN.Trial
 
             // Mode tra ve chuoi muc tieu da dich cho HUD moi frame
             string objective = mMode.UpdateObjective();
+            var director=FindFirstObjectByType<EndlessBossDirector>();
+            if(mMode is SurvivalMode survival&&director!=null&&director.HasSurvivalBoss&&survival.Remaining<=0)
+                objective=LanguageManager.Get(director.WaitingAtArena?"Objective_EnterArena":"Objective_DefeatBoss");
             if (objective != null && mTimeText != null) mTimeText.text = objective;
 
             TryWin();
@@ -108,10 +112,17 @@ namespace DATN.Trial
 
         private void TryWin()
         {
+            var director=FindFirstObjectByType<EndlessBossDirector>();
+            bool bossSurvival=mMode is SurvivalMode&&director!=null&&director.HasSurvivalBoss;
+            if(bossSurvival&&((SurvivalMode)mMode).Remaining<=0)
+            {
+                director.RequestSurvivalBoss();
+                if(!director.FiniteComplete)return;
+            }
             if (!mMode.CheckWin()) return;
             // A slow frame may cross the deadline by several tenths of a
             // second. Record the Survival deadline, not that frame's overshoot.
-            if (mMode is SurvivalMode)
+            if (mMode is SurvivalMode&&!bossSurvival)
                 _matchSeconds = mModeConfig != null ? mModeConfig.Duration : 90f;
             mRunning = false;
             mGameWinChannel.RaiseEvent();
@@ -123,6 +134,13 @@ namespace DATN.Trial
             mModeConfig = mLevelAndCharacterSO != null && mLevelAndCharacterSO.SelectLevelSO != null
                 ? mLevelAndCharacterSO.SelectLevelSO.GameMode
                 : null;
+            if(mModeConfig!=null&&RunCheckpointSession.HasPending)
+            {
+                mModeConfig=Instantiate(mModeConfig);
+                mModeConfig.hideFlags=HideFlags.DontSave;
+                mModeConfig.ModeId=RunCheckpointSession.PendingModeId(mModeConfig.ModeId);
+                if(RunCheckpointSession.UsesLegacyWorld)mModeConfig.FinalBossKind=-1;
+            }
             if (mModeConfig == null)
                 return new SurvivalMode();
             return mModeConfig.CreateInstance();

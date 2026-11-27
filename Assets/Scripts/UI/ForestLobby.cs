@@ -22,6 +22,7 @@ namespace DATN.UI
             ForestUI.Picture(go.transform,"Forest_LobbySeal","sigil",.10f,.27f,.43f,.76f,true);
             var portrait=ForestUI.Picture(go.transform,"Forest_LobbyHero",null,.16f,.33f,.37f,.70f,true);portrait.sprite=ForestUI.HeroArt(hero.CharacterName);
             ForestUI.Label(go.transform,"Forest_LobbyName",hero.CharacterName,hero.CharacterName,46,.10f,.20f,.43f,.31f,TextAlignmentOptions.Center,ForestUI.Gold);
+            HeroSelectionDetails.AddLobbyLines(go.transform, hero.CharacterName);
             var preview=ForestUI.Picture(go.transform,"Forest_LobbyPreview",null,.52f,.36f,.69f,.53f);preview.sprite=ForestUI.LevelArt(level.name);
             var levelText=ForestUI.Label(go.transform,"Forest_LobbyLevel","","",29,.71f,.35f,.94f,.54f);
             levelText.GetComponent<ForestText>().LevelAsset=level.name;

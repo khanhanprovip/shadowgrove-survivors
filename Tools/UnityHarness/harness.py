@@ -18,6 +18,7 @@ LOCK = json.loads((HERE / 'toolchain.lock.json').read_text())
 CLI = HERE / '.tools' / 'unity' / LOCK['cliVersion'] / 'unity.exe'
 SUITES = ['menus', 'backgrounds', 'skills', 'ui', 'survival', 'killtarget', 'endless',
           'animations', 'hit-feedback', 'skill-lifetime', 'audio', 'settings-write', 'settings-read', 'art', 'combat-pickups', 'survival-boundary', 'bosses', 'balance', 'pause-skills', 'spawn-pacing', 'enemy-cap', 'run-save-write', 'run-save-read', 'run-save-modes', 'run-save-bosses']
+SUITES += ['campaign-bosses', 'boss-rush', 'level-heal', 'hero-kits', 'endless-boundary']
 LEGACY = {'Smoke45': 'playtest_smoke45.txt', 'Flow65': 'playtest_flow65.txt',
           'Full100': 'playtest_full100.txt', 'Lose60': 'playtest_lose60.txt',
           'KillTargetLevel': 'playtest_killtarget_lv2.txt'}

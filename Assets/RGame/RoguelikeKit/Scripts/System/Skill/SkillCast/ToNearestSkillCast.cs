@@ -10,23 +10,37 @@ namespace RGame.RoguelikeKit
         {
             if (!base.CanCast()) return false;
             var profile = _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>();
-            return profile != null ? profile.Targets(_enemySystem).Count > 0 :
+            if (profile != null)
+            {
+                float range = _mySkillData != null && _mySkillData.StarterWeapon == profile.Kind
+                    ? _mySkillData.AttackRange
+                    : profile.Range;
+                return profile.Targets(_enemySystem, range).Count > 0;
+            }
+            return
                 _enemySystem.GetNearestEnemies(_globalConfig.GlobalPlayer.transform.position, 12, 7).Count > 0;
         }
 
         public override void Cast(SkillDataSO skillData)
         {
             base.Cast(skillData);
-            
+
             int amount = _stat.GetValue("Amount") + skillData.Amount;
             int damage = (int)(_stat.GetValue("Might") * skillData.Damage * 0.01f) + 1;
-            float velocity = skillData.Velocity * _stat.GetValue("SkillSpeed") * 0.01f;
-            
             var profile = _globalConfig.GlobalPlayer.GetComponent<StarterWeaponProfile>();
-            var enemies = profile != null ? profile.Targets(_enemySystem) :
+            float signatureSpeed = profile != null && skillData.StarterWeapon == profile.Kind
+                ? profile.SignatureProjectileSpeedMultiplier
+                : 1f;
+            float velocity = skillData.Velocity * _stat.GetValue("SkillSpeed") * 0.01f * signatureSpeed;
+
+            float range = profile != null && skillData.StarterWeapon == profile.Kind
+                ? skillData.AttackRange
+                : profile != null ? profile.Range : 0f;
+            var enemies = profile != null ? profile.Targets(_enemySystem, range) :
                 _enemySystem.GetNearestEnemies(_globalConfig.GlobalPlayer.transform.position, 12, 7);
 
-            if (profile != null && profile.Kind == StarterWeaponKind.ThornSlash)
+            if (profile != null && !profile.UsesLegacyStarter &&
+                profile.Kind == StarterWeaponKind.ThornSlash && skillData.StarterWeapon == profile.Kind)
             {
                 if (enemies.Count == 0) return;
                 Vector2 origin = _globalConfig.GlobalPlayer.transform.position;
@@ -42,7 +56,7 @@ namespace RGame.RoguelikeKit
                 }
                 return;
             }
-            
+
             for (int i = 0; i < amount && i< enemies.Count; i++)
             {
                 var go = _pool.Request(Key);
@@ -52,11 +66,11 @@ namespace RGame.RoguelikeKit
                 {
                     skill.GetComponent<SpriteRenderer>().color = Color.red;
                 }
-                
+
                 skill.transform.localScale = skill.transform.localScale * (_stat.GetValue("Area") + skillData.Area) * 0.01f;                skill.transform.position = _globalConfig.GlobalPlayer.transform.position;
                 skill.OnDeath += HandleSkillDeath;
                 skill.Init(velocity,damage,enemies[i].transform.position);
-                if (profile != null) skill.ConfigureStarter(profile);
+                if (profile != null) skill.ConfigureStarter(profile, range);
             }
         }
 

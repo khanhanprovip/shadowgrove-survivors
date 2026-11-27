@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV2_MoonlitRuins
   m_EditorClassIdentifier: 
-  Description: Tàn Tích Ánh Trăng | Moonlit Ruins — Ha 30 quai
-  LevelDescription: Tàn Tích Ánh Trăng | Moonlit Ruins — Ha 30 quai
+  Description: "T\xE0n T\xEDch \xC1nh Tr\u0103ng | Moonlit Ruins \u2014 Ha 30 quai"
+  LevelDescription: "T\xE0n T\xEDch \xC1nh Tr\u0103ng | Moonlit Ruins \u2014 Ha 30
+    quai"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: f39e076b3d455154792c3d56dc397057, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: af6df3e762cd4e098e76ce5cf90ff718, type: 2}
+  GameMode: {fileID: 11400000, guid: ec6777c69ce73a543b5deed4576b514c, type: 2}

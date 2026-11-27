@@ -1,0 +1,272 @@
+{
+  "title": "Shadowgrove Survivors SFX synthetic sketches",
+  "previewOnly": true,
+  "notFinalSfx": true,
+  "format": {
+    "container": "WAV PCM",
+    "sampleRateHz": 44100,
+    "channels": 1,
+    "bitDepth": 16,
+    "peakCeilingDbfs": -2.0
+  },
+  "method": "Original procedural synthesis with math/noise/envelopes using Python standard library; no external recordings or samples; no game audio playback.",
+  "cues": [
+    {
+      "filename": "Hero_Rowan_ThornSlash_SyntheticSketch.wav",
+      "cueID": "HERO_ROWAN_THORN_SLASH",
+      "timbre": "khô, hữu cơ, vút ngắn; tiếng gỗ/gai tổng hợp",
+      "layers": [
+        "noise band-pass quét lên xuống",
+        "tone trầm ngắn",
+        "resonance twig crack"
+      ],
+      "timing": {
+        "durationSeconds": 0.42,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue auto-skill của Rowan; tách swing khỏi impact trong phiên bản final.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.42,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -19.38,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Hero_Lyra_DarkOrb_SyntheticSketch.wav",
+      "cueID": "HERO_LYRA_DARK_ORB",
+      "timbre": "tối, tròn, hút vào rồi tắt; không có giọng nói",
+      "layers": [
+        "low filtered noise",
+        "sine xuống tông với partials",
+        "sparkle kính nhỏ"
+      ],
+      "timing": {
+        "durationSeconds": 0.55,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue phóng Cầu Bóng Đêm; bản final có thể có impact riêng, không loop tiếng bay.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.55,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -12.9,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Hero_Kael_Arrow_SyntheticSketch.wav",
+      "cueID": "HERO_KAEL_ARROW",
+      "timbre": "nhanh, chính xác, pluck sáng pha tàn lửa",
+      "layers": [
+        "transient noise",
+        "pluck tone rơi",
+        "resonance cao ngắn"
+      ],
+      "timing": {
+        "durationSeconds": 0.31,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue bắn Tên Tàn Lửa; hit cuối nên nhẹ và rõ, tránh flight loop.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.31,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -17.1,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Boss_EclipseWraith_SyntheticSketch.wav",
+      "cueID": "BOSS_ECLIPSE_WRAITH",
+      "timbre": "hồn ma, gió đảo, chuông kính mờ",
+      "layers": [
+        "high filtered wind sweep",
+        "inharmonic bell partials",
+        "low air pulse"
+      ],
+      "timing": {
+        "durationSeconds": 0.68,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue telegraph/phantom entrance tham khảo; không chứa tiếng thì thầm hay lời thoại.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.68,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -18.41,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Boss_ThornRegent_SyntheticSketch.wav",
+      "cueID": "BOSS_THORN_REGENT",
+      "timbre": "rễ gỗ nứt, thân trầm, gai khô",
+      "layers": [
+        "wood-colored noise",
+        "low root thump",
+        "bark resonances"
+      ],
+      "timing": {
+        "durationSeconds": 0.52,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue Thorn Eruption/Root Wave; trong game phân tách cue telegraph và impact.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.52,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -15.57,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Boss_FrostMourner_SyntheticSketch.wav",
+      "cueID": "BOSS_FROST_MOURNER",
+      "timbre": "tinh thể băng, gió lạnh, ngân ngắn",
+      "layers": [
+        "high cold noise sweep",
+        "glass-like inharmonic partials",
+        "low frost body"
+      ],
+      "timing": {
+        "durationSeconds": 0.7,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue Ice Ring/Comet; cân bằng dải cao để không gây chói khi lặp.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.7,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -18.62,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Boss_CrimsonHarvester_SyntheticSketch.wav",
+      "cueID": "BOSS_CRIMSON_HARVESTER",
+      "timbre": "kim loại nặng, lưỡi đao, lực va chạm",
+      "layers": [
+        "mid-band blade rush",
+        "metal partials",
+        "short low impact"
+      ],
+      "timing": {
+        "durationSeconds": 0.5,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue báo/đánh Execution Cleave; không dùng tiếng gore.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.5,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -16.72,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    },
+    {
+      "filename": "Boss_AbyssOracle_SyntheticSketch.wav",
+      "cueID": "BOSS_ABYSS_ORACLE",
+      "timbre": "xung hư không, âm sắc lệch pha, gió hút",
+      "layers": [
+        "low filtered noise sweep",
+        "descending pulse and harmonics",
+        "dissonant resonance"
+      ],
+      "timing": {
+        "durationSeconds": 0.62,
+        "attackMs": 12,
+        "releaseMs": 35
+      },
+      "licenseOriginal": "Original procedural synthesis from the accompanying local Python source; no third-party samples/recordings; no standalone public license assigned; internal review sketch only.",
+      "proposedUsage": "Cue Abyss Seal/Oracle Ring; chất giọng không lời, không vocal.",
+      "syntheticSketch": true,
+      "measurements": {
+        "sampleRateHz": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "durationSeconds": 0.62,
+        "peakDbfs": -3.0,
+        "rmsDbfs": -13.11,
+        "firstSampleAbs": 0,
+        "lastSampleAbs": 0,
+        "peakCeilingDbfs": -2.0
+      }
+    }
+  ],
+  "showcase": {
+    "filename": "showcase_8cues_SyntheticSketch.wav",
+    "silenceBetweenCuesSeconds": 0.5,
+    "sequence": [
+      "HERO_ROWAN_THORN_SLASH",
+      "HERO_LYRA_DARK_ORB",
+      "HERO_KAEL_ARROW",
+      "BOSS_ECLIPSE_WRAITH",
+      "BOSS_THORN_REGENT",
+      "BOSS_FROST_MOURNER",
+      "BOSS_CRIMSON_HARVESTER",
+      "BOSS_ABYSS_ORACLE"
+    ],
+    "measurements": {
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "bitDepth": 16,
+      "durationSeconds": 7.8,
+      "peakDbfs": -3.0,
+      "rmsDbfs": -20.6,
+      "firstSampleAbs": 0,
+      "lastSampleAbs": 0,
+      "peakCeilingDbfs": -2.0
+    }
+  }
+}

@@ -32,12 +32,9 @@ namespace RGame.RoguelikeKit
         {
             if (_isDie) return;
             
-            damage = (int)(damage * mStat.GetValue("Armor") * 0.01f);
-
-            if (damage == 0)
-            {
-                damage = 1;
-            }
+            // Purchased and in-run armor reductions may stack past zero.
+            // A hit must never turn into healing when that multiplier is negative.
+            damage = Mathf.Max(1, (int)(Mathf.Max(0,damage) * Mathf.Max(0,mStat.GetValue("Armor")) * 0.01f));
             
             mStat.ModifyValue("HP",damage * -1);
             ShadowgroveAudio.Play(SoundCue.PlayerHit);

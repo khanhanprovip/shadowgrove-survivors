@@ -7,10 +7,10 @@ namespace RGame.RoguelikeKit
     {
         public enum Shape { Disc, Line, Ring, Bolt, Orbit }
         static readonly List<BossHazard> Pool = new();
-        static Material material;
         LineRenderer line;
         BossSkillVfx skillVfx;
         Shape shape;
+        int skillIndex = -1;
         Vector2 from, to, velocity;
         float radius, age, warning, duration, orbitAngle;
         Color tint;
@@ -23,8 +23,9 @@ namespace RGame.RoguelikeKit
         public static void ClearAll() { foreach (var item in Pool) if (item != null) item.gameObject.SetActive(false); }
         internal void RestoreVisual()
         {
-            int kind=owner.GetComponent<BossBrain>().Kind;var boss=owner.GetComponent<EndlessBossEnemy>();
-            skillVfx.Init(kind,shape,from,to,radius,tint,boss!=null?BossCastingVfx.CanonicalBounds(boss).size.y:0);Draw();
+            var brain=owner!=null?owner.GetComponent<BossBrain>():null;
+            int kind=brain!=null?brain.Kind:0;var boss=owner!=null?owner.GetComponent<EndlessBossEnemy>():null;
+            skillVfx.Init(kind,shape,from,to,radius,tint,boss!=null?BossCastingVfx.CanonicalBounds(boss).size.y:0,skillIndex);Draw();
         }
         public static BossHazard Create(Transform owner, PlayerHit target, Shape shape, Vector2 from, Vector2 to,
             float radius, float warning, float duration, Color tint, Vector2 velocity = default)
@@ -36,18 +37,19 @@ namespace RGame.RoguelikeKit
                 if (Pool.Count >= 96) return null;
                 var go = new GameObject("Boss skill effect");
                 h = go.AddComponent<BossHazard>(); h.line = go.AddComponent<LineRenderer>();
-                if (material == null) material = new Material(Shader.Find("Sprites/Default"));
-                h.line.sharedMaterial = material; h.line.useWorldSpace = true; h.line.sortingOrder = 20000;
+                h.line.sharedMaterial = BossVfxShared.LineMaterial; h.line.useWorldSpace = true; h.line.sortingOrder = 20000;
                 Pool.Add(h);
             }
             h.owner = owner; h.target = target; h.shape = shape; h.from = from; h.to = to;
             h.radius = radius; h.warning = Mathf.Max(.8f, warning); h.duration = duration;
             h.velocity = velocity; h.age = 0; h.hit = false; h.tint = tint; h.orbitAngle = Mathf.Atan2(to.y,to.x);
             if(h.skillVfx==null)h.skillVfx=h.gameObject.AddComponent<BossSkillVfx>();
-            int kind=owner!=null&&owner.TryGetComponent<BossBrain>(out var brain)?brain.Kind:0;
+            var brain=owner!=null?owner.GetComponent<BossBrain>():null;
+            int kind=brain!=null?brain.Kind:0;
+            h.skillIndex=brain!=null?brain.CurrentSkill:-1;
             var boss=owner!=null?owner.GetComponent<EndlessBossEnemy>():null;
             float bodyHeight=boss!=null?BossCastingVfx.CanonicalBounds(boss).size.y:0;
-            h.skillVfx.Init(kind,shape,from,to,radius,tint,bodyHeight);
+            h.skillVfx.Init(kind,shape,from,to,radius,tint,bodyHeight,h.skillIndex);
             h.gameObject.SetActive(true); h.Draw(); return h;
         }
         static float SegmentDistance(Vector2 p, Vector2 a, Vector2 b)

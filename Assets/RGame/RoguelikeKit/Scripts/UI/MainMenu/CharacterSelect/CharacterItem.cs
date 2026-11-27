@@ -35,6 +35,7 @@ namespace RGame.RoguelikeKit
             mCharacterImage.sprite = _configSo.CharacterImage;
             mSkillImage.sprite = _configSo.BeginSkillImage;
             IsUnlocked = isUnlocked;
+            DATN.UI.HeroSelectionDetails.AddCharacterCardLines(transform, _configSo.CharacterName);
 
             if (!isUnlocked)
             {

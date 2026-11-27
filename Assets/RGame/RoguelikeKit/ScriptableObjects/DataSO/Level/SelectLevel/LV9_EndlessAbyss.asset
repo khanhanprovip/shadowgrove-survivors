@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV9_EndlessAbyss
   m_EditorClassIdentifier: 
-  Description: Vực Thẳm Vô Tận | Endless Abyss — Vo tan
-  LevelDescription: Vực Thẳm Vô Tận | Endless Abyss — Vo tan
+  Description: "V\u1EF1c Th\u1EB3m V\xF4 T\u1EADn | Endless Abyss \u2014 Vo tan"
+  LevelDescription: "V\u1EF1c Th\u1EB3m V\xF4 T\u1EADn | Endless Abyss \u2014 Vo
+    tan"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: 44700a39fada4c5aaddb5512f900a787, type: 2}
+  GameMode: {fileID: 11400000, guid: f87427d57ee81ac48a1562b8ad5edb91, type: 2}

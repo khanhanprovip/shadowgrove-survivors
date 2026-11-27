@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff4a1c7c8ff5bb48a1c5ec0346377e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
   m_Name: Shadowgrove Shared Data
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: Shadowgrove
-  m_TableCollectionNameGuidString: 1c43e473-8dcf-4172-97ec-284e0acc0d28
+  m_TableCollectionNameGuidString: 90fc3c5c6e7040448c11c7b862e82ae4
   m_Entries:
   - m_Id: 227724019850587
     m_Key: Pause
@@ -287,11 +287,230 @@ MonoBehaviour:
     m_Key: Objective_Endless
     m_Metadata:
       m_Items: []
+  - m_Id: 523231232
+    m_Key: HeroSelection_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311616
+    m_Key: HeroSelection_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311617
+    m_Key: HeroSelection_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311618
+    m_Key: HeroPassive_Name_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311619
+    m_Key: HeroPassive_Short_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311620
+    m_Key: HeroPassive_Long_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311621
+    m_Key: HeroSkill_Name_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311622
+    m_Key: HeroSkill_Short_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311623
+    m_Key: HeroSkill_Long_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311624
+    m_Key: HeroSkill_UpgradeTitle_Rowan_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311625
+    m_Key: HeroSkill_UpgradeDesc_Rowan_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311626
+    m_Key: HeroSkill_UpgradeTitle_Rowan_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311627
+    m_Key: HeroSkill_UpgradeDesc_Rowan_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311628
+    m_Key: HeroSkill_UpgradeTitle_Rowan_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311629
+    m_Key: HeroSkill_UpgradeDesc_Rowan_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311630
+    m_Key: HeroSkill_UpgradeTitle_Rowan_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311631
+    m_Key: HeroSkill_UpgradeDesc_Rowan_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311632
+    m_Key: HeroSkill_UpgradeTitle_Rowan_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311633
+    m_Key: HeroSkill_UpgradeDesc_Rowan_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311634
+    m_Key: HeroSkill_Max_Rowan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311635
+    m_Key: HeroPassive_Name_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311636
+    m_Key: HeroPassive_Short_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311637
+    m_Key: HeroPassive_Long_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311638
+    m_Key: HeroSkill_Name_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311639
+    m_Key: HeroSkill_Short_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311640
+    m_Key: HeroSkill_Long_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311641
+    m_Key: HeroSkill_UpgradeTitle_Lyra_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311642
+    m_Key: HeroSkill_UpgradeDesc_Lyra_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311643
+    m_Key: HeroSkill_UpgradeTitle_Lyra_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311644
+    m_Key: HeroSkill_UpgradeDesc_Lyra_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311645
+    m_Key: HeroSkill_UpgradeTitle_Lyra_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311646
+    m_Key: HeroSkill_UpgradeDesc_Lyra_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311647
+    m_Key: HeroSkill_UpgradeTitle_Lyra_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311648
+    m_Key: HeroSkill_UpgradeDesc_Lyra_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311649
+    m_Key: HeroSkill_UpgradeTitle_Lyra_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311650
+    m_Key: HeroSkill_UpgradeDesc_Lyra_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311651
+    m_Key: HeroSkill_Max_Lyra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311652
+    m_Key: HeroPassive_Name_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311653
+    m_Key: HeroPassive_Short_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311654
+    m_Key: HeroPassive_Long_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311655
+    m_Key: HeroSkill_Name_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311656
+    m_Key: HeroSkill_Short_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311657
+    m_Key: HeroSkill_Long_Kael
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311658
+    m_Key: HeroSkill_UpgradeTitle_Kael_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311659
+    m_Key: HeroSkill_UpgradeDesc_Kael_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311660
+    m_Key: HeroSkill_UpgradeTitle_Kael_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311661
+    m_Key: HeroSkill_UpgradeDesc_Kael_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311662
+    m_Key: HeroSkill_UpgradeTitle_Kael_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311663
+    m_Key: HeroSkill_UpgradeDesc_Kael_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311664
+    m_Key: HeroSkill_UpgradeTitle_Kael_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311665
+    m_Key: HeroSkill_UpgradeDesc_Kael_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311666
+    m_Key: HeroSkill_UpgradeTitle_Kael_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311667
+    m_Key: HeroSkill_UpgradeDesc_Kael_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311668
+    m_Key: HeroSkill_Max_Kael
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
   m_KeyGenerator:
-    rid: 0
+    rid: 1672726127701655552
   references:
     version: 2
     RefIds:
-    - rid: 0
-      type: {class: SimpleDistributedKeyGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
-      data: 
+    - rid: 1672726127701655552
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1795714443282

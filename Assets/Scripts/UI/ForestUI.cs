@@ -111,7 +111,7 @@ namespace DATN.UI
             foreach(var p in UnityEngine.Object.FindObjectsByType<CharacterSelectPanel>(FindObjectsSortMode.None))if(First(p))Characters(p);
             foreach(var i in UnityEngine.Object.FindObjectsByType<CharacterItem>(FindObjectsSortMode.None)){
                 if(First(i))CharacterCard(i);i.BackgroundImage.color=i.IsSelected?new Color(1.18f,1.45f,1.32f):Color.white;
-                Label(i.transform,"Forest_Selected",i.IsSelected?"ĐÃ CHỌN":"CHỌN NHÂN VẬT",i.IsSelected?"SELECTED":"CHOOSE SURVIVOR",21,.1f,.025f,.9f,.09f,TextAlignmentOptions.Center,Gold);}
+                Label(i.transform,"Forest_Selected",i.IsSelected?"ĐÃ CHỌN":"CHỌN NHÂN VẬT",i.IsSelected?"SELECTED":"CHOOSE SURVIVOR",18,.1f,.145f,.9f,.19f,TextAlignmentOptions.Center,Gold);}
             foreach(var p in UnityEngine.Object.FindObjectsByType<LevelSelectPanel>(FindObjectsSortMode.None))if(First(p))Levels(p);
             foreach(var i in UnityEngine.Object.FindObjectsByType<LevelItem>(FindObjectsSortMode.None)){if(First(i))LevelCard(i);i.BackgroundImage.color=i.IsSelected?new Color(1.18f,1.45f,1.32f):Color.white;}
             foreach(var p in UnityEngine.Object.FindObjectsByType<SettingPanel>(FindObjectsSortMode.None))if(First(p))Settings(p);
@@ -156,7 +156,7 @@ namespace DATN.UI
             string heroName=i.transform.Find("CharacterName").GetComponent<TMP_Text>().text;
             string roleVi=heroName=="Rowan"?"Cận chiến · Tầm 2,2\nNhát Chém Gai":heroName=="Lyra"?"Pháp sư · Tầm 7\nCầu Bóng Đêm":"Cung thủ · Tầm 10,5\nTên Tàn Lửa";
             string roleEn=heroName=="Rowan"?"Melee · Range 2.2\nThorn Cleave":heroName=="Lyra"?"Mage · Range 7\nDark Orb":"Archer · Range 10.5\nEmber Arrow";
-            Place(i.transform.Find("Skill"),.1f,.13f,.25f,.25f);Label(i.transform,"Forest_Role",roleVi,roleEn,24,.29f,.12f,.91f,.25f,color:Muted);
+            Place(i.transform.Find("Skill"),.1f,.20f,.25f,.28f);Label(i.transform,"Forest_Role",roleVi,roleEn,20,.29f,.20f,.91f,.28f,color:Muted);
         }
         private static void Levels(LevelSelectPanel p)
         {

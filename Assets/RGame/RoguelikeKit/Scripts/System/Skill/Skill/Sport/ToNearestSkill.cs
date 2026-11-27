@@ -27,7 +27,7 @@ namespace RGame.RoguelikeKit
         private void FixedUpdate()
         {
             _timer += Time.fixedDeltaTime;
-            
+
             if (_expired) return;
             if (_timer > 5 || _travelled >= _maxRange) { Expire(); return; }
             float step = Mathf.Min(_velocity * Time.fixedDeltaTime, _maxRange - _travelled);
@@ -44,13 +44,13 @@ namespace RGame.RoguelikeKit
             _damage = damage;
             _velocity = velocity;
             _origin = transform.position;
-            
+
             _moveDir = (targetPos - transform.position).normalized;
         }
 
-        public void ConfigureStarter(StarterWeaponProfile profile)
+        public void ConfigureStarter(StarterWeaponProfile profile, float attackRange = -1f)
         {
-            _maxRange = profile.Range;
+            _maxRange = attackRange > 0f ? attackRange : profile.Range;
             var renderer = GetComponent<SpriteRenderer>();
             renderer.sprite = profile.Effect;
             renderer.color = Color.white;

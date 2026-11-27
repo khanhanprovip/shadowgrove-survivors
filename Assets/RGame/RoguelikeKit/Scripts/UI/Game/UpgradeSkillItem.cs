@@ -154,6 +154,12 @@ namespace RGame.RoguelikeKit
                 ? (_language == "vi" ? "Cấp tối đa " : "MAX Lv. ") + maxLevel
                 : LanguageManager.GetFormatted("CardLevel", data.Level, data.Level + 1, maxLevel);
 
+            if (data.StarterWeapon != StarterWeaponKind.Legacy)
+            {
+                BuildSignatureDetail(data, maxLevel);
+                return;
+            }
+
             AttackSkillAttributeMod next = data.Level > 0 && data.Level <= data.UpgradeAttribute.Count
                 ? data.UpgradeAttribute[data.Level - 1] : null;
             string detail = _description.text.Length > 0 ? _description.text + "\n" : "";
@@ -181,6 +187,39 @@ namespace RGame.RoguelikeKit
             detail += StatLine(LanguageManager.Get("Stat_Area"), data.Area,
                 next != null && next.skillAttributeType == UpgradeSkillAttributeType.AreaAddPercent
                     ? data.Area + next.IntValue : data.Area);
+            _description.text = detail.TrimEnd('\n');
+        }
+
+        private void BuildSignatureDetail(SkillDataSO data, int maxLevel)
+        {
+            bool vi = _language == "vi";
+            string detail = StarterWeaponProfile.Description(data.StarterWeapon, vi) + "\n";
+            int nextLevel = data.Level + 1;
+            bool hasNext = data.Level < maxLevel && nextLevel <= 5;
+            if (hasNext)
+            {
+                detail += "<color=#D8BA73>" + StarterWeaponProfile.UpgradeTitle(data.StarterWeapon, nextLevel, vi) + "</color>\n";
+                detail += StarterWeaponProfile.UpgradeDescription(data.StarterWeapon, nextLevel, vi) + "\n";
+            }
+            else
+            {
+                detail += StarterWeaponProfile.MaxLevelDescription(data.StarterWeapon, vi) + "\n";
+            }
+
+            var next = hasNext ? StarterWeaponProfile.GetSnapshot(data.StarterWeapon, nextLevel) :
+                new StarterWeaponSnapshot(data.Damage, data.CD, data.AttackRange, data.Velocity, data.Amount);
+            detail += StatLine(LanguageManager.Get("Stat_Damage"), data.Damage, next.Damage);
+            detail += StatLine(LanguageManager.Get("SkillAttr_Cooldown"), data.CD, next.Cooldown, " s");
+            detail += StatLine(vi ? "Tầm đánh" : "Range", data.AttackRange, next.Range);
+            if (data.StarterWeapon == StarterWeaponKind.ThornSlash)
+            {
+                detail += StatLine(vi ? "Số mục tiêu" : "Targets", 2 + data.Amount, 2 + next.Amount);
+            }
+            else
+            {
+                detail += StatLine(LanguageManager.Get("Stat_Amount"), data.Amount, next.Amount);
+                detail += StatLine(LanguageManager.Get("Stat_Velocity"), data.Velocity, next.Velocity);
+            }
             _description.text = detail.TrimEnd('\n');
         }
 

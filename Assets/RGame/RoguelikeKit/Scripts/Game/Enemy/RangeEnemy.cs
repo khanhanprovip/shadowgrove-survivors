@@ -15,7 +15,7 @@ namespace RGame.RoguelikeKit
         {
             float range = StatRuntime.GetValue("AttackRange") - 0.5f;
             float distance = Vector3.Distance(_playerTransform.position, transform.position);
-            Vector3 direction = (_playerTransform.position - transform.position).normalized;
+            Vector3 direction = DATN.World.StageLayout.Chase(transform.position,_playerTransform.position);
             
             if (distance > range)
             {

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV8_CrimsonCathedral
   m_EditorClassIdentifier: 
-  Description: Thánh Đường Đỏ Thẫm | Crimson Cathedral — Song sot 120s
-  LevelDescription: Thánh Đường Đỏ Thẫm | Crimson Cathedral — Song sot 120s
+  Description: "Th\xE1nh \u0110\u01B0\u1EDDng \u0110\u1ECF Th\u1EABm | Crimson Cathedral
+    \u2014 Song sot 120s"
+  LevelDescription: "Th\xE1nh \u0110\u01B0\u1EDDng \u0110\u1ECF Th\u1EABm | Crimson
+    Cathedral \u2014 Song sot 120s"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: b20e05910e3f4e08a2c39300e45b171e, type: 2}
+  GameMode: {fileID: 11400000, guid: 5f223d1682fe10f478d19ca39c4d7483, type: 2}

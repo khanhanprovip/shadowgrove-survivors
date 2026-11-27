@@ -19,31 +19,31 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 227724019850587
-    m_Localized: TẠM DỪNG
+    m_Localized: "T\u1EA0M D\u1EEANG"
     m_Metadata:
       m_Items: []
   - m_Id: 147240631841642
-    m_Localized: TIẾP TỤC
+    m_Localized: "TI\u1EBEP T\u1EE4C"
     m_Metadata:
       m_Items: []
   - m_Id: 98044630322727
-    m_Localized: CHƠI LẠI
+    m_Localized: "CH\u01A0I L\u1EA0I"
     m_Metadata:
       m_Items: []
   - m_Id: 232332520601154
-    m_Localized: VỀ MENU
+    m_Localized: "V\u1EC0 MENU"
     m_Metadata:
       m_Items: []
   - m_Id: 193728035074856
-    m_Localized: CHIẾN THẮNG!
+    m_Localized: "CHI\u1EBEN TH\u1EAENG!"
     m_Metadata:
       m_Items: []
   - m_Id: 129533498243102
-    m_Localized: THẤT BẠI
+    m_Localized: "TH\u1EA4T B\u1EA0I"
     m_Metadata:
       m_Items: []
   - m_Id: 244370373480854
-    m_Localized: MÀN SAU
+    m_Localized: "M\xC0N SAU"
     m_Metadata:
       m_Items: []
   - m_Id: 250441889166217
@@ -55,7 +55,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 62258534137810
-    m_Localized: Vệ Binh Gai. Chiến binh cân bằng với lưỡi liềm gai quét rộng.
+    m_Localized: "V\u1EC7 Binh Gai. Chi\u1EBFn binh c\xE2n b\u1EB1ng v\u1EDBi l\u01B0\u1EE1i
+      li\u1EC1m gai qu\xE9t r\u1ED9ng."
     m_Metadata:
       m_Items: []
   - m_Id: 173558724966971
@@ -63,7 +64,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 156999271492139
-    m_Localized: Pháp Sư Nhật Thực. Đánh xa bằng cầu ma thuật nhật thực.
+    m_Localized: "Ph\xE1p S\u01B0 Nh\u1EADt Th\u1EF1c. \u0110\xE1nh xa b\u1EB1ng
+      c\u1EA7u ma thu\u1EADt nh\u1EADt th\u1EF1c."
     m_Metadata:
       m_Items: []
   - m_Id: 20976366511956
@@ -71,71 +73,73 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 242710225208285
-    m_Localized: Thợ Săn Tàn Lửa. Di chuyển nhanh với nỏ than hồng.
+    m_Localized: "Th\u1EE3 S\u0103n T\xE0n L\u1EEDa. Di chuy\u1EC3n nhanh v\u1EDBi
+      n\u1ECF than h\u1ED3ng."
     m_Metadata:
       m_Items: []
   - m_Id: 265981654029629
-    m_Localized: Rừng Thử Thách
+    m_Localized: "R\u1EEBng Th\u1EED Th\xE1ch"
     m_Metadata:
       m_Items: []
   - m_Id: 6958082104100
-    m_Localized: Sống sót 90 giây trước năm đợt quái.
+    m_Localized: "S\u1ED1ng s\xF3t 90 gi\xE2y tr\u01B0\u1EDBc n\u0103m \u0111\u1EE3t
+      qu\xE1i."
     m_Metadata:
       m_Items: []
   - m_Id: 101712088627825
-    m_Localized: 'Sống sót: {0}s'
+    m_Localized: "S\u1ED1ng s\xF3t: {0}s"
     m_Metadata:
       m_Items: []
   - m_Id: 199582914291994
-    m_Localized: Cấp {0}
+    m_Localized: "C\u1EA5p {0}"
     m_Metadata:
       m_Items: []
   - m_Id: 186459536633104
-    m_Localized: MỚI!
+    m_Localized: "M\u1EDAI!"
     m_Metadata:
       m_Items: []
   - m_Id: 109043060325783
-    m_Localized: 'Hạ: {0}'
+    m_Localized: "H\u1EA1: {0}"
     m_Metadata:
       m_Items: []
   - m_Id: 73415100261187
-    m_Localized: 'Thời gian: {0}'
+    m_Localized: "Th\u1EDDi gian: {0}"
     m_Metadata:
       m_Items: []
   - m_Id: 170799392320690
-    m_Localized: 'Cấp độ: {0}'
+    m_Localized: "C\u1EA5p \u0111\u1ED9: {0}"
     m_Metadata:
       m_Items: []
   - m_Id: 150195699065697
-    m_Localized: Quạt Gai
+    m_Localized: "Qu\u1EA1t Gai"
     m_Metadata:
       m_Items: []
   - m_Id: 144683251360480
-    m_Localized: Phóng lưỡi gai sang hai bên.
+    m_Localized: "Ph\xF3ng l\u01B0\u1EE1i gai sang hai b\xEAn."
     m_Metadata:
       m_Items: []
   - m_Id: 158532990256964
-    m_Localized: Bào Tử U Ám
+    m_Localized: "B\xE0o T\u1EED U \xC1m"
     m_Metadata:
       m_Items: []
   - m_Id: 266335890726077
-    m_Localized: Ném bào tử nảy giữa các quái.
+    m_Localized: "N\xE9m b\xE0o t\u1EED n\u1EA3y gi\u1EEFa c\xE1c qu\xE1i."
     m_Metadata:
       m_Items: []
   - m_Id: 2279370532971
-    m_Localized: Roi Rễ Cây
+    m_Localized: "Roi R\u1EC5 C\xE2y"
     m_Metadata:
       m_Items: []
   - m_Id: 41487737847386
-    m_Localized: Roi rễ quật qua quái gần đó.
+    m_Localized: "Roi r\u1EC5 qu\u1EADt qua qu\xE1i g\u1EA7n \u0111\xF3."
     m_Metadata:
       m_Items: []
   - m_Id: 229756683898716
-    m_Localized: Vầng Vệ Binh
+    m_Localized: "V\u1EA7ng V\u1EC7 Binh"
     m_Metadata:
       m_Items: []
   - m_Id: 144597081382918
-    m_Localized: Vầng sáng đánh mọi quái xung quanh.
+    m_Localized: "V\u1EA7ng s\xE1ng \u0111\xE1nh m\u1ECDi qu\xE1i xung quanh."
     m_Metadata:
       m_Items: []
   - m_Id: 108500701849110
@@ -143,95 +147,95 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 145569192685972
-    m_Localized: Lưỡi gai xoay quanh, cắt quái khi chạm.
+    m_Localized: "L\u01B0\u1EE1i gai xoay quanh, c\u1EAFt qu\xE1i khi ch\u1EA1m."
     m_Metadata:
       m_Items: []
   - m_Id: 210625631007568
-    m_Localized: Cắt Chéo
+    m_Localized: "C\u1EAFt Ch\xE9o"
     m_Metadata:
       m_Items: []
   - m_Id: 271113430255706
-    m_Localized: Bắn đạn bốn hướng.
+    m_Localized: "B\u1EAFn \u0111\u1EA1n b\u1ED1n h\u01B0\u1EDBng."
     m_Metadata:
       m_Items: []
   - m_Id: 216333245068117
-    m_Localized: Hoa Linh Hồn
+    m_Localized: "Hoa Linh H\u1ED3n"
     m_Metadata:
       m_Items: []
   - m_Id: 246706347985428
-    m_Localized: Hoa nổ nở quanh bạn.
+    m_Localized: "Hoa n\u1ED5 n\u1EDF quanh b\u1EA1n."
     m_Metadata:
       m_Items: []
   - m_Id: 55883360224934
-    m_Localized: Ma Thuật Loạn
+    m_Localized: "Ma Thu\u1EADt Lo\u1EA1n"
     m_Metadata:
       m_Items: []
   - m_Id: 89550677745645
-    m_Localized: Đạn loạn tự tìm quái.
+    m_Localized: "\u0110\u1EA1n lo\u1EA1n t\u1EF1 t\xECm qu\xE1i."
     m_Metadata:
       m_Items: []
   - m_Id: 50846383074446
-    m_Localized: Cầu Nhật Thực
+    m_Localized: "C\u1EA7u Nh\u1EADt Th\u1EF1c"
     m_Metadata:
       m_Items: []
   - m_Id: 116227430295888
-    m_Localized: Đạn tự tìm đánh quái gần nhất.
+    m_Localized: "\u0110\u1EA1n t\u1EF1 t\xECm \u0111\xE1nh qu\xE1i g\u1EA7n nh\u1EA5t."
     m_Metadata:
       m_Items: []
   - m_Id: 102071726297295
-    m_Localized: Túi Vàng
+    m_Localized: "T\xFAi V\xE0ng"
     m_Metadata:
       m_Items: []
   - m_Id: 142947643431392
-    m_Localized: Chứa vàng — của cải tức thì!
+    m_Localized: "Ch\u1EE9a v\xE0ng \u2014 c\u1EE7a c\u1EA3i t\u1EE9c th\xEC!"
     m_Metadata:
       m_Items: []
   - m_Id: 213135784412289
-    m_Localized: Sức mạnh
+    m_Localized: "S\u1EE9c m\u1EA1nh"
     m_Metadata:
       m_Items: []
   - m_Id: 24609979510728
-    m_Localized: Giáp
+    m_Localized: "Gi\xE1p"
     m_Metadata:
       m_Items: []
   - m_Id: 226384035353028
-    m_Localized: Máu tối đa
+    m_Localized: "M\xE1u t\u1ED1i \u0111a"
     m_Metadata:
       m_Items: []
   - m_Id: 270697578676530
-    m_Localized: Hồi máu
+    m_Localized: "H\u1ED3i m\xE1u"
     m_Metadata:
       m_Items: []
   - m_Id: 185314214066036
-    m_Localized: Hồi chiêu
+    m_Localized: "H\u1ED3i chi\xEAu"
     m_Metadata:
       m_Items: []
   - m_Id: 245791633292247
-    m_Localized: Phạm vi
+    m_Localized: "Ph\u1EA1m vi"
     m_Metadata:
       m_Items: []
   - m_Id: 213957144303107
-    m_Localized: Tốc kỹ năng
+    m_Localized: "T\u1ED1c k\u1EF9 n\u0103ng"
     m_Metadata:
       m_Items: []
   - m_Id: 275671309603562
-    m_Localized: Thời gian
+    m_Localized: "Th\u1EDDi gian"
     m_Metadata:
       m_Items: []
   - m_Id: 217058394145951
-    m_Localized: Số đạn
+    m_Localized: "S\u1ED1 \u0111\u1EA1n"
     m_Metadata:
       m_Items: []
   - m_Id: 273933420309311
-    m_Localized: Tốc chạy
+    m_Localized: "T\u1ED1c ch\u1EA1y"
     m_Metadata:
       m_Items: []
   - m_Id: 112885997957466
-    m_Localized: Hút EXP
+    m_Localized: "H\xFAt EXP"
     m_Metadata:
       m_Items: []
   - m_Id: 258481925275066
-    m_Localized: Tăng trưởng
+    m_Localized: "T\u0103ng tr\u01B0\u1EDFng"
     m_Metadata:
       m_Items: []
   - m_Id: 41519376158677
@@ -239,59 +243,305 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 187547233986514
-    m_Localized: Nguyền rủa
+    m_Localized: "Nguy\u1EC1n r\u1EE7a"
     m_Metadata:
       m_Items: []
   - m_Id: 5421137555364
-    m_Localized: Cấp {0} → {1} / {2}
+    m_Localized: "C\u1EA5p {0} \u2192 {1} / {2}"
     m_Metadata:
       m_Items: []
   - m_Id: 89981525826060
-    m_Localized: Cấp {0} (TỐI ĐA)
+    m_Localized: "C\u1EA5p {0} (T\u1ED0I \u0110A)"
     m_Metadata:
       m_Items: []
   - m_Id: 117468656678555
-    m_Localized: KỸ NĂNG MỚI!
+    m_Localized: "K\u1EF8 N\u0102NG M\u1EDAI!"
     m_Metadata:
       m_Items: []
   - m_Id: 279750746932096
-    m_Localized: NÂNG CẤP
+    m_Localized: "N\xC2NG C\u1EA4P"
     m_Metadata:
       m_Items: []
   - m_Id: 137708062717879
-    m_Localized: Sát thương
+    m_Localized: "S\xE1t th\u01B0\u01A1ng"
     m_Metadata:
       m_Items: []
   - m_Id: 170220118826616
-    m_Localized: Hồi chiêu
+    m_Localized: "H\u1ED3i chi\xEAu"
     m_Metadata:
       m_Items: []
   - m_Id: 253492882150148
-    m_Localized: Số đạn
+    m_Localized: "S\u1ED1 \u0111\u1EA1n"
     m_Metadata:
       m_Items: []
   - m_Id: 231404376720762
-    m_Localized: Tốc độ
+    m_Localized: "T\u1ED1c \u0111\u1ED9"
     m_Metadata:
       m_Items: []
   - m_Id: 133642766609913
-    m_Localized: Diện tích
+    m_Localized: "Di\u1EC7n t\xEDch"
     m_Metadata:
       m_Items: []
   - m_Id: 102173825467855
-    m_Localized: Vàng
+    m_Localized: "V\xE0ng"
     m_Metadata:
       m_Items: []
   - m_Id: 204012337399981
-    m_Localized: 'Hạ: {0}/{1}'
+    m_Localized: "H\u1EA1: {0}/{1}"
     m_Metadata:
       m_Items: []
   - m_Id: 143966124341762
-    m_Localized: Vô tận
+    m_Localized: "V\xF4 t\u1EADn"
     m_Metadata:
       m_Items: []
-  m_Metadata:
-    m_Items: []
+  - m_Id: 523231232
+    m_Localized: "C\u1EADn chi\u1EBFn, qu\xE9t nhi\u1EC1u m\u1EE5c ti\xEAu ph\xEDa
+      tr\u01B0\u1EDBc. H\u1ED3i ph\u1EE5c b\u1EC1n b\u1EC9; ph\u1EA3i \xE1p s\xE1t
+      \u0111\u1EC3 g\xE2y s\xE1t th\u01B0\u01A1ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311616
+    m_Localized: "Ph\xE1p s\u01B0 t\u1EA7m trung, b\u1EAFn c\u1EA7u b\xF3ng \u0111\xEAm
+      v\xE0o m\u1EE5c ti\xEAu g\u1EA7n nh\u1EA5t. \u0110\u1EA1n ch\u1EADm h\u01A1n
+      t\xEAn, d\u1EC5 h\u1EE5t m\u1EE5c ti\xEAu \u0111ang di chuy\u1EC3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311617
+    m_Localized: "Cung th\u1EE7 t\u1EA7m xa, b\u1EAFn t\xEAn nhanh v\xE0 chu\u1EA9n
+      v\xE0o m\u1EE5c ti\xEAu g\u1EA7n nh\u1EA5t trong t\u1EA7m. S\xE1t th\u01B0\u01A1ng
+      \u0111\u01A1n m\u1EE5c ti\xEAu; c\u1EA7n di chuy\u1EC3n khi qu\xE1i \xE1p s\xE1t."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311618
+    m_Localized: "T\xE2m V\u1ECF G\u1ED7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311619
+    m_Localized: "H\u1ED3i 1 HP m\u1ED7i gi\xE2y."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311620
+    m_Localized: "Sinh l\u1EF1c r\u1EEBng gi\xE0 h\u1ED3i cho Rowan 1 HP m\u1ED7i
+      gi\xE2y. N\u1ED9i t\u1EA1i lu\xF4n ho\u1EA1t \u0111\u1ED9ng v\xE0 kh\xF4ng
+      c\xF3 c\u1EA5p n\xE2ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311621
+    m_Localized: "Nh\xE1t Ch\xE9m Gai"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311622
+    m_Localized: "T\u1EF1 \u0111\u1ED9ng ch\xE9m k\u1EBB \u0111\u1ECBch g\u1EA7n
+      nh\u1EA5t, qu\xE9t tr\xFAng nhi\u1EC1u m\u1EE5c ti\xEAu ph\xEDa tr\u01B0\u1EDBc."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311623
+    m_Localized: "Rowan t\u1EF1 xoay v\u1EC1 ph\xEDa k\u1EBB \u0111\u1ECBch g\u1EA7n
+      nh\u1EA5t trong t\u1EA7m r\u1ED3i qu\xE9t m\u1ED9t cung gai r\u1ED9ng. Nh\xE1t
+      ch\xE9m ch\u1EC9 tr\xFAng m\u1EE5c ti\xEAu trong t\u1EA7m c\u1EADn chi\u1EBFn
+      v\xE0 gi\u1EDBi h\u1EA1n s\u1ED1 k\u1EBB \u0111\u1ECBch b\u1ECB ch\xE9m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311624
+    m_Localized: "Nh\xE1t Gai Kh\u1EDFi \u0110\u1EA7u"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311625
+    m_Localized: "Ch\xE9m theo cung 110\xB0; t\u1ED1i \u0111a 3 m\u1EE5c ti\xEAu
+      trong 2.2 \u0111\u01A1n v\u1ECB."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311626
+    m_Localized: "Gai T\u1EA9m S\u1EAFc"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311627
+    m_Localized: "+2 h\u1EC7 s\u1ED1 s\xE1t th\u01B0\u01A1ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311628
+    m_Localized: "Qu\u1EA1t Gai"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311629
+    m_Localized: "+1 m\u1EE5c ti\xEAu t\u1ED1i \u0111a m\u1ED7i nh\xE1t ch\xE9m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311630
+    m_Localized: "Gai V\u01B0\u01A1n Xa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311631
+    m_Localized: "T\u1EA7m ch\xE9m t\u0103ng l\xEAn 2.4 \u0111\u01A1n v\u1ECB."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311632
+    m_Localized: "R\u1EC5 X\xE9 Th\u1ECBt"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311633
+    m_Localized: "+2 h\u1EC7 s\u1ED1 s\xE1t th\u01B0\u01A1ng v\xE0 gi\u1EA3m h\u1ED3i
+      chi\xEAu c\xF2n 0.81 gi\xE2y."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311634
+    m_Localized: "\u0110\xE3 \u0111\u1EA1t c\u1EA5p t\u1ED1i \u0111a. Kh\xF4ng c\xF3
+      ti\u1EBFn h\xF3a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311635
+    m_Localized: "Nghi Th\u1EE9c Nh\u1EADt Th\u1EF1c"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311636
+    m_Localized: "C\u1EA7u B\xF3ng \u0110\xEAm bay nhanh h\u01A1n 12%."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311637
+    m_Localized: "Lyra n\xE9n qu\u1EF9 \u0111\u1EA1o c\u1EE7a C\u1EA7u B\xF3ng \u0110\xEAm,
+      t\u0103ng t\u1ED1c bay 12%. N\u1ED9i t\u1EA1i ch\u1EC9 h\u1ED7 tr\u1EE3 chi\xEAu
+      \u0111\u1ED9c quy\u1EC1n v\xE0 kh\xF4ng c\xF3 c\u1EA5p n\xE2ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311638
+    m_Localized: "C\u1EA7u B\xF3ng \u0110\xEAm"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311639
+    m_Localized: "T\u1EF1 \u0111\u1ED9ng b\u1EAFn c\u1EA7u b\xF3ng \u0111\xEAm v\xE0o
+      k\u1EBB \u0111\u1ECBch g\u1EA7n nh\u1EA5t trong t\u1EA7m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311640
+    m_Localized: "Lyra b\u1EAFn m\u1ED9t c\u1EA7u b\xF3ng \u0111\xEAm c\xF3 l\xF5i
+      s\xE1ng v\xE0o k\u1EBB \u0111\u1ECBch g\u1EA7n nh\u1EA5t trong t\u1EA7m trung.
+      M\u1ED7i c\u1EA7u g\xE2y s\xE1t th\u01B0\u01A1ng m\u1ED9t m\u1EE5c ti\xEAu
+      r\u1ED3i tan; kh\xF4ng b\u1EAFn khi kh\xF4ng c\xF3 k\u1EBB \u0111\u1ECBch h\u1EE3p
+      l\u1EC7."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311641
+    m_Localized: "C\u1EA7u Nh\u1EADt Th\u1EF1c"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311642
+    m_Localized: "1 c\u1EA7u, 1 m\u1EE5c ti\xEAu; t\u1EA7m 7 \u0111\u01A1n v\u1ECB."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311643
+    m_Localized: "L\xF5i B\xF3ng \u0110\u1EADm"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311644
+    m_Localized: "+2 h\u1EC7 s\u1ED1 s\xE1t th\u01B0\u01A1ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311645
+    m_Localized: "L\xF5i Bay Nhanh"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311646
+    m_Localized: "T\u1ED1c \u0111\u1ED9 c\u1EA7u t\u0103ng t\u1EEB 9 l\xEAn 10.8."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311647
+    m_Localized: "Qu\u1EF9 \u0110\u1EA1o M\u1EDF R\u1ED9ng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311648
+    m_Localized: "T\u1EA7m t\u0103ng l\xEAn 7.5; h\u1ED3i chi\xEAu c\xF2n 1.08 gi\xE2y."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311649
+    m_Localized: "Song Nguy\u1EC7t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311650
+    m_Localized: "+1 c\u1EA7u v\xE0o m\u1EE5c ti\xEAu kh\xE1c; s\xE1t th\u01B0\u01A1ng
+      t\u0103ng th\xEAm 1 h\u1EC7 s\u1ED1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311651
+    m_Localized: "\u0110\xE3 \u0111\u1EA1t c\u1EA5p t\u1ED1i \u0111a. Kh\xF4ng c\xF3
+      ti\u1EBFn h\xF3a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311652
+    m_Localized: "B\u01B0\u1EDBc Ch\xE2n \u01AFng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311653
+    m_Localized: "T\u1ED1c \u0111\u1ED9 di chuy\u1EC3n t\u0103ng 8%."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311654
+    m_Localized: "Kael gi\u1EEF kho\u1EA3ng c\xE1ch b\u1EB1ng b\u01B0\u1EDBc ch\xE2n
+      nh\u1EB9, t\u0103ng t\u1ED1c \u0111\u1ED9 di chuy\u1EC3n 8%. N\u1ED9i t\u1EA1i
+      lu\xF4n ho\u1EA1t \u0111\u1ED9ng v\xE0 kh\xF4ng c\xF3 c\u1EA5p n\xE2ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311655
+    m_Localized: "T\xEAn T\xE0n L\u1EEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311656
+    m_Localized: "T\u1EF1 \u0111\u1ED9ng b\u1EAFn t\xEAn nhanh v\xE0o k\u1EBB \u0111\u1ECBch
+      g\u1EA7n nh\u1EA5t trong t\u1EA7m xa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311657
+    m_Localized: "Kael b\u1EAFn t\xEAn t\xE0n l\u1EEDa t\u1ED1c \u0111\u1ED9 cao
+      v\xE0o k\u1EBB \u0111\u1ECBch g\u1EA7n nh\u1EA5t trong t\u1EA7m xa. M\u1ED7i
+      t\xEAn tr\xFAng m\u1ED9t m\u1EE5c ti\xEAu r\u1ED3i bi\u1EBFn m\u1EA5t; kh\xF4ng
+      b\u1EAFn n\u1EBFu ngo\xE0i t\u1EA7m."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311658
+    m_Localized: "T\xEAn T\xE0n L\u1EEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311659
+    m_Localized: "1 t\xEAn, 1 m\u1EE5c ti\xEAu; t\u1EA7m 10.5 \u0111\u01A1n v\u1ECB."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311660
+    m_Localized: "M\u0169i T\xEAn T\xF4i Tro"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311661
+    m_Localized: "+2 h\u1EC7 s\u1ED1 s\xE1t th\u01B0\u01A1ng."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311662
+    m_Localized: "L\xF4ng \u01AFng B\u1EAFt Gi\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311663
+    m_Localized: "T\u1ED1c \u0111\u1ED9 t\xEAn t\u0103ng t\u1EEB 16 l\xEAn 18.4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311664
+    m_Localized: "T\u1EA7m B\u1EAFn Xa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311665
+    m_Localized: "T\u1EA7m b\u1EAFn t\u0103ng l\xEAn 12 \u0111\u01A1n v\u1ECB."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311666
+    m_Localized: "Song T\xEAn Than H\u1ED3ng"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311667
+    m_Localized: "+1 t\xEAn v\xE0o m\u1EE5c ti\xEAu kh\xE1c; +2 h\u1EC7 s\u1ED1 s\xE1t
+      th\u01B0\u01A1ng; h\u1ED3i chi\xEAu c\xF2n 0.78 gi\xE2y."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 611311668
+    m_Localized: "\u0110\xE3 \u0111\u1EA1t c\u1EA5p t\u1ED1i \u0111a. Kh\xF4ng c\xF3
+      ti\u1EBFn h\xF3a."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -16,5 +16,5 @@ MonoBehaviour:
   LevelDescription: Trial Forest - 90 second survival test
   PreviewImage: {fileID: -2727198992545312515, guid: 335ce65e7c7fa7a429de08d3e2dc8d3c, type: 3}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
-  GameMode: {fileID: 11400000, guid: c2d899f0776e4212bca049ab39923edf, type: 2}
   StageConfig: {fileID: 11400000, guid: f9266d9356fb40dc8b34fe9dcdbb22b1, type: 2}
+  GameMode: {fileID: 11400000, guid: b18b0d3491c7c1548abf4dafb4a1ddfc, type: 2}

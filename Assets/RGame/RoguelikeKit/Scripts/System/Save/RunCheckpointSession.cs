@@ -12,6 +12,16 @@ namespace RGame.RoguelikeKit
         public static string LastError {get;private set;}
         public static bool Restoring {get;private set;}
         public static bool HasPending=>pending!=null;
+        public static bool UsesLegacyWorld => pending!=null&&pending.worldRevision<1;
+        public static DATN.Modes.GameModeId PendingModeId(DATN.Modes.GameModeId fallback)
+        {
+            string mode=pending?.mode?.FirstOrDefault()?.declaring;
+            if(mode==typeof(DATN.Modes.EndlessMode).FullName)return DATN.Modes.GameModeId.Endless;
+            if(mode==typeof(DATN.Modes.SurvivalMode).FullName)return DATN.Modes.GameModeId.Survival;
+            if(mode==typeof(DATN.Modes.KillTargetMode).FullName)return DATN.Modes.GameModeId.KillTarget;
+            if(mode==typeof(DATN.Modes.BossRushMode).FullName)return DATN.Modes.GameModeId.BossRush;
+            return fallback;
+        }
         public static bool HasSavedRun=>RunCheckpointStore.TryRead(out _);
         public static bool SaveAndExit(TrialController round)
         {

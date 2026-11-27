@@ -67,6 +67,12 @@ namespace DATN.Localization
             { "Objective_Survive", new[] { "Survive: {0}s", "Sống sót: {0}s" } },
             { "Objective_Kills", new[] { "Kills: {0}/{1}", "Hạ: {0}/{1}" } },
             { "Objective_Endless", new[] { "Endless", "Vô tận" } },
+            { "Objective_BossRush", new[] { "Boss Rush", "Liên chiến boss" } },
+            { "Objective_BossProgress", new[] { "Boss Rush: {0}/{1}", "Liên chiến boss: {0}/{1}" } },
+            { "Objective_BossRushCount", new[] { "Boss Rush · Defeated: {0}", "Liên chiến boss · Đã hạ: {0}" } },
+            { "Objective_BossCountdown", new[] { "Next boss in: {0}s", "Boss tiếp theo sau: {0}s" } },
+            { "Objective_DefeatBoss", new[] { "Defeat the final boss", "Hạ boss cuối màn" } },
+            { "Objective_EnterArena", new[] { "Return to the central boss arena", "Đến sân boss ở trung tâm" } },
             { "CardLevel", new[] { "Lv. {0} → {1} / {2}", "Cấp {0} → {1} / {2}" } },
             { "CardNew", new[] { "NEW SKILL!", "KỸ NĂNG MỚI!" } },
             { "Kills", new[] { "Kills: {0}", "Hạ: {0}" } },
@@ -117,14 +123,14 @@ namespace DATN.Localization
         {
             { "TrialLevel", new[] { "Trial Forest — Survive 90 seconds", "Rừng Thử Thách — Sống sót 90 giây" } },
             { "LV2_MoonlitRuins", new[] { "Moonlit Ruins — Defeat 30 enemies", "Tàn Tích Ánh Trăng — Hạ 30 quái" } },
-            { "LV3_SunkenMarsh", new[] { "Sunken Marsh — Survive 120 seconds", "Đầm Lầy Chìm — Sống sót 120 giây" } },
+            { "LV3_SunkenMarsh", new[] { "Sunken Marsh — 120s, then defeat Thorn Regent", "Đầm Lầy Chìm — 120 giây, rồi hạ Cổ Vương Gai" } },
             { "LV4_AshenQuarry", new[] { "Ashen Quarry — Defeat 30 enemies", "Mỏ Đá Tro Tàn — Hạ 30 quái" } },
-            { "LV5_FrostHollow", new[] { "Frost Hollow — Survive 120 seconds", "Khe Băng Giá — Sống sót 120 giây" } },
-            { "LV6_CursedVillage", new[] { "Cursed Village — Endless", "Ngôi Làng Bị Nguyền — Vô tận" } },
+            { "LV5_FrostHollow", new[] { "Frost Hollow — 120s, then defeat Frost Mourner", "Khe Băng Giá — 120 giây, rồi hạ Ai Nữ Băng Sương" } },
+            { "LV6_CursedVillage", new[] { "Cursed Village — Survive 120 seconds", "Ngôi Làng Bị Nguyền — Sống sót 120 giây" } },
             { "LV7_ClockworkCitadel", new[] { "Clockwork Citadel — Defeat 30 enemies", "Thành Trì Cơ Giới — Hạ 30 quái" } },
-            { "LV8_CrimsonCathedral", new[] { "Crimson Cathedral — Survive 120 seconds", "Thánh Đường Đỏ Thẫm — Sống sót 120 giây" } },
+            { "LV8_CrimsonCathedral", new[] { "Crimson Cathedral — 120s, then defeat Crimson Harvester", "Thánh Đường Đỏ Thẫm — 120 giây, rồi hạ Huyết Nguyệt Đao Phủ" } },
             { "LV9_EndlessAbyss", new[] { "Endless Abyss — Endless", "Vực Thẳm Vô Tận — Vô tận" } },
-            { "LV10_EclipseThrone", new[] { "Eclipse Throne — Defeat 30 enemies", "Ngai Nhật Thực — Hạ 30 quái" } },
+            { "LV10_EclipseThrone", new[] { "Eclipse Throne — Boss Rush; bosses only", "Ngai Nhật Thực — Liên chiến boss; chỉ đánh boss" } },
         };
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

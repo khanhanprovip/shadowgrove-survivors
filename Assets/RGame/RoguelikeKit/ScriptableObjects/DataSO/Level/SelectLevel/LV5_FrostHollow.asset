@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV5_FrostHollow
   m_EditorClassIdentifier: 
-  Description: Khe Băng Giá | Frost Hollow — Song sot 120s
-  LevelDescription: Khe Băng Giá | Frost Hollow — Song sot 120s
+  Description: "Khe B\u0103ng Gi\xE1 | Frost Hollow \u2014 Song sot 120s"
+  LevelDescription: "Khe B\u0103ng Gi\xE1 | Frost Hollow \u2014 Song sot 120s"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: f39e076b3d455154792c3d56dc397057, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: b20e05910e3f4e08a2c39300e45b171e, type: 2}
+  GameMode: {fileID: 11400000, guid: 0b8ccffc7d1ec8b4f918b7d200907d15, type: 2}

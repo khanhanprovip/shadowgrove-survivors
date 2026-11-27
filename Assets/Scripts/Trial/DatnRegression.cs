@@ -101,6 +101,11 @@ namespace DATN.Trial
 
             switch (suite)
             {
+                case "campaign-bosses":yield return CheckCampaignBosses();break;
+                case "boss-rush":yield return CheckBossRush();break;
+                case "level-heal":yield return CheckLevelHeal();break;
+                case "hero-kits":yield return CheckHeroKits();break;
+                case "endless-boundary":yield return CheckEndlessBoundary();break;
                 case "run-save-write":yield return CheckRunSaveWrite();break;
                 case "run-save-modes":yield return CheckRunSaveModes();break;
                 case "run-save-bosses":yield return CheckRunSaveBosses();break;
@@ -128,7 +133,7 @@ namespace DATN.Trial
                     }
                     break;
                 case "survival":
-                    yield return EnterRound(2, "Lyra");
+                    yield return EnterRound(5, "Lyra");
                     yield return CheckObjective(GameModeId.Survival);
                     break;
                 case "survival-boundary":
@@ -265,6 +270,17 @@ namespace DATN.Trial
             }, "Gameplay, map and player ready");
             Require(_round.GlobalConfig.GlobalPlayer.name.Contains(hero), $"Spawned {hero} prefab");
             int tiles = GameObject.Find("Map").transform.childCount;
+            if(_selection.SelectLevelSO.GameMode.ModeId==GameModeId.BossRush)
+            {
+                int choicesBefore=_upgradeCount;float setupDeadline=Time.realtimeSinceStartup+45;
+                while(FindFirstObjectByType<EndlessBossEnemy>()==null&&Time.realtimeSinceStartup<setupDeadline)
+                {
+                    if(Time.timeScale<=0)PickUpgradeOrTreasure();
+                    yield return null;
+                }
+                Require(_upgradeCount-choicesBefore==_selection.SelectLevelSO.GameMode.BossRushStartingChoices,
+                    "Boss Rush resolves exactly ten initial upgrade choices before the first boss");
+            }
             yield return Wait(() => FindFirstObjectByType<BaseEnemy>() != null, "First enemy spawns");
             yield return new WaitForSecondsRealtime(1.1f);
             Record("PASS", $"{Levels[index]} | {hero} | tiles={tiles} | {_selection.SelectLevelSO.GameMode.ModeId}");
@@ -288,8 +304,11 @@ namespace DATN.Trial
                 Require(renderer.sortingLayerName == "Map" && renderer.sortingOrder == short.MinValue &&
                         background.GetComponentsInChildren<Collider2D>().Length == 0,
                     expected + " stays below combat and adds no collision");
-                Require(map.GetComponentsInChildren<SpriteRenderer>().Count(r => r.enabled) == 1,
-                    expected + " has no forest tiles showing through");
+                var layout=map.GetComponent<DATN.World.StageLayout>();
+                Require(layout!=null&&layout.ReachableCells==layout.WalkableCells&&layout.WalkableCells>100,
+                    expected+" has fully connected authored floor");
+                Require(map.GetComponentsInChildren<SpriteRenderer>().Count(r => r.enabled) == 1+layout.WallRuns,
+                    expected + " only renders its own floor and terrain ledges");
             }
             yield return CaptureFrame("background-" + index.ToString("00") + "-" + Levels[index]);
             yield return new WaitForSecondsRealtime(0.2f);

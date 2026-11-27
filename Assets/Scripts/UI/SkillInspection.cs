@@ -9,13 +9,20 @@ namespace DATN.UI
     public static class SkillInspection
     {
         static string T(bool vi,string a,string b)=>vi?a:b;
-        public static string Name(SkillDataSO d,bool vi)=>d.StarterWeapon!=StarterWeaponKind.Legacy?StarterWeaponProfile.Name(d.StarterWeapon,vi):
+        static bool IsHeroSignature(SkillDataSO d)
+        {
+            if(d==null||d.StarterWeapon==StarterWeaponKind.Legacy)return false;
+            var profile=UnityEngine.Object.FindFirstObjectByType<TrialController>()?.GlobalConfig?.GlobalPlayer?.GetComponent<StarterWeaponProfile>();
+            return d.Key!="ToNearestSkill"||profile==null||!profile.UsesLegacyStarter;
+        }
+        public static string Name(SkillDataSO d,bool vi)=>IsHeroSignature(d)?StarterWeaponProfile.Name(d.StarterWeapon,vi):
             d.SkillType==SkillType.AttributeSkill?ForestUI.AttributeName(d.AttributeType.ToString()):LanguageManager.Get("Skill_"+d.Key);
         public static string Mechanic(SkillDataSO d,bool vi)
         {
-            if(d.StarterWeapon!=StarterWeaponKind.Legacy)return StarterWeaponProfile.Description(d.StarterWeapon,vi)+" "+T(vi,"Chỉ ra đòn khi có quái hợp lệ trong tầm; không tốn đạn dự trữ.","Attacks only when a valid enemy is in range; no ammunition reserve is consumed.");
+            if(IsHeroSignature(d))return StarterWeaponProfile.LongDescription(d.StarterWeapon,vi)+" "+T(vi,"Chỉ ra đòn khi có quái hợp lệ trong tầm; không tốn đạn dự trữ.","Attacks only when a valid enemy is in range; no ammunition reserve is consumed.");
             return d.Key switch
             {
+                "ToNearestSkill"=>T(vi,"Chiêu khởi đầu đời cũ tự đánh kẻ địch gần nhất trong tầm.","The legacy starter automatically attacks the nearest enemy in range."),
                 "BothSideSkill"=>T(vi,"Phóng hai lưỡi gai sang trái và phải. Lưỡi gai xuyên qua các quái trên đường bay và biến mất sau 1 giây. Hữu ích khi bị ép từ hai bên.","Launches a thorn blade left and right. Blades pierce enemies along their path and expire after one second. Useful against flanking groups."),
                 "BouncingSkill"=>T(vi,"Bào tử bay theo hướng ban đầu ngẫu nhiên, bật lại khi chạm mép khung hình và gây sát thương khi chạm quái. Hết thời lượng thì biến mất; không tự đổi hướng theo quái.","Spores start in random directions, bounce off the screen edges and damage enemies on contact. They expire after their lifetime; they do not home between enemies."),
                 "ChainSkill"=>T(vi,"Roi rễ tự tìm mục tiêu ở gần rồi chuyển sang mục tiêu khác khi tới nơi. Kết thúc sau một chuỗi chuyển mục tiêu hoặc khi không còn quái phù hợp. Hiệu quả khi quái tụ gần nhau.","A root lash seeks nearby enemies and switches targets as it reaches them. It ends after a short chain or when no suitable target remains. Best against clustered enemies."),
@@ -65,7 +72,8 @@ namespace DATN.UI
             text.AppendLine(T(vi,"Sát thương mỗi lần trúng: ","Damage per hit: ")+damage);
             text.AppendLine(T(vi,"Chu kỳ ra chiêu: ","Attack cycle: ")+$"{cd:0.##} s");
             int amount=d.Amount+round.PlayerStat.GetValue("Amount");
-            bool slash=d.StarterWeapon==StarterWeaponKind.ThornSlash;
+            bool heroSignature=IsHeroSignature(d);
+            bool slash=heroSignature&&d.StarterWeapon==StarterWeaponKind.ThornSlash;
             if(slash)text.AppendLine(T(vi,"Số mục tiêu tối đa: ","Maximum targets: ")+(amount+2));
             else if(d.Key=="BothSideSkill")text.AppendLine(T(vi,"2 lưỡi / đợt · trái và phải","2 blades / cast · left and right"));
             else if(d.Key=="FourCornerSkill")text.AppendLine(T(vi,"Số hướng: ","Directions: ")+(d.CurrentState==SkillCurrentState.Mixed?8:4));
@@ -73,13 +81,35 @@ namespace DATN.UI
             else text.AppendLine(T(vi,d.Key=="RandomSkill"?"Số mục tiêu tối đa: ":"Số đạn / đợt: ",d.Key=="RandomSkill"?"Maximum targets: ":"Projectiles / cast: ")+(d.Key=="CircularAttackSkill"&&d.CurrentState==SkillCurrentState.Mixed?16:amount));
             if(d.AttackRange>0)text.AppendLine(T(vi,"Tầm đánh: ","Attack range: ")+$"{d.AttackRange:0.##}");
             if(slash)text.AppendLine(T(vi,"Góc chém: ","Cleave angle: ")+$"{UnityEngine.Mathf.Clamp(55+(round.PlayerStat.GetValue("Area")+d.Area-100)*.2f,55,85)*2:0.#}°");
-            if(!slash&&d.Key!="RandomSkill"&&d.Key!="InsideScopeSkill")text.AppendLine(T(vi,"Tốc độ đạn/chuyển động: ","Projectile/motion speed: ")+$"{d.Velocity*round.PlayerStat.GetValue("SkillSpeed")*.01f:0.##}");
+            if(!slash&&d.Key!="RandomSkill"&&d.Key!="InsideScopeSkill")
+            {
+                var activeProfile=UnityEngine.Object.FindFirstObjectByType<TrialController>()?.GlobalConfig?.GlobalPlayer?.GetComponent<StarterWeaponProfile>();
+                float heroSpeed=activeProfile!=null&&d.Key=="ToNearestSkill"?activeProfile.SignatureProjectileSpeedMultiplier:
+                    d.StarterWeapon==StarterWeaponKind.DarkOrb?1.12f:1f;
+                text.AppendLine(T(vi,"Tốc độ đạn/chuyển động: ","Projectile/motion speed: ")+$"{d.Velocity*round.PlayerStat.GetValue("SkillSpeed")*.01f*heroSpeed:0.##}");
+            }
             if(d.Key=="BouncingSkill"||d.Key=="CircularMotionSkill"||d.Key=="CircularAttackSkill")text.AppendLine(T(vi,"Thời lượng: ","Lifetime: ")+$"{d.Duration*round.PlayerStat.GetValue("Duration")*.01f:0.##} s");
             text.AppendLine(T(vi,"Quy mô vùng/đạn: ","Area/projectile scale: ")+(round.PlayerStat.GetValue("Area")+d.Area)+"%");
             var status=!slash&&d.SkillPrefab!=null?d.SkillPrefab.GetComponentInChildren<SkillBase>(true)?.StatusEffect:null;
             if(status is FreezingBuff)text.AppendLine(T(vi,"Đóng băng chuyển động: ","Movement freeze: ")+$"{status.Duration:0.##} s");
             else if(status is SlowBuff slow)text.AppendLine(T(vi,"Làm chậm: ","Slow: ")+$"{slow.SlowPercentage}% · {slow.Duration:0.##} s");
             else if(status is BurnBuff burn)text.AppendLine(T(vi,"Thiêu đốt: ","Burn: ")+$"{burn.Damage} / {burn.TickInterval:0.##} s · {burn.Duration:0.##} s");
+            if(heroSignature)
+            {
+                text.AppendLine().AppendLine(T(vi,"<color=#D8BA73>NÂNG CẤP</color>","<color=#D8BA73>UPGRADES</color>"));
+                if(d.Level<max)
+                {
+                    int nextLevel=d.Level+1;
+                    text.AppendLine(T(vi,$"Cấp {nextLevel}: ",$"Level {nextLevel}: ")+StarterWeaponProfile.UpgradeTitle(d.StarterWeapon,nextLevel,vi));
+                    text.AppendLine(StarterWeaponProfile.UpgradeDescription(d.StarterWeapon,nextLevel,vi));
+                }
+                else text.AppendLine(StarterWeaponProfile.MaxLevelDescription(d.StarterWeapon,vi));
+                text.AppendLine().AppendLine(T(vi,"<color=#D8BA73>NỘI TẠI CỐ ĐỊNH</color>","<color=#D8BA73>FIXED PASSIVE</color>"));
+                text.AppendLine(StarterWeaponProfile.PassiveName(d.StarterWeapon,vi)+" — "+StarterWeaponProfile.PassiveDescription(d.StarterWeapon,vi));
+                text.AppendLine().Append(T(vi,"Các con số là đề xuất v1, chưa cân bằng.","Values are proposed v1 and are not balanced."));
+                return text.ToString();
+            }
+
             text.AppendLine().AppendLine(T(vi,"<color=#D8BA73>NÂNG CẤP & TIẾN HÓA</color>","<color=#D8BA73>UPGRADE & EVOLUTION</color>"));
             if(d.Level>0&&d.Level<=d.UpgradeAttribute.Count)
             {

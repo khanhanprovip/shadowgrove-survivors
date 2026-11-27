@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b52ea73fa5b9d4d936793fa4e30a2c, type: 3}
   m_Name: LV4_AshenQuarry
   m_EditorClassIdentifier: 
-  Description: Mỏ Đá Tro Tàn | Ashen Quarry — Ha 30 quai
-  LevelDescription: Mỏ Đá Tro Tàn | Ashen Quarry — Ha 30 quai
+  Description: "M\u1ECF \u0110\xE1 Tro T\xE0n | Ashen Quarry \u2014 Ha 30 quai"
+  LevelDescription: "M\u1ECF \u0110\xE1 Tro T\xE0n | Ashen Quarry \u2014 Ha 30 quai"
   PreviewImage: {fileID: 0}
   MapConfig: {fileID: 11400000, guid: dbd21ee903964c95b97961e9bdb3f013, type: 2}
   StageConfig: {fileID: 11400000, guid: d545bc68714582d45bae37a87c71c046, type: 2}
-  GameMode: {fileID: 11400000, guid: af6df3e762cd4e098e76ce5cf90ff718, type: 2}
+  GameMode: {fileID: 11400000, guid: 232e1ef8037819a43ac3b91637a3385d, type: 2}

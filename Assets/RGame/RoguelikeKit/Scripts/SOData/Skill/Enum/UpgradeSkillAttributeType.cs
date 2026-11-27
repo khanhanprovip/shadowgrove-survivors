@@ -8,6 +8,8 @@ namespace RGame.RoguelikeKit
         CDLessPercent,
         ProjectilesCountAdd,
         VelocityAddPercent,
-        AreaAddPercent
+        AreaAddPercent,
+        // Appended to preserve the serialized values of existing generic skills.
+        SignatureLevel
     }
 }

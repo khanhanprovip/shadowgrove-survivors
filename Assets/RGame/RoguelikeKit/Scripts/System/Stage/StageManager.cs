@@ -128,7 +128,7 @@ namespace RGame.RoguelikeKit
         {
             if(_player!=null&&globalConfig.GlobalPlayer!=null)runSeconds+=Time.deltaTime;
             bosses.Tick();
-            if(bosses.IsEncounterActive)return;
+            if(bosses.IsEncounterActive||bosses.SuppressOrdinarySpawns)return;
             if (_spawnSets == null || _spawnSets.Count == 0) return;
 
             // Luc dang tai lai scene, player cu da bi huy — tam dung sinh quai
@@ -223,6 +223,7 @@ namespace RGame.RoguelikeKit
         {
             if(spawnTokens<1)return;
             if (_aliveCount >= maxActiveEnemies) return;
+            if(!DATN.World.StageLayout.TrySpawn(position,_player.position,out position))return;
             var info = PickRandom(set.Entries);
             if (info == null) return;
 

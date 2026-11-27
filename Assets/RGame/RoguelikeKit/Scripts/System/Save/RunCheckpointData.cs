@@ -32,7 +32,7 @@ namespace RGame.RoguelikeKit
     [Serializable] public sealed class RunSystemState {public string type;public List<RunField> fields;}
     [Serializable] public sealed class RunCheckpoint
     {
-        public int version=1;public string id,hero,stage,savedUtc,random;
+        public int version=1;public int worldRevision;public string id,hero,stage,savedUtc,random;
         public float clock,cameraSize;public Vector3 cameraPosition;
         public List<RunStat> stats=new();public List<RunSkill> skills=new();public List<RunEntity> entities=new();
         public List<RunSystemState> systems=new();public List<RunField> mode;
