@@ -1,0 +1,2306 @@
+{
+  "date": "2026-11-29",
+  "unity": "6000.3.21f1",
+  "delivery": "F:\\Do_An_KT\\Build\\ShadowgroveSurvivors_QA_2026-11-29",
+  "sourceCsFilesMatchingFinalBuild": 351,
+  "binary": "F:\\Do_An_KT\\Build\\ShadowgroveSurvivors_QA_2026-11-29\\ShadowgroveSurvivors.exe",
+  "assemblySha256": "5e257014d615c0de9602b228b17650665d31a8c000f9e756e5eeb1968b993526",
+  "finalVerificationRuns": [
+    "20261129-003635-verify-39580",
+    "20261129-003843-test-14840"
+  ],
+  "oldFailedCheckpointReplay": {
+    "passed": true,
+    "passCount": 105,
+    "failCount": 0,
+    "reasons": [],
+    "runtimeErrorLines": [],
+    "binary": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+    "assemblySha256": "a8e4e3773ac20c765d91be0d82e1fd15ca51a08b90b82566f7e010b167a6c424",
+    "profile": "F:\\Do_An_KT\\_assistant_work\\fullqa-2026-11-28\\old-checkpoint-replay-profile",
+    "process": {
+      "args": [
+        "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "-datn-autotest",
+        "-datn-suite=run-save-read",
+        "-screen-width",
+        "1280",
+        "-screen-height",
+        "720",
+        "-screen-fullscreen",
+        "0",
+        "-force-d3d11",
+        "-logFile",
+        "F:\\Do_An_KT\\_assistant_work\\fullqa-2026-11-28\\old-checkpoint-replay-20261129-001543\\player.log"
+      ],
+      "timeoutSeconds": 300,
+      "timedOut": false,
+      "exitCode": 0,
+      "seconds": 13.91,
+      "log": "F:\\Do_An_KT\\_assistant_work\\fullqa-2026-11-28\\old-checkpoint-replay-20261129-001543\\stdout.log"
+    }
+  },
+  "history": [
+    {
+      "run": "20261128-025408-verify-10864",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": true,
+          "passCount": 69,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "menus",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\01-menus-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=menus",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\01-menus-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 95.33,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\01-menus-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 324,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "ui",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\02-ui-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\02-ui-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 24.3,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\02-ui-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 1531,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "skills",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\03-skills-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=skills",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\03-skills-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 17.0,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\03-skills-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 79,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "hero-kits",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\04-hero-kits-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=hero-kits",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\04-hero-kits-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 37.74,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\04-hero-kits-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 261,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "level-heal",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\05-level-heal-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=level-heal",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\05-level-heal-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 58.67,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\05-level-heal-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 4,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\06-settings-write-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-write",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\06-settings-write-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.98,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\06-settings-write-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 2,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\07-settings-read-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-read",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\07-settings-read-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.97,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\07-settings-read-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 38,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "audio",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\08-audio-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\08-audio-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 57.77,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\08-audio-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 39,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "balance",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\09-balance-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=balance",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\09-balance-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 21.23,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\09-balance-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 93,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "combat-pickups",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\10-combat-pickups-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=combat-pickups",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\10-combat-pickups-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 41.22,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\10-combat-pickups-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 14,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "survival",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\11-survival-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=survival",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\11-survival-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 142.03,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\11-survival-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 7,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "survival-boundary",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\12-survival-boundary-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=survival-boundary",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\12-survival-boundary-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 15.03,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\12-survival-boundary-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 14,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "killtarget",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\13-killtarget-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=killtarget",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\13-killtarget-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 85.8,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\13-killtarget-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 15,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "killtarget-burst",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\14-killtarget-burst-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=killtarget-burst",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\14-killtarget-burst-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 84.49,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\14-killtarget-burst-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 13,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "endless",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\15-endless-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=endless",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\15-endless-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 92.25,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\15-endless-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 98,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "pause-skills",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\16-pause-skills-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=pause-skills",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\16-pause-skills-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 41.48,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\16-pause-skills-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 9,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "spawn-pacing",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\17-spawn-pacing-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=spawn-pacing",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\17-spawn-pacing-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 38.19,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\17-spawn-pacing-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 14,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "enemy-cap",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\18-enemy-cap-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=enemy-cap",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\18-enemy-cap-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 36.98,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\18-enemy-cap-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 78,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "animations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\19-animations-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=animations",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\19-animations-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 57.84,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\19-animations-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 33,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "hit-feedback",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\20-hit-feedback-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=hit-feedback",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\20-hit-feedback-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 42.47,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\20-hit-feedback-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 4,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "skill-lifetime",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\21-skill-lifetime-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=skill-lifetime",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\21-skill-lifetime-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.91,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\21-skill-lifetime-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 19,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "art",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\22-art-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=art",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\22-art-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 21.08,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\22-art-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 161,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "backgrounds",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\23-backgrounds-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=backgrounds",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\23-backgrounds-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 114.67,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\23-backgrounds-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 12,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\24-run-save-write-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-write",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\24-run-save-write-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 23.75,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\24-run-save-write-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": false,
+          "passCount": 2,
+          "failCount": 1,
+          "reasons": [
+            "1 failed assertions",
+            "exit 1",
+            "2 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "Run restore failed: System.ArgumentException: Missing checkpoint transform",
+            "[Regression] FAIL | System.InvalidOperationException: Timed out: Checkpoint restores into pause"
+          ],
+          "suite": "run-save-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\25-run-save-read-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-read",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\25-run-save-read-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 31.44,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\25-run-save-read-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 352,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-modes",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\26-run-save-modes-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-modes",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\26-run-save-modes-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 59.38,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\26-run-save-modes-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 936,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\27-run-save-bosses-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-bosses",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\27-run-save-bosses-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 114.91,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\27-run-save-bosses-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 112,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "campaign-bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\28-campaign-bosses-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=campaign-bosses",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\28-campaign-bosses-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 56.36,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\28-campaign-bosses-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 201,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "boss-rush",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\29-boss-rush-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=boss-rush",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\29-boss-rush-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 73.84,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\29-boss-rush-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 624,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\30-bosses-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=bosses",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\30-bosses-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 226.16,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\30-bosses-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 7,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "endless-boundary",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\31-endless-boundary-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=endless-boundary",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\31-endless-boundary-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 20.2,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\31-endless-boundary-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 714,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "full-smoke-30",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\32-full-smoke-30-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=full-smoke-30",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\32-full-smoke-30-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 313.75,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-025408-verify-10864\\32-full-smoke-30-1280x720\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261128-153329-verify-2560",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": false,
+          "passCount": 21,
+          "failCount": 2,
+          "reasons": [
+            "2 failed assertions",
+            "exit 1",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: Audio voice budget or priority assertion failed; see measured counts above."
+          ],
+          "suite": "audio-budget",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\01-audio-budget-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio-budget",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\01-audio-budget-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 900,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 11.56,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\01-audio-budget-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": false,
+          "passCount": 2,
+          "failCount": 1,
+          "reasons": [
+            "1 failed assertions",
+            "exit 1",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: Button ButtonBack at (575.00, 1010.00) is not clickable. Top hit: <none>."
+          ],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\02-ui-interactions-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\02-ui-interactions-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 900,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 10.77,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\02-ui-interactions-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 96,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "deep-modes",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\03-deep-modes-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=deep-modes",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\03-deep-modes-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 900,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 332.95,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-153329-verify-2560\\03-deep-modes-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261128-154209-verify-2056",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": false,
+          "passCount": 94,
+          "failCount": 4,
+          "reasons": [
+            "4 failed assertions",
+            "1 runtime errors",
+            "exit 1",
+            "2 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "NullReferenceException: Object reference not set to an instance of an object",
+            "[Regression] FAIL | System.InvalidOperationException: UI interaction failures: ButtonExit requests application quit; the wantsToQuit interceptor prevents early Player exit | Settings blocks the real pointer event from opening the underlying New Game panel | Power Ups blocks the real pointer event from opening the underlying New Game panel"
+          ],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\01-ui-interactions-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\01-ui-interactions-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 13.22,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\01-ui-interactions-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 22,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "audio-budget",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\02-audio-budget-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio-budget",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\02-audio-budget-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.67,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\02-audio-budget-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 12,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\03-run-save-write-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-write",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\03-run-save-write-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 22.8,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\03-run-save-write-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 101,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\04-run-save-read-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-read",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\04-run-save-read-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 13.62,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\04-run-save-read-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 352,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-modes",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\05-run-save-modes-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-modes",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\05-run-save-modes-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 57.91,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\05-run-save-modes-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 894,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\06-run-save-bosses-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-bosses",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\06-run-save-bosses-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 112.67,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\06-run-save-bosses-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 171,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "boss-rush",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\07-boss-rush-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=boss-rush",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\07-boss-rush-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 72.31,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\07-boss-rush-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 112,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "campaign-bosses",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\08-campaign-bosses-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=campaign-bosses",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\08-campaign-bosses-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 54.72,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261128-154209-verify-2056\\08-campaign-bosses-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261129-001845-verify-32844",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": false,
+          "passCount": 25,
+          "failCount": 1,
+          "reasons": [
+            "1 failed assertions",
+            "exit 1",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: Open confirmation blocks pointer input to the underlying Resume button"
+          ],
+          "suite": "confirmations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\01-confirmations-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=confirmations",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\01-confirmations-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 16.83,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\01-confirmations-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": false,
+          "passCount": 2,
+          "failCount": 2,
+          "reasons": [
+            "2 failed assertions",
+            "exit 4294967295",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: Button ButtonBack at (185.60, 66.60) is not clickable. Top hit: ModalShade."
+          ],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\02-ui-interactions-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\02-ui-interactions-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 4294967295,
+            "seconds": 73.47,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\02-ui-interactions-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 13,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\03-run-save-write-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-write",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\03-run-save-write-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 22.41,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\03-run-save-write-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 109,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\04-run-save-read-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-read",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\04-run-save-read-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 13.36,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\04-run-save-read-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 69,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "menus",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\05-menus-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=menus",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\05-menus-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 95.08,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\05-menus-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 324,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "ui",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\06-ui-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\06-ui-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 24.23,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\06-ui-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 38,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "audio",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\07-audio-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\07-audio-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 57.09,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\07-audio-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 22,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "audio-budget",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\08-audio-budget-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio-budget",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\08-audio-budget-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.52,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\08-audio-budget-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 98,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "pause-skills",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\09-pause-skills-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=pause-skills",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\09-pause-skills-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 42.28,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\09-pause-skills-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 714,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "full-smoke-30",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\10-full-smoke-30-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=full-smoke-30",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\10-full-smoke-30-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 303.92,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-001845-verify-32844\\10-full-smoke-30-1280x720\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261129-003122-verify-14296",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": true,
+          "passCount": 36,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "confirmations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\01-confirmations-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=confirmations",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\01-confirmations-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 21.09,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\01-confirmations-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": false,
+          "passCount": 91,
+          "failCount": 1,
+          "reasons": [
+            "1 failed assertions",
+            "exit 1",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: Timed out: Resolution pointer click applies its safe windowed size"
+          ],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\02-ui-interactions-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\02-ui-interactions-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 33.28,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\02-ui-interactions-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 4,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\03-settings-write-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-write",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\03-settings-write-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.97,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\03-settings-write-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 2,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\04-settings-read-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-read",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\04-settings-read-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.98,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003122-verify-14296\\04-settings-read-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261129-003345-verify-5528",
+      "summary": {
+        "action": "verify",
+        "passed": false,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": true,
+          "passCount": 36,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "confirmations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\01-confirmations-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=confirmations",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\01-confirmations-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 21.19,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\01-confirmations-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": false,
+          "passCount": 118,
+          "failCount": 3,
+          "reasons": [
+            "3 failed assertions",
+            "exit 1",
+            "1 error lines in raw runtime log"
+          ],
+          "runtimeErrorLines": [
+            "[Regression] FAIL | System.InvalidOperationException: UI interaction failures: Settings blocks the real pointer event from opening the underlying New Game panel | Power Ups blocks the real pointer event from opening the underlying New Game panel"
+          ],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\02-ui-interactions-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\02-ui-interactions-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 1,
+            "seconds": 12.83,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\02-ui-interactions-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 4,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\03-settings-write-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-write",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\03-settings-write-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 11.0,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\03-settings-write-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 2,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\04-settings-read-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-read",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\04-settings-read-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 11.0,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003345-verify-5528\\04-settings-read-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261129-003635-verify-39580",
+      "summary": {
+        "action": "verify",
+        "passed": true,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": true,
+          "passCount": 36,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "confirmations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\01-confirmations-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=confirmations",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\01-confirmations-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 21.17,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\01-confirmations-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 120,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\02-ui-interactions-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\02-ui-interactions-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 12.52,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\02-ui-interactions-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 4,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\03-settings-write-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-write",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\03-settings-write-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 11.0,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\03-settings-write-1920x1080\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 2,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "settings-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\04-settings-read-1920x1080",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=settings-read",
+              "-screen-width",
+              "1920",
+              "-screen-height",
+              "1080",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\04-settings-read-1920x1080\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 10.98,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\04-settings-read-1920x1080\\stdout.log"
+          }
+        }
+      ]
+    },
+    {
+      "run": "20261129-003843-test-14840",
+      "summary": {
+        "action": "test",
+        "passed": true,
+        "artifacts": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840",
+        "editorVersion": "6000.3.21f1",
+        "exe": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+        "exeSha256": "48efab523aa684c653bd1254a6962d3410127b5c02dc1310f6f16f4810666556"
+      },
+      "results": [
+        {
+          "passed": true,
+          "passCount": 36,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "confirmations",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\01-confirmations-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=confirmations",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\01-confirmations-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 20.52,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\01-confirmations-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 120,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "ui-interactions",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\02-ui-interactions-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=ui-interactions",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\02-ui-interactions-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 12.27,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\02-ui-interactions-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 38,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "audio",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\03-audio-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=audio",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\03-audio-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 57.02,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\03-audio-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 13,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-write",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\04-run-save-write-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-write",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\04-run-save-write-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 22.77,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\04-run-save-write-1280x720\\stdout.log"
+          }
+        },
+        {
+          "passed": true,
+          "passCount": 111,
+          "failCount": 0,
+          "reasons": [],
+          "runtimeErrorLines": [],
+          "suite": "run-save-read",
+          "output": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\05-run-save-read-1280x720",
+          "process": {
+            "args": [
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003635-verify-39580\\Windows-x64\\ShadowgroveSurvivors.exe",
+              "-datn-autotest",
+              "-datn-suite=run-save-read",
+              "-screen-width",
+              "1280",
+              "-screen-height",
+              "720",
+              "-screen-fullscreen",
+              "0",
+              "-force-d3d11",
+              "-logFile",
+              "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\05-run-save-read-1280x720\\player.log"
+            ],
+            "timeoutSeconds": 750,
+            "timedOut": false,
+            "exitCode": 0,
+            "seconds": 13.59,
+            "log": "F:\\Do_An_KT\\survivors-roguelike-kit\\Tools\\UnityHarness\\artifacts\\20261129-003843-test-14840\\05-run-save-read-1280x720\\stdout.log"
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "30 smoke combinations are entry/movement/pause checks, not 30 complete matches.",
+    "deep-modes uses 3x game time and HP padding; campaign boss is killed through direct test hit.",
+    "Subjective audio quality, OS X/Alt+F4 confirmation, exhaustive resolution switching, simultaneous player-death/victory not verified.",
+    "Detailed matrices retain NOT RUN where individual-case evidence was not reconciled; suite success must not imply every inventory row passed."
+  ]
+}

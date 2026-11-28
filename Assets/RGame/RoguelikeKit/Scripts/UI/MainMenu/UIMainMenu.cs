@@ -34,7 +34,11 @@ namespace RGame.RoguelikeKit
 
         public void ExitButton()
         {
-            ExitButtonAction.Invoke();
+            ShadowgroveAudio.Play(SoundCue.UiSelect);
+            DATN.UI.ConfirmationDialog.Show(transform, "THOÁT TRÒ CHƠI?", "QUIT GAME?",
+                "Bạn có chắc muốn thoát Shadowgrove Survivors?", "Are you sure you want to quit Shadowgrove Survivors?",
+                () => { if (ExitButtonAction != null) ExitButtonAction.Invoke(); else Application.Quit(); },
+                "THOÁT GAME", "QUIT GAME");
         }
     }
 }

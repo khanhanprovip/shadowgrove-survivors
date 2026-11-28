@@ -18,6 +18,9 @@ namespace RGame.RoguelikeKit
         [SerializeField] private FloatEventChannelSO mChangeMusicVolumeEventChannel;
 
         [SerializeField] private SettingsSO mCurrentSettings;
+        private bool displayInitialized;
+        private int appliedResolutionIndex;
+        private bool appliedFullscreen;
 
         private void Awake()
         {
@@ -53,17 +56,21 @@ namespace RGame.RoguelikeKit
             // Unity applies -screen-width/-screen-height before Start. Respect those
             // explicit launch options (used by QA and desktop shortcuts) instead of
             // immediately replacing them with the last saved resolution.
-            if (TryGetCommandLineResolution(out int launchWidth, out int launchHeight, out bool launchFullscreen))
+            if (!displayInitialized && TryGetCommandLineResolution(out int launchWidth, out int launchHeight, out bool launchFullscreen))
             {
                 Screen.SetResolution(launchWidth, launchHeight, launchFullscreen);
             }
-            else
+            else if (!displayInitialized || appliedResolutionIndex != mCurrentSettings.ResolutionsIndex ||
+                     appliedFullscreen != mCurrentSettings.IsFullscreen)
             {
                 var currentResolution = Screen.currentResolution;
                 if (mCurrentSettings.ResolutionsIndex >= 0 && mCurrentSettings.ResolutionsIndex < Screen.resolutions.Length)
                     currentResolution = Screen.resolutions[mCurrentSettings.ResolutionsIndex];
                 Screen.SetResolution(currentResolution.width, currentResolution.height, mCurrentSettings.IsFullscreen);
             }
+            displayInitialized = true;
+            appliedResolutionIndex = mCurrentSettings.ResolutionsIndex;
+            appliedFullscreen = mCurrentSettings.IsFullscreen;
 
         }
 

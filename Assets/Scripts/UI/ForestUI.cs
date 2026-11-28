@@ -79,7 +79,7 @@ namespace DATN.UI
         {
             var old=p.Find("BG");if(old!=null)old.gameObject.SetActive(false);
             Picture(p,"Forest_Background","Forest",0,0,1,1).transform.SetAsFirstSibling();if(!dim)return;
-            var shade=Picture(p,"Forest_Shade",null,0,0,1,1);shade.color=new Color(.025f,.065f,.04f,.84f);shade.transform.SetSiblingIndex(1);
+            var shade=Picture(p,"Forest_Shade",null,0,0,1,1);shade.color=new Color(.025f,.065f,.04f,.84f);shade.raycastTarget=true;shade.transform.SetSiblingIndex(1);
         }
         private static void Header(Transform p,string vi,string en,string noteVi,string noteEn)
         {

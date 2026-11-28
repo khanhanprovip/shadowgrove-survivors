@@ -183,10 +183,18 @@ namespace RGame.RoguelikeKit
 
             if (activeInCategory >= categoryLimit)
             {
-                int categoryVictim = FindStealableVoice(category, priority);
-                if (categoryVictim < 0) return null;
-                StopVoice(categoryVictim);
-                activeTotal--;
+                int required=activeInCategory-categoryLimit+1,stealable=0;
+                for(int i=0;i<voices.Length;i++)
+                    if(voices[i].isPlaying&&voiceCategories[i]==category&&voices[i].priority>priority)stealable++;
+                // A cue may impose a lower category cap than the preceding cue.
+                // Reserve every required replacement before stopping any voice.
+                if(stealable<required)return null;
+                for(int i=0;i<required;i++)
+                {
+                    int categoryVictim=FindStealableVoice(category,priority);
+                    if(categoryVictim<0)return null;
+                    StopVoice(categoryVictim);activeTotal--;
+                }
             }
 
             if (activeTotal >= voices.Length)

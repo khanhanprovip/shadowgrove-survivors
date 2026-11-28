@@ -8,7 +8,16 @@ namespace DATN.Trial
     {
         IEnumerator CheckLevelHeal()
         {
-            yield return EnterRound(0,"Rowan");
+            foreach(string hero in Heroes)
+            {
+                Record("INFO","Level healing coverage: "+hero);
+                yield return CheckLevelHealForHero(hero);
+                _round.ExitToMainMenu();yield return WaitForMenu();
+            }
+        }
+        IEnumerator CheckLevelHealForHero(string hero)
+        {
+            yield return EnterRound(0,hero);
             var manager=FindFirstObjectByType<LevelManager>();
             var stats=_round.PlayerStat;
             var xp=(ExpConfig)typeof(LevelManager).GetField("expConfig",Private).GetValue(manager);

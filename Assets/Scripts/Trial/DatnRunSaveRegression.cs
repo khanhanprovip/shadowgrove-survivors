@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Linq;
+using DATN.Localization;
+using DATN.UI;
 using RGame.RoguelikeKit;
 using UnityEngine;
 using UnityEngine.UI;
@@ -123,6 +125,11 @@ namespace DATN.Trial
             _round.Pause();yield return null;yield return null;
             Require(FindObjectsByType<SkillBase>(FindObjectsSortMode.None).Length>0,"Player missiles are present at save time");
             var button=GameObject.Find("SaveRunBtn").GetComponent<Button>();yield return Wait(()=>CanClick(button),"Save button can be clicked");Click(button);
+            yield return Wait(()=>ConfirmationDialog.IsOpen,"Save confirmation opens after clicking Save & Main Menu");
+            var confirmation=GameObject.Find("ConfirmationDialog");
+            Require(confirmation!=null&&HasText(confirmation.transform,LanguageManager.GetCurrentCode()=="vi"?"LƯU TRẬN VÀ VỀ MENU?":"SAVE RUN & RETURN?"),
+                "Save action asks for confirmation before writing the checkpoint");
+            var confirm=ButtonIn(confirmation.transform,"ConfirmButton");yield return Wait(()=>CanClick(confirm),"Save confirmation action receives pointer input");Click(confirm);
             yield return Wait(()=>FindFirstObjectByType<UIMainMenu>()!=null,"Save returns to main menu");
             Require(RunCheckpointSession.LastError==null,"Save completes without an error: "+RunCheckpointSession.LastError);
             Require(RunCheckpointStore.TryRead(out var state),"Atomic checkpoint can be read after returning to menu");

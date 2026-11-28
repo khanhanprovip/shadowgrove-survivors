@@ -20,21 +20,51 @@ namespace RGame.RoguelikeKit
         readonly Dictionary<string,GameObject> entities=new();
         static readonly string[] MaterialFloats={"_Cutoff","_EdgeWidth","_TimeSpeed","_Alpha"};
         static readonly string[] MaterialColors={"_BlendColor","_ShadowColor","_FlameRedBlend"};
+        static readonly HashSet<string> RebuiltBossVfxTextures=new(StringComparer.Ordinal)
+        {"CrossBolt","EclipseBolt","Impact","RootLash","SpiritBloom","ThornFan","ThornOrbit","WardenHalo","WildMagic"};
         public RunCheckpointWorld(TrialController round)
         {this.round=round;stage=Object.FindFirstObjectByType<StageManager>();skills=Object.FindFirstObjectByType<SkillManager>();}
         static bool Functional(GameObject go)=>go.GetComponent<BaseEnemy>()!=null||go.GetComponent<SkillBase>()!=null||go.GetComponent<EnemyMagic>()!=null||go.GetComponent<IDropOut>()!=null||go.GetComponent<TreasureBox>()!=null||go.GetComponent<BossHazard>()!=null;
         static bool Script(Component c)=>c is MonoBehaviour&&c is not SoftContactShadow&&c is not BossSkillVfx&&c is not BossCastingVfx&&c.GetType().Namespace=="RGame.RoguelikeKit";
         static string Path(Transform root,Transform child)
         {if(root==child)return "";return Path(root,child.parent)+"/"+child.GetSiblingIndex();}
-        static Transform At(Transform root,string path)
+        static Transform At(Transform root,string path,string entityId=null,string key=null)
         {
             foreach(string part in path.Split('/',StringSplitOptions.RemoveEmptyEntries))
-            {if(!int.TryParse(part,out int i)||i<0||i>=root.childCount)throw new ArgumentException("Missing checkpoint transform");root=root.GetChild(i);}return root;
+            {
+                if(!int.TryParse(part,out int i)||i<0||i>=root.childCount)
+                    throw new ArgumentException(string.IsNullOrEmpty(entityId)?"Missing checkpoint transform":
+                        $"Missing checkpoint transform for entity '{entityId}' key '{key}' at path '{path}'");
+                root=root.GetChild(i);
+            }
+            return root;
         }
         IEnumerable<Transform> Children(GameObject root)
         {
             return root.GetComponentsInChildren<Transform>(true).Where(t=>t.GetComponentInParent<Canvas>()==null&&t.GetComponent<LineRenderer>()==null
+                &&!IsGeneratedBossVfxSpriteChild(root,t)
                 &&!entities.Values.Any(e=>e!=root&&(t==e.transform||t.IsChildOf(e.transform))));
+        }
+        static bool IsGeneratedBossVfxSpriteChild(GameObject owner,Transform child)
+        {
+            if(child==owner.transform)return false;
+            if(owner.GetComponent<EndlessBossEnemy>()!=null)
+                return child.name.StartsWith("Boss Cast ",StringComparison.Ordinal);
+            if(owner.GetComponent<BossHazard>()!=null)
+                return child.name=="Boss VFX Filled Motif";
+            return false;
+        }
+        static bool IsGeneratedBossVfxSprite(GameObject owner,string componentType,string spriteId)
+        {
+            if(owner==null||(owner.GetComponent<EndlessBossEnemy>()==null&&owner.GetComponent<BossHazard>()==null)
+                ||componentType!=typeof(SpriteRenderer).FullName||string.IsNullOrEmpty(spriteId))return false;
+            int separator=spriteId.IndexOf(':');
+            return separator>0&&RebuiltBossVfxTextures.Contains(spriteId.Substring(0,separator));
+        }
+        static HashSet<string> GeneratedBossVfxPaths(RunEntity entity,GameObject owner)
+        {
+            return new HashSet<string>(entity.components.Where(c=>!string.IsNullOrEmpty(c.path)
+                &&IsGeneratedBossVfxSprite(owner,c.type,c.sprite)).Select(c=>c.path),StringComparer.Ordinal);
         }
         static Component[] Components(Transform t)=>t.GetComponents<Component>().Where(c=>Script(c)||c is Rigidbody2D||c is SpriteRenderer||c is Animator||c is Collider2D).ToArray();
         void BindWorld()
@@ -181,12 +211,20 @@ namespace RGame.RoguelikeKit
         void RestoreEntity(RunEntity entity)
         {
             var go=entities[entity.id];
+            // Legacy checkpoints captured generated boss/hazard sprite children by sibling-index
+            // path. Their locations differ when restoring a completed entrance in a new process;
+            // the functional owner fields rebuild these cosmetic renderers below.
+            var generatedVfxPaths=GeneratedBossVfxPaths(entity,go);
             foreach(var saved in entity.transforms)
-            {var t=At(go.transform,saved.path);t.localPosition=saved.position;t.localRotation=saved.rotation;t.localScale=saved.scale;t.gameObject.SetActive(saved.active);}
+            {
+                if(generatedVfxPaths.Contains(saved.path))continue;
+                var t=At(go.transform,saved.path,entity.id,entity.key);t.localPosition=saved.position;t.localRotation=saved.rotation;t.localScale=saved.scale;t.gameObject.SetActive(saved.active);
+            }
             go.transform.SetPositionAndRotation(entity.position,entity.rotation);
             foreach(var saved in entity.components)
             {
-                var t=At(go.transform,saved.path);var matches=t.GetComponents<Component>().Where(c=>c!=null&&c.GetType().FullName==saved.type).ToArray();
+                if(generatedVfxPaths.Contains(saved.path))continue;
+                var t=At(go.transform,saved.path,entity.id,entity.key);var matches=t.GetComponents<Component>().Where(c=>c!=null&&c.GetType().FullName==saved.type).ToArray();
                 if(saved.index<0||saved.index>=matches.Length)throw new ArgumentException("Missing saved component "+saved.type);var c=matches[saved.index];
                 if(Script(c))fields.Restore(c,saved.fields);
                 if(c is Behaviour behaviour)behaviour.enabled=saved.enabled;if(c is Renderer renderer)renderer.enabled=saved.enabled;

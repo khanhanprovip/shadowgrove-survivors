@@ -193,6 +193,7 @@ namespace DATN.Trial
 
         private void OnPausePressed()
         {
+            if (DATN.UI.ConfirmationDialog.IsOpen) { DATN.UI.ConfirmationDialog.CancelCurrent(); return; }
             if (mEnded) return;
             if (mPaused) Resume();
             else Pause();
@@ -210,6 +211,7 @@ namespace DATN.Trial
 
         public void Resume()
         {
+            if (DATN.UI.ConfirmationDialog.IsOpen) return;
             if (!mPaused) return;
             ShadowgroveAudio.Play(SoundCue.UiSelect);
             mPaused = false;
@@ -332,8 +334,21 @@ namespace DATN.Trial
 
             mPauseResumeButton.onClick.AddListener(Resume);
             mPauseRestartButton.onClick.AddListener(Restart);
-            mPauseExitButton.onClick.AddListener(ExitToMainMenu);
-            mPauseSaveButton.onClick.AddListener(()=>RunCheckpointSession.SaveAndExit(this));
+            mPauseExitButton.onClick.AddListener(() => DATN.UI.ConfirmationDialog.Show(transform,
+                "RỜI TRẬN HIỆN TẠI?", "LEAVE CURRENT RUN?",
+                "Tiến độ trận chưa lưu sẽ bị mất. Bạn muốn về menu chính?",
+                "Unsaved run progress will be lost. Return to the main menu?", ExitToMainMenu,
+                "VỀ MENU", "MAIN MENU"));
+            mPauseSaveButton.onClick.AddListener(() => DATN.UI.ConfirmationDialog.Show(transform,
+                "LƯU TRẬN VÀ VỀ MENU?", "SAVE RUN & RETURN?",
+                "Lưu toàn bộ trận hiện tại để tiếp tục sau. Bản lưu trận trước sẽ được thay thế.",
+                "Save the current run to continue later. Any previous saved run will be replaced.",
+                () => {
+                    if (!RunCheckpointSession.SaveAndExit(this))
+                        DATN.UI.ConfirmationDialog.Show(transform, "CHƯA LƯU ĐƯỢC", "SAVE FAILED",
+                            "Không thể lưu trận. Bạn vẫn đang tạm dừng; hãy thử lại trước khi thoát.",
+                            "The run could not be saved. The game remains paused; please retry before leaving.", () => { }, "ĐÃ HIỂU", "OK");
+                }, "LƯU VÀ VỀ MENU", "SAVE & RETURN"));
 
             mPausePanel.SetActive(false);
         }

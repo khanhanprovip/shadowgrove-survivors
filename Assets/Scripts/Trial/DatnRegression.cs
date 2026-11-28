@@ -77,11 +77,14 @@ namespace DATN.Trial
                     break;
                 }
 
-                if (!moved) tests.Pop();
+                if (!moved) { tests.Pop(); (iterator as IDisposable)?.Dispose(); }
                 else if (step is IEnumerator child) tests.Push(child);
                 else yield return step;
             }
 
+            // Nested iterators can own event subscriptions (notably wantsToQuit).
+            // Dispose on assertion failure too, so their finally blocks run.
+            while (tests.Count > 0) (tests.Pop() as IDisposable)?.Dispose();
             if (!passed) yield return new WaitForSecondsRealtime(0.3f);
             _report.Add($"Runtime errors: {_errorCount}");
             _report.AddRange(_errors);
@@ -106,6 +109,11 @@ namespace DATN.Trial
                 case "level-heal":yield return CheckLevelHeal();break;
                 case "hero-kits":yield return CheckHeroKits();break;
                 case "endless-boundary":yield return CheckEndlessBoundary();break;
+                case "full-smoke-30":yield return CheckFullSmoke30();break;
+                case "audio-budget":yield return CheckAudioBudget();break;
+                case "ui-interactions":yield return CheckUiInteractions();break;
+                case "confirmations":yield return CheckConfirmations();break;
+                case "deep-modes":yield return CheckDeepModes();break;
                 case "run-save-write":yield return CheckRunSaveWrite();break;
                 case "run-save-modes":yield return CheckRunSaveModes();break;
                 case "run-save-bosses":yield return CheckRunSaveBosses();break;
@@ -342,6 +350,10 @@ namespace DATN.Trial
             var pausePanel = GameObject.Find("TrialPausePanel");
             Require(pausePanel != null, "Pause menu is visible");
             Click(ButtonIn(pausePanel.transform, "VeMenuBtn"));
+            yield return Wait(() => DATN.UI.ConfirmationDialog.IsOpen, "Leave confirmation is visible");
+            var confirm = ButtonIn(GameObject.Find("ConfirmationDialog").transform, "ConfirmButton");
+            yield return Wait(() => CanClick(confirm), "Leave confirmation receives pointer input");
+            Click(confirm);
             yield return WaitForMenu();
         }
 
